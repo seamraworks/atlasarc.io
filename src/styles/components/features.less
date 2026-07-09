@@ -1,0 +1,100 @@
+// Features page components: feature router and metric statement.
+// ===========================================================================
+
+// --- Feature router (wayfinding index: job -> capability) -------------------
+// A deliberately DIFFERENT primitive from .feature-band: a bordered index that
+// reads as a map (vs. the band's territory), so the Product (jobs) -> Features
+// (capabilities) frame switch is legible instead of invisible. Each row maps a
+// job the visitor arrived with onto the capability section that does it, and
+// deep-links into it.
+.router-head {
+  display: flex; align-items: baseline; gap: @space-lg;
+  border-bottom: 2px solid @ink;
+  padding-bottom: @space-md;
+}
+.router-head h2 { margin: 0; }
+.router-sub { max-width: 64ch; color: @ink-soft; font-weight: 300; line-height: 1.7; margin: @space-md 0 @space-lg; }
+
+.router {
+  list-style: none; margin: 0; padding: 0;
+  border: 1px solid @line; border-top: 2px solid @ink;
+}
+.router-row {
+  display: block; color: inherit; border-bottom: 1px solid @line;
+  transition: background @dur @ease;
+}
+.router-row:last-child { border-bottom: none; }
+.router-row:hover { background: @arc-tint; color: inherit; }
+.router-row:focus-visible { outline: 2px solid var(--arc); outline-offset: -2px; }
+.router-row-inner {
+  display: grid;
+  grid-template-columns: 3.5rem 1fr auto minmax(12rem, 1.05fr);
+  align-items: center; gap: @space-lg;
+  padding: @space-md @space-lg;
+}
+.router-idx {
+  font-family: @font-mono; font-size: 0.7rem; font-weight: 600;
+  color: @ink-faint; letter-spacing: 0.04em;
+  transition: color @dur @ease;
+}
+.router-row:hover .router-idx { color: var(--arc); }
+.router-job { font-size: 1rem; font-weight: 500; letter-spacing: -0.01em; color: @ink; }
+.router-job small {
+  display: block; font-family: @font-display; font-weight: 300;
+  font-size: 0.82rem; color: @ink-soft; letter-spacing: 0; line-height: 1.5;
+  margin-top: 0.15rem;
+}
+.router-arrow {
+  font-family: @font-mono; font-size: 1rem; color: @line-strong;
+  transition: color @dur @ease, transform @dur @ease;
+}
+.router-row:hover .router-arrow { color: var(--arc); transform: translateX(4px); }
+.router-cap { font-family: @font-mono; font-size: 0.86rem; font-weight: 600; color: var(--arc); }
+
+// One orchestrated load stagger on page load.
+.router-row { opacity: 0; transform: translateY(6px); animation: router-row-in 0.42s @ease both; }
+.router-row:nth-child(1) { animation-delay: 0.06s; }
+.router-row:nth-child(2) { animation-delay: 0.13s; }
+.router-row:nth-child(3) { animation-delay: 0.20s; }
+.router-row:nth-child(4) { animation-delay: 0.27s; }
+.router-row:nth-child(5) { animation-delay: 0.34s; }
+.router-row:nth-child(6) { animation-delay: 0.41s; }
+.router-row:nth-child(7) { animation-delay: 0.48s; }
+@keyframes router-row-in { to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .router-row { animation: none; opacity: 1; transform: none; } }
+
+@media (max-width: 760px) {
+  .router-row-inner { grid-template-columns: 2.5rem 1fr; gap: @space-sm @space-md; }
+  .router-arrow { display: none; }
+  .router-cap { grid-column: 2; }
+}
+
+// --- Metric statement (secondary hero: a big mono figure + claim) -----------
+// Promotes the "30+ metrics, one model" point from a throwaway intro line to a
+// navy-tint statement panel. Mono numeral echoes the pricing figures — numbers
+// read as data, per the house principle.
+.metric-statement {
+  display: grid; grid-template-columns: auto 1fr; gap: @space-xl;
+  align-items: center;
+  border: 1px solid @line; border-top: 3px solid @arc;
+  background: @arc-tint;
+  padding: @space-xl;
+}
+@media (max-width: 760px) { .metric-statement { grid-template-columns: 1fr; gap: @space-lg; } }
+.metric-statement-figure {
+  display: flex; flex-direction: column; align-items: flex-start;
+  border-right: 1px solid fade(@arc, 25%);
+  padding-right: @space-xl;
+}
+@media (max-width: 760px) { .metric-statement-figure { border-right: none; padding-right: 0; } }
+.metric-statement-num {
+  font-family: @font-mono; font-weight: 600; font-size: 4.5rem;
+  line-height: 1; color: var(--arc); letter-spacing: -0.02em;
+}
+.metric-statement-num-label {
+  font-family: @font-mono; font-size: 0.66rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: @tracking-mono;
+  color: @ink-soft; margin-top: @space-xs;
+}
+.metric-statement-body h2 { margin: @space-2xs 0 @space-sm; }
+.metric-statement-body p { color: @ink-soft; font-weight: 300; line-height: 1.7; margin: 0 0 @space-md; max-width: 60ch; }

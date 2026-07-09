@@ -1,0 +1,56 @@
+{{#> docs}}
+  {{#*inline "html-head-block"}}
+    <title>The AtlasArc Interface | AtlasArc Documentation</title>
+    <meta name="description" content="A labelled map of the AtlasArc tool window: the toolbars, lens switcher, canvas, sidebars, status strip, and the smaller widgets like the Boundary Flow glyph, with a link from each region to the page that goes deeper.">
+    <meta property="og:title" content="Find your way around the AtlasArc workspace">
+    <meta property="og:description" content="AtlasArc packs a lot onto one screen. This page names every region of the tool window and links each to the reference that explains it.">
+  {{/inline}}
+  {{#*inline "body-block"}}
+    <h1>Find your way around the AtlasArc workspace</h1>
+    <p>The AtlasArc tool window puts a lot on one screen: two toolbar rows, a lens switcher, the canvas, a left sidebar of filters, a right sidebar of detail, and a status strip along the bottom. This page is a map of that screen. It names each region and links to the reference that explains it, so you can point at anything in the window and find out what it does.</p>
+    <p>The screenshots below show the <a href="/docs/getting-started">Topology Graph</a>, which is the view you land on after your first analysis. Switching lenses from the lens switcher changes what the canvas draws and swaps a few of the view controls. The chrome around the canvas, both sidebars, and the status strip stay in the same place whichever lens is active.</p>
+
+    <h2>The main window, region by region</h2>
+    <p>Each number below points at a region of the tool window in the screenshot. The list is deliberately coarse: it maps the zones you navigate between, not every individual button. Follow the link on a region to read the page that covers it in full.</p>
+    <div class="placeholder-box">Screenshot: the AtlasArc tool window on the Topology Graph, with numbered callouts on each region</div>
+    <ol>
+      <li><strong>Analysis toolbar (top row)</strong> holds the analysis-source scope selector, the Analyze button, and a status readout with the package count, edge count, and the time of the last analysis. Start here with <a href="/docs/getting-started">Getting started</a>.</li>
+      <li><strong>Lens switcher</strong> swaps the canvas between the five lenses: Package Graph, Package Matrix, Subsystems, Hotspots, and Composition. Each one answers a different question about the same model. Compare them on the <a href="/lenses">lenses overview</a>.</li>
+      <li><strong>View toolbar (second row)</strong> carries the controls for the active view: zoom and fit, expand and collapse, Reset, Hide isolated, Only Cycles, and layout direction. It also opens the Legend, the <a href="/workflows">Workflows</a> wizard, exports, Settings, and Help.</li>
+      <li><strong>Left sidebar</strong> is the Navigation panel: View, Filters, Cycles, Exclusions, Safe Havens, Metric Thresholds, and Legend as an accordion, plus a Workflows button. Its own close-up is below.</li>
+      <li><strong>Canvas</strong> renders the active lens. On the Topology Graph it draws packages as nodes and dependencies as directed edges. See <a href="/lenses/topology-graph">Topology Graph</a> for how to read it.</li>
+      <li><strong>Graph stats bar</strong> reports the graph-level metrics for the whole model: NCCD, RACD, ARV, and GRV. Each value carries an info icon that explains it and when it becomes reliable. The <a href="/metrics">metrics reference</a> defines them.</li>
+      <li><strong>Cycles panel and cycles-only sub-toolbar</strong> appear when you turn on Only Cycles. They list the detected cycle groups and add the detail-level buttons and the group navigator for stepping through one group at a time. The <a href="/workflows/audit-individual-cycle-groups">Audit individual cycle groups</a> workflow uses them.</li>
+      <li><strong>Heatmap bar</strong> appears when you turn on the heatmap. It holds the metric dropdown, the gradient legend, and the Package or Subsystem rollup toggle that colours the canvas by any metric.</li>
+      <li><strong>Right sidebar</strong> shows the detail for whatever you select, split into a Node or Edge tab and a Metrics tab. Its own close-up is below.</li>
+      <li><strong>Status bar and Status Cluster</strong> run along the bottom with the visible node and edge counts, the build tag, and a strip of indicator lamps that show which narrowing is currently active: pinning, scope, cycles, exclusions, filters, and pruning.</li>
+    </ol>
+
+    <h2>The left sidebar up close</h2>
+    <p>The left sidebar is the Navigation panel. It mirrors the right sidebar: pin it to keep it open on a canvas click, or collapse it to a strip. It holds every persistent view control as an accordion, so opening one section closes the others. The toolbar buttons for Exclusions, Safe Havens, and the Legend open the matching section here rather than a separate window.</p>
+    <div class="placeholder-box">Screenshot: the left Navigation sidebar with a section expanded, and numbered callouts on each section</div>
+    <ol>
+      <li><strong>View</strong> reshapes the hierarchy without changing the model, through deep-package rollup and single-child folder contraction. The reasoning behind both is in <a href="/docs/handling-large-projects">Handling large projects</a>.</li>
+      <li><strong>Filters</strong> is the section that opens by default. It carries the reference-count and fan-in and fan-out ranges and Hide isolated, so you can narrow the graph to the packages that have a reason to be on screen.</li>
+      <li><strong>Cycles</strong> turns on Only Cycles and the cycle detail levels, reducing the model to the packages and edges that take part in a cycle. The <a href="/workflows/audit-individual-cycle-groups">Audit individual cycle groups</a> workflow works from here.</li>
+      <li><strong>Exclusions</strong> hides package families by pattern, with per-row toggles, a master switch, and a preset list of common noise packages.</li>
+      <li><strong>Safe Havens</strong> lists every package currently marked as an accepted cycle exception, each with a control to revoke it. It is the audit inventory for the local suppressions.</li>
+      <li><strong>Metric Thresholds</strong> sets the full-red ceiling for each unbounded metric, which calibrates the colour in every heatmap and bubble chart. The <a href="/metrics">metrics reference</a> covers what each one means.</li>
+      <li><strong>Legend</strong> explains the node, border, and edge language. It appears for the structural lenses, the graph and the matrix, and is hidden where there is no node colour to explain.</li>
+      <li><strong>Workflows</strong> is a button rather than a section. It opens the <a href="/workflows">workflow wizard</a>, which sets a lens and its filters for a chosen investigation.</li>
+    </ol>
+
+    <h2>The right sidebar up close</h2>
+    <p>The right sidebar is where a selection becomes evidence. It is shared across every lens, so the tabs and their contents work the same way whether you selected a node on the graph, a cell in the matrix, or a bubble in Hotspots. Select a package to fill the Node tab; select a folder and the Metrics tab adds a subsystem section.</p>
+    <div class="placeholder-box">Screenshot: the right sidebar Metrics tab for a selected subsystem, with numbered callouts including the Boundary Flow glyph</div>
+    <ol>
+      <li><strong>Node / Edge tab</strong> shows the selected package's name, size, fan-in and fan-out, dependency lists, cycle warning, and Safe Haven toggle. When an edge is selected it shows the reference examples behind that dependency, each one clickable to the exact source line.</li>
+      <li><strong>Metrics tab</strong> shows the architecture metrics for the selection: instability, abstractness, distance, and relative visibility, each clickable to a drill-down panel. For a folder it adds a Subsystem section with the rolled-up health of the whole subtree.</li>
+      <li><strong>Boundary Flow glyph</strong> appears in the Metrics tab for a selected subsystem. It is a compact wheel of the subsystem's strongest boundary neighbours, sized by how much traffic crosses each one, so you can read a module's coupling at a glance. When a boundary is too busy for the wheel, it opens the <a href="/lenses/package-matrix">Package Matrix</a> pinned to that boundary.</li>
+      <li><strong>Confidence signals</strong> mark where a metric could be read the wrong way. Drill-down panels carry a "Keep in mind" note for when a metric misleads, and small packages show a low-confidence badge where a ratio metric would otherwise look alarming. The <a href="/metrics">metrics reference</a> explains the caveats.</li>
+    </ol>
+
+    <h2>Where to go next</h2>
+    <p>Now that the window has names, put it to work. Run your first analysis with <a href="/docs/getting-started">Getting started</a>, learn what each lens is for on the <a href="/lenses">lenses overview</a>, or follow a guided investigation from the <a href="/workflows">workflow library</a>. When a project is too big to read at once, <a href="/docs/handling-large-projects">Handling large projects</a> covers the reductions that make it small enough to reason about.</p>
+  {{/inline}}
+{{/docs}}

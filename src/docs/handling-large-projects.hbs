@@ -1,0 +1,135 @@
+{{#> docs}}
+  {{#*inline "html-head-block"}}
+    <title>Handling Large Projects | AtlasArc Documentation</title>
+    <meta name="description" content="How AtlasArc makes a large Java or Kotlin codebase small enough to reason about: reduce scope, roll up deep namespaces, filter the noise, switch lenses, isolate cycles, and drill to the exact code.">
+    <meta property="og:title" content="Handling large projects with AtlasArc">
+    <meta property="og:description" content="Large projects don't fail because they have too many packages. They fail when every view shows everything at once. Here's how AtlasArc narrows the model until the problem is small enough to act on.">
+  {{/inline}}
+  {{#*inline "body-block"}}
+    <h1>Make large codebases small enough to reason about</h1>
+    <p>Large projects do not fail because they have too many packages. They fail when every view shows everything at once. A full dependency graph is useful only after you have made it smaller, or after you have switched to a view that answers a narrower question.</p>
+    <p>AtlasArc handles large projects by reduction. It scopes the model to the area you care about, contracts pass-through package folders, rolls deep namespaces up for triage, filters weak or irrelevant dependencies, and lets you switch from the graph to Matrix, Subsystems, Hotspots, or Composition when another lens is more honest about the problem.</p>
+    <p>Use this page as a field guide. It starts with the moment the graph is too large to read and ends with the exact dependency examples, source files, and exports you need for a review or refactoring ticket.</p>
+
+    <h2>Start with a readable map</h2>
+    <p>The first mistake on a large codebase is to expand everything. That gives you a diagram of the scanner's completeness, not a map of the architecture. AtlasArc starts from the opposite direction: show the first level where real package relationships are visible, then let you open more detail only where it helps.</p>
+    <ul>
+      <li><strong>Smart initial expansion</strong> opens namespace levels until at least one dependency edge is visible. You do not start at a blank root folder, and you do not start at every leaf package.</li>
+      <li><strong>Contracted package folders</strong> merge pass-through namespace chains into one labelled path. A chain like <code>org -&gt; example -&gt; util</code> can appear as <code>org.example.util</code> when the intermediate folders carry no separate architectural contract.</li>
+      <li><strong>Expansion controls</strong> let you open one package, expand the shallowest collapsed level, collapse the deepest expanded level, collapse all, or expand all. On large graphs, risky broad operations are guarded before they redraw too many nodes.</li>
+      <li><strong>Package internals</strong> can open one visible package/source folder into contained classes or files in the Topology Graph. This is for local evidence after you have found the owner, not something Expand All does across the project.</li>
+      <li><strong>Reset</strong> takes you back to the same edge-visible baseline after an aggressive filter pass or a dead-end exploration.</li>
+    </ul>
+    <p>Contracted folders are deliberately conservative. AtlasArc does not absorb a leaf package, a direct cycle participant, the current Focus root, a Safe Haven, or a folder with multiple visible children. The point is to remove namespace ceremony, not hide a meaningful boundary.</p>
+    <p>Start here when the first graph looks either too empty or too dense. Before changing any filters, check whether the default expansion has already found the first useful architectural layer.</p>
+    <div class="placeholder-box">Screenshot: smart initial expansion and contracted package folders</div>
+
+    <h2>Reduce the scope before you read the graph</h2>
+    <p>The fastest way to make a large project readable is to stop looking at all of it. Most architecture questions already have a subject: a module you are extracting, a layer boundary you are auditing, a package that keeps showing up in reviews, or one cycle group that blocks a refactor. These questions share a posture AtlasArc makes explicit &mdash; <strong>Subject Mode</strong>: you <strong>pin</strong> the structural view to one subject and read everything relative to it, so the graph and matrix become a focused subject audit instead of showing the model on its own terms.</p>
+    <ul>
+      <li><strong>Focus / Prefix</strong> restricts the model to one package subtree. Use it when the question is "what is happening inside <code>com.acme.billing</code>?" rather than "what is happening everywhere?"</li>
+      <li><strong>Set as Root</strong> is available from Graph, Matrix, Subsystems, Hotspots, and Composition, so a scope chosen in one lens carries into the next one.</li>
+      <li><strong>Show in AtlasArc</strong> from the IntelliJ Project tree starts from the package you already selected in the IDE. You do not have to copy a package name into a filter box.</li>
+      <li><strong>Neighbourhood</strong> shows a package or subsystem with its direct dependencies and dependents. Use it for local blast radius: "what touches this, and what does it touch?"</li>
+      <li><strong>Boundary</strong> shows the traffic crossing a subsystem perimeter. Use it when the question is whether a module boundary is holding.</li>
+      <li><strong>Cycle view</strong> shows only the packages in a selected cycle group, with enough ancestors expanded to keep the shape readable.</li>
+      <li><strong>Breadcrumbs</strong> in focus-based lenses let you drill into a subsystem and climb back out without rebuilding the package path in your head.</li>
+    </ul>
+    <p>Use root scope for a broad area, Neighbourhood for a local dependency perimeter, Boundary for subsystem ingress and egress, and Cycle view when the subject is already a strongly connected group. Neighbourhood and Boundary are preset ways to read a pinned subject, not separate models. These are different reductions, not synonyms.</p>
+    <div class="placeholder-box">Screenshot: Focus / Prefix scoping the model to one subsystem</div>
+
+    <h2>Roll up detail without losing signal</h2>
+    <p>Even after scoping, a Java or Kotlin package tree can be deeper than the architectural question. In that case, read the shape first and expand the exact packages later. AtlasArc gives you several ways to reduce depth while preserving the signals that matter.</p>
+    <ul>
+      <li><strong>Deep Package Rollup</strong> groups packages below a selected namespace depth into their visible parent. Lower the depth to inspect the dependency shape at namespace level; raise it again before planning a code edit.</li>
+      <li><strong>Contracted package folders</strong> remove single-child pass-through chains before they waste visual space. They are useful even when depth rollup is off.</li>
+      <li><strong>Collapsed-folder cycle indicators</strong> draw a dashed border on a folder whose descendants contain a cycle. You can stay at a high level and still see where hidden tangles live.</li>
+      <li><strong>Subsystem rollups</strong> attach subtree metrics to folder nodes: package count, class count, lines of code, boundary fan-in, boundary fan-out, cohesion, instability, cycle groups, visibility, abstractness, and complexity.</li>
+      <li><strong>Adaptive Treemap</strong> shows a meaningful frontier through the package tree. It is more informative than only direct children, and less overwhelming than every leaf package at once.</li>
+    </ul>
+    <p>The important detail is that subsystem health is computed from the raw graph, not from whatever happens to be visible after your current filters. A filtered view can be narrow; the rollup metrics still describe the subsystem underneath it.</p>
+    <p>A practical pattern: turn on rollup to understand the shape of a large tangle, identify the suspicious namespace, then increase depth or set that package as root before touching code.</p>
+    <div class="placeholder-box">Screenshot: Deep Package Rollup with collapsed-folder cycle indicators</div>
+
+    <h2>Filter the noise</h2>
+    <p>On a large project, filters are how you make a question precise enough to answer. Start with a broad scope, then use thresholds and exclusions until the remaining packages all have a reason to be on screen.</p>
+    <ul>
+      <li><strong>Reference-count range</strong> lets you look at dependency weight from both directions. Raise the minimum to keep only strong coupling. Set a low maximum to expose tiny, accidental-looking edges crossing a boundary.</li>
+      <li><strong>Fan-in and fan-out ranges</strong> find structural roles. High fan-in points at packages many others depend on. High fan-out points at packages that know too much. Low values can expose fragments, hermits, and packages in the wrong place.</li>
+      <li><strong>Hide isolated</strong> removes packages left with no visible edges after filtering. This keeps a strict filter from leaving visual debris across the canvas.</li>
+      <li><strong>Exclude patterns</strong> remove known-noise families by prefix, suffix, or substring. Use them for generated code, framework adapters, test fixtures, or a namespace that is out of scope for the current review.</li>
+      <li><strong>Search / Spotlight</strong> is for orientation rather than scoping. It highlights matches and immediate neighbours while dimming the rest.</li>
+      <li><strong>Status Cluster</strong> is a fixed strip of indicator lamps that always shows what is currently hiding packages, and how much. Active reference and fan filters, exclusions, Hide isolated, and Only Cycles each light a lamp, so a single forgotten setting that quietly removed most of the graph is visible at a glance instead of being mistaken for the whole architecture.</li>
+      <li><strong>No-results feedback</strong> makes aggressive filtering reversible. If everything disappears, reset or relax the threshold instead of guessing what happened.</li>
+    </ul>
+    <p>Do not treat one filter setting as "the architecture." Treat each filter as a hypothesis. For example: "show packages with high fan-in and low fan-out," "show boundary edges with at most two references," or "show only cycle participants under this module." Because the Status Cluster keeps every active filter in view, you can narrow the model hard without losing track of how much you have hidden — the warning arrives while you are still narrowing, not only when the graph is already empty.</p>
+    <div class="placeholder-box">Screenshot: reference and fan filters with Hide isolated enabled</div>
+
+    <h2>Use the right lens for the question</h2>
+    <p>A graph is the right lens when you need shape: paths, neighbours, clusters, and visible cycles. It is not always the right lens for direction, relative size, subsystem comparison, or metric outliers. AtlasArc keeps one shared architecture model underneath the lenses, so switching views changes the question without discarding the scope you already chose.</p>
+    <ul>
+      <li><strong><a href="/lenses/topology-graph">Topology Graph</a></strong> answers "how is this connected?" Use it for local neighbourhoods, cycle shape, source-level dependency inspection, and package-local class/file tangles.</li>
+      <li><strong><a href="/lenses/package-matrix">Package Matrix</a></strong> answers "who depends on whom?" Use it when graph layout becomes tangled but direction and bidirectional coupling still matter; its rows and columns remain packages/source folders.</li>
+      <li><strong><a href="/lenses/subsystems">Subsystems</a></strong> answers "which architectural areas are under pressure?" Use it to compare boundary coupling, cohesion, visibility, and internal tangles at a coarser level.</li>
+      <li><strong><a href="/lenses/hotspots">Hotspots</a></strong> answers "which packages or classes deserve attention first?" Use it to rank outliers by coupling, complexity, size, instability, visibility, or coverage.</li>
+      <li><strong><a href="/lenses/composition">Composition</a></strong> answers "what is this codebase made of?" Use Treemap, Sunburst, or Circle Pack to see where code mass, complexity, or coverage gaps concentrate in the hierarchy.</li>
+    </ul>
+    <p>The escape route from an unreadable graph is often not "tune the graph harder." If you are checking wrong-way dependencies, use the Matrix. If you are comparing modules, use Subsystems. If you are building a refactoring shortlist, use Hotspots. If you are trying to understand where the code lives, use Composition.</p>
+    <div class="placeholder-box">Screenshot: same scoped model in Matrix, Subsystems, Hotspots, and Composition</div>
+
+    <h2>Triage cycles one group at a time</h2>
+    <p>Cycle detection is more than a red highlight. On a large project, the useful question is not "are there cycles?" It is "which cycle group is this, what kind of cycle is it, and what decision does it need?" AtlasArc separates the full structural graph from the <em>problem graph</em>: the subset of packages and edges that participate in unresolved cycle problems.</p>
+    <ul>
+      <li><strong>Only Cycles</strong> removes clean packages and non-cycle edges, leaving cycle-relevant structure instead of the full dependency model.</li>
+      <li><strong>Cycle detail levels</strong> step from full context to architectural violations only. Use the early levels to understand context; use Architectural when you need the hardest violations without nested or accepted noise.</li>
+      <li><strong>Cycle-group navigator</strong> walks strongly connected groups one at a time. The point is to make "there are many cycles" become "this is group 3, and these are the packages keeping it alive."</li>
+      <li><strong>Cycle groups panel</strong> shows group membership and severity badges, and lets you mute groups you have already triaged.</li>
+      <li><strong>Classification</strong> distinguishes architectural cycles, aggregation cycles, nested-internal cycles, cross-module phantom cycles, and accepted cycles. A large codebase needs this distinction because not every loop deserves the same response.</li>
+      <li><strong>Safe Havens</strong> move known package-level exceptions out of the current investigation. <strong>Source annotations</strong> make durable exceptions reviewable in code, with a reason and optional ticket.</li>
+    </ul>
+    <p>A good cycle triage pass usually has three outcomes: refactor now, record a debt item, or sanction an intentional exception. AtlasArc keeps those decisions visible instead of pretending accepted coupling disappeared.</p>
+    <p>Useful next steps: run the <a href="/workflows/find-cycles">Find cyclic dependencies</a> workflow for discovery, then use <a href="/workflows/audit-individual-cycle-groups">Audit individual cycle groups</a> when the backlog is large enough to need a group-by-group pass.</p>
+    <div class="placeholder-box">Screenshot: Only Cycles with detail levels, group navigator, and Safe Haven state</div>
+
+    <h2>Prioritize what to fix first</h2>
+    <p>Reduction gets the model small enough to inspect. Prioritization decides where effort pays off. Do not fix the first red node just because it is visible. Compare coupling pressure, stability, size, complexity, coverage, and subsystem context before choosing the next refactor.</p>
+    <ul>
+      <li><strong>Heatmaps</strong> overlay metrics on Topology, Matrix, and Composition: instability, abstractness, distance from the main sequence, relative visibility, fan-in, fan-out, size, complexity, and coverage.</li>
+      <li><strong>Metric thresholds</strong> keep colour honest. A mostly healthy project should not look dangerous just because one package is the worst in that particular graph.</li>
+      <li><strong>Hotspots rankings</strong> list the most extreme packages or classes for the active metric. Use them when you need a shortlist rather than a map.</li>
+      <li><strong>Subsystems curated views</strong> focus the comparison: Boundary Risk for pressure across module edges, Complexity Load for where code is hard to change, Visibility Surface for leaked internals, and Internal Tangles for hidden cycle groups.</li>
+      <li><strong>Boundary Flow</strong> shows the strongest incoming and outgoing neighbours of a selected subsystem. If the boundary is too busy for the glyph, open the Boundary Matrix.</li>
+      <li><strong>Coverage and complexity overlays</strong> expose complex code whose branches are not protected by tests. That is usually characterization-test work before refactoring work.</li>
+      <li><strong>Workflow Wizard recipes</strong> turn common investigations into repeatable setup: backbone packages, suspicious dependents, accidental boundary leaks, hard-to-change packages, ticking time bombs, and more.</li>
+    </ul>
+    <p>For a first prioritization pass on an unfamiliar large project, start with <a href="/workflows/show-me-the-backbone">Show me the backbone</a>, then compare <a href="/workflows/identify-hotspots">Identify risky hotspots</a> and <a href="/workflows/understand-subsystem-coupling">Understand subsystem coupling</a>. If coverage data is available, add <a href="/workflows/complex-code-weak-coverage">Complex code with weak coverage</a> before committing to a risky refactor.</p>
+    <div class="placeholder-box">Screenshot: heatmap overlay, ranked Hotspots panel, or Subsystems Boundary Risk</div>
+
+    <h2>Drill to evidence and report</h2>
+    <p>A reduced visual finding only matters if it becomes evidence. Once you have narrowed a large project to a package, boundary, cycle, or hotspot, the next step is to inspect the actual dependency examples and produce something the team can act on.</p>
+    <ul>
+      <li><strong>Edge examples</strong> show reference counts and concrete usages behind a dependency. Each example can jump to the exact source line in the IDE.</li>
+      <li><strong>Package and metric sidebars</strong> keep context in place: dependency lists, cycle warnings, Safe Haven controls, class counts, lines of code, fan-in, fan-out, complexity, coverage, and metric caveats.</li>
+      <li><strong>Source navigation</strong> works from bubbles, matrix cells, edge examples, and context menus. Use the visual model to find the issue, then jump to the package or class that needs work.</li>
+      <li><strong>Scoped DOT export</strong> preserves the focused graph you actually reviewed, including active focus, exclusions, hide-isolated, Only Cycles, and expand/collapse state.</li>
+      <li><strong>Data exports</strong> let Matrix, Subsystems, and Hotspots leave the IDE as TSV or CSV when a spreadsheet or design note is the next step.</li>
+      <li><strong>Architecture Audit Reports</strong> turn a project baseline, subject audit, boundary review, cycle triage, or current investigation into browsable HTML with a Printable Version for PDF or meeting packets.</li>
+    </ul>
+    <p>The strongest reports are scoped to a decision. Generate a whole-project baseline when you need trend comparison; generate a subject, boundary, cycle, or current-investigation report when you need evidence for the next action.</p>
+    <div class="placeholder-box">Screenshot: edge examples sidebar and generated Architecture Audit Report</div>
+
+    <h2>Built to stay fast</h2>
+    <p>The reductions above are not cosmetic browser tricks. AtlasArc computes the meaningful reductions in the plugin backend and sends the UI a model that already reflects the selected scope, filters, cycle detail, rollup, and lens data.</p>
+    <ul>
+      <li><strong>Large Graph Guard</strong> warns before operations that would render too many nodes, such as Expand All or broad layout changes. It suggests cheaper alternatives: Only Cycles, Matrix, Set as Root, Subsystems, Hotspots, or Composition.</li>
+      <li><strong>Matrix safety limits</strong> cap package count and minimum zoom so a huge matrix does not become unusable by default.</li>
+      <li><strong>Backend-computed filters</strong> apply reference ranges, fan-in/fan-out ranges, isolated-node removal, exclusions, Only Cycles, and cycle detail levels before the frontend tries to render the result.</li>
+      <li><strong>Precomputed composition frontiers</strong> make Adaptive Treemap steps cheap. Density and reach controls index into sequences prepared during analysis instead of recalculating the hierarchy in the browser.</li>
+      <li><strong>Raw-graph subsystem metrics</strong> keep folder health stable even when the visible graph is filtered down for a narrow question.</li>
+    </ul>
+    <p>This is why the large-project strategy is reduction, not force. You should not have to wait for a huge full graph before you can ask a smaller question.</p>
+
+    <h2>Where to go next</h2>
+    <p>To see the same reduction ideas in the product story, open the <a href="/product">product overview</a>. To try them on your own repository, start with <a href="/docs/getting-started">Getting started</a>. For guided investigations, use the <a href="/workflows">workflow library</a>: it turns the moves above into concrete questions such as finding cycles, reviewing package boundaries, identifying hotspots, auditing a subsystem, or preparing an architecture health review.</p>
+  {{/inline}}
+{{/docs}}

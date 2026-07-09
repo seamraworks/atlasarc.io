@@ -1,0 +1,183 @@
+// Catalog hub components: workflow grids, lens grids, metric cards, and reference table modifiers.
+// ===========================================================================
+
+// --- Open workflow cards (top-ruled, spacious) -----------------------------
+// Distinct from the bordered `.card`: an open 4-column row sharing a top rule,
+// divided by hairlines. All cards carry equal horizontal padding so the first
+// card does not appear to hug the container edge.
+.wf-grid {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+  border-top: 1px solid @line;
+}
+@media (max-width: 900px) { .wf-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .wf-grid { grid-template-columns: 1fr; } }
+.wf-card {
+  display: block; padding: @space-lg;
+  color: inherit; text-decoration: none;
+  border-right: 1px solid @line;
+  transition: background @dur @ease;
+}
+.wf-card:hover { background: @arc-tint; color: inherit; }
+.wf-grid > li:last-child .wf-card { border-right: none; }
+.wf-card h3 { font-size: 0.98rem; margin-bottom: @space-xs; }
+.wf-card p { font-size: 0.84rem; font-weight: 300; color: @ink-soft; margin: 0; line-height: 1.7; }
+
+// Workflow hub: six spine sections, with journey-only rows for Map/Govern and
+// multi-row workflow-card grids for the populated beats.
+.workflow-group .section-header { margin-bottom: @space-md; }
+.workflow-group .section-intro { margin-bottom: @space-lg; }
+.workflow-group .wf-grid {
+  border-bottom: 1px solid @line;
+}
+.workflow-group .wf-grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+.workflow-group .wf-grid > li {
+  border-bottom: 1px solid @line;
+}
+.workflow-group .wf-card {
+  height: 100%;
+}
+@media (min-width: 901px) {
+  .workflow-group .wf-grid > li:nth-child(4n) .wf-card { border-right: none; }
+}
+@media (max-width: 900px) and (min-width: 561px) {
+  .workflow-group .wf-grid > li:nth-child(2n) .wf-card { border-right: none; }
+  .workflow-group .wf-grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .workflow-group .wf-grid-3 { grid-template-columns: 1fr; }
+  .workflow-group .wf-card { border-right: none; }
+}
+.workflow-journey {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: @space-xl;
+  align-items: start;
+  border-top: 1px solid @line;
+  padding-top: @space-lg;
+}
+.workflow-journey .section-intro {
+  margin-bottom: 0;
+}
+.workflow-actions {
+  display: flex;
+  flex-direction: column;
+  gap: @space-sm;
+  min-width: 16rem;
+}
+.workflow-actions .btn {
+  justify-content: center;
+  width: 100%;
+}
+@media (max-width: 760px) {
+  .workflow-journey { grid-template-columns: 1fr; gap: @space-lg; }
+  .workflow-actions { min-width: 0; }
+}
+
+// --- Contained lens grid (bordered shell, navy-accented cards) -------------
+// The locked design: a single outer border wraps all cards so the grid never
+// hugs the band edges; each card carries a 3px navy top accent.
+.lens-grid {
+  list-style: none; padding: 0; margin: 0;
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  border: 1px solid @line;
+}
+@media (max-width: 980px) { .lens-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .lens-grid { grid-template-columns: 1fr; } }
+.lens-card {
+  border-right: 1px solid @line;
+  position: relative;
+  transition: background @dur @ease;
+}
+.lens-card:last-child { border-right: none; }
+.lens-card:hover { background: @arc-tint; }
+.lens-card-link {
+  display: block;
+  height: 100%;
+  padding: @space-lg;
+  color: inherit;
+  border-bottom: none;
+}
+.lens-card-link:hover {
+  color: inherit;
+  border-bottom: none;
+}
+.lens-card-link::before {
+  content: ""; display: block; height: 3px;
+  background: var(--arc); margin-bottom: @space-md;
+}
+.lens-type {
+  display: block;
+  font-family: @font-mono; font-size: 0.58rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: @tracking-mono;
+  color: @arc; margin-bottom: 0.45rem;
+}
+.lens-card h3 { font-size: 0.95rem; margin-bottom: @space-2xs; }
+.lens-card p { color: @ink-soft; font-size: 0.78rem; font-weight: 300; margin: 0; line-height: 1.65; }
+
+// --- Clickable metric cards (individually bordered, arrow affordance) ------
+.metrics-grid {
+  list-style: none; padding: 0; margin: 0;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: @space-md;
+}
+@media (max-width: 760px) { .metrics-grid { grid-template-columns: 1fr; } }
+.metric-card {
+  display: block; position: relative;
+  padding: @space-lg @space-lg 3.5rem;
+  border: 1px solid @line;
+  background: @surface;
+  color: inherit;
+  cursor: pointer;
+  transition: border-color @dur @ease, background @dur @ease;
+}
+.metric-card:hover { border-color: var(--arc); background: @arc-tint; color: inherit; }
+.metric-card::after {
+  content: "\2192"; position: absolute; bottom: @space-lg; right: 1.8rem;
+  font-size: 1.1rem; color: @line;
+  transition: color @dur @ease, transform @dur @ease;
+}
+.metric-card:hover::after { color: var(--arc); transform: translateX(3px); }
+.metric-label {
+  display: block;
+  font-family: @font-mono; font-size: 0.6rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: @tracking-mono;
+  color: @arc; margin-bottom: @space-sm;
+}
+.metric-card h3 { font-size: 1.1rem; margin-bottom: @space-xs; }
+.metric-card p { color: @ink-soft; font-size: 0.86rem; font-weight: 300; margin: 0; line-height: 1.7; }
+.metrics-divider {
+  border: none; border-top: 1px solid @line;
+  margin: @space-xl 0 @space-sm;
+}
+.metrics-divider-label {
+  font-family: @font-mono; font-size: 0.65rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: @tracking-mono;
+  color: @ink-faint; margin: 0 0 @space-md;
+}
+.metrics-grid-aliases { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 900px) { .metrics-grid-aliases { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .metrics-grid-aliases { grid-template-columns: 1fr; } }
+.metric-card-alias { padding: @space-md @space-md 2.5rem; }
+.metric-card-alias h3 { font-size: 0.95rem; }
+
+// --- Reference lookup table (metric matrix) --------------------------------
+.feature-table--reference tbody td { vertical-align: top; }
+.feature-table--reference tbody tr.feat-group td {
+  color: @ink; border-left: 3px solid @arc;
+}
+.feature-table--reference tbody tr:not(.feat-group) td:nth-child(1) {
+  font-family: @font-mono; font-size: 0.78rem; font-weight: 600; color: @arc; min-width: 200px;
+}
+.feature-table--reference tbody tr:not(.feat-group) td:nth-child(2) {
+  font-family: @font-mono; font-size: 0.7rem; color: @ink-soft; min-width: 140px;
+}
+.feature-table--reference tbody tr:not(.feat-group) td:nth-child(4) {
+  color: @ink-soft; font-size: 0.78rem;
+}
+.feature-table--reference tbody tr:not(.feat-group):hover td { background: @arc-tint; }
+.feature-table--reference tbody td a {
+  color: @arc; text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px;
+}
+.feature-table--reference tbody td a:hover { color: @arc-deep; }

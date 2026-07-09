@@ -1,0 +1,96 @@
+// Homepage-specific components: split hero, value strip, and trust strip.
+// ===========================================================================
+
+// --- Hero ------------------------------------------------------------------
+.hero {
+  position: relative;
+  padding: @space-2xl 0 @space-xl;
+  border-bottom: 1px solid @line;
+}
+.hero-actions { display: flex; flex-wrap: wrap; gap: @space-md; margin: @space-lg 0 0; }
+.hero-visual { margin-top: @space-xl; }
+
+// Two-column hero (text | graph) — the locked AtlasArc Target layout.
+.hero-split {
+  display: grid; grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid @line;
+  padding: 0;
+}
+.hero-split .hero-text {
+  padding: @space-2xl @space-xl @space-xl @space-lg;
+  border-right: 1px solid @line;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.hero-split .hero-text h1 { max-width: 22ch; margin-bottom: @space-md; }
+.hero-split .hero-panel {
+  background: @arc-tint;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: @space-lg @space-xl;
+}
+@media (max-width: 760px) {
+  .hero-split { grid-template-columns: 1fr; }
+  .hero-split .hero-text { border-right: none; padding: @space-xl @space-lg; }
+  .hero-split .hero-panel { padding: @space-lg; }
+}
+
+// --- Homepage value strip (three-point, navy-accented) ---------------------
+.value-strip {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+}
+@media (max-width: 760px) { .value-strip { grid-template-columns: 1fr; } }
+.value-card {
+  display: block;
+  height: 100%;
+  padding: @space-lg;
+  border-right: 1px solid @line;
+  border-top: 3px solid @arc;
+  color: inherit;
+  border-bottom: none;
+  transition: background @dur @ease;
+}
+.value-card:hover { background: @arc-tint; color: inherit; border-bottom: none; }
+.value-strip > li:last-child .value-card { border-right: none; }
+.value-card h3 { font-size: 1rem; margin-bottom: @space-xs; letter-spacing: -0.01em; }
+.value-card p { font-size: 0.84rem; font-weight: 300; color: @ink-soft; margin: 0; line-height: 1.7; }
+.value-cue {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  margin-top: @space-md;
+  font-family: @font-mono; font-size: 0.66rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: @tracking-mono;
+  color: var(--arc);
+}
+.value-cue::after { content: "\2192"; transition: transform @dur @ease; }
+.value-card:hover .value-cue::after { transform: translateX(3px); }
+
+// --- Trust strip -----------------------------------------------------------
+.trust-strip {
+  background: @surface-sunk;
+  border-bottom: 1px solid @line;
+}
+.trust-strip-inner {
+  max-width: @container-max;
+  margin: 0 auto;
+  padding: 0 @space-lg;
+  display: flex;
+  flex-wrap: wrap;
+  gap: @space-lg;
+  align-items: center;
+  justify-content: center;
+}
+.trust-item {
+  display: inline-flex;
+  align-items: center;
+  font-family: @font-mono;
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: @tracking-mono;
+  color: @ink-soft;
+  padding: 0.9rem 0;
+}
+.trust-item + .trust-item { border-left: 1px solid @line; padding-left: @space-lg; margin-left: -@space-xs; }
+@media (max-width: 560px) {
+  .trust-strip-inner { gap: @space-sm; }
+  .trust-item + .trust-item { border-left: none; padding-left: 0; margin-left: 0; }
+}

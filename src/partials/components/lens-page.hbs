@@ -1,0 +1,29 @@
+<article class="content-page lens-page">
+  <header class="page-hero">
+    <p class="eyebrow">{{category}}</p>
+    <h1>{{title}}</h1>
+    <p class="lede">{{summary}}</p>
+  </header>
+
+  <section class="content-section lens-body">
+    {{{md content}}}
+  </section>
+
+  {{#if related_metrics}}
+  <section class="content-section related">
+    <h2>Most relevant metrics</h2>
+    <ul class="related-list metric-pills">
+      {{#each related_metrics}}<li><a href="/metrics/{{this}}">{{labelFromSlug this}}</a></li>{{/each}}
+    </ul>
+  </section>
+  {{/if}}
+
+  {{#if relatedBeats}}
+  <section class="content-section related">
+    <h2>Where this lens does its work</h2>
+    <ul class="related-list lens-pills">
+      {{#each relatedBeats}}<li><a href="{{url}}">{{title}}</a></li>{{/each}}
+    </ul>
+  </section>
+  {{/if}}
+</article>

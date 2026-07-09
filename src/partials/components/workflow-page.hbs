@@ -1,0 +1,68 @@
+<article class="content-page workflow-page">
+  <header class="page-hero">
+    <h1>{{title}}</h1>
+  </header>
+
+  <section class="content-section">
+    <h2>The problem</h2>
+    {{{md problem}}}
+  </section>
+
+  <section class="content-section">
+    <h2>Why it matters</h2>
+    {{{md why_it_matters}}}
+  </section>
+
+  <section class="content-section">
+    <h2>Where to start</h2>
+    <p>Begin with <strong>{{lens}}</strong>.</p>
+  </section>
+
+  {{#if steps}}
+  <section class="content-section">
+    <h2>Step by step</h2>
+    <ol class="workflow-steps">
+      {{#each steps}}
+        <li><strong>{{heading}}</strong> {{{md body}}}</li>
+      {{/each}}
+    </ol>
+  </section>
+  {{/if}}
+
+  <section class="content-section">
+    <h2>Interpreting results</h2>
+    {{{md interpretation}}}
+  </section>
+
+  <section class="content-section">
+    <h2>Export &amp; share</h2>
+    {{{md export_note}}}
+  </section>
+
+  {{#if related_metrics}}
+  <section class="content-section related">
+    <h2>Related metrics</h2>
+    <ul class="related-list metric-pills">
+      {{#each related_metrics}}<li><a href="/metrics/{{this}}">{{labelFromSlug this}}</a></li>{{/each}}
+    </ul>
+  </section>
+  {{/if}}
+
+  {{#if related_workflows}}
+  <section class="content-section related">
+    <h2>Related workflows</h2>
+    <ul class="related-list workflow-pills">
+      {{#each related_workflows}}<li><a href="/workflows/{{this}}">{{workflowTitleFromSlug this}}</a></li>{{/each}}
+    </ul>
+  </section>
+  {{/if}}
+
+  {{#if related_docs}}
+  <section class="content-section related">
+    <h2>Related docs</h2>
+    <ul class="related-list">
+      {{#each related_docs}}<li><a href="{{#if (eq this "lenses")}}/lenses/topology-graph{{else}}/docs/{{this}}{{/if}}">{{#if (eq this "lenses")}}Topology Graph{{else}}{{labelFromSlug this}}{{/if}}</a></li>{{/each}}
+    </ul>
+  </section>
+  {{/if}}
+</article>

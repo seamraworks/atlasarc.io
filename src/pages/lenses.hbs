@@ -1,0 +1,31 @@
+{{#> marketing}}
+  {{#*inline "html-head-block"}}
+    <title>Lenses | AtlasArc</title>
+    <meta name="description" content="Reference for the AtlasArc lenses: Topology Graph, Package Matrix, Composition, Subsystems, and Hotspots. What each view shows and how to read it.">
+    <meta property="og:title" content="AtlasArc Lenses">
+    <meta property="og:description" content="Reference for the five AtlasArc analysis lenses and how to read them.">
+  {{/inline}}
+  {{#*inline "body-block"}}
+    <section class="page-hero container">
+      <p class="eyebrow">Lenses</p>
+      <h1>Five ways to read your architecture</h1>
+      <p class="lede">Each lens answers a different set of questions about your package structure. Switching lenses doesn't change the underlying data: it changes how the data is presented and which patterns it makes visible.</p>
+    </section>
+
+    <section class="band">
+      <div class="container">
+        <ul class="lens-grid">
+          {{#each site.lenses}}
+            <li class="lens-card">
+              <a class="lens-card-link" href="{{url}}">
+                <span class="lens-type">{{category}}</span>
+                <h3>{{title}}</h3>
+                <p>{{description}}</p>
+              </a>
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    </section>
+  {{/inline}}
+{{/marketing}}

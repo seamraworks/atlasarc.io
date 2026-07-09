@@ -1,0 +1,85 @@
+<button class="sidebar-toggle" aria-expanded="false" aria-controls="docs-nav-body">
+  Navigation <span class="sidebar-toggle-caret" aria-hidden="true">▾</span>
+</button>
+<div id="docs-nav-body">
+<div class="docs-search">
+  <div id="search"></div>
+</div>
+<nav class="docs-nav" aria-label="Documentation">
+  <p class="docs-nav-title">Documentation</p>
+  <ul>
+    {{#each site.docs}}
+      <li><a href="{{url}}" class="{{activeClass url @root.currentUrl}}">{{title}}</a></li>
+    {{/each}}
+  </ul>
+
+  <details class="docs-nav-section docs-nav-section-principles" open>
+    <summary>AtlasArc Principles</summary>
+    <ul>
+      <li><a href="/lenses" class="{{activeClass "/lenses" @root.currentUrl}}">Lenses</a></li>
+      <li><a href="/workflows" class="{{activeClass "/workflows" @root.currentUrl}}">Workflows</a></li>
+      <li><a href="/metrics" class="{{activeClass "/metrics" @root.currentUrl}}">Metrics</a></li>
+    </ul>
+  </details>
+
+  <details class="docs-nav-section" {{sectionOpen "/languages" @root.currentUrl}}>
+    <summary>Supported languages</summary>
+    <ul>
+      {{#each site.languages}}
+        <li>
+          <a href="{{url}}" class="{{activeClass url @root.currentUrl}}">{{title}}</a>
+          {{#if (eq url @root.currentUrl)}}
+            {{#if @root.toc}}
+              <ul class="docs-nav-toc" aria-label="{{title}} sections">
+                {{#each @root.toc}}
+                  <li>
+                    {{#if href}}
+                      <a href="{{href}}">{{label}}</a>
+                    {{else}}
+                      <span>{{label}}</span>
+                    {{/if}}
+                    {{#if items}}
+                      <ul>
+                        {{#each items}}
+                          <li><a href="{{href}}">{{label}}</a></li>
+                        {{/each}}
+                      </ul>
+                    {{/if}}
+                  </li>
+                {{/each}}
+              </ul>
+            {{/if}}
+          {{/if}}
+        </li>
+      {{/each}}
+    </ul>
+  </details>
+
+  <details class="docs-nav-section" {{sectionOpen "/lenses" @root.currentUrl}}>
+    <summary>Lenses</summary>
+    <ul>
+      {{#each site.lenses}}
+        <li><a href="{{url}}" class="{{activeClass url @root.currentUrl}}">{{title}}</a></li>
+      {{/each}}
+    </ul>
+  </details>
+
+  <details class="docs-nav-section" {{sectionOpen "/workflows" @root.currentUrl}}>
+    <summary>Workflows</summary>
+    <ul>
+      {{#each site.workflows}}
+        <li><a href="{{url}}" class="{{activeClass url @root.currentUrl}}">{{title}}</a></li>
+      {{/each}}
+    </ul>
+  </details>
+
+  <details class="docs-nav-section" {{sectionOpen "/metrics" @root.currentUrl}}>
+    <summary>Metrics</summary>
+    <ul>
+      {{#each site.metrics}}
+        <li><a href="{{url}}" class="{{activeClass url @root.currentUrl}}">{{title}}</a></li>
+      {{/each}}
+    </ul>
+  </details>
+</nav>
+</div>

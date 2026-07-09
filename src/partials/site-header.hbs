@@ -1,0 +1,34 @@
+<header class="site-header">
+  <a class="brand" href="/">AtlasArc</a>
+  <nav class="primary-nav" aria-label="Primary">
+    <ul class="nav-list">
+      {{#each nav.primary}}
+        <li class="nav-item{{#if dropdown}} has-children{{/if}}">
+          {{#if dropdown}}
+            <a href="{{href}}" class="nav-parent {{anySectionActive href (lookup @root.nav dropdown) @root.currentUrl}}">{{label}}<span class="nav-caret" aria-hidden="true">&#9662;</span></a>
+            <ul class="nav-dropdown">
+              {{#each (lookup @root.nav dropdown)}}
+                <li><a href="{{href}}">{{label}}</a></li>
+              {{/each}}
+            </ul>
+          {{else}}
+            <a href="{{href}}" class="{{sectionActiveClass href @root.currentUrl}}">{{label}}</a>
+          {{/if}}
+        </li>
+      {{/each}}
+    </ul>
+  </nav>
+  <div class="header-actions">
+    <a class="utility-link" href="{{nav.utility.href}}">{{nav.utility.label}}</a>
+    {{#if page.internal}}
+      <a class="btn-nav" href="{{nav.cta.href}}">{{nav.cta.label}}</a>
+    {{else}}
+      <a
+        class="btn-nav"
+        href="{{marketplaceHref "header_nav"}}"
+        data-analytics-cta="header_nav"
+        data-analytics-destination="jetbrains_marketplace">{{nav.cta.label}}</a>
+    {{/if}}
+  </div>
+  <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">Menu</button>
+</header>

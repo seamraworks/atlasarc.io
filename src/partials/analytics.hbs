@@ -1,0 +1,7 @@
+{{#if site.analytics}}
+  {{#if (eq site.analytics.provider "plausible")}}
+    {{#unless page.internal}}
+      <script defer data-domain="{{site.analytics.domain}}" src="https://plausible.io/js/script.js"></script>
+    {{/unless}}
+  {{/if}}
+{{/if}}

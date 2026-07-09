@@ -1,0 +1,110 @@
+{{#> marketing}}
+  {{#*inline "html-head-block"}}
+    <title>AtlasArc for IntelliJ IDEA | Java, Kotlin &amp; TypeScript Architecture Analysis</title>
+    <meta name="description" content="AtlasArc is an interactive architecture workspace for Java, Kotlin, and TypeScript inside IntelliJ IDEA. Map structure, find cycles and boundary problems, expose complex undertested code, prioritize risk, govern exceptions, and generate Architecture Audit Reports without leaving the IDE.">
+    <meta property="og:title" content="AtlasArc Product Overview">
+    <meta property="og:description" content="Interactive architecture analysis for Java, Kotlin, and TypeScript inside IntelliJ IDEA.">
+  {{/inline}}
+  {{#*inline "body-block"}}
+
+    <section class="page-hero container">
+      <p class="eyebrow">Product</p>
+      <h1>Understand the structure. Prioritize the risk. Act inside the IDE.</h1>
+      <p class="lede">AtlasArc brings interactive architecture analysis into IntelliJ IDEA. Map the real structure, find the cycles and boundary problems, and expose complex, undertested code, then prioritize the risk, govern the exceptions, and report it to your team, all without leaving the editor or standing up a separate architecture tool.</p>
+    </section>
+
+    <section class="band" id="map-the-architecture">
+      <div class="container">
+        <div class="feature-band">
+          <div class="placeholder-box">Screenshot — Topology Graph, Matrix, and Composition treemap</div>
+          <div>
+            <h2>Map the architecture</h2>
+            <p>The structure you remember and the structure you have drift apart with every sprint. The <strong>Topology Graph</strong> and <strong>Package Matrix</strong> show every real package, source-folder, or file relationship in the selected analysis source; the <strong>Composition view</strong> maps where the code mass actually sits as a treemap, sunburst, or circle pack.</p>
+            <p>Expand and collapse the hierarchy inline, filter by coupling strength, lay a metric heatmap over the graph, and open one visible package/source folder as a contained class/file microscope when the local implementation tangle matters. Survey the whole map, or drop a pin on the package you are about to touch and turn the graph and matrix into a focused subject audit. <strong>You read the architecture as it is, not as the README claims.</strong> And when the project is too large to take in at once, AtlasArc is built to reduce it: scope, roll-up, and the right lens make a sprawling model small enough to read. See <a href="/docs/handling-large-projects">handling large projects</a>.</p>
+            <a class="btn btn-ghost" href="/product/features#explore-structure">Explore the structure &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-alt" id="diagnose-structural-problems">
+      <div class="container">
+        <div class="feature-band feature-band-reverse">
+          <div class="placeholder-box">Screenshot — Cycles and boundary leaks in the Topology Graph</div>
+          <div>
+            <h2>Diagnose structural problems</h2>
+            <p>Cycles are the headline, but they are not the whole story. AtlasArc separates the structural dependency graph from the cycle <em>problem</em> graph, filters the view to just the loops, and groups them by cluster so you can work one tangle at a time with the cycle-group navigator. The same model surfaces the quieter decay too: packages that cross intended boundaries, implementation internals leaking past their module, and packages sitting in the wrong layer for the way they actually depend. When a package looks suspicious, open its contained internals in the graph to see the local class/file tangle, then jump straight to the source edge that proves it.</p>
+            <a class="btn btn-ghost" href="/product/features#diagnose-structural-problems">See structural analysis &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" id="expose-risky-code">
+      <div class="container">
+        <div class="feature-band">
+          <div class="placeholder-box">Screenshot — Complexity and coverage heatmap on the hierarchy</div>
+          <div>
+            <h2>Expose complex, undertested code</h2>
+            <p>Structure is only half of maintainability. AtlasArc reads cyclomatic and cognitive complexity down to the method, and overlays branch and line coverage loaded from your JaCoCo reports. The Hotspots CC vs Coverage map shows the large, complex, weakly covered packages first, so you can add characterization tests <em>before</em> you refactor, not after something breaks in production.</p>
+            <a class="btn btn-ghost" href="/workflows/complex-code-weak-coverage">Complex code, weak coverage workflow &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-alt" id="prioritize-what-to-fix">
+      <div class="container">
+        <div class="feature-band feature-band-reverse">
+          <div class="placeholder-box">Screenshot — Hotspots map with metric axes</div>
+          <div>
+            <h2>Prioritize what to fix</h2>
+            <p>Fan-in, fan-out, instability, abstractness, distance from the main sequence: a metric in isolation is a number; a metric on the structure tells you where to act. The Hotspots map gives you the first ranked shortlist; Galaxy adds depth and dependency routes when the shortlist is crowded. The Subsystems lens finds the zone of pain, the over-abstract dead ends, and the load-bearing backbone the whole system rests on. You spend the refactoring budget where the risk actually concentrates.</p>
+            <a class="btn btn-ghost" href="/metrics/fan-in-fan-out">Fan-in and fan-out metric &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" id="govern-exceptions">
+      <div class="container">
+        <div class="feature-band">
+          <div class="placeholder-box">Screenshot — Accepted annotations and Safe Havens in the graph</div>
+          <div>
+            <h2>Govern intentional exceptions</h2>
+            <p>Not every cycle is a mistake: some dependencies are intentional, some are tracked debt. A zero-cycles rule that cannot record intent just gets switched off. AtlasArc gives the decision two commitment levels: <strong>Safe Havens</strong> mute a region for the investigation you are doing right now, workspace-local and uncommitted; <strong>source-controlled annotations</strong> mark a dependency as sanctioned in the code itself, carrying a reason and a ticket into the pull request. This is the part other analyzers don't have: your exceptions live in the codebase, not a tool's private database: <strong>versioned with your source, reviewed by your team, and enforceable in CI</strong>. Wire the annotations into an ArchUnit rule and the build fails on any new, un-sanctioned cycle, with no AtlasArc runtime anywhere in your pipeline.</p>
+            <a class="btn btn-ghost" href="/docs/recipe-archunit-build">Recipe: AtlasArc in your build &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-alt" id="review-and-report">
+      <div class="container">
+        <div class="feature-band feature-band-reverse">
+          <div class="placeholder-box">Screenshot — Architecture Audit Report index and Printable Version</div>
+          <div>
+            <h2>Review and report</h2>
+            <p>When the investigation is done, you have to hand it on. AtlasArc turns project, subsystem, boundary, cycle, and current-investigation reviews into Architecture Audit Reports: browsable HTML with focused sections plus a Printable Version for PDF or meeting packets. Export any lens as PNG, CSV, TSV, or DOT when you need a raw file; generate a report when the team needs one architectural record. The report reads from project overview into selected evidence, so the same dossier can support a retrospective, subsystem audit, boundary review, or technical-debt planning session.</p>
+            <a class="btn btn-ghost" href="/workflows/project-architecture-health-review">Architecture health review &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band cta-band">
+      <div class="container cta-band-inner">
+        <div class="cta-text">
+          <p class="eyebrow eyebrow-inverse">Get started</p>
+          <h2>Try AtlasArc free for 30 days</h2>
+          <p>Installs directly from the JetBrains Marketplace into IntelliJ IDEA. No card required. Cancel any time.</p>
+        </div>
+        <div class="cta-meta">
+          <a class="btn btn-primary" href="{{marketplaceHref "product_cta_band"}}" data-analytics-cta="product_cta_band" data-analytics-destination="jetbrains_marketplace">Start free trial</a>
+          <span class="cta-note">IntelliJ IDEA 2023.3+ &middot; Java, Kotlin &amp; TypeScript &middot; JetBrains Marketplace</span>
+        </div>
+      </div>
+    </section>
+
+  {{/inline}}
+{{/marketing}}

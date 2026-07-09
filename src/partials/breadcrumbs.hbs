@@ -1,0 +1,14 @@
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="/">Home</a>
+  {{#if breadcrumb}}
+    {{#unless (eq breadcrumb.url currentUrl)}}
+      <span aria-hidden="true">/</span>
+      <a href="{{breadcrumb.url}}">{{breadcrumb.label}}</a>
+    {{/unless}}
+  {{else}}
+    <span aria-hidden="true">/</span>
+    <a href="/docs">Docs</a>
+  {{/if}}
+  <span aria-hidden="true">/</span>
+  <span aria-current="page">{{page.title}}</span>
+</nav>

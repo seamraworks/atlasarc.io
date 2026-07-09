@@ -1,0 +1,124 @@
+// Language support page and Prism token styling.
+// ===========================================================================
+
+// ===========================================================================
+// Language support pages — markdown-rendered construct matrix
+
+// ===========================================================================
+.language-doc .lede { max-width: 64ch; }
+.language-tip {
+  margin: @space-lg 0;
+  padding: @space-md @space-lg;
+  border: 1px solid @line;
+  border-left: 3px solid @arc;
+  background: @arc-tint;
+}
+.language-tip-label {
+  margin: 0 0 @space-xs;
+  font-family: @font-mono;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: @tracking-mono;
+  text-transform: uppercase;
+  color: @arc;
+}
+.language-tip ol {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+.language-tip li {
+  margin: @space-2xs 0;
+}
+.language-tip li::marker {
+  color: @arc;
+  font-family: @font-mono;
+  font-weight: 700;
+}
+
+// The matrix arrives as a plain markdown <table>; style it to match the
+// reference tables without per-cell classes.
+.language-body table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid @line;
+  margin: @space-md 0 @space-lg;
+  font-size: 0.84rem;
+}
+.language-body thead th {
+  font-family: @font-mono; font-size: 0.62rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: @tracking-mono;
+  text-align: left; padding: @space-sm @space-md;
+  border-bottom: 2px solid @ink; border-right: 1px solid @line;
+  background: @surface; color: @arc;
+}
+.language-body thead th:last-child { border-right: none; }
+.language-body tbody td {
+  padding: @space-sm @space-md; vertical-align: top; color: @ink-soft;
+  border-bottom: 1px solid @line; border-right: 1px solid @line;
+}
+.language-body tbody tr:last-child td { border-bottom: none; }
+.language-body tbody td:last-child { border-right: none; }
+.language-body tbody tr:hover td { background: @arc-tint; }
+
+// First column: the construct name. Second column: the recognition status.
+.language-body tbody td:first-child {
+  color: @ink; font-weight: 500; min-width: 220px;
+}
+.language-body tbody td:nth-child(2) {
+  font-family: @font-mono; font-size: 0.72rem; white-space: nowrap; color: @arc;
+}
+.language-body code {
+  font-family: @font-mono; font-size: 0.85em;
+  background: @surface-sunk; padding: 0.1em 0.35em; border: 1px solid @line;
+}
+.language-body pre {
+  max-width: 100%;
+  white-space: normal;
+}
+.language-body pre code {
+  display: block;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.8rem;
+  line-height: 1.65;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  tab-size: 2;
+}
+
+// Prism emits token spans; AtlasArc owns the docs code theme here instead of
+// importing Prism's default CSS.
+.language-body .token.property {
+  color: @arc;
+  font-weight: 600;
+}
+.language-body .token.keyword,
+.language-body .token.builtin {
+  color: @arc;
+  font-weight: 600;
+}
+.language-body .token.string {
+  color: @verdigris;
+}
+.language-body .token.number,
+.language-body .token.boolean,
+.language-body .token.null {
+  color: @arc-deep;
+}
+.language-body .token.function,
+.language-body .token.class-name {
+  color: @arc-deep;
+  font-weight: 600;
+}
+.language-body .token.comment {
+  color: @ink-faint;
+}
+.language-body .token.variable,
+.language-body .token.parameter {
+  color: @ink-soft;
+}
+.language-body .token.punctuation,
+.language-body .token.operator {
+  color: @line-strong;
+}

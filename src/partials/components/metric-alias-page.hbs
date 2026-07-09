@@ -1,0 +1,23 @@
+<article class="content-page metric-page metric-alias-page" data-pagefind-ignore>
+  <header class="page-hero">
+    <h1>{{title}}</h1>
+    <p class="metric-alias-notice">Alternative name for <a href="/metrics/{{alias_of_slug}}">{{alias_of_title}}</a>.</p>
+  </header>
+
+  <section class="content-section">
+    {{{md what_it_is}}}
+  </section>
+
+  {{#if related_lenses}}
+  <section class="content-section related">
+    <h2>Relevant lenses</h2>
+    <ul class="related-list lens-pills">
+      {{#each related_lenses}}<li><a href="/lenses/{{this}}">{{labelFromSlug this}}</a></li>{{/each}}
+    </ul>
+  </section>
+  {{/if}}
+
+  <div class="alias-cta">
+    <a class="btn btn-primary" href="/metrics/{{alias_of_slug}}">Full explainer: {{alias_of_title}} &rarr;</a>
+  </div>
+</article>

@@ -1,0 +1,49 @@
+{{#> marketing}}
+  {{#*inline "html-head-block"}}
+    <title>Support | AtlasArc</title>
+    <meta name="description" content="Get help with AtlasArc: support, contact, and issue reporting.">
+    <meta property="og:title" content="AtlasArc Support">
+    <meta property="og:description" content="Support and contact for AtlasArc.">
+  {{/inline}}
+  {{#*inline "body-block"}}
+    <section class="page-hero container">
+      <p class="eyebrow">Support</p>
+      <h1>Get help with AtlasArc</h1>
+      <p class="lede">Documentation, bug reports, and direct contact, all in one place.</p>
+    </section>
+    <section class="band">
+      <div class="container">
+        <ul class="card-grid">
+          <li class="card">
+            <a href="/docs/getting-started">
+              <h3>Documentation</h3>
+              <p>Start with the docs: installation, first analysis, lens guides, and
+              metric reference are all covered.</p>
+            </a>
+          </li>
+          <li class="card">
+            <a href="https://github.com/seamraworks/atlasarc/issues" rel="noopener noreferrer" target="_blank">
+              <h3>Bug reports &amp; feature requests</h3>
+              <p>Found something broken or have an idea? Open an issue on GitHub. It&rsquo;s the
+              fastest way to track progress and get a response.</p>
+            </a>
+          </li>
+          <li class="card">
+            <a href="mailto:support@atlasarc.io">
+              <h3>Direct contact</h3>
+              <p>For licensing questions, private reports, or anything not suited to a public
+              issue tracker, email <strong>support@atlasarc.io</strong>.</p>
+            </a>
+          </li>
+        </ul>
+        <p class="section-intro">For subscription and billing questions, contact
+        <a
+          href="{{marketplaceHref "support_marketplace"}}"
+          data-analytics-cta="support_marketplace"
+          data-analytics-destination="jetbrains_marketplace"
+          rel="noopener noreferrer">JetBrains
+        Marketplace support</a>. They manage all payments and licence keys.</p>
+      </div>
+    </section>
+  {{/inline}}
+{{/marketing}}

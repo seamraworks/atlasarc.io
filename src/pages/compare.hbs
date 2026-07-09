@@ -1,0 +1,317 @@
+{{#> marketing}}
+  {{#*inline "html-head-block"}}
+    <title>Stan4J Alternative and Structure101 Replacement | AtlasArc</title>
+    <meta name="description" content="Compare AtlasArc with Stan4J, Structure101, IntelliJ dependency tools, CodeMR, Sonar, dependency-cruiser, and ArchUnit for local architecture exploration.">
+    <meta property="og:title" content="AtlasArc Comparison">
+    <meta property="og:description" content="A candid comparison for teams looking for a Stan4J alternative, a Structure101 replacement, or a more interactive IntelliJ architecture workbench.">
+  {{/inline}}
+  {{#*inline "body-block"}}
+
+    <section class="page-hero container compare-hero">
+      <p class="eyebrow">Compare</p>
+      <h1>Stan4J alternative and Structure101 replacement for IntelliJ architecture analysis</h1>
+      <p class="lede">The architecture-analysis gap never went away. Stan4J is gone. Structure101 is no longer sold. CodeMR and broad static-analysis platforms answer different questions. AtlasArc is built for the local architecture investigations architects still do inside IntelliJ.</p>
+      <div class="compare-hero-grid" aria-label="Comparison summary">
+        <a class="compare-hero-card" href="#stan4j-alternative">
+          <span class="compare-label">Coming from</span>
+          <strong>Stan4J</strong>
+          <p>Recover the local Java structure-analysis workflow in a modern IntelliJ plugin.</p>
+        </a>
+        <a class="compare-hero-card" href="#structure101-replacement">
+          <span class="compare-label">Replacing</span>
+          <strong>Structure101</strong>
+          <p>Cover discovery, diagnosis, cycle triage, and reporting without claiming full historical suite parity.</p>
+        </a>
+        <a class="compare-hero-card" href="#codemr-sonar">
+          <span class="compare-label">Already using</span>
+          <strong>Sonar or ArchUnit</strong>
+          <p>Use AtlasArc for exploration, then keep platform governance and build enforcement where they belong.</p>
+        </a>
+      </div>
+      <div class="placeholder-box hero-placeholder compare-proof-placeholder">Screenshot: AtlasArc topology, matrix, cycle triage, and Architecture Audit Report</div>
+    </section>
+
+    <section class="band band-alt">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">Fit</span>
+          <h2>When AtlasArc is the right comparison</h2>
+        </div>
+        <div class="compare-fit-grid">
+          <article class="compare-fit">
+            <h3>You need to read the architecture you have</h3>
+            <p>AtlasArc gives you a shared model across Topology, Matrix, Composition, Subsystems, and Hotspots, so switching lenses changes the question without throwing away context.</p>
+          </article>
+          <article class="compare-fit">
+            <h3>You need interaction, not a static diagram</h3>
+            <p>Expand packages, pin a subject, inspect its boundary, step through cycle groups, open local class/file evidence, and navigate from structural evidence back to source.</p>
+          </article>
+          <article class="compare-fit">
+            <h3>You need reports with architectural evidence</h3>
+            <p>Architecture Audit Reports are assembled from the analysis model, with browsable HTML and a Printable Version, not a bundle of generic metrics screenshots.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" id="comparison-at-a-glance">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">Table</span>
+          <h2>Comparison at a glance</h2>
+        </div>
+        <p class="section-intro">This table compares evaluator needs, not every historical feature. Read it this way: AtlasArc is the local IntelliJ architecture workbench; some tools are discontinued, some are broader governance platforms, and some are useful companions.</p>
+        <div class="feature-table-wrap compare-table-wrap">
+          <table class="feature-table compare-table">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Current reality</th>
+                <th>Best fit</th>
+                <th>Limits to know</th>
+                <th>AtlasArc answer</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="feat-group"><td colspan="5">Reference point</td></tr>
+              <tr>
+                <td><strong>AtlasArc</strong></td>
+                <td>Active IntelliJ plugin; local analysis; Java/Kotlin via JVM bytecode; TypeScript via generated dependency-cruiser artifacts.</td>
+                <td>Interactive architecture exploration, cycle triage, boundary diagnosis, hotspot prioritization, governed exceptions, and Architecture Audit Reports.</td>
+                <td>Not a broad security platform; not a full historical Structure101 spec/build/repository clone; TypeScript is artifact-backed.</td>
+                <td>The reference point: one shared model, <a href="/lenses">five lenses</a>, <a href="/product/features#explore-structure">subject pinning</a>, <a href="/product/features#diagnose-structural-problems">cycle/problem-graph distinction</a>, <a href="/product/features#govern-exceptions">source-level exception governance</a>, and <a href="/product/features#review-and-report">reports built for architecture review</a>.</td>
+              </tr>
+              <tr class="feat-group"><td colspan="5">Discontinued architecture tools</td></tr>
+              <tr>
+                <td><strong>Stan4J</strong></td>
+                <td>Discontinued years ago; no practical current download or purchase path; historically Java-only and tied to an older Java era.</td>
+                <td>Historical local Java structure exploration: dependencies, cycles, tangles, metrics, and visual architecture reading.</td>
+                <td>Not a current option for modern teams. The Java 8-era ceiling is secondary because the product is gone.</td>
+                <td>AtlasArc is the modern IntelliJ-native answer to the same core need: show me the architecture I actually have.</td>
+              </tr>
+              <tr>
+                <td><strong>Structure101</strong></td>
+                <td>No longer sold after the Sonar acquisition; historically a serious architecture suite.</td>
+                <td>Current-state discovery plus authored structure specs, LSM/matrix work, build checks, snapshots, and architecture governance.</td>
+                <td>Discontinued. AtlasArc should not claim full parity with authored specs, repository snapshots, or build-native enforcement unless those are implemented.</td>
+                <td>AtlasArc can replace much of the daily <a href="/product/features#explore-structure">exploration</a>, <a href="/product/features#diagnose-structural-problems">dependency diagnosis</a>, <a href="/workflows/find-cycles">cycle triage</a>, and <a href="/workflows/project-architecture-health-review">reporting workflow</a> former Structure101 users miss.</td>
+              </tr>
+
+              <tr class="feat-group"><td colspan="5">Native IDE bridge</td></tr>
+              <tr>
+                <td><strong>IntelliJ built-in dependency tools</strong></td>
+                <td>Active IDE features: dependency analysis, module diagrams, cyclic dependency checks, dependency validation rules, and DSM via the Ultimate DSM plugin.</td>
+                <td>Quick local answers about who depends on what, module relationships, cyclic dependencies, usage paths, and package/class relationships.</td>
+                <td>Useful inspection/navigation tools, not a productized architecture review workflow with shared lenses, governed cycle states, hotspot prioritization, and audit reports.</td>
+                <td>Use IntelliJ's built-ins for local dependency inspection. Use AtlasArc when that inspection becomes <a href="/product/features#explore-structure">architecture exploration</a>, <a href="/product/features#diagnose-structural-problems">diagnosis</a>, <a href="/product/features#govern-exceptions">governance</a>, and <a href="/product/features#review-and-report">reporting</a>.</td>
+              </tr>
+
+              <tr class="feat-group"><td colspan="5">Adjacent active tools</td></tr>
+              <tr>
+                <td><strong>CodeMR</strong></td>
+                <td>Still available and marketed with large architecture/visualization claims.</td>
+                <td>Metrics-heavy inspection for people who want local IDE metrics and static summaries.</td>
+                <td>Closer to a mostly static metrics/reporting plugin than an interactive architecture workbench. Its report is not the same thing as reviewable architecture evidence.</td>
+                <td>AtlasArc is not "more metrics." It is built around investigation: <a href="/lenses/topology-graph">graph</a>, <a href="/lenses/package-matrix">matrix</a>, <a href="/product/features#explore-structure">subject pinning</a>, <a href="/metrics/cyclic-dependencies">cycle states</a>, <a href="/workflows/review-package-boundaries">boundary views</a>, and <a href="/product/features#review-and-report">reports with architectural evidence</a>.</td>
+              </tr>
+              <tr>
+                <td><strong>SonarQube / SonarQube for IDE</strong></td>
+                <td>Active broad static-analysis and security platform with server/cloud workflows and IDE issue feedback.</td>
+                <td>Organization-wide release gates, security/code-smell workflows, PR/CI governance, dashboards, and issue tracking.</td>
+                <td>Built for a broader governance lane, not for local architecture investigation. It is not the thing AtlasArc should claim to replace.</td>
+                <td>Use Sonar for platform governance. Use AtlasArc for local IntelliJ <a href="/product/features#explore-structure">architecture exploration</a>, <a href="/product/features#diagnose-structural-problems">diagnosis</a>, and explanation.</td>
+              </tr>
+              <tr>
+                <td><strong>dependency-cruiser</strong></td>
+                <td>Active JavaScript/TypeScript CLI and rule tool; strong artifact and rule engine.</td>
+                <td>JS/TS dependency rules, CI checks, JSON output, and static dependency graphs.</td>
+                <td>Not an IntelliJ architecture workbench by itself; static artifacts do not provide synchronized lens switching, subject pinning, or audit reports.</td>
+                <td>AtlasArc consumes dependency-cruiser JSON for <a href="/languages/typescript">TypeScript</a> and turns it into a navigable architecture model. It does not replace dependency-cruiser's parser or rules.</td>
+              </tr>
+              <tr>
+                <td><strong>ArchUnit</strong></td>
+                <td>Active Java test library.</td>
+                <td>Codifying architecture rules and failing CI builds on violations.</td>
+                <td>No exploratory UI, graph, matrix, composition lens, or local visual investigation loop.</td>
+                <td>Companion, not competitor: <a href="/workflows/find-cycles">discover and explain in AtlasArc</a>; enforce durable rules with the <a href="/docs/recipe-archunit-build">ArchUnit recipe</a>.</td>
+              </tr>
+              <tr>
+                <td><strong>Sonargraph / ArcTree</strong></td>
+                <td>Active architecture tooling, including IntelliJ-centered ArcTree and a broader Sonargraph governance suite.</td>
+                <td>Teams wanting a deeper architecture-governance suite with DSL/build/process depth.</td>
+                <td>Heavier category than AtlasArc's first positioning; less directly tied to the Stan4J/Structure101 search intent.</td>
+                <td>Mention as a serious active alternative for broader governance. AtlasArc's contrast is <a href="/product">lighter, local, IntelliJ-first, and exploration-first</a>.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-alt" id="intellij-built-in-dependency-tools">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">IntelliJ</span>
+          <h2>How is AtlasArc different from IntelliJ's built-in dependency tools?</h2>
+        </div>
+        <p class="section-intro">IntelliJ IDEA already includes useful tools for dependency analysis, module diagrams, cyclic dependency checks, and Dependency Structure Matrix exploration. AtlasArc doesn't replace those general-purpose IDE features. It builds on the same local-first workflow and adds the architecture layer on top: every lens reads one shared model, so cycle states, boundaries, hotspots, governance, and reports stay in sync as you move between them.</p>
+
+        <div class="feature-table-wrap">
+          <table class="feature-table compare-intellij-table">
+            <thead>
+              <tr>
+                <th>Area</th>
+                <th>IntelliJ built-in dependency tools</th>
+                <th>AtlasArc contrast</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Best fit</strong></td>
+                <td>Inspect dependencies, module relationships, cyclic dependencies, usage paths, and package/class relationships inside the IDE.</td>
+                <td>Run a repeatable architecture review: <a href="/product/features#explore-structure">map</a>, <a href="/product/features#diagnose-structural-problems">diagnose</a>, <a href="/product/features#expose-risky-code">expose</a>, <a href="/product/features#prioritize-refactoring-work">prioritize</a>, <a href="/product/features#govern-exceptions">govern</a>, and <a href="/product/features#review-and-report">report</a>.</td>
+              </tr>
+              <tr>
+                <td><strong>Graph support</strong></td>
+                <td>Module dependency diagrams, package/class dependency views, and Gradle/Maven dependency diagrams in relevant contexts.</td>
+                <td><a href="/lenses/topology-graph">Interactive topology graph</a> with package/source-folder expansion and a Topology-only contained class/file internals layer.</td>
+              </tr>
+              <tr>
+                <td><strong>Matrix support</strong></td>
+                <td>DSM plugin for matrix-style dependency exploration; requires an Ultimate subscription.</td>
+                <td><a href="/lenses/package-matrix">Dedicated Dependency Matrix</a> over AtlasArc's shared architecture model, aligned with other lenses.</td>
+              </tr>
+              <tr>
+                <td><strong>Cycle support</strong></td>
+                <td>Cyclic dependency analysis and visual highlighting of circular dependencies.</td>
+                <td><a href="/metrics/cyclic-dependencies">Architecture-specific cycle states</a>: architectural, nested, aggregation, cross-module, and accepted cycles.</td>
+              </tr>
+              <tr>
+                <td><strong>Navigation</strong></td>
+                <td>Strong IDE-native navigation: jump to source, find usages, inspect dependencies.</td>
+                <td>IDE-local narrowing around <a href="/product/features#explore-structure">subject pinning</a>, Neighbourhood, Boundary Graph, Boundary Matrix, breadcrumb, and Status Cluster.</td>
+              </tr>
+              <tr>
+                <td><strong>Governance</strong></td>
+                <td>Dependency validation rules can mark dependencies valid or invalid in the Dependency Viewer.</td>
+                <td><a href="/product/features#govern-exceptions">Safe Havens, reviewable cycle annotations, accepted cycle states</a>, and an <a href="/docs/recipe-archunit-build">ArchUnit recipe</a> for CI follow-through.</td>
+              </tr>
+              <tr>
+                <td><strong>Reporting/export</strong></td>
+                <td>Dependency analysis can export results to a text file or clipboard.</td>
+                <td><a href="/product/features#review-and-report">PNG, TSV/CSV, DOT, browsable HTML Architecture Audit Reports, and Printable Version</a>.</td>
+              </tr>
+              <tr>
+                <td><strong>TypeScript relevance</strong></td>
+                <td>Not the comparison point for the Java/IDE dependency-analysis docs reviewed.</td>
+                <td><a href="/languages/typescript">TypeScript architecture exploration</a> via user-generated dependency-cruiser artifacts.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="compare-faq" id="faq-intellij-dependency-analyzer">
+          <h3>How is AtlasArc different from IntelliJ IDEA's built-in dependency analyzer?</h3>
+          <p>IntelliJ IDEA's tools are great for a quick local question: who depends on this, where's the cycle, what's in this module. AtlasArc is for the standing architecture review around those answers. One shared model feeds every lens, cycles carry architectural states instead of a single flag, you can pin a subject and read its boundary, and accepted exceptions stay in source where the team reviews them and CI enforces them.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" id="stan4j-alternative">
+      <div class="container compare-split">
+        <div>
+          <p class="eyebrow">Stan4J alternative</p>
+          <h2>Coming from Stan4J</h2>
+        </div>
+        <div class="compare-copy">
+          <p>Stan4J solved a real problem: local Java structure analysis that made dependencies, cycles, tangles, and metrics visible. It's no longer a practical option. The product disappeared years ago, can't be bought or downloaded through any current path, and its old Java support ceiling is mostly academic now that the tool is gone.</p>
+          <p>AtlasArc doesn't try to recreate Stan4J screen by screen. It brings the useful part back to current IntelliJ projects: direct structural visibility, interactive package exploration, cycle diagnosis, architecture metrics, and a route from any finding back to source.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-alt" id="structure101-replacement">
+      <div class="container compare-split">
+        <div>
+          <p class="eyebrow">Structure101 replacement</p>
+          <h2>Coming from Structure101</h2>
+        </div>
+        <div class="compare-copy">
+          <p>Structure101 was a serious architecture product: LSM exploration, dependency matrices, authored structure specs, build checks, reports, and snapshot workflows. It's also no longer sold, which leaves a real gap for teams that still need to inspect, explain, and govern architecture inside current codebases.</p>
+          <p>AtlasArc covers the daily work former users miss: graph and matrix navigation, subject and boundary reads, cycle triage, source-level exception governance, hotspot prioritization, and Architecture Audit Reports. It should not be read as a full clone of every historical Structure101 workflow.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" id="codemr-sonar">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">Adjacent</span>
+          <h2>CodeMR and Sonar are different comparisons</h2>
+        </div>
+        <div class="compare-fit-grid compare-fit-grid--two">
+          <article class="compare-fit">
+            <h3>CodeMR is not the benchmark for interaction</h3>
+            <p>CodeMR is best read as a metrics-oriented inspection plugin. AtlasArc is built around interactive architecture work: moving from topology to matrix to hotspots, pinning subjects, tracing cycle evidence, and producing reports that explain architectural findings.</p>
+          </article>
+          <article class="compare-fit">
+            <h3>Sonar is a complement, not a target</h3>
+            <p>Sonar is the broad static-analysis and security governance platform. AtlasArc is the local IntelliJ architecture workbench you use when you need to understand, explain, and act on the structure behind those risks.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-alt" id="typescript-and-enforcement">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">Companions</span>
+          <h2>TypeScript artifacts and CI enforcement</h2>
+        </div>
+        <div class="compare-fit-grid compare-fit-grid--two">
+          <article class="compare-fit">
+            <h3>From dependency-cruiser artifacts to exploration</h3>
+            <p>For TypeScript, AtlasArc reads dependency-cruiser JSON generated by your project. It turns that static artifact into a navigable architecture model; it doesn't replace dependency-cruiser's parser, rules, or CI use.</p>
+            <a class="btn btn-ghost" href="/languages/typescript">TypeScript support &rarr;</a>
+          </article>
+          <article class="compare-fit">
+            <h3>Investigate in AtlasArc, enforce with ArchUnit</h3>
+            <p>AtlasArc helps you find and explain the architecture problem. Java teams can then codify long-lived rules in CI with ArchUnit, including annotation-aware cycle exceptions.</p>
+            <a class="btn btn-ghost" href="/docs/recipe-archunit-build">ArchUnit recipe &rarr;</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">Limits</span>
+          <h2>What AtlasArc does not claim</h2>
+        </div>
+        <ul class="compare-limits">
+          <li>AtlasArc does not replace SonarQube's broad static-analysis, security, PR, and organization-wide governance platform.</li>
+          <li>AtlasArc does not claim full historical Structure101 suite parity for authored specs, repository snapshots, and build products.</li>
+          <li>AtlasArc does not replace IntelliJ IDEA's dependency analyzer, module diagrams, DSM, or source-navigation strengths.</li>
+          <li>AtlasArc does not parse TypeScript semantically; it reads dependency-cruiser artifacts generated by your project.</li>
+          <li>AtlasArc's class/file internals are a Topology detail layer, not a sixth lens or a new architecture-unit model.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="band cta-band">
+      <div class="container cta-band-inner">
+        <div class="cta-text">
+          <p class="eyebrow eyebrow-inverse">Try it on your architecture</p>
+          <h2>Run AtlasArc on the codebase you already know</h2>
+          <p>Install the trial from the JetBrains Marketplace, analyze a real project, and compare the architecture you remember with the one the code actually contains.</p>
+        </div>
+        <div class="cta-meta">
+          <a class="btn btn-primary" href="{{marketplaceHref "compare_cta_band"}}" data-analytics-cta="compare_cta_band" data-analytics-destination="jetbrains_marketplace">Start free trial</a>
+          <a class="btn btn-ghost" href="/product/features">Explore features &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+  {{/inline}}
+{{/marketing}}

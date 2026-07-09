@@ -1,0 +1,213 @@
+{{#> marketing}}
+  {{#*inline "html-head-block"}}
+    <title>AtlasArc Pricing | Serious Architecture Analysis for IntelliJ</title>
+    <meta name="description" content="Start with a 30-day JetBrains Marketplace trial. Personal, Commercial, and Team licensing for AtlasArc architecture analysis inside IntelliJ IDEA.">
+    <meta property="og:title" content="AtlasArc Pricing">
+    <meta property="og:description" content="Personal, Commercial, and Team licensing through JetBrains Marketplace. Start with a 30-day trial.">
+  {{/inline}}
+  {{#*inline "body-block"}}
+
+    <section class="page-hero container">
+      <p class="eyebrow">Pricing</p>
+      <h1>Pricing for serious architecture work inside IntelliJ</h1>
+      <p class="lede">Start with a 30-day JetBrains Marketplace trial. Choose a Personal license for individual use, a Commercial seat for professional work, or a Team pack for shared architecture reviews.</p>
+    </section>
+
+    <section class="band">
+      <div class="container">
+
+        <p class="pricing-launch-notice">Early-access launch pricing for AtlasArc 1.x</p>
+
+        {{! Billing toggle — applies to individual plans only }}
+        <div class="billing-toggle" role="group" aria-label="Billing period">
+          <button class="billing-opt is-active" data-billing="monthly" type="button">Monthly</button>
+          <button class="billing-opt" data-billing="yearly" type="button">Yearly</button>
+        </div>
+
+        {{! Plan cards }}
+        <div class="plans-grid">
+
+          {{! Personal }}
+          <div class="plan-col">
+            <p class="plan-name">Personal</p>
+            <div class="plan-price-row">
+              <span class="plan-currency">€</span>
+              <span class="plan-amount" data-monthly="12.90" data-yearly="89">12.90</span>
+              <span class="plan-period" data-monthly="/month" data-yearly="/year">/month</span>
+            </div>
+            <p class="plan-billing-note" data-monthly="€89/yr annual available" data-yearly="launch price · then €129/yr">€89/yr annual available</p>
+            <hr class="plan-divider">
+            <p class="plan-desc">For independent developers, personal projects, open-source maintenance, and learning. Includes the full AtlasArc feature set for non-company use.</p>
+            <div class="plan-cta">
+              <a class="btn btn-primary" href="{{marketplaceHref "pricing_personal"}}" data-analytics-cta="pricing_personal" data-analytics-destination="jetbrains_marketplace">Start free trial</a>
+            </div>
+          </div>
+
+          {{! Commercial (featured) }}
+          <div class="plan-col plan-featured">
+            <span class="plan-tag">Recommended</span>
+            <p class="plan-name">Commercial</p>
+            <div class="plan-price-row">
+              <span class="plan-currency">€</span>
+              <span class="plan-amount" data-monthly="24.90" data-yearly="179">24.90</span>
+              <span class="plan-period" data-monthly="/month /seat" data-yearly="/year /seat">/month /seat</span>
+            </div>
+            <p class="plan-billing-note" data-monthly="€179/yr annual · per seat" data-yearly="launch · then €249/yr/seat">€179/yr annual · per seat</p>
+            <hr class="plan-divider">
+            <p class="plan-desc">For professional and company use. Includes the full AtlasArc architecture cockpit: graph, matrix, composition, subsystems, hotspots, metrics, coverage, exports, workflows, and governed cycle exceptions.</p>
+            <div class="plan-cta">
+              <a class="btn btn-primary" href="{{marketplaceHref "pricing_commercial"}}" data-analytics-cta="pricing_commercial" data-analytics-destination="jetbrains_marketplace">Start free trial</a>
+            </div>
+          </div>
+
+          {{! Team (single card with in-column pack size selector) }}
+          <div class="plan-col plan-col--corporate">
+            <p class="plan-name">Team</p>
+            <div class="pack-toggle" role="group" aria-label="Team pack size">
+              <button class="pack-opt is-active" data-pack="five" type="button">5-pack</button>
+              <button class="pack-opt" data-pack="ten" type="button">10-pack</button>
+            </div>
+            <div class="plan-price-row">
+              <span class="plan-currency">€</span>
+              <span class="plan-amount" data-five="999" data-ten="1,799">999</span>
+              <span class="plan-period">/year</span>
+            </div>
+            <p class="plan-billing-note" data-five="5 seats · annual only" data-ten="10 seats · annual only">5 seats · annual only</p>
+            <hr class="plan-divider">
+            <p class="plan-desc">For architecture and development teams. Centralised seat management for reviews, refactoring planning, onboarding, and dependency cleanup.</p>
+            <div class="plan-cta">
+              <a class="btn btn-ghost" href="{{marketplaceHref "pricing_team"}}" data-analytics-cta="pricing_team" data-analytics-destination="jetbrains_marketplace">Start free trial</a>
+            </div>
+          </div>
+
+        </div>{{! /plans-grid }}
+
+        <p class="pricing-trial-note">30-day free trial · no card required · purchased through JetBrains Marketplace · cancel any time</p>
+
+      </div>
+    </section>
+
+    <section class="band band-alt">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">Compare</span>
+          <h2>Plan comparison</h2>
+        </div>
+        <div class="feature-table-wrap">
+          <table class="feature-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Personal</th>
+                <th class="th-featured">Commercial</th>
+                <th>Team</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr class="feat-group"><td colspan="4">License</td></tr>
+              <tr>
+                <td>Full AtlasArc feature set</td>
+                <td class="feat-cell"><span class="feat-yes">✓</span></td>
+                <td class="feat-cell col-featured"><span class="feat-yes">✓</span></td>
+                <td class="feat-cell"><span class="feat-yes">✓</span></td>
+              </tr>
+              <tr>
+                <td>Commercial / company use</td>
+                <td class="feat-cell"><span class="feat-no">—</span></td>
+                <td class="feat-cell col-featured"><span class="feat-yes">✓</span></td>
+                <td class="feat-cell"><span class="feat-yes">✓</span></td>
+              </tr>
+              <tr>
+                <td>Seat count</td>
+                <td class="feat-cell"><span class="feat-val">1</span></td>
+                <td class="feat-cell col-featured"><span class="feat-val">1</span></td>
+                <td class="feat-cell"><span class="feat-val">5 or 10</span></td>
+              </tr>
+              <tr>
+                <td>Centralised team purchase</td>
+                <td class="feat-cell"><span class="feat-no">—</span></td>
+                <td class="feat-cell col-featured"><span class="feat-no">—</span></td>
+                <td class="feat-cell"><span class="feat-yes">✓</span></td>
+              </tr>
+
+              <tr class="feat-group"><td colspan="4">Trial and billing</td></tr>
+              <tr>
+                <td>30-day free trial</td>
+                <td class="feat-cell"><span class="feat-yes">✓</span></td>
+                <td class="feat-cell col-featured"><span class="feat-yes">✓</span></td>
+                <td class="feat-cell"><span class="feat-yes">✓</span></td>
+              </tr>
+              <tr>
+                <td>Annual billing</td>
+                <td class="feat-cell"><span class="feat-yes">✓</span></td>
+                <td class="feat-cell col-featured"><span class="feat-yes">✓</span></td>
+                <td class="feat-cell"><span class="feat-yes">✓</span></td>
+              </tr>
+              <tr>
+                <td>Monthly billing</td>
+                <td class="feat-cell"><span class="feat-yes">✓</span></td>
+                <td class="feat-cell col-featured"><span class="feat-yes">✓</span></td>
+                <td class="feat-cell"><span class="feat-no">—</span></td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" id="faq">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">FAQ</span>
+          <h2>Trial and licensing questions</h2>
+        </div>
+        <dl class="faq">
+          <div class="faq-item">
+            <dt>Is there a free trial?</dt>
+            <dd>Yes. Every plan starts with a 30-day free trial through the JetBrains Marketplace. No card is required, and you can cancel any time.</dd>
+          </div>
+          <div class="faq-item">
+            <dt>Is my source code uploaded anywhere?</dt>
+            <dd>No. AtlasArc runs entirely on your machine: it reads your project locally inside IntelliJ IDEA and renders the results in the IDE. No source code, metrics, or project data is ever transmitted to Seamra Works or any third party.</dd>
+          </div>
+          <div class="faq-item">
+            <dt>Does it work with IntelliJ IDEA Community and Ultimate?</dt>
+            <dd>Both. AtlasArc runs on IntelliJ IDEA 2023.3 or later, Community or Ultimate. Java and Kotlin projects use compiled bytecode; TypeScript sources use generated dependency-cruiser artifacts.</dd>
+          </div>
+          <div class="faq-item">
+            <dt>How is AtlasArc licensed, and who handles payment?</dt>
+            <dd>Licenses are sold and managed through the JetBrains Marketplace. JetBrains handles all payment, subscription management, invoices, and license keys; Seamra Works receives only the anonymised license metadata needed to validate your subscription.</dd>
+          </div>
+          <div class="faq-item">
+            <dt>What is the difference between Personal and Commercial?</dt>
+            <dd>Personal is for individual, non-company use: personal projects, open-source work, and learning. Commercial is for professional and company use. Both include the full AtlasArc feature set.</dd>
+          </div>
+          <div class="faq-item">
+            <dt>What happens after the trial ends?</dt>
+            <dd>Nothing is charged automatically. To keep using AtlasArc after 30 days, purchase a plan through the Marketplace; otherwise the trial simply lapses.</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="band cta-band">
+      <div class="container cta-band-inner">
+        <div class="cta-text">
+          <p class="eyebrow eyebrow-inverse">Get started</p>
+          <h2>Try AtlasArc free for 30 days</h2>
+          <p>No card required. Installs directly from the JetBrains Marketplace into IntelliJ IDEA. Cancel any time.</p>
+        </div>
+        <div class="cta-meta">
+          <a class="btn btn-primary" href="{{marketplaceHref "pricing_cta_band"}}" data-analytics-cta="pricing_cta_band" data-analytics-destination="jetbrains_marketplace">Start free trial</a>
+          <span class="cta-note">IntelliJ IDEA 2023.3+ · Java, Kotlin &amp; TypeScript · JetBrains Marketplace</span>
+        </div>
+      </div>
+    </section>
+
+  {{/inline}}
+  {{#*inline "scripts-block"}}
+    <script type="module" src="/assets/scripts/pricing.js"></script>
+  {{/inline}}
+{{/marketing}}

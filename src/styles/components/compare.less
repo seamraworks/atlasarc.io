@@ -1,0 +1,131 @@
+// Compare page components.
+// ===========================================================================
+
+// --- Comparison page -------------------------------------------------------
+.compare-hero .lede { max-width: 76ch; }
+.compare-hero-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+  margin-top: @space-lg; border: 1px solid @line; border-bottom: 2px solid @ink;
+}
+.compare-hero-card {
+  display: block; padding: @space-lg; border-right: 1px solid @line;
+  background: @surface; color: inherit; text-decoration: none;
+  transition: background @dur @ease, box-shadow @dur @ease;
+}
+.compare-hero-card:hover,
+.compare-hero-card:focus-visible {
+  background: @arc-tint; box-shadow: inset 0 -3px 0 @arc; outline: none;
+}
+.compare-hero-card:focus-visible {
+  box-shadow: inset 0 0 0 2px @arc;
+}
+.compare-hero-card:last-child { border-right: none; }
+.compare-label {
+  display: block; margin-bottom: @space-xs;
+  font-family: @font-mono; font-size: 0.62rem; font-weight: 700;
+  letter-spacing: @tracking-mono; text-transform: uppercase; color: @arc;
+}
+.compare-hero-grid strong {
+  display: block; font-size: 1.08rem; letter-spacing: -0.01em; margin-bottom: @space-xs;
+}
+.compare-hero-grid p { margin: 0; color: @ink-soft; font-size: 0.86rem; font-weight: 300; line-height: 1.7; }
+@media (max-width: 860px) {
+  .compare-hero-grid { grid-template-columns: 1fr; }
+  .compare-hero-card { border-right: none; border-bottom: 1px solid @line; }
+  .compare-hero-card:last-child { border-bottom: none; }
+}
+
+.compare-fit-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+  border-top: 1px solid @line; border-left: 1px solid @line;
+}
+.compare-fit-grid--two { grid-template-columns: repeat(2, 1fr); }
+.compare-fit {
+  padding: @space-lg; background: @surface;
+  border-right: 1px solid @line; border-bottom: 1px solid @line;
+}
+.compare-fit h3 { margin: 0 0 @space-sm; font-size: 1rem; letter-spacing: -0.01em; }
+.compare-fit p { margin: 0 0 @space-md; color: @ink-soft; font-size: 0.9rem; font-weight: 300; line-height: 1.7; }
+.compare-fit p:last-child { margin-bottom: 0; }
+@media (max-width: 860px) {
+  .compare-fit-grid,
+  .compare-fit-grid--two { grid-template-columns: 1fr; }
+}
+
+.feature-table-wrap.compare-table-wrap { overflow-x: visible; }
+.compare-table { min-width: 1120px; border-collapse: separate; border-spacing: 0; }
+.compare-table thead th {
+  position: sticky; top: 53px; z-index: 15;
+  background: @surface;
+}
+.compare-table tbody td { vertical-align: top; line-height: 1.55; }
+.compare-table tbody tr:not(.feat-group) td:first-child {
+  font-family: @font-mono; font-size: 0.76rem; color: @arc; min-width: 150px;
+}
+.compare-table tbody tr:not(.feat-group) td:nth-child(2),
+.compare-table tbody tr:not(.feat-group) td:nth-child(3),
+.compare-table tbody tr:not(.feat-group) td:nth-child(4),
+.compare-table tbody tr:not(.feat-group) td:nth-child(5) {
+  min-width: 230px;
+}
+.compare-table thead th:nth-child(5) {
+  background: @verdigris; color: @canvas;
+}
+.compare-table tbody tr:not(.feat-group) td:nth-child(5) {
+  background: @verdigris-tint; border-left: 2px solid @verdigris;
+}
+.compare-table tbody tr:not(.feat-group) td:nth-child(5) a {
+  color: @verdigris; border-bottom-color: fade(@verdigris, 40%);
+}
+.compare-table tbody tr:not(.feat-group) td:nth-child(5) a:hover {
+  color: darken(@verdigris, 8%); border-bottom-color: currentColor;
+}
+.compare-table tbody tr:not(.feat-group):hover td { background: @arc-tint; }
+.compare-table tbody tr:not(.feat-group):hover td:nth-child(5) {
+  background: @verdigris-tint;
+}
+
+.compare-intellij-table { min-width: 920px; }
+.compare-intellij-table tbody td { vertical-align: top; line-height: 1.6; }
+.compare-intellij-table tbody td:first-child {
+  font-family: @font-mono; font-size: 0.76rem; color: @arc; min-width: 150px;
+}
+.compare-intellij-table tbody td:nth-child(2),
+.compare-intellij-table tbody td:nth-child(3) {
+  min-width: 320px;
+}
+
+.compare-faq {
+  margin-top: @space-xl; padding-top: @space-md;
+  border-top: 2px solid @ink;
+}
+.compare-faq h3 { margin: 0 0 @space-sm; font-size: 1rem; letter-spacing: -0.01em; }
+.compare-faq p { margin: 0; color: @ink-soft; font-weight: 300; line-height: 1.75; max-width: 82ch; }
+
+.compare-split {
+  display: grid; grid-template-columns: minmax(220px, 0.8fr) minmax(0, 1.4fr);
+  gap: @space-2xl; align-items: start;
+}
+.compare-split h2 { margin-top: 0; }
+.compare-copy {
+  border-top: 2px solid @ink;
+  padding-top: @space-md;
+}
+.compare-copy p { color: @ink-soft; font-weight: 300; line-height: 1.75; margin: 0 0 @space-md; }
+.compare-copy p:last-child { margin-bottom: 0; }
+@media (max-width: 760px) {
+  .compare-split { grid-template-columns: 1fr; gap: @space-lg; }
+}
+
+.compare-limits {
+  list-style: none; margin: 0; padding: 0; border-top: 1px solid @line;
+}
+.compare-limits li {
+  position: relative; padding: @space-md 0 @space-md @space-xl;
+  border-bottom: 1px solid @line; color: @ink-soft; font-weight: 300; line-height: 1.7;
+}
+.compare-limits li::before {
+  content: "Limit"; position: absolute; left: 0; top: @space-md;
+  font-family: @font-mono; font-size: 0.58rem; font-weight: 700;
+  letter-spacing: @tracking-mono; text-transform: uppercase; color: @arc;
+}

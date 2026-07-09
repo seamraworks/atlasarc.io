@@ -1,0 +1,70 @@
+<article class="content-page metric-page">
+  <header class="page-hero">
+    <h1>{{title}}</h1>
+    {{#if aliases}}
+    <p class="metric-aliases">Also known as: {{#each aliases}}{{this}}{{#unless @last}} · {{/unless}}{{/each}}</p>
+    {{/if}}
+  </header>
+
+  <section class="content-section">
+    <h2>What it is</h2>
+    {{{md what_it_is}}}
+  </section>
+
+  <section class="content-section">
+    <h2>Why it matters</h2>
+    {{{md why_it_matters}}}
+  </section>
+
+  <section class="content-section">
+    <h2>What a high value usually means</h2>
+    {{{md high_value_means}}}
+  </section>
+
+  <section class="content-section">
+    <h2>What a low value usually means</h2>
+    {{{md low_value_means}}}
+  </section>
+
+  <section class="content-section caveat">
+    <h2>When not to overinterpret it</h2>
+    {{{md do_not_overinterpret}}}
+  </section>
+
+  <section class="content-section">
+    <h2>Where AtlasArc shows it</h2>
+    {{{md where_shown}}}
+  </section>
+
+  {{#if relatedWorkflows}}
+  <section class="content-section related">
+    <h2>Which workflows it helps</h2>
+    <ul class="related-list workflow-pills">
+      {{#each relatedWorkflows}}<li><a href="{{url}}">{{title}}</a></li>{{/each}}
+    </ul>
+  </section>
+  {{/if}}
+
+  {{#if related_metrics}}
+  <section class="content-section related">
+    <h2>Related metrics</h2>
+    <ul class="related-list metric-pills">
+      {{#each related_metrics}}<li><a href="/metrics/{{this}}">{{labelFromSlug this}}</a></li>{{/each}}
+    </ul>
+  </section>
+  {{/if}}
+
+  {{#if related_lenses}}
+  <section class="content-section related">
+    <h2>Relevant lenses</h2>
+    <ul class="related-list lens-pills">
+      {{#each related_lenses}}<li><a href="/lenses/{{this}}">{{labelFromSlug this}}</a></li>{{/each}}
+    </ul>
+  </section>
+  {{/if}}
+
+  <section class="content-section formula">
+    <h2>How AtlasArc computes it</h2>
+    {{{md formula}}}
+  </section>
+</article>

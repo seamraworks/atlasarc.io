@@ -1,0 +1,69 @@
+// ===========================================================================
+// AtlasArc design tokens — "AtlasArc Target" (Swiss-engineering register)
+// The single source of truth for the house style. Components reference these
+// (or the CSS custom properties mirrored from them in base.less), never raw values.
+//
+// Direction: structural grotesque + technical mono, navy as the single brand /
+// structural / signal colour, black for hard structure, white page ground,
+// grey alternating bands. No border-radius. No shadows. Lines do the work.
+// ===========================================================================
+
+// --- Colour: ground & structure --------------------------------------------
+@canvas:        #ffffff; // page background — clean white
+@surface:       #ffffff; // cards, panels — white, defined by their border
+@surface-sunk:  #f2f2f2; // alternating bands, wells — light grey
+@ink:           #000000; // primary text & hard structure — black
+@ink-soft:      #555555; // secondary text — grey-dark
+@ink-faint:     #888888; // tertiary / muted legal
+@line:          #cccccc; // hairline borders, grid (grey-mid)
+@line-strong:   #999999; // emphasised rules
+
+// --- Colour: signal & structure (navy carries brand + accent) --------------
+@arc:           #1a3556; // SIGNATURE — navy: brand, signal, structure, accent
+@arc-deep:      #2d4f7a; // navy hover / active (navy-dim)
+@arc-tint:      #e8edf3; // navy wash background
+@blueprint:     #1a3556; // structural — same navy (single structural voice)
+@blueprint-tint:#e8edf3;
+@verdigris:     #2a7050; // "healthy / stable" counterpoint (health signal)
+@verdigris-tint:#d8ede4;
+
+// --- Colour: caveat (warning — semantic, kept warm for contrast) -----------
+@caveat-bg:     #fbeed3;
+@caveat-line:   #e0b257;
+
+// --- Typography ------------------------------------------------------------
+@font-display: "DM Sans", Helvetica, Arial, sans-serif;
+@font-sans:    "DM Sans", Helvetica, Arial, sans-serif;
+@font-mono:    "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+
+@text-base: 1rem;     // 16px
+@line-base: 1.6;
+@tracking-mono: 0.12em;
+
+// --- Spacing scale ---------------------------------------------------------
+@space-2xs: 0.25rem;
+@space-xs:  0.5rem;
+@space-sm:  0.75rem;
+@space-md:  1rem;
+@space-lg:  2rem;
+@space-xl:  4rem;
+@space-2xl: 6rem;
+
+// --- Layout ----------------------------------------------------------------
+@container-max:  1200px;
+@container-text: 720px;
+@docs-sidebar-w: 260px;
+
+// --- Radius (none — hard Swiss corners) ------------------------------------
+@radius:      0;
+@radius-card: 0;
+@radius-pill: 0;
+
+// --- Motion ----------------------------------------------------------------
+@ease:     cubic-bezier(0.2, 0.7, 0.2, 1);
+@dur:      0.15s;
+@dur-slow: 0.5s;
+
+// --- Elevation (none — structure is carried by lines, not shadow) ----------
+@shadow-card: none;
+@shadow-lift: none;

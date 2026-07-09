@@ -1,0 +1,66 @@
+// Generated reference page components for workflow, lens, and metric pages.
+// ===========================================================================
+
+// --- Structured content pages (workflow / metric) --------------------------
+.content-page { max-width: @container-text; margin: 0 auto; padding: @space-xl @space-lg @space-2xl; }
+.content-page .page-hero { padding-top: @space-lg; border-bottom: 1px solid @line; margin-bottom: @space-lg; }
+.metric-aliases { font-family: @font-mono; font-size: 0.8rem; color: @ink-faint; margin-top: @space-xs; letter-spacing: 0.01em; }
+.metric-alias-notice { font-size: 1rem; color: @ink-soft; margin-top: @space-sm; }
+.alias-cta { margin-top: @space-xl; }
+.content-section { margin-bottom: @space-lg; }
+.content-section h2 { font-size: 1.5rem; }
+.content-section p { color: @ink-soft; }
+
+.content-section.caveat {
+  background: @caveat-bg;
+  border: 1px solid @caveat-line;
+  border-left: 4px solid @caveat-line;
+  border-radius: @radius;
+  padding: @space-md @space-lg;
+}
+.content-section.caveat h2 { font-size: 1.05rem; color: darken(@caveat-line, 30%); }
+.content-section.caveat p { color: darken(@caveat-line, 34%); }
+
+.content-section.formula {
+  border-top: 1px solid @line;
+  margin-top: @space-xl;
+  padding-top: @space-md;
+}
+.content-section.formula h2 { font-family: @font-mono; font-size: 0.95rem; text-transform: uppercase; letter-spacing: @tracking-mono; color: @ink-faint; }
+.content-section.formula p { font-family: @font-mono; font-size: 0.9rem; color: @ink-soft; }
+
+.related-list { list-style: none; padding: 0; margin: @space-sm 0 0; display: flex; flex-wrap: wrap; gap: @space-xs; }
+.related-list a {
+  display: inline-block; padding: 0.3rem 0.7rem;
+  font-family: @font-mono; font-size: 0.78rem;
+  border: 1px solid @line; border-radius: @radius;
+  background: @surface; color: @ink-soft;
+}
+.related-list a:hover { border-color: var(--arc); color: var(--arc); }
+
+.metric-pills-label {
+  margin: @space-md 0 @space-xs;
+  font-family: @font-mono;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: @tracking-mono;
+  text-transform: uppercase;
+  color: @ink-faint;
+}
+// Reference cross-link pills — lenses, metrics, workflows share one style.
+// (Actions like the ArchUnit recipe use a .btn-ghost, not a pill.)
+.metric-pills, .lens-pills, .workflow-pills { margin-bottom: @space-md; }
+.metric-pills a, .lens-pills a, .workflow-pills a {
+  color: var(--arc);
+  border-color: fade(@arc, 40%);
+  background: @arc-tint;
+}
+.metric-pills a:hover, .lens-pills a:hover, .workflow-pills a:hover {
+  color: @canvas;
+  border-color: var(--arc);
+  background: var(--arc);
+}
+
+.workflow-steps { padding-left: 1.2rem; }
+.workflow-steps li { margin-bottom: @space-sm; color: @ink-soft; }
+.workflow-steps li::marker { color: var(--arc); font-family: @font-mono; }

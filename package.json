@@ -1,0 +1,28 @@
+{
+  "name": "atlasarc-website",
+  "version": "0.1.0",
+  "description": "AtlasArc product website — static site (Gulp + Handlebars + LESS + TypeScript).",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "gulp build",
+    "dev": "gulp dev",
+    "clean": "gulp clean",
+    "check": "tsc -p tsconfig.json --noEmit",
+    "copy-style": "node scripts/copy-style-audit.mjs",
+    "copy-style:openai": "node scripts/copy-style-audit.mjs --openai"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "gray-matter": "^4.0.3",
+    "gulp": "^5.0.1",
+    "gulp-autoprefixer": "^10.0.0",
+    "gulp-less": "^5.0.0",
+    "handlebars": "^4.7.9",
+    "marked": "^18.0.5",
+    "pagefind": "^1.5.2",
+    "typescript": "^6.0.3"
+  }
+}

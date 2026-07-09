@@ -1,0 +1,181 @@
+// ===========================================================================
+// Docs chrome: two-column shell, sidebar, search, breadcrumbs.
+// ===========================================================================
+
+.docs-shell {
+  display: grid;
+  grid-template-columns: @docs-sidebar-w 1fr;
+  gap: @space-xl;
+  max-width: @container-max;
+  margin: 0 auto;
+  padding: @space-lg @space-lg @space-2xl;
+}
+
+.docs-sidebar {
+  border-right: 1px solid @line;
+  padding-right: @space-md;
+  // Room for the active-item indicator (border + negative margin) so it has no
+  // horizontal overflow once this column becomes its own scroll container.
+  padding-left: @space-sm;
+  align-self: start;
+  position: sticky;
+  top: 84px;
+  // Bound the nav to the viewport and let it scroll on its own. Without this a
+  // tall nav overflows below the fold, and its lower items are only reachable by
+  // scrolling the body content all the way down. Leave a bottom gap that mirrors
+  // the sticky offset at the top, plus an inner cushion so the last item never
+  // hugs the edge when the nav is scrolled to its end.
+  max-height: calc(100vh - 84px - @space-lg);
+  overflow-y: auto;
+  padding-bottom: @space-lg;
+}
+.docs-search { margin-bottom: @space-lg; }
+.docs-nav-title {
+  font-family: @font-mono;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: @tracking-mono;
+  color: @ink-faint;
+  margin: 0 0 @space-sm;
+}
+.docs-nav-title:not(:first-child) { margin-top: @space-lg; }
+.docs-nav ul { list-style: none; margin: 0; padding: 0; }
+.docs-nav li { margin: @space-2xs 0; }
+.docs-nav a { display: block; padding: 0.2rem 0; color: @ink-soft; font-size: 0.95rem; background: none; }
+.docs-nav a:hover { color: var(--arc-deep); }
+.docs-nav a.is-active { color: var(--ink); font-weight: 600; border-left: 2px solid var(--arc); padding-left: @space-sm; margin-left: -@space-sm; }
+.docs-nav-section {
+  margin-top: @space-lg;
+  border-top: 1px solid @line;
+  padding-top: @space-sm;
+}
+.docs-nav-section summary {
+  cursor: pointer;
+  font-family: @font-mono;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: @tracking-mono;
+  color: @ink-faint;
+  list-style-position: outside;
+}
+.docs-nav-section summary:hover { color: var(--arc-deep); }
+.docs-nav-section ul { margin-top: @space-sm; }
+.docs-nav-section a { font-size: 0.86rem; }
+.docs-nav-section .docs-nav-toc {
+  margin: @space-xs 0 @space-sm @space-sm;
+  padding-left: @space-sm;
+  border-left: 1px solid @line;
+}
+.docs-nav-section .docs-nav-toc li { margin: @space-2xs 0; }
+.docs-nav-section .docs-nav-toc > li + li { margin-top: @space-sm; }
+.docs-nav-section .docs-nav-toc span {
+  display: block;
+  margin-bottom: @space-2xs;
+  font-family: @font-mono;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: @tracking-mono;
+  text-transform: uppercase;
+  color: @ink;
+}
+.docs-nav-section .docs-nav-toc ul {
+  margin-top: @space-2xs;
+  padding-left: @space-xs;
+}
+.docs-nav-section .docs-nav-toc a {
+  padding: 0.12rem 0;
+  border-bottom: none;
+  font-size: 0.76rem;
+  font-weight: 400;
+}
+
+.docs-content { min-width: 0; max-width: @container-text; }
+.docs-content-wide { max-width: none; }
+.docs-content h1 { font-size: clamp(2rem, 1.5rem + 2vw, 2.8rem); margin-bottom: @space-md; }
+.docs-content h2 { font-size: 1.5rem; margin-top: @space-lg; }
+.docs-content p, .docs-content li { color: @ink-soft; }
+.docs-content a {
+  color: var(--arc);
+  font-weight: 600;
+  border-bottom-color: fade(@arc, 45%);
+  background: linear-gradient(to top, fade(@arc, 10%) 0 42%, transparent 42% 100%);
+}
+.docs-content a:hover {
+  color: var(--arc-deep);
+  border-bottom-color: currentColor;
+  background: linear-gradient(to top, fade(@arc, 16%) 0 48%, transparent 48% 100%);
+}
+
+.breadcrumbs {
+  font-family: @font-mono;
+  font-size: 0.78rem;
+  color: @ink-faint;
+  margin-bottom: @space-lg;
+  display: flex; gap: 0.5rem; align-items: center;
+}
+.breadcrumbs a { color: @ink-faint; background: none; }
+.breadcrumbs a:hover { color: var(--arc-deep); }
+.breadcrumbs [aria-current="page"] { color: @ink; }
+
+// ---------------------------------------------------------------------------
+// Structured content (metric / workflow pages) rendered inside the docs chrome.
+// Reference-page component rules are imported before docs.less, so docs prose
+// link rules would otherwise clobber pills and double-constrain the page box.
+// These `.docs-content .content-page` rules win on specificity regardless of
+// import order.
+// ---------------------------------------------------------------------------
+.docs-content .content-page {
+  max-width: none;   // the .docs-content column already supplies the text width
+  margin: 0;
+  padding: 0;        // ...and the shell already supplies the padding
+}
+
+// Pills keep their pill shape and fill rather than the docs prose
+// gradient-underline link treatment.
+.docs-content .content-page .related-list a {
+  background: @surface;
+  border: 1px solid @line;
+  color: @ink-soft;
+}
+.docs-content .content-page .related-list a:hover {
+  border-color: var(--arc);
+  color: var(--arc);
+}
+.docs-content .content-page .metric-pills a,
+.docs-content .content-page .lens-pills a,
+.docs-content .content-page .workflow-pills a {
+  color: var(--arc);
+  border-color: fade(@arc, 40%);
+  background: @arc-tint;
+}
+.docs-content .content-page .metric-pills a:hover,
+.docs-content .content-page .lens-pills a:hover,
+.docs-content .content-page .workflow-pills a:hover {
+  color: @canvas;
+  border-color: var(--arc);
+  background: var(--arc);
+}
+
+// Sidebar toggle — desktop: hidden button, full nav visible.
+.sidebar-toggle { display: none; }
+
+@media (max-width: 760px) {
+  .docs-shell { grid-template-columns: 1fr; }
+  .docs-sidebar {
+    position: static; border-right: none; border-bottom: 1px solid @line;
+    padding-bottom: 0; max-height: none; overflow-y: visible;
+  }
+  // Collapsed by default on mobile — toggle button reveals the nav body.
+  .sidebar-toggle {
+    display: flex; width: 100%; align-items: center; justify-content: space-between;
+    padding: @space-sm 0;
+    font-family: @font-mono; font-size: 0.72rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: @tracking-mono;
+    color: @ink; background: none; border: none; cursor: pointer;
+  }
+  .sidebar-toggle-caret { transition: transform 0.2s; display: inline-block; }
+  .docs-sidebar.is-open .sidebar-toggle-caret { transform: rotate(180deg); }
+  #docs-nav-body { display: none; padding-bottom: 0; }
+  .docs-sidebar.is-open #docs-nav-body { display: block; padding-bottom: @space-md; }
+}

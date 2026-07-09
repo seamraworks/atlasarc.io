@@ -1,0 +1,47 @@
+{{#> marketing}}
+  {{#*inline "html-head-block"}}
+    <title>Why AtlasArc Exists | AtlasArc</title>
+    <meta name="description" content="Why AtlasArc exists: the independent product vision behind local, interactive architecture analysis for Java and TypeScript teams.">
+    <meta property="og:title" content="Why AtlasArc Exists">
+    <meta property="og:description" content="The independent product vision behind AtlasArc: local, interactive architecture analysis for Java and TypeScript, built to bring back what the ecosystem lost.">
+  {{/inline}}
+  {{#*inline "body-block"}}
+
+    <section class="page-hero container">
+      <p class="eyebrow">About AtlasArc</p>
+      <h1>Why AtlasArc exists</h1>
+      <p class="lede">AtlasArc exists because the gap never closed. The tools that made package structure, dependency cycles, and architectural drift visible for Java teams are gone. TypeScript teams never had them to begin with. What grew in their place moved toward fixed views and aggregated scores, losing resolution all the while. AtlasArc is built to bring it back: local, interactive, and integrated.</p>
+    </section>
+
+    <section class="band">
+      <div class="container legal-body">
+        <article>
+          <h2>The problem never went away</h2>
+          <p>For years, Java teams had tools that made package structure, dependency cycles, and architectural drift visible. Stan4J gave you a precise lens on your package graph. Structure101 offered deep layer analysis, even if it took effort to get there. <strong>Both are gone.</strong> And the platforms that grew to fill that space moved in a different direction: fixed diagrams, rolled-up metrics, and steadily less resolution at the level where architecture decisions actually live. The problem stayed exactly where it was: inside real codebases, where boundaries blur, cycles accumulate, and architecture decisions get separated from the source they are supposed to govern.</p>
+          <p>The same gap exists for TypeScript. The go-to tool is dependency-cruiser, which maps your imports into a DOT file rendered to SVG via Graphviz, <strong>a static snapshot you can read but not navigate.</strong> ESLint with SARIF exports provides metrics. LCOV provides coverage data. All useful on their own, none of it integrated. The picture of the architecture is scattered across files and formats, with no single interactive tool to hold it all together.</p>
+          <p>AtlasArc started from that gap. The goal is not to recreate an old tool screen by screen. The goal is to bring the useful part back: <strong>a precise way to read the architecture you actually have,</strong> inside the IDE where the code already lives.</p>
+
+          <h2>Built around a few beliefs</h2>
+          <p><strong>Architecture analysis should be local by default.</strong> A tool that reads source code should not need to upload the project to prove its value. AtlasArc runs inside IntelliJ IDEA and keeps the analysis on your machine.</p>
+          <p><strong>Architecture work should also stay connected.</strong> A graph, a matrix, a heatmap, a subsystem view, and a report should not feel like five unrelated exports. AtlasArc builds one shared model and lets you inspect it through <a href="/lenses">different lenses</a>, so the same package, dependency, metric, and exception keeps its meaning as you move through an investigation.</p>
+          <p><strong>Code architecture should be browsable.</strong> The tool should move at the user's speed and keep the right things in focus. AtlasArc has a strong navigable interface that lets you switch viewing angles and shift between focus modes, pinning subjects to reveal their neighbourhoods and expanding boundaries to follow dependency flows.</p>
+          <p><strong>And exceptions should be governed instead of hidden.</strong> Some dependency problems are real defects. Some are accepted trade-offs. AtlasArc treats that distinction as part of the architecture: decisions can live with the source, be reviewed by the team, and be enforced in CI instead of disappearing into a private tool database. That way you can focus on real problems, not noise.</p>
+          <p><strong>And metrics should be explorable, not fixed.</strong> A plot that combines coupling, complexity, churn, and size on axes you choose reveals far more than a roll-up score ever can. That kind of flexibility used to exist in the ecosystem. AtlasArc's <a href="/lenses/hotspots">Hotspots lens</a> brings it back.</p>
+
+          <h2>Published by Seamra Works, built with a product point of view</h2>
+          <p>AtlasArc is developed and published by Seamra Works. The product is built independently by Benny Bottema, a software architect with 20+ years of experience working across Java, Kotlin, and frontend systems where architecture was important enough to discuss but too hard to keep visible day to day.</p>
+          <p><strong>The vision behind AtlasArc is fifteen years old.</strong> It took shape when Stan4J went dark, and sharpened over the years that followed. The goal was never just to recreate what had been lost. It was to build the tool that should have come next. Modern graph libraries and AI-assisted development finally made that possible.</p>
+          <p>AtlasArc isn't a generic diagramming surface, a metrics dump, or a dashboard you check once a quarter. It's <strong>a working cockpit for architecture questions:</strong> map the structure, find what's broken, <a href="/product/features#expose-risky-code">expose the risky code</a>, decide what to fix first, <a href="/product/features#govern-exceptions">keep the exceptions you've chosen to live with</a>, and report it all clearly enough that the team can act.</p>
+
+          <h2>Try the workflow in your own project</h2>
+          <p>The fastest way to understand AtlasArc is to run it on a codebase you already know. Start with the product overview, then install the trial from the JetBrains Marketplace and compare the architecture you remember with the one the code actually contains.</p>
+          <p>
+            <a class="btn btn-primary" href="{{marketplaceHref "about_cta"}}" data-analytics-cta="about_cta" data-analytics-destination="jetbrains_marketplace">Start free trial</a>
+            <a class="btn btn-ghost" href="/product">See how it works &rarr;</a>
+          </p>
+        </article>
+      </div>
+    </section>
+
+  {{/inline}}
+{{/marketing}}

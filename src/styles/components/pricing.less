@@ -1,0 +1,185 @@
+// Pricing page components.
+// ===========================================================================
+
+// ===========================================================================
+// Pricing page — plan cards, feature comparison table
+
+// ===========================================================================
+
+// --- Launch pricing notice -------------------------------------------------
+.pricing-launch-notice {
+  display: inline-block;
+  font-family: @font-mono; font-size: 0.62rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: @tracking-mono;
+  color: @arc; border: 1px solid @arc; padding: 0.25em 0.65em;
+  margin-bottom: @space-sm;
+}
+
+// --- Billing toggle (segmented control — individual plans only) ------------
+.billing-toggle {
+  display: inline-flex;
+  border: 1px solid @line;
+  margin-bottom: @space-xl;
+}
+.billing-opt {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.55rem 1.5rem;
+  font-family: @font-mono; font-size: 0.7rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: @tracking-mono;
+  background: none; border: none; cursor: pointer;
+  color: @ink-soft;
+  transition: background @dur @ease, color @dur @ease;
+}
+.billing-opt + .billing-opt { border-left: 1px solid @line; }
+.billing-opt.is-active { background: @ink; color: @canvas; }
+
+// --- Pack size toggle (inside Team column) ---------------------------------
+.pack-toggle {
+  display: inline-flex;
+  border: 1px solid @line;
+  margin-bottom: @space-md;
+  align-self: flex-start;
+}
+.pack-opt {
+  display: inline-flex; align-items: center;
+  padding: 0.35rem 0.9rem;
+  font-family: @font-mono; font-size: 0.62rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: @tracking-mono;
+  background: none; border: none; cursor: pointer;
+  color: @ink-soft;
+  transition: background @dur @ease, color @dur @ease;
+}
+.pack-opt + .pack-opt { border-left: 1px solid @line; }
+.pack-opt.is-active { background: @ink; color: @canvas; }
+
+// --- Plan cards grid -------------------------------------------------------
+.plans-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  border: 1px solid @line; margin-bottom: @space-md;
+}
+@media (max-width: 760px) {
+  .plans-grid { grid-template-columns: 1fr; }
+  .plan-col { border-right: none; }
+}
+
+.plan-col {
+  padding: @space-xl @space-lg;
+  border-right: 1px solid @line;
+  border-top: 3px solid @line;
+  display: flex; flex-direction: column;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.55s @ease, border-top-color @dur @ease;
+  will-change: transform;
+
+  // Cursor-following spotlight — renders between background and content (z:-1)
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    background: radial-gradient(
+      circle 260px at var(--spotlight-x, 50%) var(--spotlight-y, 30%),
+      rgba(26, 53, 86, 0.05) 0%,
+      transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.28s @ease;
+  }
+
+  &:hover {
+    border-top-color: @arc;
+    &::after { opacity: 1; }
+  }
+}
+.plan-col:last-child { border-right: none; }
+.plan-col.plan-featured {
+  background: @arc;
+  border-top-color: @arc;
+
+  // Brighter spotlight on navy: white radial wash
+  &::after {
+    background: radial-gradient(
+      circle 300px at var(--spotlight-x, 50%) var(--spotlight-y, 30%),
+      rgba(255, 255, 255, 0.10) 0%,
+      transparent 65%
+    );
+  }
+  &:hover { border-top-color: @arc; }
+}
+
+// Team packs: permanent black top accent instead of the grey→navy transition.
+.plan-col--corporate {
+  border-top-color: @ink;
+  &:hover { border-top-color: @ink; }
+}
+
+.plan-tag {
+  position: absolute; top: @space-sm; right: @space-sm;
+  display: inline-block;
+  font-family: @font-mono; font-size: 0.55rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  border: 1px solid fade(#ffffff, 30%); color: fade(#ffffff, 55%);
+  padding: 0.2em 0.6em;
+}
+
+.plan-name {
+  font-family: @font-display; font-size: 1.25rem; font-weight: 900;
+  letter-spacing: -0.02em; margin: 0 0 @space-sm; color: @ink;
+}
+.plan-featured .plan-name { color: @canvas; }
+
+.plan-price-row {
+  display: flex; align-items: baseline; gap: 0.12em; margin: @space-md 0 0;
+}
+.plan-currency {
+  font-family: @font-mono; font-size: 1rem; font-weight: 400;
+  color: @ink-soft; line-height: 1; padding-bottom: 0.2em;
+}
+.plan-featured .plan-currency { color: fade(#ffffff, 50%); }
+.plan-amount {
+  font-family: @font-mono; font-size: 3.2rem; font-weight: 600;
+  line-height: 1; color: @ink;
+  transition: opacity 0.12s @ease;
+}
+.plan-featured .plan-amount { color: @canvas; }
+.plan-period {
+  font-family: @font-mono; font-size: 0.62rem; font-weight: 400;
+  color: @ink-faint; line-height: 1.25; max-width: 5em;
+  padding: 0 0 0.3em 0.25em; align-self: flex-end;
+}
+.plan-featured .plan-period { color: fade(#ffffff, 40%); }
+
+.plan-billing-note {
+  font-family: @font-mono; font-size: 0.68rem; letter-spacing: 0.03em;
+  color: @ink-faint; margin: @space-xs 0 @space-md;
+}
+.plan-featured .plan-billing-note { color: fade(#ffffff, 35%); }
+
+.plan-divider {
+  border: none; border-top: 1px solid @line; margin: @space-md 0;
+}
+.plan-featured .plan-divider { border-color: fade(#ffffff, 15%); }
+
+.plan-desc {
+  font-size: 0.84rem; font-weight: 300; line-height: 1.65;
+  color: @ink-soft; flex: 1; margin-bottom: @space-xl;
+}
+.plan-featured .plan-desc { color: fade(#ffffff, 68%); }
+
+.plan-cta { margin-top: auto; }
+.pricing-trial-note {
+  font-family: @font-mono; font-size: 0.62rem; color: @ink-faint;
+  letter-spacing: 0.04em; text-align: center; margin: 0 0 @space-xl;
+}
+.plan-featured .plan-cta .btn-primary {
+  background: @canvas; color: @arc; border-color: @canvas;
+}
+.plan-featured .plan-cta .btn-primary:hover {
+  background: @arc-tint; border-color: @arc-tint; color: @arc;
+}

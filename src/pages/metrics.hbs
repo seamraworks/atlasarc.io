@@ -1,0 +1,298 @@
+{{#> marketing}}
+  {{#*inline "html-head-block"}}
+    <title>Software Architecture Metrics | AtlasArc</title>
+    <meta name="description" content="Learn how to interpret fan-in, fan-out, instability, abstractness, cycles, and other package architecture metrics in AtlasArc.">
+    <meta property="og:title" content="AtlasArc Architecture Metrics">
+    <meta property="og:description" content="Interpret package architecture metrics in AtlasArc.">
+  {{/inline}}
+  {{#*inline "body-block"}}
+    <section class="page-hero container">
+      <p class="eyebrow">Metrics</p>
+      <h1>Architecture metrics, made practical</h1>
+      <p class="lede">Metrics are only useful when they help you decide what to do next. Each page below starts with plain-English interpretation: what a high value means, when to act on it, when to ignore it, and where AtlasArc shows it.</p>
+    </section>
+
+    <section class="band">
+      <div class="container">
+        <ul class="metrics-grid">
+          {{#each site.metrics}}
+            {{#unless alias}}
+              <li><a class="metric-card" href="{{url}}"><span class="metric-label">{{category}}</span><h3>{{title}}</h3><p>{{description}}</p></a></li>
+            {{/unless}}
+          {{/each}}
+        </ul>
+
+        <hr class="metrics-divider">
+        <p class="metrics-divider-label">Alternative terms</p>
+        <ul class="metrics-grid metrics-grid-aliases">
+          {{#each site.metrics}}
+            {{#if alias}}
+              <li><a class="metric-card metric-card-alias" href="{{url}}"><h3>{{title}}</h3><p>Alternative name for {{alias_of_title}}</p></a></li>
+            {{/if}}
+          {{/each}}
+        </ul>
+      </div>
+    </section>
+
+    <section class="band band-alt" id="metric-matrix">
+      <div class="container">
+        <div class="section-header">
+          <h2>Metric matrix</h2>
+        </div>
+        <p class="section-intro">AtlasArc computes package, subsystem, class, coverage, cycle, and project-level metrics from the same analysis model. This matrix maps each metric to common aliases, what it measures, the lenses where it most directly drives interpretation, and the workflows that use it.</p>
+        <div class="feature-table-wrap">
+          <table class="feature-table feature-table--reference">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Alias</th>
+                <th>What it measures</th>
+                <th>Primary lens drivers</th>
+                <th>Workflows</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="feat-group"><td colspan="5">Package and class metrics</td></tr>
+              <tr>
+                <td>Fan-out</td>
+                <td>Efferent coupling, Ce, exits</td>
+                <td>Outgoing dependency targets; external packages this package or class uses.</td>
+                <td><a href="/lenses/topology-graph">Topology Graph</a>, <a href="/lenses/package-matrix">Package Matrix</a>, <a href="/lenses/hotspots">Hotspots</a>, <a href="/lenses/composition">Composition heatmap</a>, Metrics sidebar</td>
+                <td><a href="/workflows/review-package-boundaries">Review package boundaries</a>; <a href="/workflows/understand-subsystem-coupling">Understand subsystem coupling</a>; <a href="/workflows/show-me-the-backbone">Show me the backbone</a>; <a href="/workflows/find-suspicious-dependents">Find suspicious dependents</a>; <a href="/workflows/stable-but-too-concrete">Stable but too concrete</a>; <a href="/workflows/packages-in-the-wrong-place">Packages in the wrong place</a>; <a href="/workflows/ticking-time-bombs">Ticking time bombs</a>; <a href="/workflows/audit-a-module-boundary">Audit a module boundary</a></td>
+              </tr>
+              <tr>
+                <td>Fan-in</td>
+                <td>Afferent coupling, Ca, entrances</td>
+                <td>Incoming dependency sources; packages or classes depending on this item.</td>
+                <td><a href="/lenses/topology-graph">Topology Graph</a>, <a href="/lenses/package-matrix">Package Matrix</a>, <a href="/lenses/hotspots">Hotspots</a>, <a href="/lenses/composition">Composition heatmap</a>, Metrics sidebar</td>
+                <td><a href="/workflows/review-package-boundaries">Review package boundaries</a>; <a href="/workflows/understand-subsystem-coupling">Understand subsystem coupling</a>; <a href="/workflows/show-me-the-backbone">Show me the backbone</a>; <a href="/workflows/stable-but-too-concrete">Stable but too concrete</a>; <a href="/workflows/zone-of-pain">Zone of Pain</a>; <a href="/workflows/zone-of-uselessness">Zone of Uselessness</a>; <a href="/workflows/leaky-internals">Leaky internals</a>; <a href="/workflows/hard-to-change-packages">Hard-to-change packages</a>; <a href="/workflows/complexity-hotspots">Complexity hotspots</a>; <a href="/workflows/audit-a-module-boundary">Audit a module boundary</a></td>
+              </tr>
+              <tr>
+                <td>Instability</td>
+                <td>I</td>
+                <td>Dependency balance; fan-out divided by fan-in plus fan-out, 0 stable to 1 unstable.</td>
+                <td><a href="/lenses/hotspots">Hotspots</a>, <a href="/lenses/subsystems">Subsystems</a>, <a href="/lenses/topology-graph">Topology Graph heatmap</a>, <a href="/lenses/package-matrix">Package Matrix heatmap</a>, <a href="/lenses/composition">Composition heatmap</a></td>
+                <td><a href="/workflows/identify-hotspots">Identify risky hotspots</a>; <a href="/workflows/understand-subsystem-coupling">Understand subsystem coupling</a>; <a href="/workflows/show-me-the-backbone">Show me the backbone</a>; <a href="/workflows/cycle-tangle-reduction">Cycle / tangle reduction</a>; <a href="/workflows/zone-of-pain">Zone of Pain</a>; <a href="/workflows/ticking-time-bombs">Ticking time bombs</a>; <a href="/workflows/audit-a-module-boundary">Audit a module boundary</a>; <a href="/workflows/audit-a-subsystem">Audit a subsystem</a></td>
+              </tr>
+              <tr>
+                <td>Abstractness</td>
+                <td>A</td>
+                <td>Public abstraction ratio; interfaces and abstract types compared with public type count.</td>
+                <td><a href="/lenses/hotspots">Hotspots</a>, <a href="/lenses/subsystems">Subsystems</a>, <a href="/lenses/topology-graph">Topology Graph heatmap</a>, <a href="/lenses/package-matrix">Package Matrix heatmap</a>, <a href="/lenses/composition">Composition heatmap</a></td>
+                <td><a href="/workflows/identify-hotspots">Identify risky hotspots</a>; <a href="/workflows/stable-but-too-concrete">Stable but too concrete</a>; <a href="/workflows/zone-of-pain">Zone of Pain</a>; <a href="/workflows/zone-of-uselessness">Zone of Uselessness</a>; <a href="/workflows/audit-a-subsystem">Audit a subsystem</a></td>
+              </tr>
+              <tr>
+                <td>Distance from main sequence</td>
+                <td>D, normalized distance</td>
+                <td>Fit to stable abstractions principle; absolute distance from A + I = 1.</td>
+                <td><a href="/lenses/hotspots">Hotspots Zone Map</a>, <a href="/lenses/topology-graph">Topology Graph heatmap</a>, <a href="/lenses/package-matrix">Package Matrix heatmap</a>, <a href="/lenses/composition">Composition heatmap</a>, Metrics sidebar</td>
+                <td><a href="/workflows/identify-hotspots">Identify risky hotspots</a>; <a href="/workflows/show-me-the-backbone">Show me the backbone</a>; <a href="/workflows/packages-in-the-wrong-place">Packages in the wrong place</a>; <a href="/workflows/zone-of-pain">Zone of Pain</a>; <a href="/workflows/audit-a-subsystem">Audit a subsystem</a></td>
+              </tr>
+              <tr>
+                <td>Relative visibility</td>
+                <td>RV, visibility</td>
+                <td>Public surface exposure; visible elements divided by all elements.</td>
+                <td><a href="/lenses/hotspots">Hotspots</a>, <a href="/lenses/subsystems">Subsystems</a>, <a href="/lenses/topology-graph">Topology Graph heatmap</a>, <a href="/lenses/package-matrix">Package Matrix heatmap</a>, <a href="/lenses/composition">Composition heatmap</a></td>
+                <td><a href="/workflows/leaky-internals">Leaky internals</a>; <a href="/workflows/audit-a-subsystem">Audit a subsystem</a>; <a href="/workflows/understand-subsystem-coupling">Understand subsystem coupling</a></td>
+              </tr>
+              <tr>
+                <td>Cyclomatic complexity max</td>
+                <td>CC max</td>
+                <td>Worst control-flow path count; highest method complexity in a package or class.</td>
+                <td><a href="/lenses/hotspots">Hotspots</a>, <a href="/lenses/subsystems">Subsystems</a>, <a href="/lenses/topology-graph">Topology Graph heatmap</a>, <a href="/lenses/package-matrix">Package Matrix heatmap</a>, <a href="/lenses/composition">Composition heatmap</a>, Metrics sidebar</td>
+                <td><a href="/workflows/identify-hotspots">Identify risky hotspots</a>; <a href="/workflows/hard-to-change-packages">Hard-to-change packages</a>; <a href="/workflows/complexity-hotspots">Complexity hotspots</a>; <a href="/workflows/audit-a-subsystem">Audit a subsystem</a></td>
+              </tr>
+              <tr>
+                <td>Cyclomatic complexity average</td>
+                <td>CC avg</td>
+                <td>Mean control-flow path count across scanned methods or class-weighted package rollups.</td>
+                <td><a href="/lenses/topology-graph">Topology Graph heatmap</a>, <a href="/lenses/package-matrix">Package Matrix heatmap</a>, <a href="/lenses/composition">Composition heatmap</a>, Metrics sidebar</td>
+                <td><a href="/workflows/complexity-hotspots">Complexity hotspots</a>; <a href="/workflows/audit-a-subsystem">Audit a subsystem</a></td>
+              </tr>
+              <tr>
+                <td>Cognitive complexity max</td>
+                <td>CogC max</td>
+                <td>Worst human reading difficulty; nesting, branching, recursion, and flow disruption.</td>
+                <td><a href="/lenses/hotspots">Hotspots</a>, <a href="/lenses/subsystems">Subsystems</a>, <a href="/lenses/topology-graph">Topology Graph heatmap</a>, <a href="/lenses/package-matrix">Package Matrix heatmap</a>, <a href="/lenses/composition">Composition heatmap</a>, Metrics sidebar</td>
+                <td><a href="/workflows/complexity-hotspots">Complexity hotspots</a>; <a href="/workflows/audit-a-subsystem">Audit a subsystem</a></td>
+              </tr>
+              <tr>
+                <td>Cognitive complexity average</td>
+                <td>CogC avg</td>
+                <td>Mean reading difficulty across scanned methods or class-weighted package rollups.</td>
+                <td><a href="/lenses/topology-graph">Topology Graph heatmap</a>, <a href="/lenses/package-matrix">Package Matrix heatmap</a>, <a href="/lenses/composition">Composition heatmap</a>, Metrics sidebar</td>
+                <td><a href="/workflows/complexity-hotspots">Complexity hotspots</a>; <a href="/workflows/audit-a-subsystem">Audit a subsystem</a></td>
+              </tr>
+              <tr>
+                <td>Class count</td>
+                <td>Types, type count</td>
+                <td>Code mass by declared classes, interfaces, enums, and other types.</td>
+                <td><a href="/lenses/composition">Composition</a>, <a href="/lenses/hotspots">Hotspots</a>, <a href="/lenses/subsystems">Subsystems</a>, <a href="/lenses/topology-graph">Topology Graph heatmap</a>, <a href="/lenses/package-matrix">Package Matrix heatmap</a></td>
+                <td><a href="/workflows/identify-hotspots">Identify risky hotspots</a>; <a href="/workflows/understand-subsystem-coupling">Understand subsystem coupling</a>; <a href="/workflows/audit-a-subsystem">Audit a subsystem</a></td>
+              </tr>
+              <tr>
+                <td>Lines of code</td>
+                <td>LOC, lines</td>
+                <td>Code mass by source lines in a package, class, or subtree.</td>
+                <td><a href="/lenses/composition">Composition</a>, <a href="/lenses/hotspots">Hotspots</a>, <a href="/lenses/subsystems">Subsystems</a>, <a href="/lenses/topology-graph">Topology Graph heatmap</a>, <a href="/lenses/package-matrix">Package Matrix heatmap</a></td>
+                <td><a href="/workflows/audit-a-subsystem">Audit a subsystem</a></td>
+              </tr>
+              <tr>
+                <td>Method count</td>
+                <td>Methods</td>
+                <td>Class-level size and responsibility count; number of methods on a class bubble.</td>
+                <td><a href="/lenses/hotspots">Hotspots class mode</a>, <a href="/lenses/composition">Composition class mode</a></td>
+                <td><a href="/workflows/complexity-hotspots">Complexity hotspots</a>; <a href="/workflows/audit-a-subsystem">Audit a subsystem</a></td>
+              </tr>
+              <tr>
+                <td>Line coverage</td>
+                <td>JaCoCo line coverage</td>
+                <td>Executed line ratio from a loaded JaCoCo XML report; low values are riskier.</td>
+                <td><a href="/lenses/topology-graph">Topology Graph heatmap</a>, <a href="/lenses/package-matrix">Package Matrix heatmap</a>, <a href="/lenses/composition">Composition heatmap</a>, Metrics sidebar</td>
+                <td><a href="/workflows/manual-coverage-heatmap-review">Manual coverage heatmap review</a></td>
+              </tr>
+              <tr>
+                <td>Branch coverage</td>
+                <td>JaCoCo branch coverage</td>
+                <td>Executed branch ratio from a loaded JaCoCo XML report; low values expose untested decisions.</td>
+                <td><a href="/lenses/topology-graph">Topology Graph heatmap</a>, <a href="/lenses/package-matrix">Package Matrix heatmap</a>, <a href="/lenses/composition">Composition heatmap</a>, Metrics sidebar</td>
+                <td><a href="/workflows/manual-coverage-heatmap-review">Manual coverage heatmap review</a></td>
+              </tr>
+
+              <tr class="feat-group"><td colspan="5">Dependency, cycle, and subsystem metrics</td></tr>
+              <tr>
+                <td>Dependency references</td>
+                <td>Edge count, ref count, weight</td>
+                <td>Number of concrete references from one package to another.</td>
+                <td><a href="/lenses/package-matrix">Package Matrix</a> boundary mode, <a href="/lenses/topology-graph">Topology Graph</a>, exports</td>
+                <td><a href="/workflows/find-cycles">Find cyclic package dependencies</a>; <a href="/workflows/review-package-boundaries">Review package boundaries</a>; <a href="/workflows/show-me-the-backbone">Show me the backbone</a>; <a href="/workflows/find-accidental-boundary-leaks">Find accidental boundary leaks</a>; <a href="/workflows/packages-in-the-wrong-place">Packages in the wrong place</a></td>
+              </tr>
+              <tr>
+                <td>Cycle status</td>
+                <td>Cyclic dependencies, SCC, cycle type</td>
+                <td>Whether an item participates in architectural, nested, aggregation, cross-module, accepted, or no cycles.</td>
+                <td><a href="/lenses/topology-graph">Topology Graph</a>, <a href="/lenses/package-matrix">Package Matrix</a>, <a href="/lenses/subsystems">Subsystems internal tangles</a>, <a href="/lenses/hotspots">Hotspots cycle colour</a></td>
+                <td><a href="/workflows/find-cycles">Find cyclic package dependencies</a>; <a href="/workflows/cycle-tangle-reduction">Cycle / tangle reduction</a>; <a href="/workflows/audit-individual-cycle-groups">Audit individual cycle groups</a></td>
+              </tr>
+              <tr>
+                <td>Cycle group count</td>
+                <td>Internal cycles, SCC count</td>
+                <td>Number of strongly connected dependency groups fully inside a subsystem tree.</td>
+                <td><a href="/lenses/subsystems">Subsystems internal tangles</a>, Metrics sidebar</td>
+                <td><a href="/workflows/find-cycles">Find cyclic package dependencies</a>; <a href="/workflows/cycle-tangle-reduction">Cycle / tangle reduction</a>; <a href="/workflows/audit-a-module-boundary">Audit a module boundary</a>; <a href="/workflows/audit-individual-cycle-groups">Audit individual cycle groups</a></td>
+              </tr>
+              <tr>
+                <td>Largest cycle size</td>
+                <td>Largest SCC</td>
+                <td>Package count in the largest internal dependency cycle for a subsystem tree.</td>
+                <td><a href="/lenses/subsystems">Subsystems internal tangles</a>, Metrics sidebar</td>
+                <td><a href="/workflows/cycle-tangle-reduction">Cycle / tangle reduction</a>; <a href="/workflows/audit-a-module-boundary">Audit a module boundary</a>; <a href="/workflows/audit-individual-cycle-groups">Audit individual cycle groups</a></td>
+              </tr>
+              <tr>
+                <td>Package count</td>
+                <td>Subsystem size</td>
+                <td>Number of packages in a subtree; structural breadth of a subsystem.</td>
+                <td><a href="/lenses/subsystems">Subsystems</a>, <a href="/lenses/composition">Composition</a>, Metrics sidebar</td>
+                <td><a href="/workflows/understand-subsystem-coupling">Understand subsystem coupling</a>; <a href="/workflows/audit-a-module-boundary">Audit a module boundary</a>; <a href="/workflows/audit-a-subsystem">Audit a subsystem</a></td>
+              </tr>
+              <tr>
+                <td>Internal edges</td>
+                <td>Internal coupling</td>
+                <td>Dependency edges where source and target are both inside the same subtree.</td>
+                <td><a href="/lenses/subsystems">Subsystems</a>, Boundary Flow, Metrics sidebar</td>
+                <td><a href="/workflows/understand-subsystem-coupling">Understand subsystem coupling</a>; <a href="/workflows/audit-a-module-boundary">Audit a module boundary</a></td>
+              </tr>
+              <tr>
+                <td>Boundary fan-out</td>
+                <td>Subsystem exits, efferent boundary coupling</td>
+                <td>External packages depended on by packages inside the subsystem.</td>
+                <td><a href="/lenses/subsystems">Subsystems boundary risk</a>, Boundary Flow, Metrics sidebar</td>
+                <td><a href="/workflows/understand-subsystem-coupling">Understand subsystem coupling</a>; <a href="/workflows/audit-a-module-boundary">Audit a module boundary</a></td>
+              </tr>
+              <tr>
+                <td>Boundary fan-in</td>
+                <td>Subsystem entrances, afferent boundary coupling</td>
+                <td>External packages that depend on packages inside the subsystem.</td>
+                <td><a href="/lenses/subsystems">Subsystems boundary risk</a>, Boundary Flow, Metrics sidebar</td>
+                <td><a href="/workflows/understand-subsystem-coupling">Understand subsystem coupling</a>; <a href="/workflows/audit-a-module-boundary">Audit a module boundary</a></td>
+              </tr>
+              <tr>
+                <td>Subsystem instability</td>
+                <td>Boundary I</td>
+                <td>Subsystem boundary balance; exits divided by exits plus entrances.</td>
+                <td><a href="/lenses/subsystems">Subsystems boundary risk</a>, Metrics sidebar</td>
+                <td><a href="/workflows/understand-subsystem-coupling">Understand subsystem coupling</a>; <a href="/workflows/show-me-the-backbone">Show me the backbone</a>; <a href="/workflows/stable-but-too-concrete">Stable but too concrete</a>; <a href="/workflows/zone-of-pain">Zone of Pain</a>; <a href="/workflows/audit-a-module-boundary">Audit a module boundary</a></td>
+              </tr>
+              <tr>
+                <td>Subsystem cohesion</td>
+                <td>Cohesion</td>
+                <td>Internal connectedness; internal edges compared with total internal plus boundary edges.</td>
+                <td><a href="/lenses/subsystems">Subsystems boundary risk</a>, Metrics sidebar</td>
+                <td><a href="/workflows/understand-subsystem-coupling">Understand subsystem coupling</a>; <a href="/workflows/audit-a-module-boundary">Audit a module boundary</a></td>
+              </tr>
+              <tr>
+                <td>Recursive abstractness</td>
+                <td>Subsystem abstractness</td>
+                <td>Class-count-weighted abstractness across every package in a subtree.</td>
+                <td><a href="/lenses/subsystems">Subsystems visibility surface</a>, <a href="/lenses/topology-graph">Topology Graph subsystem heatmap</a>, <a href="/lenses/package-matrix">Package Matrix subsystem heatmap</a></td>
+                <td><a href="/workflows/stable-but-too-concrete">Stable but too concrete</a>; <a href="/workflows/zone-of-pain">Zone of Pain</a>; <a href="/workflows/audit-a-subsystem">Audit a subsystem</a></td>
+              </tr>
+              <tr>
+                <td>Recursive visibility</td>
+                <td>Subsystem visibility</td>
+                <td>Class-count-weighted relative visibility across every package in a subtree.</td>
+                <td><a href="/lenses/subsystems">Subsystems visibility surface</a>, Metrics sidebar</td>
+                <td><a href="/workflows/leaky-internals">Leaky internals</a>; <a href="/workflows/understand-subsystem-coupling">Understand subsystem coupling</a></td>
+              </tr>
+
+              <tr class="feat-group"><td colspan="5">Project-level metrics</td></tr>
+              <tr>
+                <td>Cumulative component dependency</td>
+                <td>CCD</td>
+                <td>Total transitive dependency load across all components.</td>
+                <td>Project stats, reports, model exports</td>
+                <td><a href="/workflows/project-architecture-health-review">Project architecture health review</a></td>
+              </tr>
+              <tr>
+                <td>Average component dependency</td>
+                <td>ACD</td>
+                <td>Average transitive dependency load per component.</td>
+                <td>Project stats, reports, model exports</td>
+                <td><a href="/workflows/project-architecture-health-review">Project architecture health review</a></td>
+              </tr>
+              <tr>
+                <td>Relative average component dependency</td>
+                <td>RACD</td>
+                <td>Average transitive dependency load normalized by graph size.</td>
+                <td>Project stats bar, Metrics sidebar</td>
+                <td><a href="/workflows/project-architecture-health-review">Project architecture health review</a></td>
+              </tr>
+              <tr>
+                <td>Normalized cumulative component dependency</td>
+                <td>NCCD</td>
+                <td>Overall coupling density compared with a balanced component hierarchy.</td>
+                <td>Project stats bar, Metrics sidebar</td>
+                <td><a href="/workflows/project-architecture-health-review">Project architecture health review</a></td>
+              </tr>
+              <tr>
+                <td>Average relative visibility</td>
+                <td>ARV</td>
+                <td>Average visible API surface across components.</td>
+                <td>Project stats bar, Metrics sidebar</td>
+                <td><a href="/workflows/leaky-internals">Leaky internals</a>; <a href="/workflows/project-architecture-health-review">Project architecture health review</a></td>
+              </tr>
+              <tr>
+                <td>Global relative visibility</td>
+                <td>GRV</td>
+                <td>Whole-graph visible API surface compared with all elements.</td>
+                <td>Project stats bar, Metrics sidebar</td>
+                <td><a href="/workflows/leaky-internals">Leaky internals</a>; <a href="/workflows/project-architecture-health-review">Project architecture health review</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  {{/inline}}
+{{/marketing}}

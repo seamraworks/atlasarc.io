@@ -1,0 +1,172 @@
+// Shared marketing/docs content primitives: page heroes, bands, cards, FAQ, feature bands, tables, CTA, and legal helpers.
+// ===========================================================================
+
+// --- Bands -----------------------------------------------------------------
+.page-hero { padding-block: @space-xl @space-lg; }
+
+.band { padding-block: @space-2xl; border-bottom: 1px solid @line; }
+.band-alt { background: @surface-sunk; }
+.band-slim { padding-block: @space-lg; }
+
+// --- Section header (mono number · h2 · 2px black rule) --------------------
+.section-header {
+  display: flex; align-items: baseline; gap: @space-lg;
+  border-bottom: 2px solid @ink;
+  padding-bottom: @space-md;
+  margin-bottom: @space-lg;
+}
+.section-number {
+  font-family: @font-mono; font-size: 0.62rem; font-weight: 600;
+  letter-spacing: @tracking-mono; text-transform: uppercase;
+  color: @arc; flex-shrink: 0; padding-top: 0.2em;
+}
+.section-header h2 { margin: 0; }
+
+// Section intro (300-weight lead paragraph below a heading)
+.section-intro { max-width: 64ch; color: @ink-soft; font-weight: 300; line-height: 1.7; margin: 0 0 @space-lg; }
+
+// --- Placeholder box (dashed grey well for un-shot visuals) ----------------
+.placeholder-box {
+  border: 1px dashed @line-strong;
+  border-radius: @radius;
+  padding: @space-xl;
+  text-align: center;
+  font-family: @font-mono;
+  font-size: 0.72rem;
+  letter-spacing: @tracking-mono;
+  text-transform: uppercase;
+  color: @ink-faint;
+  background:
+    repeating-linear-gradient(-45deg, transparent 0 11px, fade(@line, 50%) 11px 12px);
+}
+
+// --- Cards (white, line-bordered, navy on hover) ---------------------------
+.card-grid {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; gap: @space-md;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+.card {
+  position: relative;
+  border: 1px solid @line;
+  border-radius: @radius;
+  background: @surface;
+  transition: border-color @dur @ease, background @dur @ease;
+}
+.card:hover { border-color: var(--arc); background: @arc-tint; }
+.card a { display: block; padding: @space-lg; color: inherit; border-bottom: none; }
+.card a:hover { color: inherit; }
+.card h3 {
+  display: flex; align-items: baseline; gap: 0.5rem;
+  margin-bottom: @space-xs;
+}
+.card h3::before {
+  content: "\2197"; // outgoing arc
+  font-family: @font-mono; font-size: 0.85em; font-weight: 400; color: var(--arc);
+}
+.card p { color: @ink-soft; margin: 0; font-size: 0.86rem; font-weight: 300; line-height: 1.7; }
+
+// --- FAQ (question/answer list; hairline-ruled, pricing & support) ---------
+.faq { margin: 0; border-top: 1px solid @line; }
+.faq-item { padding: @space-lg 0; border-bottom: 1px solid @line; }
+.faq-item dt { font-weight: 500; margin: 0 0 @space-xs; }
+.faq-item dd {
+  margin: 0; max-width: 64ch;
+  color: @ink-soft; font-weight: 300; font-size: 0.9rem; line-height: 1.7;
+}
+
+// --- Feature band ----------------------------------------------------------
+.feature-band {
+  display: grid; grid-template-columns: 1fr 1fr; gap: @space-xl;
+  align-items: center; margin-bottom: @space-xl;
+}
+.feature-band:nth-child(even) .placeholder-box { order: 2; }
+@media (max-width: 760px) { .feature-band { grid-template-columns: 1fr; } }
+
+// --- Eyebrow inverse (for navy CTA / dark backgrounds) ---------------------
+.eyebrow-inverse {
+  color: fade(#ffffff, 45%);
+}
+
+// --- Hero placeholder (pending product screenshot) -------------------------
+.hero-placeholder {
+  min-height: 320px;
+  margin-top: @space-xl;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-split .hero-placeholder { margin-top: 0; }
+
+// --- CTA closing band (navy) -----------------------------------------------
+.cta-band {
+  background: @arc;
+  border-bottom: none;
+}
+.cta-band-inner { display: flex; align-items: flex-end; gap: @space-2xl; }
+@media (max-width: 760px) { .cta-band-inner { flex-direction: column; align-items: flex-start; gap: @space-lg; } }
+.cta-band h2 { color: @canvas; margin-bottom: @space-md; }
+.cta-band .cta-text { flex: 1; }
+.cta-band p { color: fade(#ffffff, 60%); font-weight: 300; margin: 0; line-height: 1.65; max-width: 54ch; }
+.cta-band .cta-meta { flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-start; gap: @space-md; }
+.cta-band .btn-primary {
+  background: @canvas; color: @arc; border-color: @canvas;
+}
+.cta-band .btn-primary:hover { background: @surface-sunk; color: @arc; border-color: @surface-sunk; }
+.cta-note {
+  font-family: @font-mono; font-size: 0.6rem; color: fade(#ffffff, 32%);
+  letter-spacing: 0.08em;
+}
+
+// --- Feature comparison table ----------------------------------------------
+.feature-table-wrap { overflow-x: auto; }
+.feature-table {
+  width: 100%; border-collapse: collapse; border: 1px solid @line;
+}
+.feature-table thead th {
+  font-family: @font-mono; font-size: 0.62rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: @tracking-mono;
+  padding: @space-md @space-lg; text-align: center;
+  border-bottom: 2px solid @ink; border-right: 1px solid @line;
+  background: @surface; color: @arc;
+}
+.feature-table thead th:first-child { text-align: left; color: @ink; min-width: 220px; }
+.feature-table thead th.th-featured { background: @arc; color: @canvas; }
+.feature-table thead th:last-child { border-right: none; }
+
+.feature-table tbody tr.feat-group td {
+  font-family: @font-mono; font-size: 0.58rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: @tracking-mono;
+  color: @ink-soft; background: @surface-sunk;
+  padding: @space-xs @space-lg;
+  border-bottom: 1px solid @line; border-right: 1px solid @line;
+}
+.feature-table tbody tr.feat-group td:last-child { border-right: none; }
+
+.feature-table tbody td {
+  padding: @space-sm @space-lg;
+  border-bottom: 1px solid @line; border-right: 1px solid @line;
+  font-size: 0.84rem; vertical-align: middle; color: @ink;
+}
+.feature-table tbody tr:last-child td { border-bottom: none; }
+.feature-table tbody td:last-child { border-right: none; }
+.feature-table .feat-cell { text-align: center; }
+.feature-table .col-featured { background: @arc-tint; }
+
+.feat-yes {
+  font-family: @font-mono; font-size: 0.85rem; font-weight: 700; color: @arc;
+}
+.feat-no {
+  font-family: @font-mono; font-size: 0.9rem; color: @line-strong; opacity: 0.55;
+}
+.feat-val {
+  font-family: @font-mono; font-size: 0.72rem; font-weight: 500; color: @ink-soft;
+}
+// --- Shared anchor/legal helpers -------------------------------------------
+.band[id],
+.docs-content h2[id],
+.lenses-doc h2[id] {
+  scroll-margin-top: 76px;
+}
+
+.legal-body { max-width: @container-text; }

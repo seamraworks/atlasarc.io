@@ -1,0 +1,163 @@
+// ===========================================================================
+// Styleguide-only components: section scaffolding, swatches, type specimens,
+// component demos, the live sandbox. Prefixed .sg- to stay isolated from site
+// CSS. AtlasArc Target — Swiss engineering register.
+// ===========================================================================
+
+.sg-page { padding-bottom: @space-2xl; }
+
+// Page masthead -------------------------------------------------------------
+.sg-masthead {
+  padding: @space-2xl 0 @space-xl;
+  border-bottom: 2px solid @ink;
+}
+.sg-masthead h1 { font-size: clamp(2.4rem, 1.6rem + 4vw, 4.5rem); margin-bottom: @space-md; }
+.sg-masthead .lede { max-width: 60ch; }
+.sg-meta {
+  display: flex; flex-wrap: wrap; gap: @space-md;
+  margin-top: @space-lg;
+  font-family: @font-mono; font-size: 0.66rem; color: @ink-faint;
+  letter-spacing: 0.04em;
+}
+.sg-meta span { display: inline-flex; align-items: center; gap: 0.4rem; }
+.sg-meta span::before { content: "//"; color: @arc; }
+
+// Numbered sections ---------------------------------------------------------
+.sg-section { padding: @space-xl 0; border-bottom: 1px solid @line; }
+.sg-section > .container { position: relative; }
+.sg-section-head { margin-bottom: @space-lg; }
+.sg-index {
+  display: block;
+  font-family: @font-mono; font-size: 0.66rem; font-weight: 600;
+  color: @arc; letter-spacing: @tracking-mono; text-transform: uppercase;
+  margin-bottom: @space-xs;
+}
+.sg-note { color: @ink-soft; font-weight: 300; max-width: 60ch; margin-top: @space-xs; }
+
+// Generic specimen frame (a labelled panel) ---------------------------------
+.sg-panel {
+  border: 1px solid @line;
+  border-radius: @radius;
+  background: @surface;
+  padding: @space-lg;
+}
+
+// Colour swatches -----------------------------------------------------------
+.sg-swatches {
+  display: grid; gap: @space-md;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  list-style: none; margin: 0; padding: 0;
+}
+.sg-swatch { border: 1px solid @line; border-radius: @radius; overflow: hidden; background: @surface; }
+.sg-chip { height: 84px; border-bottom: 1px solid @line; }
+.sg-swatch-meta { padding: @space-sm; }
+.sg-swatch-name { font-family: @font-mono; font-size: 0.78rem; font-weight: 600; }
+.sg-swatch-hex { font-family: @font-mono; font-size: 0.7rem; color: @ink-faint; text-transform: uppercase; }
+.sg-swatch-role { font-size: 0.8rem; color: @ink-soft; margin-top: 0.2rem; }
+
+// Type specimens ------------------------------------------------------------
+.sg-type-row { padding: @space-md 0; border-bottom: 1px solid @line; }
+.sg-type-row:last-child { border-bottom: none; }
+.sg-type-label {
+  font-family: @font-mono; font-size: 0.66rem; color: @ink-faint;
+  text-transform: uppercase; letter-spacing: @tracking-mono; margin-bottom: 0.4rem;
+}
+.sg-display { font-family: @font-display; font-weight: 900; font-size: clamp(2.5rem, 1.5rem + 4vw, 4.5rem); line-height: 1.0; letter-spacing: -0.03em; }
+.sg-specimen-sans { font-family: @font-sans; font-weight: 300; }
+.sg-specimen-mono { font-family: @font-mono; }
+.sg-glyphs { font-family: @font-mono; font-size: 1.1rem; color: @ink-soft; letter-spacing: 0.06em; }
+.sg-weights { display: flex; flex-wrap: wrap; gap: @space-lg; }
+.sg-weights span { font-size: 1.5rem; letter-spacing: -0.02em; }
+.sg-w300 { font-weight: 300; } .sg-w400 { font-weight: 400; } .sg-w500 { font-weight: 500; }
+.sg-w700 { font-weight: 700; } .sg-w900 { font-weight: 900; }
+
+// Spacing scale -------------------------------------------------------------
+.sg-scale { list-style: none; margin: 0; padding: 0; display: grid; gap: @space-sm; }
+.sg-scale li { display: flex; align-items: center; gap: @space-md; }
+.sg-scale-bar { height: 18px; background: @arc; }
+.sg-scale-label { font-family: @font-mono; font-size: 0.74rem; color: @ink-soft; min-width: 9ch; }
+
+// Component demo wrappers ---------------------------------------------------
+.sg-demo { margin-top: @space-md; }
+.sg-demo + .sg-demo { margin-top: @space-lg; }
+.sg-specimen-grid { display: grid; gap: @space-lg; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); align-items: start; }
+.sg-stack { display: flex; flex-direction: column; gap: @space-md; align-items: flex-start; }
+.sg-row { display: flex; flex-wrap: wrap; gap: @space-md; align-items: center; }
+
+// A bordered frame to host full-bleed component demos (nav, hero, CTA)
+.sg-frame {
+  border: 1px solid @line;
+  overflow: hidden;
+}
+.sg-frame > * { margin: 0; }
+// Neutralise sticky/viewport behaviour for demo'd chrome inside a frame
+.sg-frame .site-header { position: static; }
+.sg-frame .hero, .sg-frame .hero-split, .sg-frame .cta-band, .sg-frame .band { border-bottom: none; }
+
+// Sandbox -------------------------------------------------------------------
+.sg-sandbox {
+  display: grid; grid-template-columns: 260px 1fr; gap: @space-xl;
+  align-items: start;
+}
+@media (max-width: 760px) { .sg-sandbox { grid-template-columns: 1fr; } }
+
+.sg-controls {
+  border: 1px solid @line;
+  border-radius: @radius;
+  background: @surface;
+  padding: @space-lg;
+  position: sticky; top: 70px;
+}
+.sg-control { margin-bottom: @space-lg; }
+.sg-control:last-child { margin-bottom: 0; }
+.sg-control label {
+  display: block;
+  font-family: @font-mono; font-size: 0.66rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: @tracking-mono; color: @ink-soft;
+  margin-bottom: @space-xs;
+}
+.sg-control input[type="color"] {
+  width: 100%; height: 38px; padding: 0;
+  border: 1px solid @line; border-radius: @radius; background: @surface; cursor: pointer;
+}
+.sg-reset {
+  font-family: @font-mono; font-size: 0.7rem;
+  background: none; border: 1px solid @line; border-radius: @radius;
+  padding: 0.5rem 0.8rem; cursor: pointer; color: @ink-soft;
+  text-transform: uppercase; letter-spacing: 0.06em;
+}
+.sg-reset:hover { border-color: @arc; color: @arc; }
+
+.sg-preview {
+  border: 1px solid @line;
+  border-radius: @radius;
+  background: @surface;
+  padding: @space-xl;
+  display: flex; flex-direction: column; gap: @space-lg;
+}
+.sg-preview-node {
+  width: 100%; height: 120px;
+  border: 1px solid @line;
+  background:
+    radial-gradient(circle at 22% 40%, var(--arc) 0 7px, transparent 8px),
+    radial-gradient(circle at 74% 64%, var(--arc-deep) 0 7px, transparent 8px),
+    linear-gradient(78deg, transparent 48%, var(--arc) 48% 49%, transparent 49%);
+}
+
+// Page-load stagger ---------------------------------------------------------
+@media (prefers-reduced-motion: no-preference) {
+  .sg-section, .sg-masthead {
+    animation: sg-rise @dur-slow @ease both;
+  }
+  .sg-section:nth-child(2) { animation-delay: 0.05s; }
+  .sg-section:nth-child(3) { animation-delay: 0.10s; }
+  .sg-section:nth-child(4) { animation-delay: 0.15s; }
+  .sg-section:nth-child(5) { animation-delay: 0.20s; }
+  .sg-section:nth-child(6) { animation-delay: 0.25s; }
+  .sg-section:nth-child(7) { animation-delay: 0.30s; }
+  .sg-section:nth-child(n+8) { animation-delay: 0.35s; }
+}
+@keyframes sg-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

@@ -1,0 +1,27 @@
+{{!--
+  Cross-link badges for a Features capability section, rendered from the beat's
+  manifest relations (single source of truth). Call with:
+    {{> beat-badges beat=(lookup site.beatsById "diagnose") showWorkflows=true}}
+  Reference pills (lenses/metrics) share one style; Workflows is a single group
+  link. The Recipe action (Govern) is a .btn-ghost in the page, not a pill.
+--}}
+{{#if beat.metricObjects.length}}
+            <p class="metric-pills-label">Relevant metrics</p>
+            <ul class="related-list metric-pills">
+              {{#each beat.metricObjects}}<li><a href="{{url}}">{{title}}</a></li>
+              {{/each}}
+            </ul>
+{{/if}}
+{{#if beat.lensObjects.length}}
+            <p class="metric-pills-label">Relevant lenses</p>
+            <ul class="related-list lens-pills">
+              {{#each beat.lensObjects}}<li><a href="{{url}}">{{title}}</a></li>
+              {{/each}}
+            </ul>
+{{/if}}
+{{#if showWorkflows}}
+            <p class="metric-pills-label">Workflows</p>
+            <ul class="related-list workflow-pills">
+              <li><a href="/workflows#{{beat.anchor}}">Browse the workflows &rarr;</a></li>
+            </ul>
+{{/if}}

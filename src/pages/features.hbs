@@ -1,0 +1,215 @@
+{{#> marketing}}
+  {{#*inline "html-head-block"}}
+    <title>AtlasArc Features | Architecture Analysis, Cycle &amp; Boundary Triage, Coverage Risk, and Dependency Governance</title>
+    <meta name="description" content="AtlasArc gives Java, Kotlin, and TypeScript teams interactive architecture exploration, structural-problem triage, complexity and coverage risk, governed dependency exceptions, Architecture Audit Reports, and five analytical lenses inside IntelliJ IDEA.">
+    <meta property="og:title" content="AtlasArc Features">
+    <meta property="og:description" content="Interactive architecture analysis with structural triage, coverage risk, governed exceptions, and five analytical lenses inside IntelliJ IDEA.">
+  {{/inline}}
+  {{#*inline "body-block"}}
+
+    <section class="page-hero container">
+      <p class="eyebrow">Features</p>
+      <h1>Switch between 5 lenses to answer any question.</h1>
+      <p class="lede">You arrived with something to get done. This page expands the product overview into the specific features that do the work, all built on one shared package model, so filters, focus, and navigation carry across every lens. Start wherever your question is.</p>
+    </section>
+
+    <section class="band band-alt">
+      <div class="container">
+        <div class="router-head">
+          <span class="section-number">Wayfinding</span>
+          <h2>Choose the architecture question you need to answer</h2>
+        </div>
+        <p class="router-sub">Each row maps a question you came to ask onto the lenses that answer it. Jump straight to the one you need.</p>
+        <ul class="router">
+          <li><a class="router-row" href="#explore-structure"><span class="router-row-inner">
+            <span class="router-idx">01</span>
+            <span class="router-job">Understand how the codebase is put together<small>See the structure you have, not the one you assume.</small></span>
+            <span class="router-arrow">&rarr;</span>
+            <span class="router-cap">Explore the structure</span>
+          </span></a></li>
+          <li><a class="router-row" href="#diagnose-structural-problems"><span class="router-row-inner">
+            <span class="router-idx">02</span>
+            <span class="router-job">Find cycles, boundary leaks, and misplaced packages<small>Work the problem graph one cluster at a time.</small></span>
+            <span class="router-arrow">&rarr;</span>
+            <span class="router-cap">Diagnose structural problems</span>
+          </span></a></li>
+          <li><a class="router-row" href="#expose-risky-code"><span class="router-row-inner">
+            <span class="router-idx">03</span>
+            <span class="router-job">Find complex code that the tests don't cover<small>Complexity and branch coverage in one view.</small></span>
+            <span class="router-arrow">&rarr;</span>
+            <span class="router-cap">Expose complex, undertested code</span>
+          </span></a></li>
+          <li><a class="router-row" href="#prioritize-refactoring-work"><span class="router-row-inner">
+            <span class="router-idx">04</span>
+            <span class="router-job">Decide where refactoring effort pays off<small>Instability, complexity, and the zone of pain.</small></span>
+            <span class="router-arrow">&rarr;</span>
+            <span class="router-cap">Prioritize refactoring work</span>
+          </span></a></li>
+          <li><a class="router-row" href="#govern-exceptions"><span class="router-row-inner">
+            <span class="router-idx">05</span>
+            <span class="router-job">Govern exceptions and stop new cycles in CI<small>Sanction in code; enforce in the build with ArchUnit.</small></span>
+            <span class="router-arrow">&rarr;</span>
+            <span class="router-cap">Govern intentional exceptions</span>
+          </span></a></li>
+          <li><a class="router-row" href="#review-and-report"><span class="router-row-inner">
+            <span class="router-idx">06</span>
+            <span class="router-job">Audit architecture findings and report them to the team<small>Architecture Audit Reports, HTML, Printable Version.</small></span>
+            <span class="router-arrow">&rarr;</span>
+            <span class="router-cap">Review and report</span>
+          </span></a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="band" id="explore-structure">
+      <div class="container">
+        <div class="feature-band">
+          <div class="placeholder-box">Screenshot — Topology Graph and Composition treemap</div>
+          <div>
+            <h2>Explore the structure</h2>
+            <p>The Topology Graph shows package dependencies as a directed graph. The Package Matrix shows them as a cell grid, making coupling patterns and off-diagonal dependencies immediately visible. The Composition view maps where the code mass sits as a treemap, sunburst, or circle pack. Structural lenses expand package hierarchy in place; the Graph can also open one visible package/source folder into contained classes or files when you need local implementation evidence. Re-scope every lens by setting any package as the architectural root. On a large project, the same controls reduce a model that is too big to read. See <a href="/docs/handling-large-projects">handling large projects</a>.</p>
+            <ul>
+              <li>Topology Graph with inline package expansion</li>
+              <li>Graph-only package internals for local class/file tangles</li>
+              <li>Package Matrix with TSV export</li>
+              <li>Composition treemap, sunburst, and circle pack by code mass</li>
+              <li>Heatmap overlay for any metric on structure-preserving lenses</li>
+            </ul>
+{{> beat-badges beat=(lookup site.beatsById "map")}}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-alt" id="diagnose-structural-problems">
+      <div class="container">
+        <div class="feature-band feature-band-reverse">
+          <div class="placeholder-box">Screenshot — Cycles-only graph and boundary leaks in the Matrix</div>
+          <div>
+            <h2>Diagnose structural problems</h2>
+            <p>Cycles are the headline, but not the whole story. AtlasArc separates the structural dependency graph from the cycle problem graph: accepted exceptions remain structurally visible but leave problem detection entirely, so the distinction between real design problems and governed exceptions is always explicit. The Cycles section filters the Topology Graph to packages in the problem graph, grouped by cluster, and the same model surfaces boundary erosion, leaked internals, package-local implementation tangles, and packages sitting in the wrong layer for the way they actually depend.</p>
+            <ul>
+              <li>Cycle detection and group navigation with the cycle-group navigator</li>
+              <li>Structural graph vs problem graph: accepted edges remain visible, not deleted</li>
+              <li>Boundary erosion and leaked-internal detection via the Package Matrix</li>
+              <li>Contained Topology internals for the class/file evidence inside one suspicious package</li>
+              <li>Navigate from any cycle participant or boundary breach directly to the class</li>
+            </ul>
+{{> beat-badges beat=(lookup site.beatsById "diagnose") showWorkflows=true}}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" id="expose-risky-code">
+      <div class="container">
+        <div class="feature-band">
+          <div class="placeholder-box">Screenshot — Hotspots CC vs Coverage map</div>
+          <div>
+            <h2>Expose complex, undertested code</h2>
+            <p>Structure is only half of maintainability. AtlasArc reads cyclomatic and cognitive complexity down to the method, and overlays branch and line coverage loaded from your JaCoCo reports. The CC vs Coverage Hotspots map shows the packages that are both complex and thinly tested. When that map gets crowded, Galaxy can add depth and route context without replacing the simpler read.</p>
+            <ul>
+              <li>Cyclomatic and cognitive complexity at package, class, and method level</li>
+              <li>Branch and line coverage loaded from JaCoCo reports</li>
+              <li>CC vs Coverage map, with Galaxy as dense-project support</li>
+            </ul>
+{{> beat-badges beat=(lookup site.beatsById "expose") showWorkflows=true}}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-alt" id="prioritize-refactoring-work">
+      <div class="container">
+        <div class="feature-band feature-band-reverse">
+          <div class="placeholder-box">Screenshot — Hotspots and Subsystems metric charts</div>
+          <div>
+            <h2>Prioritize refactoring work</h2>
+            <p>The Hotspots view plots packages by instability, complexity, size, and colour so the first refactoring shortlist is easy to read. Galaxy is there when the flat map is too dense or when dependency routes explain why several risky packages belong together. The Subsystems view compares entire architectural areas by boundary coupling, cohesion, and visibility, surfacing the zone of pain, the over-abstract dead ends, and the load-bearing backbone the whole system rests on.</p>
+            <ul>
+              <li>Hotspots: bubble map and Galaxy view with customizable metric axes</li>
+              <li>Subsystems: boundary risk, complexity load, and visibility surface presets</li>
+              <li>Zone of pain, zone of uselessness, and backbone presets</li>
+              <li>Drill-down into any subsystem to re-scope the view</li>
+            </ul>
+{{> beat-badges beat=(lookup site.beatsById "prioritize") showWorkflows=true}}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" id="metric-matrix">
+      <div class="container">
+        <div class="metric-statement">
+          <div class="metric-statement-figure">
+            <span class="metric-statement-num">30+</span>
+            <span class="metric-statement-num-label">metrics</span>
+          </div>
+          <div class="metric-statement-body">
+            <p class="eyebrow">One model, every metric</p>
+            <h2>Thirty-plus metrics from one analysis.</h2>
+            <p>Fan-in and fan-out, instability and abstractness, cyclomatic and cognitive complexity, line and branch coverage, size: computed across package, class, subsystem, and project levels, every one derived from the same scan rather than a separate pass.</p>
+            <a class="btn btn-ghost" href="/metrics#metric-matrix">Explore the metric matrix &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-alt" id="govern-exceptions">
+      <div class="container">
+        <div class="feature-band feature-band-reverse">
+          <div class="placeholder-box">Screenshot — Accepted annotations, Safe Havens, and a passing ArchUnit cycle test</div>
+          <div>
+            <h2>Govern intentional exceptions</h2>
+            <p>Not every cycle is a design problem. Some dependencies are intentional, some are tracked debt, some are out of scope for the current investigation. AtlasArc gives teams two tools to manage this without hiding structural reality.</p>
+            <p><strong>Safe Havens</strong> suppress a package's cycle participation for the current workspace-local investigation. Nothing is committed to the codebase. <strong>Source-controlled annotations</strong> mark a specific dependency as an intentional decision or tracked debt, with a reason and ticket that travel into code review.</p>
+            <p>This is the part other analyzers don't have: your exceptions live in the codebase, not a tool's private database: <strong>versioned with your source, reviewed by your team, and enforceable in CI</strong>. The annotations are ordinary, bytecode-visible Java annotations, so a handful of lines of ArchUnit turn them into a build gate: a standard cycle rule fails on any new, un-sanctioned cycle, while the cycles you sanctioned are excluded automatically, with no AtlasArc runtime anywhere in your build.</p>
+            <ul>
+              <li>Safe Havens: workspace-local noise suppression for the current investigation</li>
+              <li>Source annotations: source-controlled, directional, intentional or debt</li>
+              <li>Accepted dependencies leave the problem graph but stay structurally visible</li>
+              <li>Standard ArchUnit <code>beFreeOfCycles()</code> with annotation-aware exclusions; only a <code>compileOnly</code> artifact added</li>
+            </ul>
+            <a class="btn btn-ghost" href="/docs/recipe-archunit-build">Recipe: AtlasArc in your build &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" id="review-and-report">
+      <div class="container">
+        <div class="feature-band">
+          <div class="placeholder-box">Screenshot — Architecture Audit Report index and Printable Version</div>
+          <div>
+            <h2>Review and report</h2>
+            <p>When the investigation is done, you need something the team can actually use. AtlasArc generates Architecture Audit Reports: browsable HTML with a Printable Version for PDF, covering project health reviews, subsystem audits, module-boundary reviews, cycle triage, and current-investigation handoff. Right-click any package to set it as the architectural root, inspect its neighbourhood or boundary in Graph and Matrix, or navigate straight to the class in the editor. Export raw lens files when you need them, or generate one report that reads from overview into selected evidence.</p>
+            <ul>
+              <li>Architecture Audit Reports for project health, subsystem, boundary, cycle, and current-investigation reviews</li>
+              <li>Browsable HTML plus a Printable Version for PDF or meeting packets</li>
+              <li>Set as Root, Neighbourhood or Boundary subject reads, and direct IDE navigation from any node</li>
+              <li>Per-lens export: PNG, CSV, TSV, DOT</li>
+              <li>Global overview, Subject Audit, Current Investigation, and focused evidence sections in one report</li>
+              <li>Generates quietly without changing the lens you are working in</li>
+            </ul>
+{{> beat-badges beat=(lookup site.beatsById "report") showWorkflows=true}}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band cta-band">
+      <div class="container cta-band-inner">
+        <div class="cta-text">
+          <p class="eyebrow eyebrow-inverse">Get started</p>
+          <h2>Try AtlasArc free for 30 days</h2>
+          <p>Installs directly from the JetBrains Marketplace into IntelliJ IDEA. No card required. Cancel any time.</p>
+        </div>
+        <div class="cta-meta">
+          <a class="btn btn-primary" href="{{marketplaceHref "features_cta_band"}}" data-analytics-cta="features_cta_band" data-analytics-destination="jetbrains_marketplace">Start free trial</a>
+          <span class="cta-note">IntelliJ IDEA 2023.3+ &middot; Java, Kotlin &amp; TypeScript &middot; JetBrains Marketplace</span>
+        </div>
+      </div>
+    </section>
+
+  {{/inline}}
+{{/marketing}}

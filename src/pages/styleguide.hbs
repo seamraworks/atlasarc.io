@@ -1,0 +1,524 @@
+{{#> marketing}}
+  {{#*inline "html-head-block"}}
+    <title>House Style | AtlasArc (internal)</title>
+    <meta name="description" content="The AtlasArc house style: AtlasArc Target. A living reference and component library — internal, not part of the public site.">
+    <meta name="robots" content="noindex">
+    <link rel="stylesheet" href="/assets/styleguide.css">
+  {{/inline}}
+
+  {{#*inline "body-block"}}
+  <div class="sg-page">
+
+    <header class="sg-masthead">
+      <div class="container">
+        <p class="eyebrow">House style — AtlasArc Target</p>
+        <h1>Drawn to scale. Built to ship.</h1>
+        <p class="lede">The living reference for the AtlasArc website. The product reads architecture — nodes, edges, cycles, metrics — so the brand reads like the schematic of one: a structural grotesque, a technical mono, navy as the single signal, black for hard structure, white ground, and lines doing the work that shadows used to.</p>
+        <div class="sg-meta">
+          <span>v2.0 — AtlasArc Target</span>
+          <span>internal — excluded from sitemap</span>
+          <span>edit src/styles/tokens.less to retune</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- 01 Voice -->
+    <section class="sg-section">
+      <div class="container">
+        <div class="sg-section-head">
+          <span class="sg-index">01 / voice</span>
+          <h2>Principles</h2>
+          <p class="sg-note">Three rules that keep the design honest. When a choice is unclear, these break the tie.</p>
+        </div>
+        <ul class="card-grid">
+          <li class="card"><a href="#01"><h3>Structure, not decoration</h3><p>A rule, a border, or a grid earns its place by clarifying structure. No gradients, no glow, no shadow — edges and weight carry the hierarchy.</p></a></li>
+          <li class="card"><a href="#01"><h3>Read it like data</h3><p>Anything the machine produced — package names, metrics, coordinates — is set in mono. The reader should always know what is data and what is prose.</p></a></li>
+          <li class="card"><a href="#01"><h3>Decisive, not loud</h3><p>One navy signal. Hard corners. Heavy display weight against light body weight. Confident without shouting; technical without being cold.</p></a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 02 Colour -->
+    <section class="sg-section">
+      <div class="container">
+        <div class="sg-section-head">
+          <span class="sg-index">02 / colour</span>
+          <h2>Palette</h2>
+          <p class="sg-note">White ground, black structure, navy signal. Grey carries alternating bands and borders. Health and caveat are semantic — used only to mean something.</p>
+        </div>
+        <ul class="sg-swatches">
+          <li class="sg-swatch"><div class="sg-chip" style="background:#ffffff;border:1px solid #ccc"></div><div class="sg-swatch-meta"><div class="sg-swatch-name">@canvas</div><div class="sg-swatch-hex">#ffffff</div><div class="sg-swatch-role">Page ground</div></div></li>
+          <li class="sg-swatch"><div class="sg-chip" style="background:#f2f2f2"></div><div class="sg-swatch-meta"><div class="sg-swatch-name">@surface-sunk</div><div class="sg-swatch-hex">#f2f2f2</div><div class="sg-swatch-role">Alternating bands</div></div></li>
+          <li class="sg-swatch"><div class="sg-chip" style="background:#000000"></div><div class="sg-swatch-meta"><div class="sg-swatch-name">@ink</div><div class="sg-swatch-hex">#000000</div><div class="sg-swatch-role">Text & structure</div></div></li>
+          <li class="sg-swatch"><div class="sg-chip" style="background:#555555"></div><div class="sg-swatch-meta"><div class="sg-swatch-name">@ink-soft</div><div class="sg-swatch-hex">#555555</div><div class="sg-swatch-role">Secondary text</div></div></li>
+          <li class="sg-swatch"><div class="sg-chip" style="background:#cccccc"></div><div class="sg-swatch-meta"><div class="sg-swatch-name">@line</div><div class="sg-swatch-hex">#cccccc</div><div class="sg-swatch-role">Borders, hairlines</div></div></li>
+          <li class="sg-swatch"><div class="sg-chip" style="background:#1a3556"></div><div class="sg-swatch-meta"><div class="sg-swatch-name">@arc</div><div class="sg-swatch-hex">#1a3556</div><div class="sg-swatch-role">Signal — navy</div></div></li>
+          <li class="sg-swatch"><div class="sg-chip" style="background:#2d4f7a"></div><div class="sg-swatch-meta"><div class="sg-swatch-name">@arc-deep</div><div class="sg-swatch-hex">#2d4f7a</div><div class="sg-swatch-role">Navy hover</div></div></li>
+          <li class="sg-swatch"><div class="sg-chip" style="background:#e8edf3"></div><div class="sg-swatch-meta"><div class="sg-swatch-name">@arc-tint</div><div class="sg-swatch-hex">#e8edf3</div><div class="sg-swatch-role">Navy wash</div></div></li>
+          <li class="sg-swatch"><div class="sg-chip" style="background:#2a7050"></div><div class="sg-swatch-meta"><div class="sg-swatch-name">@verdigris</div><div class="sg-swatch-hex">#2a7050</div><div class="sg-swatch-role">Healthy / stable</div></div></li>
+          <li class="sg-swatch"><div class="sg-chip" style="background:#fbeed3"></div><div class="sg-swatch-meta"><div class="sg-swatch-name">@caveat-bg</div><div class="sg-swatch-hex">#fbeed3</div><div class="sg-swatch-role">Caveat wash</div></div></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 03 Typography -->
+    <section class="sg-section">
+      <div class="container">
+        <div class="sg-section-head">
+          <span class="sg-index">03 / type</span>
+          <h2>Typography</h2>
+          <p class="sg-note">DM Sans does both display and body — hierarchy comes from weight contrast (300 lede against 900 display), not from a second family. IBM Plex Mono sets anything the machine produced.</p>
+        </div>
+        <div class="sg-panel">
+          <div class="sg-type-row">
+            <div class="sg-type-label">DM Sans 900 — display</div>
+            <div class="sg-display">Find the cycle.</div>
+          </div>
+          <div class="sg-type-row">
+            <div class="sg-type-label">DM Sans — weight contrast</div>
+            <div class="sg-weights">
+              <span class="sg-w300">300 Light</span>
+              <span class="sg-w400">400 Regular</span>
+              <span class="sg-w500">500 Medium</span>
+              <span class="sg-w700">700 Bold</span>
+              <span class="sg-w900">900 Black</span>
+            </div>
+          </div>
+          <div class="sg-type-row">
+            <div class="sg-type-label">DM Sans 300 — body / lede</div>
+            <p class="sg-specimen-sans" style="margin:0;font-size:1.05rem;line-height:1.7">AtlasArc visualizes dependencies, cycles, hotspots, subsystems, and architecture metrics directly inside IntelliJ IDEA — so you can read the shape of a codebase before you change it.</p>
+          </div>
+          <div class="sg-type-row">
+            <div class="sg-type-label">IBM Plex Mono — technical</div>
+            <p class="sg-specimen-mono" style="margin:0">com.atlasarc.core.graph &nbsp;&middot;&nbsp; fan-in: 14 &nbsp;&middot;&nbsp; instability: 0.82 &nbsp;&middot;&nbsp; cycle: A &rarr; B &rarr; A</p>
+          </div>
+          <div class="sg-type-row">
+            <div class="sg-type-label">Mono glyph set</div>
+            <div class="sg-glyphs">ABCDEFG abcdefg 0123456789 {} [] () &rarr; &rArr; &harr; // &amp;&amp;</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 Spacing -->
+    <section class="sg-section">
+      <div class="container">
+        <div class="sg-section-head">
+          <span class="sg-index">04 / measure</span>
+          <h2>Spacing &amp; structure</h2>
+          <p class="sg-note">A short, doubling-ish scale keeps rhythm predictable. There is no border-radius and no shadow anywhere — structure is carried by 1px hairlines and 2px section rules.</p>
+        </div>
+        <div class="sg-panel">
+          <ul class="sg-scale">
+            <li><span class="sg-scale-label">2xs · 4px</span><span class="sg-scale-bar" style="width:4px"></span></li>
+            <li><span class="sg-scale-label">xs · 8px</span><span class="sg-scale-bar" style="width:8px"></span></li>
+            <li><span class="sg-scale-label">sm · 12px</span><span class="sg-scale-bar" style="width:12px"></span></li>
+            <li><span class="sg-scale-label">md · 16px</span><span class="sg-scale-bar" style="width:16px"></span></li>
+            <li><span class="sg-scale-label">lg · 32px</span><span class="sg-scale-bar" style="width:32px"></span></li>
+            <li><span class="sg-scale-label">xl · 64px</span><span class="sg-scale-bar" style="width:64px"></span></li>
+            <li><span class="sg-scale-label">2xl · 96px</span><span class="sg-scale-bar" style="width:96px"></span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 Buttons & links -->
+    <section class="sg-section">
+      <div class="container">
+        <div class="sg-section-head">
+          <span class="sg-index">05 / actions</span>
+          <h2>Buttons &amp; links</h2>
+          <p class="sg-note">Hard, decisive. The primary fills navy; the ghost is a 2px solid black outline. The compact <code>btn-nav</code> sits in the header. Links are navy and underline on hover.</p>
+        </div>
+        <div class="sg-panel sg-stack">
+          <div class="sg-row">
+            <a class="btn btn-primary" href="#05">Start free trial</a>
+            <a class="btn btn-ghost" href="#05">Explore workflows</a>
+            <a class="btn-nav" href="#05">Start free trial</a>
+          </div>
+          <p style="margin:0">Inline links read in <a href="#05">navy with a hover underline</a>. Technical references read as <code>com.atlasarc.metrics</code> in mono.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 Navigation -->
+    <section class="sg-section">
+      <div class="container">
+        <div class="sg-section-head">
+          <span class="sg-index">06 / navigation</span>
+          <h2>Site header</h2>
+          <p class="sg-note">White ground, 1px rule beneath, navy wordmark, mixed-case nav in grey that goes navy on hover, and a compact CTA pinned right.</p>
+        </div>
+        <div class="sg-frame">
+          <header class="site-header">
+            <a class="brand" href="#06">AtlasArc</a>
+            <nav class="primary-nav">
+              <ul class="nav-list">
+                <li class="nav-item"><a href="#06">Product</a></li>
+                <li class="nav-item"><a href="#06" class="is-active">Workflows</a></li>
+                <li class="nav-item"><a href="#06">Metrics</a></li>
+                <li class="nav-item"><a href="#06">Docs</a></li>
+                <li class="nav-item"><a href="#06">Pricing</a></li>
+              </ul>
+            </nav>
+            <div class="header-actions">
+              <a class="utility-link" href="#06">Release notes</a>
+              <a class="btn-nav" href="#06">Start free trial</a>
+            </div>
+          </header>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 Hero -->
+    <section class="sg-section">
+      <div class="container">
+        <div class="sg-section-head">
+          <span class="sg-index">07 / hero</span>
+          <h2>Two-column hero</h2>
+          <p class="sg-note">The signature page opener: copy on the left against a 1px divider, a navy-tint panel carrying the topology graph on the right.</p>
+        </div>
+        <div class="sg-frame">
+          <section class="hero-split">
+            <div class="hero-text">
+              <span class="eyebrow">Built for IntelliJ IDEA</span>
+              <h1>Understand Java, Kotlin, and TypeScript architecture</h1>
+              <p class="lede">AtlasArc visualizes dependencies, cycles, hotspots, and subsystems directly in the IDE — so architectural decisions stay inside the development loop.</p>
+              <div class="hero-actions">
+                <a class="btn btn-primary" href="#07">Start free trial</a>
+                <a class="btn btn-ghost" href="#07">Explore workflows</a>
+              </div>
+            </div>
+            <div class="hero-panel">
+              <span class="eyebrow">Topology · com.example.app</span>
+              <svg viewBox="0 0 460 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Topology graph with a detected cycle">
+                <defs>
+                  <marker id="sg-arr" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#1a3556" opacity="0.4"/></marker>
+                  <marker id="sg-arr-c" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#c0392b"/></marker>
+                </defs>
+                <rect x="0.5" y="0.5" width="459" height="229" fill="none" stroke="#1a3556" stroke-width="1" opacity="0.15"/>
+                <line x1="120" y1="80" x2="200" y2="80" stroke="#1a3556" stroke-width="1.5" stroke-opacity="0.3" marker-end="url(#sg-arr)"/>
+                <line x1="262" y1="80" x2="342" y2="80" stroke="#1a3556" stroke-width="1.5" stroke-opacity="0.3" marker-end="url(#sg-arr)"/>
+                <line x1="88" y1="92" x2="88" y2="146" stroke="#c0392b" stroke-width="2" marker-end="url(#sg-arr-c)"/>
+                <path d="M62,158 C32,158 32,80 62,80" fill="none" stroke="#c0392b" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#sg-arr-c)"/>
+                <rect x="62" y="67" width="58" height="26" fill="#fce8e6" stroke="#c0392b" stroke-width="1.5"/>
+                <text font-family="'IBM Plex Mono',monospace" font-size="9.5" fill="#9b231a" text-anchor="middle" font-weight="600" x="91" y="84">api</text>
+                <rect x="200" y="67" width="62" height="26" fill="#fff" stroke="#1a3556" stroke-width="1" stroke-opacity="0.4"/>
+                <text font-family="'IBM Plex Mono',monospace" font-size="9.5" fill="#222" text-anchor="middle" x="231" y="84">service</text>
+                <rect x="342" y="67" width="62" height="26" fill="#d8e4f0" stroke="#1a3556" stroke-width="1.5"/>
+                <text font-family="'IBM Plex Mono',monospace" font-size="9.5" fill="#1a3556" text-anchor="middle" x="373" y="84">domain</text>
+                <rect x="62" y="146" width="58" height="26" fill="#fce8e6" stroke="#c0392b" stroke-width="1.5"/>
+                <text font-family="'IBM Plex Mono',monospace" font-size="9.5" fill="#9b231a" text-anchor="middle" font-weight="600" x="91" y="163">dto</text>
+                <rect x="342" y="146" width="62" height="26" fill="#d8ede4" stroke="#2a7050" stroke-width="1" stroke-opacity="0.7"/>
+                <text font-family="'IBM Plex Mono',monospace" font-size="9.5" fill="#2a7050" text-anchor="middle" x="373" y="163">util</text>
+                <text x="16" y="216" font-family="'IBM Plex Mono',monospace" font-size="7.5" fill="#8a9db0" letter-spacing="0.06em">6 packages · 24 dependencies · scanned in 0.3s</text>
+              </svg>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08 Section header -->
+    <section class="sg-section">
+      <div class="container">
+        <div class="sg-section-head">
+          <span class="sg-index">08 / section header</span>
+          <h2>Band section header</h2>
+          <p class="sg-note">Every content band opens with a mono section number, a 900-weight heading, and a 2px black rule beneath. A 300-weight intro follows.</p>
+        </div>
+        <div class="sg-panel">
+          <div class="section-header">
+            <span class="section-number">01</span>
+            <h2>Workflows</h2>
+          </div>
+          <p class="section-intro">Architecture problems are not discovered in theory — they are discovered while working. AtlasArc fits the IDE workflow you already have.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 09 Cards -->
+    <section class="sg-section">
+      <div class="container">
+        <div class="sg-section-head">
+          <span class="sg-index">09 / cards</span>
+          <h2>Cards</h2>
+          <p class="sg-note">Two treatments. The default bordered card — a white panel with a 1px border and an outgoing-arc glyph, going navy on hover. And the open workflow-card row — a top-ruled four-column band divided by hairlines, first card flush to the edge.</p>
+        </div>
+        <ul class="card-grid">
+          <li class="card"><a href="#09"><h3>Find cyclic dependencies</h3><p>Detect, inspect, and untangle cycles between packages.</p></a></li>
+          <li class="card"><a href="#09"><h3>Review package boundaries</h3><p>Spot boundary erosion before it sets like concrete.</p></a></li>
+          <li class="card"><a href="#09"><h3>Identify risky hotspots</h3><p>See where change concentration meets complexity.</p></a></li>
+        </ul>
+        <div class="sg-demo">
+          <div class="sg-type-label" style="margin-bottom:1rem">Open workflow cards — top-ruled four-column row</div>
+          <ul class="wf-grid">
+            <li><a class="wf-card" href="#09"><h3>Find cyclic dependencies</h3><p>Detect the dependency loops that block refactoring before they compound.</p></a></li>
+            <li><a class="wf-card" href="#09"><h3>Review package boundaries</h3><p>See which packages cross intended architectural boundaries.</p></a></li>
+            <li><a class="wf-card" href="#09"><h3>Identify risky hotspots</h3><p>Find the packages absorbing the most change pressure and complexity.</p></a></li>
+            <li><a class="wf-card" href="#09"><h3>Understand subsystem coupling</h3><p>Plot subsystems in metric space to see which parts are stable.</p></a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 Lens grid -->
+    <section class="sg-section">
+      <div class="container">
+        <div class="sg-section-head">
+          <span class="sg-index">10 / lenses</span>
+          <h2>Contained lens grid</h2>
+          <p class="sg-note">The five analytical lenses. A single outer border wraps the row so it never hugs the band edge; each cell carries a 3px navy top accent and a mono lens type.</p>
+        </div>
+        <ul class="lens-grid">
+          <li class="lens-card">
+            <span class="lens-type">Structural</span>
+            <h3>Topology</h3>
+            <p>Understand how the architecture is connected. Inline expansion without losing context.</p>
+          </li>
+          <li class="lens-card">
+            <span class="lens-type">Relational</span>
+            <h3>Matrix</h3>
+            <p>Inspect exact dependency relationships. Spot coupling patterns and cycles at a glance.</p>
+          </li>
+          <li class="lens-card">
+            <span class="lens-type">Hierarchical</span>
+            <h3>Composition</h3>
+            <p>Explore the architecture by area and mass. Treemap, sunburst, circle pack.</p>
+          </li>
+          <li class="lens-card">
+            <span class="lens-type">Metric-space</span>
+            <h3>Subsystems</h3>
+            <p>Plot subsystems in abstract metric space. Find stable cores and the risky periphery.</p>
+          </li>
+          <li class="lens-card">
+            <span class="lens-type">Metric-space</span>
+            <h3>Hotspots</h3>
+            <p>Find the packages absorbing the most change pressure, coupling, and complexity.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 11 Metric cards -->
+    <section class="sg-section">
+      <div class="container">
+        <div class="sg-section-head">
+          <span class="sg-index">11 / metrics</span>
+          <h2>Clickable metric cards</h2>
+          <p class="sg-note">Individually bordered, separated by a gap, with a mono label and an arrow that slides on hover — clearly navigable, distinct from the static card grid.</p>
+        </div>
+        <ul class="metrics-grid">
+          <li><a class="metric-card" href="#11">
+            <span class="metric-label">Structural</span>
+            <h3>Cyclic dependencies</h3>
+            <p>Count and classify dependency cycles. See which packages are entangled and which form the cycle core.</p>
+          </a></li>
+          <li><a class="metric-card" href="#11">
+            <span class="metric-label">Coupling</span>
+            <h3>Fan-in and fan-out</h3>
+            <p>Measure how widely a package is used and how many dependencies it takes on. The primary signal for stability.</p>
+          </a></li>
+          <li><a class="metric-card" href="#11">
+            <span class="metric-label">Stability</span>
+            <h3>Instability &amp; abstractness</h3>
+            <p>Plot packages on the distance-from-main-sequence diagram to find which ones are in the zone of pain.</p>
+          </a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 12 Trust strip -->
+    <section class="sg-section">
+      <div class="container">
+        <div class="sg-section-head">
+          <span class="sg-index">12 / trust</span>
+          <h2>Trust strip</h2>
+          <p class="sg-note">A grey band of mono credentials, divided by hairline rules. Sits directly beneath the hero.</p>
+        </div>
+        <div class="sg-frame">
+          <div class="trust-strip">
+            <div class="trust-strip-inner">
+              <span class="trust-item">Built for IntelliJ IDEA</span>
+              <span class="trust-item">Java, Kotlin &amp; TypeScript</span>
+              <span class="trust-item">30-day free trial</span>
+              <span class="trust-item">JetBrains Marketplace</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13 Feature band -->
+    <section class="sg-section">
+      <div class="container">
+        <div class="sg-section-head">
+          <span class="sg-index">13 / feature band</span>
+          <h2>Feature band</h2>
+          <p class="sg-note">The image-led explanation unit. Alternating sides; restrained copy; one idea each.</p>
+        </div>
+        <div class="feature-band">
+          <div class="placeholder-box">topology.png</div>
+          <div>
+            <p class="eyebrow">Explore structure</p>
+            <h3>Graph, matrix, and composition views</h3>
+            <p style="color:#555;font-weight:300">One model, several lenses. Switch between the topology graph, the dependency matrix, and composition treemaps without losing your place.</p>
+            <a href="#13">Learn more</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14 Feature router -->
+    <section class="sg-section">
+      <div class="container">
+        <div class="sg-section-head">
+          <span class="sg-index">14 / router</span>
+          <h2>Feature router</h2>
+          <p class="sg-note">A wayfinding index, deliberately a different shape from the feature band: a bordered table that reads as a <em>map</em> (the band is the territory). Each row maps a job onto a capability and deep-links into it. Mono index and capability, sans job; hairline rows; navy wash and a 4px arrow nudge on hover.</p>
+        </div>
+        <ul class="router">
+          <li><a class="router-row" href="#14"><span class="router-row-inner">
+            <span class="router-idx">01</span>
+            <span class="router-job">Understand how packages depend on each other<small>See the structure you have, not the one you assume.</small></span>
+            <span class="router-arrow">&rarr;</span>
+            <span class="router-cap">Explore structure</span>
+          </span></a></li>
+          <li><a class="router-row" href="#14"><span class="router-row-inner">
+            <span class="router-idx">02</span>
+            <span class="router-job">Find cycles, boundary leaks, and misplaced packages<small>Work the problem graph one cluster at a time.</small></span>
+            <span class="router-arrow">&rarr;</span>
+            <span class="router-cap">Diagnose structural problems</span>
+          </span></a></li>
+          <li><a class="router-row" href="#14"><span class="router-row-inner">
+            <span class="router-idx">03</span>
+            <span class="router-job">Govern exceptions and stop new cycles in CI<small>Sanction a dependency in code; it leaves the problem, not the graph.</small></span>
+            <span class="router-arrow">&rarr;</span>
+            <span class="router-cap">Govern intentional exceptions</span>
+          </span></a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 15 Metric statement -->
+    <section class="sg-section">
+      <div class="container">
+        <div class="sg-section-head">
+          <span class="sg-index">15 / metric statement</span>
+          <h2>Metric statement</h2>
+          <p class="sg-note">A secondary hero for one load-bearing figure: a big mono numeral on a navy-tint panel with a 3px accent, paired with a claim and a ghost CTA. For promoting a single statistic above body copy — not a general content block.</p>
+        </div>
+        <div class="metric-statement">
+          <div class="metric-statement-figure">
+            <span class="metric-statement-num">30+</span>
+            <span class="metric-statement-num-label">metrics</span>
+          </div>
+          <div class="metric-statement-body">
+            <p class="eyebrow">One model, every metric</p>
+            <h2>Thirty-plus metrics, all from a single analysis.</h2>
+            <p>Computed across package, class, subsystem, and project levels — every one derived from the same scan.</p>
+            <a class="btn btn-ghost" href="#15">Explore the metric matrix &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 16 Callouts -->
+    <section class="sg-section">
+      <div class="container">
+        <div class="sg-section-head">
+          <span class="sg-index">16 / callouts</span>
+          <h2>Callouts</h2>
+          <p class="sg-note">The interpretive blocks used on metric and workflow pages, plus the drafting placeholder for un-shot visuals.</p>
+        </div>
+        <div class="sg-specimen-grid">
+          <div class="content-section caveat" style="margin:0">
+            <h2>When not to overinterpret it</h2>
+            <p style="margin:0">A single high hotspot is a question, not a verdict. Read it alongside change frequency before acting.</p>
+          </div>
+          <div class="content-section formula" style="margin:0;border-top:none;padding-top:0">
+            <h2>How AtlasArc computes it</h2>
+            <p style="margin:0">I = Ce / (Ca + Ce) &nbsp; where Ca = afferent, Ce = efferent coupling.</p>
+          </div>
+          <div class="placeholder-box">hotspots.mp4</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 17 CTA band -->
+    <section class="sg-section">
+      <div class="container">
+        <div class="sg-section-head">
+          <span class="sg-index">17 / cta</span>
+          <h2>Closing CTA band</h2>
+          <p class="sg-note">A full navy band to close the page: copy left, action and mono fine-print right, on an inverse eyebrow.</p>
+        </div>
+        <div class="sg-frame">
+          <section class="cta-band band">
+            <div class="container cta-band-inner">
+              <div class="cta-text">
+                <p class="eyebrow eyebrow-inverse">Start exploring</p>
+                <h2>Start exploring your architecture today</h2>
+                <p>Available through the JetBrains Marketplace. Installs directly into IntelliJ IDEA. No configuration required.</p>
+              </div>
+              <div class="cta-meta">
+                <a class="btn btn-primary" href="#15">Start free trial on JetBrains Marketplace</a>
+                <span class="cta-note">IntelliJ IDEA 2023.3+ · Java, Kotlin &amp; TypeScript · 30-day free trial</span>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <!-- 18 Motion -->
+    <section class="sg-section">
+      <div class="container">
+        <div class="sg-section-head">
+          <span class="sg-index">18 / motion</span>
+          <h2>Motion</h2>
+          <p class="sg-note">One orchestrated page load — sections rise in a short stagger (you just saw it). Interactions are quick and directional: borders go navy, arrows slide 3px. Never bouncy. All motion respects <code>prefers-reduced-motion</code>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 19 Sandbox -->
+    <section class="sg-section">
+      <div class="container">
+        <div class="sg-section-head">
+          <span class="sg-index">19 / sandbox</span>
+          <h2>Try things</h2>
+          <p class="sg-note">The accent control rewrites the navy signal across the whole page in real time — buttons, accents, hovers, and washes all retrack. Reset returns to the house navy.</p>
+        </div>
+        <div class="sg-sandbox">
+          <div class="sg-controls">
+            <div class="sg-control">
+              <label for="sg-accent">Signal colour</label>
+              <input type="color" id="sg-accent" value="#1a3556">
+            </div>
+            <div class="sg-control">
+              <button type="button" class="sg-reset" id="sg-reset">// reset to navy</button>
+            </div>
+          </div>
+          <div class="sg-preview">
+            <div class="sg-preview-node" aria-hidden="true"></div>
+            <div class="sg-row">
+              <a class="btn btn-primary" href="#17">Primary</a>
+              <a class="btn btn-ghost" href="#17">Ghost</a>
+            </div>
+            <ul class="card-grid" style="margin:0">
+              <li class="card"><a href="#17"><h3>Live card</h3><p>Watch the accents, borders, and washes respond as you adjust the control.</p></a></li>
+              <li class="card"><a href="#17"><h3>Second card</h3><p>The whole page is the preview — scroll up and everything tracks your change.</p></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+  {{/inline}}
+
+  {{#*inline "scripts-block"}}
+    <script type="module" src="/assets/scripts/styleguide.js"></script>
+  {{/inline}}
+{{/marketing}}

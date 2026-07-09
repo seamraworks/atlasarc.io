@@ -1,0 +1,125 @@
+{{#> marketing}}
+  {{#*inline "html-head-block"}}
+    <title>Release Notes | AtlasArc</title>
+    <meta name="description" content="What's new in AtlasArc: release notes and changelog for the IntelliJ IDEA architecture analysis plugin.">
+    <meta property="og:title" content="AtlasArc Release Notes">
+    <meta property="og:description" content="Release notes and changelog for AtlasArc.">
+  {{/inline}}
+  {{#*inline "body-block"}}
+    <section class="page-hero container">
+      <p class="eyebrow">Release notes</p>
+      <h1>What&rsquo;s new in AtlasArc</h1>
+      <p class="lede">Every AtlasArc release is recorded here. The current release is the first public version.</p>
+    </section>
+
+    <section class="band">
+      <div class="container">
+        <p class="eyebrow">Version 1.0.0 &middot; June 2026</p>
+        <h2>The first public release</h2>
+        <p class="section-intro">AtlasArc 1.0 is an interactive architecture workspace for Java, Kotlin, and TypeScript inside IntelliJ IDEA. It ships with five analytical lenses over a shared architecture model, precision cycle triage, source-controlled dependency governance, architecture metrics, and Architecture Audit Reports, all without leaving the IDE.</p>
+      </div>
+    </section>
+
+    <section class="band band-alt">
+      <div class="container">
+        <h2>Five analytical lenses</h2>
+        <p>One shared package model, five interchangeable views. Switching lenses preserves filters, focus, and navigation state.</p>
+        <ul>
+          <li><strong>Topology Graph</strong>: an interactive dependency graph you can expand and collapse package by package.</li>
+          <li><strong>Package Matrix</strong>: a grid view that makes coupling patterns and one-way dependencies easy to spot.</li>
+          <li><strong>Subsystems</strong>: a bubble chart that compares whole modules at a glance, using metrics aggregated across each module such as cohesion and boundary coupling.</li>
+          <li><strong>Hotspots</strong>: plot packages and classes by metrics like instability and complexity to surface the ones that stand out, ranked in a side panel.</li>
+          <li><strong>Composition</strong>: treemap, sunburst, and circle-pack views where size reflects how much code each package holds.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="container">
+        <h2>Cycle detection and triage</h2>
+        <ul>
+          <li>Automatic detection of every dependency cycle, each classified as architectural, aggregation, nested, or cross-module so you can tell a real design problem from a harmless one.</li>
+          <li>In multi-module projects, cycles that only exist because modules were merged stay hidden until you ask to see them.</li>
+          <li>A cycles-only view with four levels of detail and a navigator that steps you through one cycle group at a time.</li>
+          <li>Collapsed folders show a marker when a cycle is hiding inside them, so you can find trouble without expanding everything.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="band band-alt">
+      <div class="container">
+        <h2>Governed dependency exceptions</h2>
+        <ul>
+          <li><strong>Safe Havens</strong>: set aside cycles you&rsquo;ve already reviewed or don&rsquo;t care about right now. It&rsquo;s local to your session and never changes your code.</li>
+          <li><strong>Source annotations</strong>: mark a dependency as an intentional decision or known debt right in your code, with a required reason and an optional ticket. The note travels with the code into review.</li>
+          <li><strong>Intentional vs. debt</strong>: accepted dependencies show in muted green when they&rsquo;re intentional and amber when they&rsquo;re tracked debt, and the debt is collected in one place so it stays visible.</li>
+          <li><strong>Annotate without leaving the view</strong>: for Java and Kotlin declaration targets, accept a dependency from the sidebar and AtlasArc adds the annotation to your source and refreshes the analysis for you.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="container">
+        <h2>Architecture metrics</h2>
+        <ul>
+          <li>Per-package Instability, Abstractness, and Distance from the main sequence (Robert C. Martin&rsquo;s component metrics), plus relative visibility.</li>
+          <li>Project-wide dependency-health metrics, including NCCD (normalized cumulative component dependency), so you can see whether the structure is getting more or less tangled over time.</li>
+          <li>Cyclomatic and cognitive complexity for every package, to find the code that&rsquo;s hardest to read and test.</li>
+          <li>Optional test-coverage overlay: load a JaCoCo report to see line and branch coverage alongside everything else.</li>
+          <li>Plain-language caveats and confidence hints that flag when a number looks alarming but is actually fine.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="band band-alt">
+      <div class="container">
+        <h2>Heatmaps, filtering, and navigation</h2>
+        <ul>
+          <li>Colour any view by a metric to see where problems concentrate, whether by individual package or by whole module.</li>
+          <li>Set your own thresholds for what counts as &ldquo;too high,&rdquo; so a healthy codebase stays green instead of always lighting up red.</li>
+          <li>Focus on one package tree, search for names, filter by how strongly packages are coupled, and hide noise with exclusion patterns.</li>
+          <li>Right-click any package in any view to set it as root, inspect its neighbourhood or boundary, or copy its name.</li>
+          <li>Right-click a package in IntelliJ&rsquo;s project tree and choose <em>Show in AtlasArc</em> to jump straight to it.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="container">
+        <h2>Guided workflows and onboarding</h2>
+        <ul>
+          <li>A first-run welcome screen that introduces the views and how to start.</li>
+          <li>A workflows wizard with sixteen ready-made analyses. Each one explains what to look for and suggests starting values based on your own codebase, then sets them up in one click.</li>
+          <li>Hover-to-define tooltips for unfamiliar terms, a visual legend, and a one-click way back when filters hide everything.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="band band-alt">
+      <div class="container">
+        <h2>Export, reporting, and the IDE</h2>
+        <ul>
+          <li>Export any view as an image or as data (CSV/TSV), or as a Graphviz file for use in other tools.</li>
+          <li>Generate Architecture Audit Reports as browsable HTML with a Printable Version for PDF. Reports cover project baselines, focused subject audits, current-investigation handoff, and cycle evidence.</li>
+          <li>Analyses Java and Kotlin through JVM bytecode, including projects that mix the two in the same module.</li>
+          <li>Analyses TypeScript through generated dependency-cruiser artifacts owned by the project toolchain.</li>
+          <li>Matches your IntelliJ light or dark theme, warns before slow operations on very large graphs, and remembers your settings.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="band cta-band">
+      <div class="container cta-band-inner">
+        <div class="cta-text">
+          <p class="eyebrow eyebrow-inverse">Get started</p>
+          <h2>Try AtlasArc free for 30 days</h2>
+          <p>Installs directly from the JetBrains Marketplace into IntelliJ IDEA. No card required. Cancel any time.</p>
+        </div>
+        <div class="cta-meta">
+          <a class="btn btn-primary" href="{{marketplaceHref "release_notes_cta_band"}}" data-analytics-cta="release_notes_cta_band" data-analytics-destination="jetbrains_marketplace">Start free trial</a>
+          <span class="cta-note">IntelliJ IDEA 2023.3+ &middot; Java, Kotlin &amp; TypeScript &middot; JetBrains Marketplace</span>
+        </div>
+      </div>
+    </section>
+  {{/inline}}
+{{/marketing}}

@@ -1,0 +1,60 @@
+{{#> marketing}}
+  {{#*inline "html-head-block"}}
+    <title>AtlasArc Workflows | Map, Diagnose, Expose, Prioritize, Govern, Report</title>
+    <meta name="description" content="Follow AtlasArc workflows by architecture journey: map the structure, diagnose structural problems, expose undertested code, prioritize refactoring, govern exceptions, and report health.">
+    <meta property="og:title" content="AtlasArc Workflows">
+    <meta property="og:description" content="Task-oriented architecture workflows for using AtlasArc in IntelliJ IDEA.">
+  {{/inline}}
+  {{#*inline "body-block"}}
+    <section class="page-hero container">
+      <p class="eyebrow">Workflows</p>
+      <h1>Work through architecture questions in order.</h1>
+      <p class="lede">Start with the shared structure, then move into concrete investigations: cycles, boundaries, complex undertested code, refactoring priorities, governed exceptions, and shareable architecture reviews.</p>
+    </section>
+
+    {{#each site.workflowBeats}}
+      <section class="band{{#if alt}} band-alt{{/if}}" id="{{anchor}}">
+        <div class="container workflow-group">
+          <div class="section-header">
+            <span class="section-number">{{number}} {{label}}</span>
+            <h2>{{title}}</h2>
+          </div>
+
+          {{#if journey}}
+            <div class="workflow-journey">
+              <div>
+                <p class="section-intro">{{intro}}</p>
+              </div>
+              <div class="workflow-actions">
+                {{#each ctas}}
+                  <a class="btn btn-ghost" href="{{href}}">{{label}}</a>
+                {{/each}}
+              </div>
+            </div>
+          {{else}}
+            <p class="section-intro">{{intro}}</p>
+            <ul class="{{gridClass}}">
+              {{#each (workflowsByBeat @root.site.workflows beat)}}
+                <li><a class="wf-card" href="{{url}}"><h3>{{title}}</h3><p>{{description}}</p></a></li>
+              {{/each}}
+            </ul>
+          {{/if}}
+        </div>
+      </section>
+    {{/each}}
+
+    <section class="band cta-band">
+      <div class="container cta-band-inner">
+        <div class="cta-text">
+          <p class="eyebrow eyebrow-inverse">Get started</p>
+          <h2>Try AtlasArc free for 30 days</h2>
+          <p>Installs directly from the JetBrains Marketplace into IntelliJ IDEA. No card required. Cancel any time.</p>
+        </div>
+        <div class="cta-meta">
+          <a class="btn btn-primary" href="{{marketplaceHref "workflows_cta_band"}}" data-analytics-cta="workflows_cta_band" data-analytics-destination="jetbrains_marketplace">Start free trial</a>
+          <span class="cta-note">IntelliJ IDEA 2023.3+ &middot; Java, Kotlin &amp; TypeScript &middot; JetBrains Marketplace</span>
+        </div>
+      </div>
+    </section>
+  {{/inline}}
+{{/marketing}}

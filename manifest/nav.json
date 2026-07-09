@@ -1,0 +1,22 @@
+{
+  "primary": [
+    { "label": "Product", "href": "/product" },
+    { "label": "Features", "href": "/product/features" },
+    { "label": "Docs", "href": "/docs", "dropdown": "reference" },
+    { "label": "Pricing", "href": "/pricing" }
+  ],
+  "reference": [
+    { "label": "Getting started", "href": "/docs/getting-started" },
+    { "label": "Lenses", "href": "/lenses" },
+    { "label": "Workflows", "href": "/workflows" },
+    { "label": "Metrics", "href": "/metrics" }
+  ],
+  "cta": {
+    "label": "Start free trial",
+    "href": "https://plugins.jetbrains.com/plugin/atlasarc"
+  },
+  "utility": {
+    "label": "Release notes",
+    "href": "/release-notes"
+  }
+}

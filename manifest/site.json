@@ -1,0 +1,474 @@
+{
+  "analytics": {
+    "provider": "plausible",
+    "domain": "atlasarc.io"
+  },
+  "marketing": [
+    { "title": "Home", "src": "index.hbs", "url": "/", "out": "index.html" },
+    { "title": "Product", "src": "product.hbs", "url": "/product", "out": "product/index.html" },
+    { "title": "Features", "src": "features.hbs", "url": "/product/features", "out": "product/features/index.html" },
+    { "title": "Compare", "src": "compare.hbs", "url": "/compare", "out": "compare/index.html" },
+    { "title": "Lenses", "src": "lenses.hbs", "url": "/lenses", "out": "lenses/index.html" },
+    { "title": "Workflows", "src": "workflows.hbs", "url": "/workflows", "out": "workflows/index.html" },
+    { "title": "Metrics", "src": "metrics.hbs", "url": "/metrics", "out": "metrics/index.html" },
+    { "title": "Pricing", "src": "pricing.hbs", "url": "/pricing", "out": "pricing/index.html" },
+    { "title": "FAQ", "src": "faq.hbs", "url": "/faq", "out": "faq/index.html" },
+    { "title": "Release notes", "src": "release-notes.hbs", "url": "/release-notes", "out": "release-notes/index.html" },
+    { "title": "Support", "src": "support.hbs", "url": "/support", "out": "support/index.html" },
+    { "title": "About AtlasArc", "src": "about.hbs", "url": "/about", "out": "about/index.html" },
+    { "title": "Privacy", "src": "privacy.hbs", "url": "/privacy", "out": "privacy/index.html" },
+    { "title": "EULA", "src": "eula.hbs", "url": "/eula", "out": "eula/index.html" },
+    { "title": "House style", "src": "styleguide.hbs", "url": "/styleguide", "out": "styleguide/index.html", "internal": true }
+  ],
+  "workflows": [
+    {
+      "title": "Find cyclic dependencies",
+      "slug": "find-cycles",
+      "url": "/workflows/find-cycles",
+      "description": "Detect the dependency loops that block refactoring before they compound. Navigate from the graph directly to the class breaking the cycle.",
+      "beat": "diagnose"
+    },
+    {
+      "title": "Review package boundaries",
+      "slug": "review-package-boundaries",
+      "url": "/workflows/review-package-boundaries",
+      "description": "See which packages cross intended architectural boundaries and how much traffic flows across them. Catch boundary erosion before it spreads.",
+      "beat": "diagnose"
+    },
+    {
+      "title": "Identify risky hotspots",
+      "slug": "identify-hotspots",
+      "url": "/workflows/identify-hotspots",
+      "description": "Plot complexity, coupling, volatility, and architectural distance to find the packages where refactoring pays off most.",
+      "beat": "prioritize"
+    },
+    {
+      "title": "Understand subsystem coupling",
+      "slug": "understand-subsystem-coupling",
+      "url": "/workflows/understand-subsystem-coupling",
+      "description": "Plot subsystems in metric space to see which parts of the architecture are stable, which are under pressure, and where coupling is highest.",
+      "beat": "prioritize"
+    },
+    {
+      "title": "Show me the backbone",
+      "slug": "show-me-the-backbone",
+      "url": "/workflows/show-me-the-backbone",
+      "description": "Find the packages the whole system would collapse without: high fan-in, stable, and at the centre of every dependency chain.",
+      "beat": "prioritize"
+    },
+    {
+      "title": "Find suspicious dependents",
+      "slug": "find-suspicious-dependents",
+      "url": "/workflows/find-suspicious-dependents",
+      "description": "Spot packages that are importing things they have no business touching: wrong layer, wrong module, wrong abstraction level.",
+      "beat": "diagnose"
+    },
+    {
+      "title": "Stable but too concrete",
+      "slug": "stable-but-too-concrete",
+      "url": "/workflows/stable-but-too-concrete",
+      "description": "Find packages that are stable enough that nothing will change them, but concrete enough that they are a maintenance trap.",
+      "beat": "prioritize"
+    },
+    {
+      "title": "Find accidental boundary leaks",
+      "slug": "find-accidental-boundary-leaks",
+      "url": "/workflows/find-accidental-boundary-leaks",
+      "description": "Detect where implementation packages are reachable from outside their intended module boundary.",
+      "beat": "diagnose"
+    },
+    {
+      "title": "Packages in the wrong place",
+      "slug": "packages-in-the-wrong-place",
+      "url": "/workflows/packages-in-the-wrong-place",
+      "description": "Identify packages that don't belong where they are: the wrong layer, the wrong module, or the wrong abstraction level for their actual dependency direction.",
+      "beat": "diagnose"
+    },
+    {
+      "title": "Cycle / tangle reduction",
+      "slug": "cycle-tangle-reduction",
+      "url": "/workflows/cycle-tangle-reduction",
+      "description": "Work through a backlog of dependency cycles methodically over multiple sprints, tracking progress as the problem graph shrinks.",
+      "beat": "diagnose"
+    },
+    {
+      "title": "Zone of Pain",
+      "slug": "zone-of-pain",
+      "url": "/workflows/zone-of-pain",
+      "description": "Investigate packages in the Zone of Pain: maximally stable, maximally concrete, and hard to change without breaking everything that depends on them.",
+      "beat": "prioritize"
+    },
+    {
+      "title": "Zone of Uselessness",
+      "slug": "zone-of-uselessness",
+      "url": "/workflows/zone-of-uselessness",
+      "description": "Find packages that are maximally abstract but have no dependents: over-engineered abstractions that the rest of the system is not using.",
+      "beat": "prioritize"
+    },
+    {
+      "title": "Leaky internals",
+      "slug": "leaky-internals",
+      "url": "/workflows/leaky-internals",
+      "description": "Find packages exposing far more internal surface than callers need, then inspect the local class/file evidence inside the graph.",
+      "beat": "diagnose"
+    },
+    {
+      "title": "Find hermit packages",
+      "slug": "find-hermit-packages",
+      "url": "/workflows/find-hermit-packages",
+      "description": "Spot isolated packages with no dependencies in either direction: dead code, a forgotten refactor, or a self-contained utility ready to promote.",
+      "beat": "diagnose"
+    },
+    {
+      "title": "Hard-to-change packages",
+      "slug": "hard-to-change-packages",
+      "url": "/workflows/hard-to-change-packages",
+      "description": "Find the packages where even small changes cause outsized ripple effects through the codebase.",
+      "beat": "prioritize"
+    },
+    {
+      "title": "Ticking time bombs",
+      "slug": "ticking-time-bombs",
+      "url": "/workflows/ticking-time-bombs",
+      "description": "Catch the unstable packages quietly accumulating callers: cheap to refactor now, expensive once they harden into load-bearing cores.",
+      "beat": "prioritize"
+    },
+    {
+      "title": "Complexity hotspots",
+      "slug": "complexity-hotspots",
+      "url": "/workflows/complexity-hotspots",
+      "description": "Find where reading difficulty concentrates at the class and method level instead of stopping at the package aggregate.",
+      "beat": "expose"
+    },
+    {
+      "title": "Complex code with weak coverage",
+      "slug": "complex-code-weak-coverage",
+      "url": "/workflows/complex-code-weak-coverage",
+      "description": "Combine cyclomatic complexity with branch coverage to find risky packages that need characterization tests before refactoring.",
+      "beat": "expose"
+    },
+    {
+      "title": "Audit a module boundary",
+      "slug": "audit-a-module-boundary",
+      "url": "/workflows/audit-a-module-boundary",
+      "description": "Do a thorough structural review of one module: what flows in, what flows out, package cycles inside, and how cohesive the implementation is.",
+      "beat": "report"
+    },
+    {
+      "title": "Audit individual cycle groups",
+      "slug": "audit-individual-cycle-groups",
+      "url": "/workflows/audit-individual-cycle-groups",
+      "description": "Step through every cycle group in the project one at a time and decide what to do with each.",
+      "beat": "diagnose"
+    },
+    {
+      "title": "Audit a subsystem",
+      "slug": "audit-a-subsystem",
+      "url": "/workflows/audit-a-subsystem",
+      "description": "Get a complete structural health snapshot of one subsystem: size, complexity, visibility, stability, and coverage gaps in one session.",
+      "beat": "report"
+    },
+    {
+      "title": "Manual coverage heatmap review",
+      "slug": "manual-coverage-heatmap-review",
+      "url": "/workflows/manual-coverage-heatmap-review",
+      "description": "Load a JaCoCo coverage report and find which load-bearing packages the test suite is not exercising.",
+      "beat": "expose"
+    },
+    {
+      "title": "Project architecture health review",
+      "slug": "project-architecture-health-review",
+      "url": "/workflows/project-architecture-health-review",
+      "description": "Get a project-level structural summary suitable for a team retrospective or technical debt planning session.",
+      "beat": "report"
+    }
+  ],
+  "metrics": [
+    {
+      "title": "Cyclic dependencies",
+      "slug": "cyclic-dependencies",
+      "url": "/metrics/cyclic-dependencies",
+      "category": "Structural",
+      "description": "Count and classify dependency cycles as architectural, aggregation, or nested-internal. See which packages are entangled and which relationships form the cycle core."
+    },
+    {
+      "title": "Fan-in and fan-out",
+      "slug": "fan-in-fan-out",
+      "url": "/metrics/fan-in-fan-out",
+      "category": "Coupling",
+      "description": "Measure how widely a package is used and how many dependencies it takes on. The primary signal for evaluating structural stability and coupling."
+    },
+    {
+      "title": "Instability and abstractness",
+      "slug": "instability-abstractness",
+      "url": "/metrics/instability-abstractness",
+      "category": "Stability",
+      "description": "Plot packages on the distance-from-main-sequence diagram to find which ones are in the zone of pain: stable, concrete, and hardest to change."
+    },
+    {
+      "title": "Relative visibility",
+      "slug": "relative-visibility",
+      "url": "/metrics/relative-visibility",
+      "category": "Visibility",
+      "description": "Measure how much of a package's surface area is publicly exposed. High visibility in an implementation package is unwanted coupling waiting to happen."
+    },
+    {
+      "title": "Cyclomatic complexity",
+      "slug": "cyclomatic-complexity",
+      "url": "/metrics/cyclomatic-complexity",
+      "category": "Complexity",
+      "description": "Count independent control-flow paths through methods. CC max reveals the worst offender; CC avg shows how widespread the complexity is across the package."
+    },
+    {
+      "title": "Cognitive complexity",
+      "slug": "cognitive-complexity",
+      "url": "/metrics/cognitive-complexity",
+      "category": "Complexity",
+      "description": "Measure how hard code is to read by penalizing nesting and flow-breaking constructs. This is a closer proxy for actual reading difficulty than cyclomatic complexity."
+    },
+    {
+      "title": "Class count",
+      "slug": "class-count",
+      "url": "/metrics/class-count",
+      "category": "Size",
+      "description": "Count the declared types in a package. The primary code-mass metric for understanding structural size before refactoring or extraction work."
+    },
+    {
+      "title": "Lines of code",
+      "slug": "lines-of-code",
+      "url": "/metrics/lines-of-code",
+      "category": "Size",
+      "description": "Count source lines in a package or class. The fastest orientation metric for finding where the weight is in an unfamiliar codebase."
+    },
+    {
+      "title": "Method count",
+      "slug": "method-count",
+      "url": "/metrics/method-count",
+      "category": "Size",
+      "description": "Count methods on a class. High method count is the fastest smell test for a class that has accumulated too many responsibilities over time."
+    },
+    {
+      "title": "Line and branch coverage",
+      "slug": "line-branch-coverage",
+      "url": "/metrics/line-branch-coverage",
+      "category": "Coverage",
+      "description": "Surface JaCoCo line and branch coverage as architecture heatmaps. Find which load-bearing packages the test suite is not actually exercising."
+    },
+    {
+      "title": "Afferent coupling (Ca)",
+      "slug": "afferent-coupling",
+      "url": "/metrics/afferent-coupling",
+      "alias": true,
+      "alias_of_title": "Fan-in and fan-out"
+    },
+    {
+      "title": "Efferent coupling (Ce)",
+      "slug": "efferent-coupling",
+      "url": "/metrics/efferent-coupling",
+      "alias": true,
+      "alias_of_title": "Fan-in and fan-out"
+    },
+    {
+      "title": "Distance from the main sequence (D)",
+      "slug": "distance-from-main-sequence",
+      "url": "/metrics/distance-from-main-sequence",
+      "alias": true,
+      "alias_of_title": "Instability and abstractness"
+    },
+    {
+      "title": "Stable abstractions principle",
+      "slug": "stable-abstractions-principle",
+      "url": "/metrics/stable-abstractions-principle",
+      "alias": true,
+      "alias_of_title": "Instability and abstractness"
+    },
+    {
+      "title": "Zone of pain",
+      "slug": "zone-of-pain",
+      "url": "/metrics/zone-of-pain",
+      "alias": true,
+      "alias_of_title": "Instability and abstractness"
+    },
+    {
+      "title": "Zone of uselessness",
+      "slug": "zone-of-uselessness",
+      "url": "/metrics/zone-of-uselessness",
+      "alias": true,
+      "alias_of_title": "Instability and abstractness"
+    },
+    {
+      "title": "Strongly connected components (SCCs)",
+      "slug": "strongly-connected-components",
+      "url": "/metrics/strongly-connected-components",
+      "alias": true,
+      "alias_of_title": "Cyclic dependencies"
+    },
+    {
+      "title": "Circular dependencies",
+      "slug": "circular-dependencies",
+      "url": "/metrics/circular-dependencies",
+      "alias": true,
+      "alias_of_title": "Cyclic dependencies"
+    },
+    {
+      "title": "Dependency cycles",
+      "slug": "dependency-cycles",
+      "url": "/metrics/dependency-cycles",
+      "alias": true,
+      "alias_of_title": "Cyclic dependencies"
+    }
+  ],
+  "lenses": [
+    {
+      "title": "Topology Graph",
+      "slug": "topology-graph",
+      "url": "/lenses/topology-graph",
+      "category": "Structural",
+      "description": "Every package as a node, every usage dependency as a directed edge, with package-local class/file internals when one package needs closer inspection."
+    },
+    {
+      "title": "Package Matrix",
+      "slug": "package-matrix",
+      "url": "/lenses/package-matrix",
+      "category": "Relational",
+      "description": "A package/source-folder matrix that makes directionality and mutual coupling obvious where the graph hides it."
+    },
+    {
+      "title": "Composition",
+      "slug": "composition",
+      "url": "/lenses/composition",
+      "category": "Mass",
+      "description": "A treemap, sunburst, or circle pack by class count for seeing where the code actually lives."
+    },
+    {
+      "title": "Subsystems",
+      "slug": "subsystems",
+      "url": "/lenses/subsystems",
+      "category": "Comparative",
+      "description": "Architectural areas compared in metric space so you can reason about boundaries at a coarser granularity."
+    },
+    {
+      "title": "Hotspots",
+      "slug": "hotspots",
+      "url": "/lenses/hotspots",
+      "category": "Risk",
+      "description": "A metric-space lens with bubble and Galaxy views for finding packages or classes where complexity, coupling, size, coverage, and stability risk overlap."
+    }
+  ],
+  "languages": [
+    {
+      "title": "Java",
+      "slug": "java",
+      "url": "/languages/java",
+      "category": "Supported language",
+      "description": "Which Java language constructs AtlasArc recognizes as package dependencies, and which source-looking relationships are deliberately out of scope."
+    },
+    {
+      "title": "Kotlin",
+      "slug": "kotlin",
+      "url": "/languages/kotlin",
+      "category": "Supported language",
+      "description": "How AtlasArc reads Kotlin dependencies through compiled JVM output, including top-level declarations, delegation, value classes, and suspend functions."
+    },
+    {
+      "title": "TypeScript",
+      "slug": "typescript",
+      "url": "/languages/typescript",
+      "category": "Supported language",
+      "description": "How to analyze TypeScript projects with a generated dependency graph, optional ESLint/SonarJS SARIF, and manually loaded LCOV coverage."
+    }
+  ],
+  "docs": [
+    { "title": "Documentation", "src": "index.hbs", "slug": "", "url": "/docs", "out": "docs/index.html" },
+    { "title": "Getting started", "src": "getting-started.hbs", "slug": "getting-started", "url": "/docs/getting-started", "out": "docs/getting-started/index.html" },
+    { "title": "The AtlasArc interface", "src": "interface.hbs", "slug": "interface", "url": "/docs/interface", "out": "docs/interface/index.html" },
+    { "title": "Recipe: AtlasArc in your build", "src": "recipe-archunit-build.hbs", "slug": "recipe-archunit-build", "url": "/docs/recipe-archunit-build", "out": "docs/recipe-archunit-build/index.html" },
+    { "title": "Handling large projects", "src": "handling-large-projects.hbs", "slug": "handling-large-projects", "url": "/docs/handling-large-projects", "out": "docs/handling-large-projects/index.html" }
+  ],
+  "workflowBeats": [
+    {
+      "beat": "map",
+      "number": "01",
+      "label": "Map",
+      "anchor": "explore-structure",
+      "title": "Explore the structure",
+      "lenses": ["topology-graph", "package-matrix", "composition"],
+      "intro": "Before diagnosis, read the architecture model: packages as a graph, dependencies as a matrix, and code mass as composition. Set the right root, expand the right packages, and get oriented before deciding what deserves attention.",
+      "journey": true,
+      "alt": true,
+      "ctas": [
+        {
+          "label": "Explore structure features →",
+          "href": "/product/features#explore-structure"
+        },
+        {
+          "label": "Compare lenses →",
+          "href": "/lenses"
+        }
+      ]
+    },
+    {
+      "beat": "diagnose",
+      "number": "02",
+      "label": "Diagnose",
+      "anchor": "diagnose-structural-problems",
+      "title": "Diagnose structural problems",
+      "metrics": ["cyclic-dependencies"],
+      "lenses": ["topology-graph", "package-matrix"],
+      "intro": "Find cycles, boundary leaks, misplaced packages, and internals that have become part of the public architecture by accident.",
+      "gridClass": "wf-grid"
+    },
+    {
+      "beat": "expose",
+      "number": "03",
+      "label": "Expose",
+      "anchor": "expose-risky-code",
+      "title": "Expose complex, undertested code",
+      "metrics": ["cyclomatic-complexity", "line-branch-coverage"],
+      "lenses": ["composition", "hotspots"],
+      "intro": "Combine complexity, coverage, and package structure to find the code that needs characterization tests before refactoring starts.",
+      "alt": true,
+      "gridClass": "wf-grid wf-grid-3"
+    },
+    {
+      "beat": "prioritize",
+      "number": "04",
+      "label": "Prioritize",
+      "anchor": "prioritize-refactoring-work",
+      "title": "Prioritize refactoring work",
+      "lenses": ["hotspots", "subsystems"],
+      "intro": "Decide where effort pays off by looking at coupling pressure, stability, abstraction, complexity, size, and the parts of the architecture other packages depend on.",
+      "gridClass": "wf-grid"
+    },
+    {
+      "beat": "govern",
+      "number": "05",
+      "label": "Govern",
+      "anchor": "govern-exceptions",
+      "title": "Govern intentional exceptions",
+      "intro": "After triage, sanction the dependencies the team accepts and keep new structural debt out of the build. Safe Havens keep local investigations focused; source-controlled annotations turn intentional exceptions into reviewable, enforceable architecture decisions.",
+      "journey": true,
+      "alt": true,
+      "ctas": [
+        {
+          "label": "Govern intentional exceptions →",
+          "href": "/product/features#govern-exceptions"
+        },
+        {
+          "label": "ArchUnit recipe →",
+          "href": "/docs/recipe-archunit-build"
+        }
+      ]
+    },
+    {
+      "beat": "report",
+      "number": "06",
+      "label": "Report",
+      "anchor": "review-and-report",
+      "title": "Review and report",
+      "lenses": ["topology-graph", "package-matrix", "composition", "subsystems", "hotspots"],
+      "intro": "Turn an investigation into an Architecture Audit Report the team can use: project health baselines, subsystem audits, boundary reviews, and focused evidence for the decision at hand.",
+      "gridClass": "wf-grid wf-grid-3"
+    }
+  ]
+}

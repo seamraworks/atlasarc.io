@@ -1,0 +1,17 @@
+// ===========================================================================
+// Shared LESS mixins. Mixins emit no CSS until called, so importing this into
+// multiple bundles (main, docs, styleguide) adds no duplication.
+// ===========================================================================
+
+// Crop / registration ticks at the four corners of a bordered element.
+.crop-ticks(@color: @line-strong) {
+  position: relative;
+  &::before, &::after {
+    content: "";
+    position: absolute;
+    width: 9px; height: 9px;
+    pointer-events: none;
+  }
+  &::before { top: -1px; left: -1px; border-top: 1.5px solid @color; border-left: 1.5px solid @color; }
+  &::after  { bottom: -1px; right: -1px; border-bottom: 1.5px solid @color; border-right: 1.5px solid @color; }
+}

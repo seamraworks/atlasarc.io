@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.idea/
+copy-style-openai-findings.json
+*.log
+.DS_Store
