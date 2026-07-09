@@ -3,10 +3,10 @@
 Static marketing + docs site for AtlasArc. Built with Gulp + Handlebars + LESS +
 TypeScript. No framework, no bundler, no server at runtime.
 
-This public repository contains publishable website source only. In the Seamra
-Works workspace, private website architecture notes, content plans, and launch
-planning live in the parent governance repo under `../docs/website/`. Standalone
-styleguide experiments live under `../design/styleguide-variants/`.
+This public repository contains publishable website source. When this checkout
+sits inside a larger Seamra Works workspace, supporting planning material may
+live outside this repository; review the workspace-level notes before broad
+content or structure changes.
 
 ## Commands
 
@@ -16,8 +16,6 @@ npm run build    # clean + compile everything into dist/
 npm run dev      # build, then watch + serve at http://localhost:3000
 npm run clean    # remove dist/
 npm run check    # tsc type-check only (no emit)
-npm run copy-style        # deterministic website copy style audit
-npm run copy-style:openai # manual OpenAI-only copy review
 ```
 
 ### Analytics builds
@@ -58,54 +56,11 @@ loads only the chunks needed by the current route and emits `rel="prefetch"
 as="style"` hints for the other public CSS files, so small next-page styles can
 warm in the background.
 
-### Copy style audit
+### Publication review
 
-`npm run build` runs `copyStyle` before compiling the site. The deterministic pass
-uses `copy-style-rules.json` to flag copy that needs review: possible AI-style tells,
-generic SaaS phrasing, abstract benefit words, and em-dash density in `manifest/`
-and website source copy. These are review signals, not automatic violations. It writes
-the current finding set to `copy-style-findings.json`.
-
-During the Gulp build, findings are not printed line-by-line. The JSON report is
-rendered into a separate table at `dist/_reports/copy-style/index.html`, with the
-same data copied to `dist/_reports/copy-style/report.json` for follow-up tooling.
-
-That JSON is kept in sync with the content and should be committed. On every build, findings that no longer
-occur in source copy are purged from the file. Current findings keep their previous
-triage only when it is exactly `"ACCEPTED"`; all new or unaccepted findings are written
-as `"UNKNOWN"` and fail the build. To accept a finding, set its `triage` field to
-`"ACCEPTED"` in `copy-style-findings.json`. To remove a finding, fix the copy; the next
-build removes that JSON row automatically.
-
-Do not fix a failure by mechanically replacing a flagged word with a synonym, and do
-not rewrite copy solely to remove a review word. A flagged word is not a defect by
-itself. Accept the finding when the sentence is concrete, accurate, product-specific,
-literal, and intentional. Words such as `quality` are normal in code-metric contexts;
-`comprehensive` is acceptable when it literally describes breadth, such as a broad
-library or documentation set.
-If it is weak, fix the substance: name the AtlasArc feature, metric, workflow, or
-consequence that makes the sentence true, or delete the sentence if it adds no
-information. Em-dash findings are punctuation/style findings; changing punctuation
-without fixing generic contrast-rhythm is not enough.
-
-The OpenAI reviewer should follow the private voice contract in the parent
-governance repo when that repo is available. In a standalone public clone, use
-`copy-style-rules.json` and the existing source copy as the local fallback.
-
-The OpenAI reviewer is a separate manual track. It does not run during
-`npm run build`, it does not share `copy-style-findings.json`, and it does not
-sync or purge findings against earlier runs. Each invocation writes a standalone
-snapshot to `copy-style-openai-findings.json` and renders
-`dist/_reports/copy-style-openai/index.html`.
-
-Run it explicitly with:
-
-```bash
-OPENAI_API_KEY=... npm run copy-style:openai
-```
-
-By default it uses the low-cost model configured in `copy-style-rules.json`. Override
-it with `COPY_STYLE_OPENAI_MODEL`.
+The website build compiles source and validates manifest, analytics, and style
+hints. When this checkout sits inside a larger workspace, run any
+workspace-level publication checks before committing copy changes.
 
 ### Adding a metric or workflow page
 

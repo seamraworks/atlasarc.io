@@ -3,8 +3,8 @@
  *
  * Static site renderer for AtlasArc.io.
  *
- * The private architecture/content plan lives in the parent governance repo at
- * ../docs/website/ when this repo is checked out inside the Seamra Works workspace.
+ * Workspace-level architecture/content notes may exist outside this repository
+ * when checked out inside a larger Seamra Works workspace.
  *  - Handlebars (used directly, NOT gulp-handlebars) for the decorator/layout pattern
  *  - Front-matter Markdown -> structured workflow/metric pages
  *  - manifest/site.json + manifest/nav.json are the single source of truth
@@ -437,15 +437,6 @@ function scripts(cb) {
   cb();
 }
 
-function copyStyle(cb) {
-  const result = spawnSync(process.execPath, ['scripts/copy-style-audit.mjs', '--quiet'], {
-    stdio: 'inherit',
-    cwd: __dirname,
-  });
-  if (result.status !== 0) return cb(new Error('copy style audit failed.'));
-  cb();
-}
-
 function assets() {
   return gulp
     .src(path.join(SRC, 'assets/**/*'), { encoding: false, allowEmpty: true })
@@ -713,7 +704,7 @@ function serve(cb) {
 function watch(cb) {
   gulp.watch(
     [path.join(SRC, '**/*.hbs'), path.join(SRC, 'content/**/*.md'), path.join(MANIFEST, '**/*.json')],
-    gulp.series(copyStyle, html, sitemap, checkAnalytics, checkStyleHints),
+    gulp.series(html, sitemap, checkAnalytics, checkStyleHints),
   );
   gulp.watch(path.join(SRC, 'styles/**/*.less'), styles);
   gulp.watch(path.join(SRC, 'scripts/**/*.ts'), scripts);
@@ -728,7 +719,6 @@ function watch(cb) {
 
 const build = gulp.series(
   clean,
-  copyStyle,
   gulp.parallel(html, styles, scripts, assets, staticFiles),
   sitemap,
   searchIndex,
@@ -739,5 +729,5 @@ const build = gulp.series(
 
 const dev = gulp.series(build, gulp.parallel(serve, watch));
 
-export { clean, html, styles, scripts, copyStyle, assets, staticFiles, sitemap, searchIndex, checkManifest, checkAnalytics, checkStyleHints, serve, watch, build, dev };
+export { clean, html, styles, scripts, assets, staticFiles, sitemap, searchIndex, checkManifest, checkAnalytics, checkStyleHints, serve, watch, build, dev };
 export default build;

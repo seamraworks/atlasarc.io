@@ -1,10 +1,10 @@
-# AtlasArc Website Claude Instructions
+# AtlasArc Website Claude Notes
 
-Start in the parent governance repo when available: read `../AGENTS.md`,
-`../repos.yml`, and relevant files under `../docs/` before inspecting this
-website repo. Then return to `AGENTS.md` and `README.md` here for local build and
-publication-boundary guidance.
+When this checkout sits inside a larger Seamra Works workspace, review the
+workspace-level notes before editing.
 
-This public repo contains publishable website source only. Keep private content
-plans in `../docs/website/` and standalone styleguide variants in
-`../design/styleguide-variants/`.
+In a standalone clone, use `AGENTS.md` and `README.md` for local orientation.
+For copy changes in a larger workspace, run the workspace-level publication
+checks before committing.
+Keep changes focused on website source, manifests, styles, scripts, and build
+assets unless an explicit request expands the scope.

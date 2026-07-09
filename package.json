@@ -8,9 +8,7 @@
     "build": "gulp build",
     "dev": "gulp dev",
     "clean": "gulp clean",
-    "check": "tsc -p tsconfig.json --noEmit",
-    "copy-style": "node scripts/copy-style-audit.mjs",
-    "copy-style:openai": "node scripts/copy-style-audit.mjs --openai"
+    "check": "tsc -p tsconfig.json --noEmit"
   },
   "engines": {
     "node": ">=20"
