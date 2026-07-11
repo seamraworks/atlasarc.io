@@ -52,18 +52,28 @@ function configureAnalytics(site) {
   const raw = site.analytics || {};
   const mode = String(process.env.ATLASARC_ANALYTICS || '').toLowerCase();
   const explicitDomain = process.env.ATLASARC_ANALYTICS_DOMAIN || process.env.PLAUSIBLE_DOMAIN || '';
+  const explicitScriptId = process.env.ATLASARC_ANALYTICS_SCRIPT_ID || process.env.PLAUSIBLE_SCRIPT_ID || '';
 
   if (mode === '0' || mode === 'false') {
     delete site.analytics;
     return;
   }
 
-  const enabled = mode === '1' || explicitDomain !== '';
+  const enabled = mode === '1' || explicitDomain !== '' || explicitScriptId !== '';
   const provider = process.env.ATLASARC_ANALYTICS_PROVIDER || raw.provider;
   const domain = explicitDomain || raw.domain;
+  const scriptId = explicitScriptId || raw.scriptId;
 
   if (enabled && (!provider || !domain)) {
     throw new Error('[analytics] ATLASARC_ANALYTICS is enabled, but provider/domain is incomplete.');
+  }
+
+  if (enabled && provider === 'plausible' && !scriptId) {
+    throw new Error('[analytics] Plausible analytics is enabled, but scriptId is incomplete.');
+  }
+
+  if (scriptId && !/^[A-Za-z0-9_-]+$/.test(scriptId)) {
+    throw new Error('[analytics] Plausible scriptId may only contain letters, numbers, underscores, or dashes.');
   }
 
   if (!enabled || !provider || !domain) {
@@ -71,7 +81,11 @@ function configureAnalytics(site) {
     return;
   }
 
-  site.analytics = { provider, domain };
+  site.analytics = { provider, domain, scriptId };
+}
+
+function plausibleScriptSrc(analytics) {
+  return `https://plausible.io/js/pa-${analytics.scriptId}.js`;
 }
 
 function* walk(dir) {
@@ -543,17 +557,23 @@ function expectedPublicHtmlPaths(site) {
 
 function assertAnalyticsScriptState(site, publicPaths, failures) {
   const analyticsEnabled = !!site.analytics?.domain;
+  const expectedPlausibleSrc = site.analytics?.provider === 'plausible' ? plausibleScriptSrc(site.analytics) : '';
+  const plausibleScriptRe = /https:\/\/plausible\.io\/js\/(?:script|pa-[A-Za-z0-9_-]+)\.js/;
+
   for (const file of walk(DIST)) {
     if (!file.endsWith('.html')) continue;
     const rel = path.relative(DIST, file).replace(/\\/g, '/');
     if (rel.startsWith('pagefind/') || rel.startsWith('_reports/')) continue;
 
     const html = fs.readFileSync(file, 'utf8');
-    const hasPlausible = html.includes('https://plausible.io/js/script.js');
+    const hasPlausible = plausibleScriptRe.test(html);
+    const hasExpectedPlausible = expectedPlausibleSrc && html.includes(expectedPlausibleSrc);
     const isPublic = publicPaths.has(rel);
 
-    if (isPublic && analyticsEnabled && !hasPlausible) {
+    if (isPublic && analyticsEnabled && !hasExpectedPlausible) {
       failures.push(`missing Plausible script on public page: ${rel}`);
+    } else if (isPublic && analyticsEnabled && !html.includes('plausible.init()')) {
+      failures.push(`missing Plausible init on public page: ${rel}`);
     } else if (hasPlausible && (!analyticsEnabled || !isPublic)) {
       failures.push(`unexpected Plausible script on ${isPublic ? 'quiet-build public page' : 'non-public page'}: ${rel}`);
     }

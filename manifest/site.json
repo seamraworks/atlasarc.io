@@ -1,7 +1,8 @@
 {
   "analytics": {
     "provider": "plausible",
-    "domain": "atlasarc.io"
+    "domain": "atlasarc.io",
+    "scriptId": "t8CPz3UjaKIrKBlIRF0If"
   },
   "marketing": [
     { "title": "Home", "src": "index.hbs", "url": "/", "out": "index.html" },

@@ -28,12 +28,15 @@ Production build options:
 ```bash
 ATLASARC_ANALYTICS=1 npm run build
 ATLASARC_ANALYTICS_DOMAIN=atlasarc.io npm run build
+ATLASARC_ANALYTICS_SCRIPT_ID=t8CPz3UjaKIrKBlIRF0If npm run build
 ATLASARC_ANALYTICS=0 npm run build # force analytics off
 ```
 
-`ATLASARC_ANALYTICS=1` uses the provider/domain declared in
-`manifest/site.json`. `ATLASARC_ANALYTICS_DOMAIN` or `PLAUSIBLE_DOMAIN` can
-override the domain for a deployment target. The build fails if a public
+`ATLASARC_ANALYTICS=1` uses the provider, domain, and Plausible script id
+declared in `manifest/site.json`. `ATLASARC_ANALYTICS_DOMAIN` or
+`PLAUSIBLE_DOMAIN` can override the domain for a deployment target.
+`ATLASARC_ANALYTICS_SCRIPT_ID` or `PLAUSIBLE_SCRIPT_ID` can override the public
+Plausible script id. The build fails if a public
 Marketplace link bypasses UTM tagging or the `data-analytics-*` CTA attributes.
 
 ## How it fits together
