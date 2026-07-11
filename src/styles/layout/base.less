@@ -40,6 +40,30 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+.coming-soon-banner {
+  position: fixed;
+  top: 42vh;
+  left: -20vw;
+  z-index: 1000;
+  width: 140vw;
+  padding: 0.25em 0;
+  transform: rotate(-14deg);
+  transform-origin: center;
+  pointer-events: none;
+  user-select: none;
+  border-top: 2px solid fade(@arc, 18%);
+  border-bottom: 2px solid fade(@arc, 18%);
+  background: fade(@canvas, 72%);
+  color: fade(@arc, 22%);
+  font-family: @font-display;
+  font-size: clamp(3.5rem, 13vw, 9rem);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  line-height: 0.9;
+  text-align: center;
+  text-transform: uppercase;
+}
+
 // --- Typography ------------------------------------------------------------
 // Structural grotesque: weight contrast (300 lede ↔ 900 display) carries the
 // hierarchy, tight tracking on display sizes.
