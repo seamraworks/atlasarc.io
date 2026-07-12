@@ -1,0 +1,39 @@
+{{#> docs}}
+  {{#*inline "html-head-block"}}
+    <title>Heatmap Overlay | AtlasArc Documentation</title>
+    <meta name="description" content="How AtlasArc heatmap overlays colour the graph, matrix, and composition lenses by metrics such as instability, fan-in, complexity, coverage, size, and visibility.">
+    <meta property="og:title" content="AtlasArc heatmap overlay">
+    <meta property="og:description" content="Metric colour on top of the structure you are already looking at, and how to tell it apart from the colour Subsystems and Hotspots use natively.">
+  {{/inline}}
+  {{#*inline "body-block"}}
+    <h1>Heatmap overlay</h1>
+    <p>The heatmap overlay colours the current structure by a metric you choose. It leaves the structure itself alone: same packages, same source folders, same classes, same dependencies. What you gain is the ability to read shape and risk in one glance, instead of holding one of them in your head while you stare at the other.</p>
+    <p>Reach for it once the structural question is already settled and the follow-up arrives: "fine, but which of these is actually a problem?" Unstable, too concrete, heavily depended on, complex, large, over-exposed, under-covered. The overlay is how you work out which boxes on screen have earned your afternoon.</p>
+    <div class="placeholder-box">Screenshot: heatmap overlay on the Topology Graph with the metric banner visible</div>
+
+    <h2 id="supported-lenses">Supported lenses</h2>
+    <p>The overlay turns up wherever metric colour can sit on top of existing geometry: Topology Graph, Package Matrix, and Composition. In those three, the banner tells you both halves of the read at once, naming the active lens state and the active heatmap metric.</p>
+    <p>Subsystems and Hotspots are the exception. They already use colour natively, as part of their curated metric-space views, so there's no global overlay to add on top. Even when the metric looks like the one you picked, that colour is coming from somewhere else. It's a common enough mix-up that it gets <a href="#native-color-vs-overlay">its own section below</a>.</p>
+    <div class="placeholder-box">Screenshot: Heatmap menu open on the Topology Graph toolbar</div>
+
+    <h2 id="metric-selection">Metric selection</h2>
+    <p>The metric menu will colour by stability, abstraction, distance from the main sequence, relative visibility, fan-in, fan-out, size, complexity, and coverage, wherever the data exists. Java and Kotlin projects get bytecode-backed package metrics. TypeScript artifact analysis works from source-folder and source-file labels, so don't be thrown when the banner says source folder count where you were expecting class count.</p>
+    <p>One habit worth forming: pair the overlay with a structural narrowing. A root scope, a pinned subject, Cycles Only, a filtered graph, any of them. A whole-project heatmap is good for orientation. A scoped heatmap is the one that turns into a ticket.</p>
+    <div class="placeholder-box">Screenshot: metric menu with instability selected on the Package Matrix</div>
+
+    <h2 id="normalization-and-thresholds">Normalization and thresholds</h2>
+    <p>Colour is calibrated against metric thresholds, which is what stops a single outlier from painting the whole project red and making every codebase look equally dangerous. Green means low pressure for the selected metric. Red means high pressure. Coverage inverts that reading, because with coverage it's the weak numbers that should be pulling your eye.</p>
+    <p>When a metric has no natural ceiling, set the full-red point yourself under Metric Thresholds. It's worth the minute it takes. It's what keeps repeated investigations comparable, so you can tell a package that genuinely improved from one that merely looks better because the visible subset changed underneath it.</p>
+    <div class="placeholder-box">Screenshot: Metric Thresholds dialog setting the full-red point for an unbounded metric</div>
+
+    <h2 id="composition-heatmaps">Composition heatmaps</h2>
+    <p>Composition is a containment lens. Treemap, Sunburst, and Circle Pack draw package hierarchy and mass, never dependencies. Switch a heatmap on and that hierarchy picks up the colour of the selected metric, which is how you catch the overlap that tends to matter: the places where code mass and metric pressure are sitting on top of each other.</p>
+    <p>For package-level Composition, the colour describes the package or subtree being drawn. For class-level Composition, the metrics on offer follow whatever class and source-file evidence AtlasArc holds for the current analysis source.</p>
+    <div class="placeholder-box">Screenshot: Treemap with a complexity heatmap, showing code mass and metric pressure together</div>
+
+    <h2 id="native-color-vs-overlay">Native colour versus overlay colour</h2>
+    <p>Subsystems and Hotspots bake their selected view straight into X, Y, size, and colour. Subsystems Boundary Risk uses instability colour as part of the preset. Hotspots Galaxy views can use colour as one metric dimension among several. None of that is the global Heatmap overlay, however much it looks the part.</p>
+    <p>The banner settles it. If it says Heatmap, you're reading the overlay. If it names a Subsystems preset or a Hotspots view and stays quiet about Heatmap, the colour belongs to that lens's selected view.</p>
+    <div class="placeholder-box">Screenshot: Subsystems Boundary Risk banner alongside a Heatmap banner, showing the difference</div>
+  {{/inline}}
+{{/docs}}

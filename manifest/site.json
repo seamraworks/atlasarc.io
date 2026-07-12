@@ -23,10 +23,17 @@
   ],
   "workflows": [
     {
-      "title": "Find cyclic dependencies",
+      "title": "Find cyclic package dependencies",
       "slug": "find-cycles",
       "url": "/workflows/find-cycles",
       "description": "Detect the dependency loops that block refactoring before they compound. Navigate from the graph directly to the class breaking the cycle.",
+      "beat": "diagnose"
+    },
+    {
+      "title": "Inspect cycle edges in the matrix",
+      "slug": "inspect-cycle-edges-in-the-matrix",
+      "url": "/workflows/inspect-cycle-edges-in-the-matrix",
+      "description": "Use the Package Matrix to read the directional edges that keep a cycle group alive after the graph has found the loop.",
       "beat": "diagnose"
     },
     {
@@ -383,6 +390,8 @@
     { "title": "Documentation", "src": "index.hbs", "slug": "", "url": "/docs", "out": "docs/index.html" },
     { "title": "Getting started", "src": "getting-started.hbs", "slug": "getting-started", "url": "/docs/getting-started", "out": "docs/getting-started/index.html" },
     { "title": "The AtlasArc interface", "src": "interface.hbs", "slug": "interface", "url": "/docs/interface", "out": "docs/interface/index.html" },
+    { "title": "Structural view modes", "src": "structural-view-modes.hbs", "slug": "structural-view-modes", "url": "/docs/structural-view-modes", "out": "docs/structural-view-modes/index.html" },
+    { "title": "Heatmap overlay", "src": "heatmap-overlay.hbs", "slug": "heatmap-overlay", "url": "/docs/heatmap-overlay", "out": "docs/heatmap-overlay/index.html" },
     { "title": "Recipe: AtlasArc in your build", "src": "recipe-archunit-build.hbs", "slug": "recipe-archunit-build", "url": "/docs/recipe-archunit-build", "out": "docs/recipe-archunit-build/index.html" },
     { "title": "Handling large projects", "src": "handling-large-projects.hbs", "slug": "handling-large-projects", "url": "/docs/handling-large-projects", "out": "docs/handling-large-projects/index.html" }
   ],

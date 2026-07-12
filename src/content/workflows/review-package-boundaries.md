@@ -10,7 +10,7 @@ why_it_matters: |
 lens: Matrix
 steps:
   - heading: Open the boundary in the Package Matrix.
-    body: Right-click the package or subsystem you want to audit and choose Pin subject · Boundary matrix. AtlasArc opens the Matrix around that subject, with its boundary neighbours visible instead of hiding the outside world behind an ordinary root scope.
+    body: Right-click the package or subsystem you want to audit and choose Pin subject · Matrix. AtlasArc opens the Matrix around that subject, with its boundary neighbours visible instead of hiding the outside world behind an ordinary root scope.
   - heading: Read the subject row and column.
     body: The subject row shows outgoing traffic from the package or subsystem; the subject column shows incoming traffic from neighbours. Dense cells crossing your intended layering boundaries are the first leaks to investigate.
   - heading: Check the neighbour context.

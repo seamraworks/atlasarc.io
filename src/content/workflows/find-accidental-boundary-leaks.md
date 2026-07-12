@@ -10,7 +10,7 @@ why_it_matters: |
 lens: the Package Matrix
 steps:
   - heading: Open the module boundary.
-    body: Right-click the module root package and choose Pin subject · Boundary matrix. This keeps the module as the subject while preserving the outside callers and dependencies you need for a leak check.
+    body: Right-click the module root package and choose Pin subject · Matrix. This keeps the module as the subject while preserving the outside callers and dependencies you need for a leak check.
   - heading: Read the Package Matrix around the subject.
     body: The subject subtree appears with its boundary neighbours as rows and columns. External callers show up as neighbour rows with cells pointing into internal package columns.
   - heading: Look for internal packages with external callers.

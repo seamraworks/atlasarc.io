@@ -30,12 +30,12 @@
       <li><strong>Focus / Prefix</strong> restricts the model to one package subtree. Use it when the question is "what is happening inside <code>com.acme.billing</code>?" rather than "what is happening everywhere?"</li>
       <li><strong>Set as Root</strong> is available from Graph, Matrix, Subsystems, Hotspots, and Composition, so a scope chosen in one lens carries into the next one.</li>
       <li><strong>Show in AtlasArc</strong> from the IntelliJ Project tree starts from the package you already selected in the IDE. You do not have to copy a package name into a filter box.</li>
-      <li><strong>Neighbourhood</strong> shows a package or subsystem with its direct dependencies and dependents. Use it for local blast radius: "what touches this, and what does it touch?"</li>
-      <li><strong>Boundary</strong> shows the traffic crossing a subsystem perimeter. Use it when the question is whether a module boundary is holding.</li>
+      <li><strong>Pinned subject in Graph</strong> shows a package or subsystem with its perimeter neighbours. Use Neighbour links for local blast radius: "what touches this, and what does it touch?"</li>
+      <li><strong>Boundary reads</strong> emphasize traffic crossing a subsystem perimeter. Use Direction, and Mute cycles when needed, when the question is whether a module boundary is holding.</li>
       <li><strong>Cycle view</strong> shows only the packages in a selected cycle group, with enough ancestors expanded to keep the shape readable.</li>
       <li><strong>Breadcrumbs</strong> in focus-based lenses let you drill into a subsystem and climb back out without rebuilding the package path in your head.</li>
     </ul>
-    <p>Use root scope for a broad area, Neighbourhood for a local dependency perimeter, Boundary for subsystem ingress and egress, and Cycle view when the subject is already a strongly connected group. Neighbourhood and Boundary are preset ways to read a pinned subject, not separate models. These are different reductions, not synonyms.</p>
+    <p>Use root scope for a broad area, pinned subject for a local dependency perimeter or boundary read, and Cycle view when the subject is already a strongly connected group. Neighbourhood and Boundary are explanatory readings of a pinned subject, not separate product modes. These are different reductions, not synonyms.</p>
     <div class="placeholder-box">Screenshot: Focus / Prefix scoping the model to one subsystem</div>
 
     <h2>Roll up detail without losing signal</h2>

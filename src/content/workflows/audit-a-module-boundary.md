@@ -18,7 +18,7 @@ steps:
   - heading: Review cohesion in the sidebar.
     body: The cohesion metric in the sidebar measures how connected the internal packages are relative to boundary packages. High cohesion means the module's packages depend on each other more than they depend on external packages, which is what you want. Declining cohesion across quarters means the module is growing outward dependencies faster than internal ones.
   - heading: Check for boundary leaks.
-    body: Open the module with Pin subject · Boundary matrix. The Matrix keeps the module as the subject while showing outside boundary neighbours, so you can spot internal implementation packages with external callers. Document any leaks found; these are boundary erosion events that should appear in the health report.
+    body: Open the module with Pin subject · Matrix. The Matrix keeps the module as the subject while showing outside boundary neighbours, so you can spot internal implementation packages with external callers. Document any leaks found; these are boundary erosion events that should appear in the health report.
 interpretation: |
   A healthy module has boundary fan-in greater than fan-out (it provides more than it consumes), zero or declining internal cycles, and cohesion above 0.5. Cohesion below 0.5 means more than half of the internal dependencies cross subpackage boundaries, which usually means packages were grouped by accident rather than by design. A module with growing fan-out and declining cohesion is expanding outward faster than it is consolidating internally. That is the early signal of a module boundary that is starting to blur.
 export_note: |
