@@ -9,7 +9,9 @@
   <p class="docs-nav-title">Documentation</p>
   <ul>
     {{#each site.docs}}
-      <li><a href="{{url}}" class="{{activeClass url @root.currentUrl}}">{{title}}</a></li>
+      {{#unless internal}}
+        <li><a href="{{url}}" class="{{activeClass url @root.currentUrl}}">{{title}}</a></li>
+      {{/unless}}
     {{/each}}
   </ul>
 
