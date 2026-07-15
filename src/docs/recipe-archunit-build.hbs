@@ -1,0 +1,83 @@
+{{#> docs}}
+  {{#*inline "html-head-block"}}
+    <title>Recipe: Honour AtlasArc Cycle Governance in ArchUnit and JUnit | AtlasArc</title>
+    <link rel="canonical" href="https://atlasarc.io/docs/recipe-archunit-build">
+    <meta name="description" content="Use AtlasArc's ArchUnit rule in JUnit so cycles accepted in .atlasarc/governance/cycles.json pass CI while new ungoverned cycles still fail.">
+    <meta property="og:title" content="Recipe: AtlasArc with ArchUnit">
+    <meta property="og:description" content="One repository-governance decision, honoured by the AtlasArc IDE and an executable ArchUnit build rule.">
+    <meta property="og:url" content="https://atlasarc.io/docs/recipe-archunit-build">
+  {{/inline}}
+  {{#*inline "body-block"}}
+    <h1>Recipe: AtlasArc with ArchUnit</h1>
+    <p>This recipe keeps the build promise behind AtlasArc cycle governance: a cycle accepted in the IDE does not break the matching ArchUnit/JUnit rule, while a new ungoverned cycle still fails CI.</p>
+    <p>The decision comes from <code>.atlasarc/governance/cycles.json</code>. The rule does not look for annotations and does not maintain a second acceptance list. It gives ArchUnit's imported Java/Kotlin classes to the same AtlasArc evidence mapper, governance matcher, and problem-cycle classifier used by the IDE and standalone evaluator.</p>
+
+    <h2>How it fits together</h2>
+    <ul>
+      <li><strong>AtlasArc in the IDE</strong>: review a cycle-forming dependency, record it as intentional or managed debt, and commit the governance file.</li>
+      <li><strong>ArchUnit in JUnit</strong>: import the compiled project classes as usual and run the AtlasArc governance rule over them.</li>
+      <li><strong>The result</strong>: governed dependencies can break the problem cycle without disappearing from the structural graph; uncovered cycle problems remain ArchUnit violations.</li>
+    </ul>
+
+    <h2>1. Add the test dependencies</h2>
+    <p>A local AtlasArc build places <code>atlasarc-archunit-&lt;version&gt;-standalone.jar</code> beside the evaluator under <code>AtlasArc/tools/governance-evaluator/</code>. Copy the matching adapter JAR into a CI-managed <code>tools/</code> directory in your project, then add it with ArchUnit's JUnit 5 integration:</p>
+    <pre><code>// build.gradle.kts
+dependencies {
+    testImplementation("com.tngtech.archunit:archunit-junit5:1.4.2")
+    testImplementation(files("tools/atlasarc-archunit-&lt;version&gt;-standalone.jar"))
+}</code></pre>
+    <p>Keep the adapter from the same AtlasArc build that authored the governance file. The adapter contains AtlasArc's framework-free matching runtime, but ArchUnit itself remains your normal test dependency.</p>
+
+    <h2>2. Add the governed-cycle rule</h2>
+    <pre><code>import com.tngtech.archunit.junit.AnalyzeClasses;
+import com.tngtech.archunit.junit.ArchTest;
+import com.tngtech.archunit.lang.ArchRule;
+import io.atlasarc.archunit.AtlasArcGovernanceRules;
+
+import java.nio.file.Path;
+
+@AnalyzeClasses(packages = "com.myapp")
+class ArchitectureTest {
+
+    @ArchTest
+    static final ArchRule cyclesAcceptedByAtlasArc =
+        AtlasArcGovernanceRules.governedCycles()
+            .fromRepository(Path.of("."))
+            .forAnalysisSource("jvm:whole-project")
+            .withSourceRoot(Path.of("src/main/java"))
+            .build();
+}</code></pre>
+    <p>For Kotlin or mixed JVM code, add each real source root:</p>
+    <pre><code>.withSourceRoot(Path.of("src/main/java"))
+.withSourceRoot(Path.of("src/main/kotlin"))</code></pre>
+    <p>The analysis-source ID must match the records written by AtlasArc. A whole-project scan uses <code>jvm:whole-project</code>; a module-scoped rule uses its stable <code>jvm:module:&lt;name&gt;</code> ID and the corresponding source roots.</p>
+
+    <h2>3. Run it as an ordinary test</h2>
+    <p>Run <code>./gradlew test</code>, <code>mvn test</code>, or the same test task in CI. The rule produces an ArchUnit architecture violation when:</p>
+    <ul>
+      <li>a problem cycle remains after current governance is applied;</li>
+      <li>a governance record is invalid, ambiguous, unsupported, or no longer matches current evidence;</li>
+      <li>the repository or configured source roots cannot be read.</li>
+    </ul>
+    <p>Intentional and debt records both honour the reviewed dependency decision. Debt remains debt in AtlasArc's review and reporting surfaces; the ArchUnit rule's job is to enforce whether an ungoverned problem cycle remains.</p>
+
+    <h2>What the executable proof checks</h2>
+    <p>AtlasArc's own build tests this recipe against compiled fixture classes. The proof is bracketed on both sides:</p>
+    <ol>
+      <li>a plain ArchUnit slice rule confirms that the fixture really contains a package cycle;</li>
+      <li>the AtlasArc rule passes when <code>cycles.json</code> governs the cycle-forming dependency;</li>
+      <li>the same rule still fails when a separate ungoverned cycle is added.</li>
+    </ol>
+    <p>That third check prevents a broad exclusion or unreadable governance file from accidentally making the build green.</p>
+
+    <h2>Limits</h2>
+    <ul>
+      <li>This recipe is for Java and Kotlin bytecode because it runs inside ArchUnit/JUnit. Use the <a href="/docs/govern-cycle-exceptions#ci">standalone evaluator</a> for TypeScript and for a language-neutral pipeline command.</li>
+      <li>Local Safe Havens never affect CI. Only committed repository governance is honoured.</li>
+      <li>The rule consumes the classes selected by <code>@AnalyzeClasses</code>. Keep that scope aligned with the source roots and analysis-source ID used when the governance records were authored.</li>
+    </ul>
+
+    <h2>Related</h2>
+    <p>See <a href="/docs/govern-cycle-exceptions">Govern cycle exceptions</a> for the IDE workflow, governance scopes, stale-record repair, and standalone evaluator configuration.</p>
+  {{/inline}}
+{{/docs}}

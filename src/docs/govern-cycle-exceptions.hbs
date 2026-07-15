@@ -99,6 +99,7 @@
   evaluate --config .atlasarc/evaluator.json --format human</code></pre>
     <p>Use <code>--format json</code> for machine processing or <code>--format sarif --output build/atlasarc-governance.sarif</code> for code-scanning ingestion. Exit code <code>0</code> means valid governance with no remaining problem cycle; <code>1</code> means valid evaluation with ungoverned cycle problems; <code>2</code> means configuration, acquisition, freshness, schema, or governance validation failed; <code>3</code> means an unexpected evaluator error.</p>
     <p>Multiple configured sources are evaluated independently. AtlasArc does not invent a merged Java/Kotlin/TypeScript graph, and CI does not consume local Safe Havens.</p>
+    <p>Java/Kotlin projects that already run architecture tests can use the <a href="/docs/recipe-archunit-build">AtlasArc ArchUnit/JUnit recipe</a>. Its <code>ArchRule</code> reads the same governance file and delegates to the same evaluation core, so accepted cycles pass while new ungoverned cycles remain test failures.</p>
 
     <h2>Where to go next</h2>
     <p>Start cycle triage with <a href="/workflows/find-cycles">Find cyclic dependencies</a>, see the public product summary under <a href="/product/features#govern-exceptions">Govern intentional exceptions</a>, or review <a href="/docs/handling-large-projects">Handling large projects</a> for ways to reduce a crowded model before recording decisions.</p>

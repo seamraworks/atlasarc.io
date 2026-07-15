@@ -133,7 +133,7 @@
                 <td>Active Java test library.</td>
                 <td>Codifying architecture rules and failing CI builds on violations.</td>
                 <td>No exploratory UI, graph, matrix, composition lens, or local visual investigation loop.</td>
-                <td>Companion, not competitor: use AtlasArc's evaluator for AtlasArc cycle-governance parity, and ArchUnit when Java teams also want custom JVM architecture rules.</td>
+                <td>Companion, not competitor: use AtlasArc's sidecar-backed ArchUnit rule when JVM architecture tests should honour the same accepted cycles as the IDE; use the standalone evaluator for TypeScript and language-neutral CI.</td>
               </tr>
               <tr>
                 <td><strong>Sonargraph / ArcTree</strong></td>
@@ -276,8 +276,9 @@
           </article>
           <article class="compare-fit">
             <h3>Evaluate AtlasArc governance in CI</h3>
-            <p>The AtlasArc evaluator reads the same committed governance file and applies the same evidence matching and cycle classification as the IDE for Java, Kotlin, and TypeScript. ArchUnit remains a useful companion when Java teams also want separate custom JVM rules.</p>
+            <p>The standalone evaluator reads the same committed governance file for Java, Kotlin, and TypeScript. JVM teams can also use AtlasArc's ArchUnit/JUnit adapter: accepted cycles pass the architecture test, while new ungoverned cycles still fail.</p>
             <a class="btn btn-ghost" href="/docs/govern-cycle-exceptions#ci">Governance and CI guide &rarr;</a>
+            <a class="btn btn-ghost" href="/docs/recipe-archunit-build">ArchUnit recipe &rarr;</a>
           </article>
         </div>
       </div>

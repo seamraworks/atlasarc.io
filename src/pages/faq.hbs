@@ -167,7 +167,7 @@
         <dl class="faq">
           <div class="faq-item">
             <dt>Does AtlasArc fail my build?</dt>
-            <dd>The IntelliJ plugin does not fail builds by itself. Add the standalone AtlasArc evaluator to your pipeline when governed cycles should be a build gate. See <a href="/docs/govern-cycle-exceptions#ci">Enforce the same decisions in CI</a>.</dd>
+            <dd>The IntelliJ plugin does not fail builds by itself. Add the standalone evaluator as a pipeline step, or use the <a href="/docs/recipe-archunit-build">AtlasArc ArchUnit/JUnit rule</a> in a JVM architecture test. Both read the committed governance file and fail when an ungoverned problem cycle remains.</dd>
           </div>
           <div class="faq-item">
             <dt>How does the governance evaluator work?</dt>
@@ -176,6 +176,10 @@
           <div class="faq-item">
             <dt>Do I need AtlasArc in CI?</dt>
             <dd>You do not run IntelliJ in CI. Use the framework-free evaluator shipped with the matching AtlasArc release; it requires JDK 21 and explicitly configured compiler output or TypeScript artifacts.</dd>
+          </div>
+          <div class="faq-item">
+            <dt>Can my ArchUnit tests honour cycles accepted in AtlasArc?</dt>
+            <dd>Yes. The AtlasArc ArchUnit adapter reads <code>.atlasarc/governance/cycles.json</code> and applies the same matcher and problem-cycle classifier as the IDE. A governed cycle passes; a new ungoverned cycle remains an ArchUnit violation. See the <a href="/docs/recipe-archunit-build">executable recipe</a>.</dd>
           </div>
           <div class="faq-item">
             <dt>Will the IDE and CI make the same governance decision?</dt>
