@@ -2,4 +2,3 @@
 # Add slug-change redirects here so in-plugin deep links never break (SAD §13).
 # Example:
 #   /old-metric-slug  /metrics/new-slug  301
-/docs/recipe-archunit-build  /docs/govern-cycle-exceptions#ci  301

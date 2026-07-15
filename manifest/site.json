@@ -393,7 +393,6 @@
     { "title": "Structural view modes", "src": "structural-view-modes.hbs", "slug": "structural-view-modes", "url": "/docs/structural-view-modes", "out": "docs/structural-view-modes/index.html" },
     { "title": "Heatmap overlay", "src": "heatmap-overlay.hbs", "slug": "heatmap-overlay", "url": "/docs/heatmap-overlay", "out": "docs/heatmap-overlay/index.html" },
     { "title": "Govern cycle exceptions", "src": "govern-cycle-exceptions.hbs", "slug": "govern-cycle-exceptions", "url": "/docs/govern-cycle-exceptions", "out": "docs/govern-cycle-exceptions/index.html" },
-    { "title": "Retired annotation recipe", "src": "recipe-archunit-build-redirect.hbs", "slug": "recipe-archunit-build", "url": "/docs/recipe-archunit-build", "out": "docs/recipe-archunit-build/index.html", "internal": true },
     { "title": "Handling large projects", "src": "handling-large-projects.hbs", "slug": "handling-large-projects", "url": "/docs/handling-large-projects", "out": "docs/handling-large-projects/index.html" }
   ],
   "workflowBeats": [

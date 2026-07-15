@@ -100,9 +100,6 @@
     <p>Use <code>--format json</code> for machine processing or <code>--format sarif --output build/atlasarc-governance.sarif</code> for code-scanning ingestion. Exit code <code>0</code> means valid governance with no remaining problem cycle; <code>1</code> means valid evaluation with ungoverned cycle problems; <code>2</code> means configuration, acquisition, freshness, schema, or governance validation failed; <code>3</code> means an unexpected evaluator error.</p>
     <p>Multiple configured sources are evaluated independently. AtlasArc does not invent a merged Java/Kotlin/TypeScript graph, and CI does not consume local Safe Havens.</p>
 
-    <h2 id="legacy">About the retired annotations artifact</h2>
-    <p><code>io.atlasarc:atlasarc-annotations:1.0.0</code> remains immutable on Maven Central, but was never adopted as an AtlasArc plugin workflow or by a known consumer. AtlasArc v1 does not read it, does not write source annotations, and does not support the old annotation/ArchUnit recipe as a governance path. Do not add that dependency; use the repository file plus evaluator for IDE/CI parity.</p>
-
     <h2>Where to go next</h2>
     <p>Start cycle triage with <a href="/workflows/find-cycles">Find cyclic dependencies</a>, see the public product summary under <a href="/product/features#govern-exceptions">Govern intentional exceptions</a>, or review <a href="/docs/handling-large-projects">Handling large projects</a> for ways to reduce a crowded model before recording decisions.</p>
   {{/inline}}
