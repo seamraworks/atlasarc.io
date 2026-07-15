@@ -47,7 +47,7 @@
           </span></a></li>
           <li><a class="router-row" href="#govern-exceptions"><span class="router-row-inner">
             <span class="router-idx">05</span>
-            <span class="router-job">Govern exceptions and stop new cycles in CI<small>Sanction in code; enforce in the build with ArchUnit.</small></span>
+            <span class="router-job">Govern exceptions and stop new cycles in CI<small>Commit one AtlasArc governance file; evaluate the same evidence in the IDE and build.</small></span>
             <span class="router-arrow">&rarr;</span>
             <span class="router-cap">Govern intentional exceptions</span>
           </span></a></li>
@@ -158,19 +158,19 @@
     <section class="band band-alt" id="govern-exceptions">
       <div class="container">
         <div class="feature-band feature-band-reverse">
-          <div class="placeholder-box">Screenshot — Accepted annotations, Safe Havens, and a passing ArchUnit cycle test</div>
+          <div class="placeholder-box">Screenshot — Governance diff review, debt evidence, and a passing evaluator run</div>
           <div>
             <h2>Govern intentional exceptions</h2>
             <p>Not every cycle is a design problem. Some dependencies are intentional, some are tracked debt, some are out of scope for the current investigation. AtlasArc gives teams two tools to manage this without hiding structural reality.</p>
-            <p><strong>Safe Havens</strong> suppress a package's cycle participation for the current workspace-local investigation. Nothing is committed to the codebase. <strong>Source-controlled annotations</strong> mark a specific dependency as an intentional decision or tracked debt, with a reason and ticket that travel into code review.</p>
-            <p>This is the part other analyzers don't have: your exceptions live in the codebase, not a tool's private database: <strong>versioned with your source, reviewed by your team, and enforceable in CI</strong>. The annotations are ordinary, bytecode-visible Java annotations, so a handful of lines of ArchUnit turn them into a build gate: a standard cycle rule fails on any new, un-sanctioned cycle, while the cycles you sanctioned are excluded automatically, with no AtlasArc runtime anywhere in your build.</p>
+            <p><strong>Safe Havens</strong> suppress a package's cycle participation for the current workspace-local investigation. Nothing is committed to the codebase. <strong>Repository governance records</strong> capture a specific dependency as an intentional decision or tracked debt, with a reason and optional ticket in <code>.atlasarc/governance/cycles.json</code>.</p>
+            <p>Your decisions live with the repository rather than in a private tool database: <strong>versioned with the code, reviewed by the team, and enforceable in CI</strong>. AtlasArc previews the exact file diff and never edits application source or build files. The matching evaluator uses the same schema, evidence matcher, debt precedence, and problem-graph classifier as the IDE for Java, Kotlin, and TypeScript.</p>
             <ul>
               <li>Safe Havens: workspace-local noise suppression for the current investigation</li>
-              <li>Source annotations: source-controlled, directional, intentional or debt</li>
-              <li>Accepted dependencies leave the problem graph but stay structurally visible</li>
-              <li>Standard ArchUnit <code>beFreeOfCycles()</code> with annotation-aware exclusions; only a <code>compileOnly</code> artifact added</li>
+              <li>Governance records: committed, directional, intentional or debt</li>
+              <li>Fully governed references leave the problem graph but stay structurally visible</li>
+              <li>One headless evaluator for JVM bytecode and TypeScript artifacts, with IDE/CI parity</li>
             </ul>
-            <a class="btn btn-ghost" href="/docs/recipe-archunit-build">Recipe: AtlasArc in your build &rarr;</a>
+            <a class="btn btn-ghost" href="/docs/govern-cycle-exceptions">Governance and CI guide &rarr;</a>
           </div>
         </div>
       </div>

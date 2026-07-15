@@ -1,7 +1,7 @@
 {{#> marketing}}
   {{#*inline "html-head-block"}}
     <title>AtlasArc FAQ | IntelliJ Architecture Analysis Questions</title>
-    <meta name="description" content="Answers about AtlasArc language support, IntelliJ versions, Java/Kotlin analysis, TypeScript setup, multi-module projects, offline use, licensing, trials, and ArchUnit CI enforcement.">
+    <meta name="description" content="Answers about AtlasArc language support, IntelliJ versions, Java/Kotlin analysis, TypeScript setup, multi-module projects, offline use, repository governance, CI evaluation, licensing, and trials.">
     <meta property="og:title" content="AtlasArc FAQ">
     <meta property="og:description" content="Pre-install answers for AtlasArc in IntelliJ IDEA.">
   {{/inline}}
@@ -23,8 +23,8 @@
           <li class="card"><a href="#start-here"><h3>Start here</h3><p>Local analysis, source upload, IntelliJ editions, and first install.</p></a></li>
           <li class="card"><a href="#project-compatibility"><h3>Project compatibility</h3><p>Java, Kotlin, TypeScript, Gradle, Maven, multi-module projects, and large-codebase fit.</p></a></li>
           <li class="card"><a href="#typescript"><h3>TypeScript</h3><p>Generated dependency artifacts, setup requirements, and what is in scope.</p></a></li>
-          <li class="card"><a href="#architecture-workflow"><h3>Architecture workflow</h3><p>IntelliJ built-ins, Sonar, Safe Havens, annotations, exports, and reports.</p></a></li>
-          <li class="card"><a href="#ci-governance"><h3>CI and governance</h3><p>What AtlasArc does in the IDE, and what ArchUnit can enforce in your build.</p></a></li>
+          <li class="card"><a href="#architecture-workflow"><h3>Architecture workflow</h3><p>IntelliJ built-ins, Sonar, Safe Havens, repository governance, exports, and reports.</p></a></li>
+          <li class="card"><a href="#ci-governance"><h3>CI and governance</h3><p>How the same AtlasArc governance decisions are evaluated in the IDE and build.</p></a></li>
           <li class="card"><a href="#trial-licensing-support"><h3>Trial and support</h3><p>Marketplace trial, payment, license shape, and support routing.</p></a></li>
         </ul>
       </div>
@@ -78,7 +78,7 @@
           </div>
           <div class="faq-item">
             <dt>Do I need to change my build files?</dt>
-            <dd>No for IDE analysis. Build-file changes are only needed if your team chooses to enforce accepted cycle decisions in CI with the <a href="/docs/recipe-archunit-build">ArchUnit recipe</a>.</dd>
+            <dd>No. AtlasArc does not edit application build files for analysis or governance. It writes only its committed governance document after you review the diff. To enforce decisions in CI, build your project normally and add a pipeline step that runs the <a href="/docs/govern-cycle-exceptions#ci">AtlasArc evaluator</a>.</dd>
           </div>
           <div class="faq-item">
             <dt>Why should I build before analysis?</dt>
@@ -144,11 +144,11 @@
           </div>
           <div class="faq-item">
             <dt>What are Safe Havens?</dt>
-            <dd>Safe Havens are workspace-local suppressions for narrowing an investigation. They help you keep noise out of the current review without committing a source-level architecture decision. See <a href="/product/features#govern-exceptions">Govern intentional exceptions</a>.</dd>
+            <dd>Safe Havens are workspace-local suppressions for narrowing an investigation. They keep noise out of the current review without creating a committed team decision. See <a href="/docs/govern-cycle-exceptions#safe-havens">Govern cycle exceptions</a>.</dd>
           </div>
           <div class="faq-item">
-            <dt>What are accepted cycle annotations?</dt>
-            <dd>Accepted cycle annotations are source-controlled decisions that mark a dependency as intentional or tracked debt. The reason and ticket travel with the code, so the decision can be reviewed instead of disappearing into a tool setting. See <a href="/product/features#govern-exceptions">Govern intentional exceptions</a>.</dd>
+            <dt>What are repository governance records?</dt>
+            <dd>They are committed AtlasArc decisions that mark a directed dependency as intentional or tracked debt. A required reason and optional ticket travel in <code>.atlasarc/governance/cycles.json</code>, so the decision is reviewed instead of disappearing into a tool setting. See <a href="/docs/govern-cycle-exceptions">Govern cycle exceptions</a>.</dd>
           </div>
           <div class="faq-item">
             <dt>Can I export findings?</dt>
@@ -167,19 +167,19 @@
         <dl class="faq">
           <div class="faq-item">
             <dt>Does AtlasArc fail my build?</dt>
-            <dd>No. AtlasArc is an IDE analysis tool. It helps you find, explain, and record architecture decisions; build enforcement belongs in your test suite or CI pipeline. See <a href="/docs/recipe-archunit-build">Recipe: AtlasArc in your build</a>.</dd>
+            <dd>The IntelliJ plugin does not fail builds by itself. Add the standalone AtlasArc evaluator to your pipeline when governed cycles should be a build gate. See <a href="/docs/govern-cycle-exceptions#ci">Enforce the same decisions in CI</a>.</dd>
           </div>
           <div class="faq-item">
-            <dt>How does ArchUnit enforcement work?</dt>
-            <dd>Add AtlasArc's acceptance annotations at compile/provided scope and add ArchUnit in test scope. The recipe starts from ArchUnit's standard cycle rule, ignores sanctioned cycles, and still fails new unsanctioned ones. See <a href="/docs/recipe-archunit-build">Recipe: AtlasArc in your build</a>.</dd>
+            <dt>How does the governance evaluator work?</dt>
+            <dd>Your build first produces current JVM classes or TypeScript dependency artifacts. The standalone evaluator then reads those inputs plus <code>.atlasarc/governance/cycles.json</code>, using the same matcher and problem-graph classifier as the IDE. Remaining ungoverned cycle problems return a failing exit code. See the <a href="/docs/govern-cycle-exceptions#ci">CI setup</a>.</dd>
           </div>
           <div class="faq-item">
             <dt>Do I need AtlasArc in CI?</dt>
-            <dd>No. CI needs your compiled classes, the annotations on the code, and your ArchUnit test. The AtlasArc plugin does not run in the pipeline.</dd>
+            <dd>You do not run IntelliJ in CI. Use the framework-free evaluator shipped with the matching AtlasArc release; it requires JDK 21 and explicitly configured compiler output or TypeScript artifacts.</dd>
           </div>
           <div class="faq-item">
-            <dt>Which accepted annotations are safe to enforce in CI?</dt>
-            <dd>For IDE/CI parity, keep build-enforced exceptions at class or package level and avoid <code>packages()</code> narrowing in the CI rule. Member-level acceptance and narrowed counterparties are IDE review tools, not equivalent build-gate semantics in the current recipe. See the <a href="/docs/recipe-archunit-build">ArchUnit recipe</a>.</dd>
+            <dt>Will the IDE and CI make the same governance decision?</dt>
+            <dd>Yes for the same current evidence. They share schema version 1, evidence matching, debt precedence, reference-level red-wins behavior, and cycle classification. Invalid, stale, partial, ambiguous, or unsupported records fail closed in both surfaces.</dd>
           </div>
         </dl>
       </div>

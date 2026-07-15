@@ -51,9 +51,10 @@
         <h2>Governed dependency exceptions</h2>
         <ul>
           <li><strong>Safe Havens</strong>: set aside cycles you&rsquo;ve already reviewed or don&rsquo;t care about right now. It&rsquo;s local to your session and never changes your code.</li>
-          <li><strong>Source annotations</strong>: mark a dependency as an intentional decision or known debt right in your code, with a required reason and an optional ticket. The note travels with the code into review.</li>
-          <li><strong>Intentional vs. debt</strong>: accepted dependencies show in muted green when they&rsquo;re intentional and amber when they&rsquo;re tracked debt, and the debt is collected in one place so it stays visible.</li>
-          <li><strong>Annotate without leaving the view</strong>: for Java and Kotlin declaration targets, accept a dependency from the sidebar and AtlasArc adds the annotation to your source and refreshes the analysis for you.</li>
+          <li><strong>Repository governance</strong>: record a directional dependency as intentional or known debt in <code>.atlasarc/governance/cycles.json</code>, with a required reason and optional ticket.</li>
+          <li><strong>Intentional vs. debt</strong>: governed dependencies show in muted green when they&rsquo;re intentional and amber when they&rsquo;re tracked debt, and debt stays visible in dedicated evidence surfaces.</li>
+          <li><strong>Review without source mutation</strong>: AtlasArc previews the exact governance-file diff, writes only after confirmation, and never edits application source or build files.</li>
+          <li><strong>IDE/CI parity</strong>: the bundled headless evaluator applies the same Java, Kotlin, and TypeScript matching and problem-graph rules in the build.</li>
         </ul>
       </div>
     </section>

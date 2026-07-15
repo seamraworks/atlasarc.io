@@ -1,0 +1,109 @@
+{{#> docs}}
+  {{#*inline "html-head-block"}}
+    <title>Govern Cycle Exceptions in the IDE and CI | AtlasArc Documentation</title>
+    <link rel="canonical" href="https://atlasarc.io/docs/govern-cycle-exceptions">
+    <meta name="description" content="Record reviewable Java, Kotlin, and TypeScript cycle-governance decisions in .atlasarc/governance/cycles.json and enforce the same evidence in CI.">
+    <meta property="og:title" content="Govern Cycle Exceptions with AtlasArc">
+    <meta property="og:description" content="One committed governance workflow for intentional cycles and managed debt in the IDE and CI.">
+    <meta property="og:url" content="https://atlasarc.io/docs/govern-cycle-exceptions">
+  {{/inline}}
+  {{#*inline "body-block"}}
+    <h1>Govern cycle exceptions</h1>
+    <p>Not every dependency cycle is a defect. Some are deliberate architecture; others are debt the team has chosen to carry for now. AtlasArc records both as reviewable repository governance, without changing application source or build files.</p>
+    <p>The authoritative file is <code>.atlasarc/governance/cycles.json</code> in the nearest owning Git root. Commit it with the code that creates or changes the decision. The IntelliJ workflow and the headless evaluator read the same schema and apply the same matching and cycle-classification rules.</p>
+
+    <h2 id="safe-havens">Choose the right commitment level</h2>
+    <ul>
+      <li><strong>Safe Haven</strong>: local, workspace-scoped focus state. Use it to set a package or source folder aside during your current investigation. It is not team policy and the CI evaluator does not read it.</li>
+      <li><strong>Governance record</strong>: a durable team decision committed in <code>.atlasarc/governance/cycles.json</code>. Use it when a dependency is intentionally accepted or tracked as debt and should receive the same treatment in the IDE, review, reports, and CI.</li>
+    </ul>
+    <p>A Safe Haven answers “not in this investigation.” A governance record answers “the team has reviewed this dependency.”</p>
+
+    <h2 id="record">Record and review a decision</h2>
+    <ol>
+      <li>Analyze the current Java, Kotlin, or TypeScript source and select a problem-cycle edge or one of its concrete references.</li>
+      <li>Choose <strong>Record cycle decision…</strong>.</li>
+      <li>Select the scope and owner side, classify it as <strong>Intentional</strong> or <strong>Debt</strong>, add the required reason, and optionally add a ticket.</li>
+      <li>Review the exact governance-file diff. AtlasArc writes only after confirmation and refuses to overwrite a concurrent edit.</li>
+      <li>Re-analyze or reload governance, review the resulting status, then commit the file with the related source change.</li>
+    </ol>
+    <p><strong>Owner side</strong> records where responsibility sits on the directed dependency: source means the code depending outward owns the decision; target means the depended-on side accepts incoming use. Narrow the counterparty when a broader owner-side record would cover unrelated dependencies.</p>
+    <p><strong>Intentional</strong> is a deliberate design choice and renders in muted green. <strong>Debt</strong> is tolerated structure that should remain visible in debt counts, lists, reports, and review surfaces; it renders in muted amber. If active records overlap, debt wins so a narrower or later intentional record cannot hide it.</p>
+
+    <h2 id="language-scope">Use only evidence the backend can prove</h2>
+    <table>
+      <thead>
+        <tr><th>Analysis backend</th><th>Supported v1 governance evidence</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Java bytecode</td><td>Package, type, member, and directed-reference evidence when stable identities are present.</td></tr>
+        <tr><td>Kotlin bytecode</td><td>Package architecture units plus type, function, property, constructor, member, and directed-reference evidence when present.</td></tr>
+        <tr><td>TypeScript artifact</td><td>Source-folder, source-file, directed import, and dependency-kind evidence such as runtime, type-only, dynamic import, or re-export.</td></tr>
+      </tbody>
+    </table>
+    <p>TypeScript v1 does not pretend that dependency-cruiser artifacts provide stable class or function identities. Kotlin package governance does not require a source declaration site: the package is an AtlasArc architecture unit.</p>
+
+    <h2 id="problem-graph">Structural truth stays visible</h2>
+    <p>Governance changes which dependencies remain cycle <em>problems</em>; it does not rewrite the structural graph. A governed dependency remains available for inspection and reporting even when it no longer keeps a cycle warning red.</p>
+    <p>Coverage is conservative at reference level: every concrete reference behind an architecture edge must be governed or otherwise suppressed before that edge leaves problem-cycle detection. One uncovered reference keeps the edge eligible for a red cycle. In short: <strong>red wins</strong>.</p>
+    <p>If removing one fully governed edge breaks a cycle, the red warning disappears even though the structural dependency still exists. This keeps warnings actionable without pretending the code relationship vanished.</p>
+
+    <h2 id="repair">Repair stale records explicitly</h2>
+    <p>Every record is checked against current evidence. Only an active record covers dependencies. AtlasArc reports resolved, missing-source, missing-target, partial, ambiguous, unsupported, and invalid records without silently retargeting or deleting them.</p>
+    <ul>
+      <li><strong>Resolved</strong>: the governed dependency no longer exists; review and remove the record when that is intentional.</li>
+      <li><strong>Missing source/target</strong>: an identity moved or disappeared; inspect candidates before retargeting.</li>
+      <li><strong>Partial</strong>: only some recorded reference evidence still matches; uncovered evidence remains a problem.</li>
+      <li><strong>Ambiguous, unsupported, or invalid</strong>: the record suppresses nothing until a person resolves the issue.</li>
+    </ul>
+    <p>Use the governance review to inspect evidence, preview a retarget or removal diff, reload an externally changed file, or open the document. AtlasArc never turns a suggestion into a write without confirmation.</p>
+
+    <h2 id="file-contract">File ownership and merge behavior</h2>
+    <p>The schema is versioned at <a href="/schemas/cycle-governance-v1.schema.json"><code>https://atlasarc.io/schemas/cycle-governance-v1.schema.json</code></a>. Records are keyed objects rather than one large array, so independent branch additions stay local in review. AtlasArc writes deterministic UTF-8/LF JSON with sorted record and reference IDs.</p>
+    <p>Keep generated dependency evidence separate from committed governance under <code>.atlasarc/</code>. AtlasArc owns valid writes; manual editing is possible but is not the intended workflow, and malformed, unknown, stale, or unsupported content fails closed.</p>
+
+    <h2 id="ci">Enforce the same decisions in CI</h2>
+    <p>The AtlasArc governance evaluator is the framework-free CI companion built from the same source revision as the plugin. A locally built plugin distribution contains its JAR, configuration schema, examples, checksums, SBOM, provenance, license, and notices under <code>AtlasArc/tools/governance-evaluator/</code>. Use the evaluator from the same build as the plugin that authored the file.</p>
+    <p>The evaluator requires JDK 21. It never runs Gradle, Maven, npm, or dependency-cruiser: your build creates current compiler output or TypeScript artifacts first, then the evaluator reads those explicit inputs.</p>
+
+    <h3>JVM configuration</h3>
+    <p>Copy the bundled JVM example to <code>.atlasarc/evaluator.json</code> and point it at the classes and source roots produced by your build:</p>
+    <pre><code>{
+  "configVersion": 1,
+  "repositoryRoot": ".",
+  "sources": [{
+    "id": "jvm:main",
+    "backend": "jvm-bytecode",
+    "classDirectories": [{"path": "build/classes/java/main", "module": "main"}],
+    "sourceRoots": [{"path": "src/main/java", "module": "main"}]
+  }]
+}</code></pre>
+
+    <h3>TypeScript configuration</h3>
+    <p>Generate dependency-cruiser JSON in your own toolchain, then point the evaluator at it:</p>
+    <pre><code>{
+  "configVersion": 1,
+  "repositoryRoot": ".",
+  "sources": [{
+    "id": "typescript:frontend",
+    "backend": "typescript-artifact",
+    "root": ".",
+    "dependencyCruiserJson": ".atlasarc/depgraph.json",
+    "eslintSarif": ".atlasarc/eslint.sarif"
+  }]
+}</code></pre>
+
+    <h3>Run the gate</h3>
+    <p>Copy the matching build's evaluator payload into a CI-managed <code>tools/</code> directory (or adjust the path below), and verify its bundled <code>SHA256SUMS</code> before execution:</p>
+    <pre><code>java -jar tools/atlasarc-governance-evaluator-&lt;version&gt;-standalone.jar \
+  evaluate --config .atlasarc/evaluator.json --format human</code></pre>
+    <p>Use <code>--format json</code> for machine processing or <code>--format sarif --output build/atlasarc-governance.sarif</code> for code-scanning ingestion. Exit code <code>0</code> means valid governance with no remaining problem cycle; <code>1</code> means valid evaluation with ungoverned cycle problems; <code>2</code> means configuration, acquisition, freshness, schema, or governance validation failed; <code>3</code> means an unexpected evaluator error.</p>
+    <p>Multiple configured sources are evaluated independently. AtlasArc does not invent a merged Java/Kotlin/TypeScript graph, and CI does not consume local Safe Havens.</p>
+
+    <h2 id="legacy">About the retired annotations artifact</h2>
+    <p><code>io.atlasarc:atlasarc-annotations:1.0.0</code> remains immutable on Maven Central, but was never adopted as an AtlasArc plugin workflow or by a known consumer. AtlasArc v1 does not read it, does not write source annotations, and does not support the old annotation/ArchUnit recipe as a governance path. Do not add that dependency; use the repository file plus evaluator for IDE/CI parity.</p>
+
+    <h2>Where to go next</h2>
+    <p>Start cycle triage with <a href="/workflows/find-cycles">Find cyclic dependencies</a>, see the public product summary under <a href="/product/features#govern-exceptions">Govern intentional exceptions</a>, or review <a href="/docs/handling-large-projects">Handling large projects</a> for ways to reduce a crowded model before recording decisions.</p>
+  {{/inline}}
+{{/docs}}

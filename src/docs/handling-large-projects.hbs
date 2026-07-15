@@ -85,7 +85,7 @@
       <li><strong>Cycle-group navigator</strong> walks strongly connected groups one at a time. The point is to make "there are many cycles" become "this is group 3, and these are the packages keeping it alive."</li>
       <li><strong>Cycle groups panel</strong> shows group membership and severity badges, and lets you mute groups you have already triaged.</li>
       <li><strong>Classification</strong> distinguishes architectural cycles, aggregation cycles, nested-internal cycles, cross-module phantom cycles, and accepted cycles. A large codebase needs this distinction because not every loop deserves the same response.</li>
-      <li><strong>Safe Havens</strong> move known package-level exceptions out of the current investigation. <strong>Source annotations</strong> make durable exceptions reviewable in code, with a reason and optional ticket.</li>
+      <li><strong>Safe Havens</strong> move known package-level exceptions out of the current investigation. <strong>Repository governance</strong> makes durable intentional/debt decisions reviewable in <code>.atlasarc/governance/cycles.json</code>, with a reason and optional ticket.</li>
     </ul>
     <p>A good cycle triage pass usually has three outcomes: refactor now, record a debt item, or sanction an intentional exception. AtlasArc keeps those decisions visible instead of pretending accepted coupling disappeared.</p>
     <p>Useful next steps: run the <a href="/workflows/find-cycles">Find cyclic dependencies</a> workflow for discovery, then use <a href="/workflows/audit-individual-cycle-groups">Audit individual cycle groups</a> when the backlog is large enough to need a group-by-group pass.</p>

@@ -392,7 +392,7 @@
     { "title": "The AtlasArc interface", "src": "interface.hbs", "slug": "interface", "url": "/docs/interface", "out": "docs/interface/index.html" },
     { "title": "Structural view modes", "src": "structural-view-modes.hbs", "slug": "structural-view-modes", "url": "/docs/structural-view-modes", "out": "docs/structural-view-modes/index.html" },
     { "title": "Heatmap overlay", "src": "heatmap-overlay.hbs", "slug": "heatmap-overlay", "url": "/docs/heatmap-overlay", "out": "docs/heatmap-overlay/index.html" },
-    { "title": "Recipe: AtlasArc in your build", "src": "recipe-archunit-build.hbs", "slug": "recipe-archunit-build", "url": "/docs/recipe-archunit-build", "out": "docs/recipe-archunit-build/index.html" },
+    { "title": "Govern cycle exceptions", "src": "govern-cycle-exceptions.hbs", "slug": "govern-cycle-exceptions", "url": "/docs/govern-cycle-exceptions", "out": "docs/govern-cycle-exceptions/index.html" },
     { "title": "Handling large projects", "src": "handling-large-projects.hbs", "slug": "handling-large-projects", "url": "/docs/handling-large-projects", "out": "docs/handling-large-projects/index.html" }
   ],
   "workflowBeats": [
@@ -456,7 +456,7 @@
       "label": "Govern",
       "anchor": "govern-exceptions",
       "title": "Govern intentional exceptions",
-      "intro": "After triage, sanction the dependencies the team accepts and keep new structural debt out of the build. Safe Havens keep local investigations focused; source-controlled annotations turn intentional exceptions into reviewable, enforceable architecture decisions.",
+      "intro": "After triage, record intentional dependencies and managed debt in AtlasArc's committed governance file, then enforce the same decisions in CI. Safe Havens remain local investigation tools; repository governance is reviewable team policy.",
       "journey": true,
       "alt": true,
       "ctas": [
@@ -465,8 +465,8 @@
           "href": "/product/features#govern-exceptions"
         },
         {
-          "label": "ArchUnit recipe →",
-          "href": "/docs/recipe-archunit-build"
+          "label": "Governance and CI guide →",
+          "href": "/docs/govern-cycle-exceptions"
         }
       ]
     },

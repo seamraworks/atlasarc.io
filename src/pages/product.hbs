@@ -69,11 +69,11 @@
     <section class="band" id="govern-exceptions">
       <div class="container">
         <div class="feature-band">
-          <div class="placeholder-box">Screenshot — Accepted annotations and Safe Havens in the graph</div>
+          <div class="placeholder-box">Screenshot — Repository governance review and Safe Havens in the graph</div>
           <div>
             <h2>Govern intentional exceptions</h2>
-            <p>Not every cycle is a mistake: some dependencies are intentional, some are tracked debt. A zero-cycles rule that cannot record intent just gets switched off. AtlasArc gives the decision two commitment levels: <strong>Safe Havens</strong> mute a region for the investigation you are doing right now, workspace-local and uncommitted; <strong>source-controlled annotations</strong> mark a dependency as sanctioned in the code itself, carrying a reason and a ticket into the pull request. This is the part other analyzers don't have: your exceptions live in the codebase, not a tool's private database: <strong>versioned with your source, reviewed by your team, and enforceable in CI</strong>. Wire the annotations into an ArchUnit rule and the build fails on any new, un-sanctioned cycle, with no AtlasArc runtime anywhere in your pipeline.</p>
-            <a class="btn btn-ghost" href="/docs/recipe-archunit-build">Recipe: AtlasArc in your build &rarr;</a>
+            <p>Not every cycle is a mistake: some dependencies are intentional, some are tracked debt. A zero-cycles rule that cannot record intent just gets switched off. AtlasArc gives the decision two commitment levels: <strong>Safe Havens</strong> mute a region for the investigation you are doing right now, workspace-local and uncommitted; <strong>repository governance</strong> records a directional dependency in <code>.atlasarc/governance/cycles.json</code>, carrying a reason and optional ticket into the pull request. The decision is <strong>versioned with the code, reviewed by the team, and enforceable in CI</strong>. AtlasArc previews its own governance-file diff without changing application source or build files, and the headless evaluator applies the same Java, Kotlin, or TypeScript evidence rules as the IDE.</p>
+            <a class="btn btn-ghost" href="/docs/govern-cycle-exceptions">Governance and CI guide &rarr;</a>
           </div>
         </div>
       </div>

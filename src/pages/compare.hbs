@@ -133,7 +133,7 @@
                 <td>Active Java test library.</td>
                 <td>Codifying architecture rules and failing CI builds on violations.</td>
                 <td>No exploratory UI, graph, matrix, composition lens, or local visual investigation loop.</td>
-                <td>Companion, not competitor: <a href="/workflows/find-cycles">discover and explain in AtlasArc</a>; enforce durable rules with the <a href="/docs/recipe-archunit-build">ArchUnit recipe</a>.</td>
+                <td>Companion, not competitor: use AtlasArc's evaluator for AtlasArc cycle-governance parity, and ArchUnit when Java teams also want custom JVM architecture rules.</td>
               </tr>
               <tr>
                 <td><strong>Sonargraph / ArcTree</strong></td>
@@ -194,7 +194,7 @@
               <tr>
                 <td><strong>Governance</strong></td>
                 <td>Dependency validation rules can mark dependencies valid or invalid in the Dependency Viewer.</td>
-                <td><a href="/product/features#govern-exceptions">Safe Havens, reviewable cycle annotations, accepted cycle states</a>, and an <a href="/docs/recipe-archunit-build">ArchUnit recipe</a> for CI follow-through.</td>
+                <td><a href="/docs/govern-cycle-exceptions">Safe Havens, reviewable repository governance, governed cycle evidence, and one matching evaluator</a> for CI follow-through.</td>
               </tr>
               <tr>
                 <td><strong>Reporting/export</strong></td>
@@ -275,9 +275,9 @@
             <a class="btn btn-ghost" href="/languages/typescript">TypeScript support &rarr;</a>
           </article>
           <article class="compare-fit">
-            <h3>Investigate in AtlasArc, enforce with ArchUnit</h3>
-            <p>AtlasArc helps you find and explain the architecture problem. Java teams can then codify long-lived rules in CI with ArchUnit, including annotation-aware cycle exceptions.</p>
-            <a class="btn btn-ghost" href="/docs/recipe-archunit-build">ArchUnit recipe &rarr;</a>
+            <h3>Evaluate AtlasArc governance in CI</h3>
+            <p>The AtlasArc evaluator reads the same committed governance file and applies the same evidence matching and cycle classification as the IDE for Java, Kotlin, and TypeScript. ArchUnit remains a useful companion when Java teams also want separate custom JVM rules.</p>
+            <a class="btn btn-ghost" href="/docs/govern-cycle-exceptions#ci">Governance and CI guide &rarr;</a>
           </article>
         </div>
       </div>
