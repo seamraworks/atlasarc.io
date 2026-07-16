@@ -25,7 +25,7 @@
 
     <h2>Open the plugin</h2>
     <p>With your project open, go to <strong>Tools &gt; AtlasArc</strong>. You can also click the AtlasArc icon in the right tool window stripe if it's there.</p>
-    <p>On the first run, choose an analysis source and run Analyze. JVM sources scan class files and TypeScript sources read generated artifacts. For a medium-sized project this takes a few seconds. Give it a moment on very large codebases.</p>
+    <p>On the first run, choose an analysis source and run Analyze. JVM sources scan production class files by default; select <strong>Include tests</strong> beside the JVM source when you also want compiled test classes and test source roots in that analysis. TypeScript sources read generated artifacts, whose contents define whether tests are included. For a medium-sized project this takes a few seconds. Give it a moment on very large codebases.</p>
 
     <h2>Your first graph</h2>
     <p>The view that opens is the Topology Graph. Each box is a package. The arrows show usage dependencies, pointing from the package using code to the package being used.</p>

@@ -6,7 +6,7 @@ seo_description: Use AtlasArc to step through every dependency cycle group one a
 problem: |
   You ran the cycle finder and got 23 groups. Some are two packages. One has twelve. You need to go through them in order from easiest to hardest and make a call on each one before the sprint ends. You do not need to fix all of them. You need to know what each one is, and record a decision, so the team is not starting from zero next sprint.
 why_it_matters: |
-  Unexamined cycle groups compound. A team that has never classified its cycles does not know which ones are design problems and which ones are accepted technical debt. Without that classification, every cycle looks the same, and you cannot measure progress or communicate risk. Systematically auditing each group turns an undifferentiated list of warnings into a managed backlog: some resolved, some annotated as accepted, some tracked, and a few genuinely deferred.
+  Unexamined cycle groups compound. A team that has never classified its cycles does not know which ones are design problems and which ones are accepted technical debt. Without that classification, every cycle looks the same, and you cannot measure progress or communicate risk. Systematically auditing each group turns an undifferentiated list of warnings into a managed backlog: some resolved, some recorded as intentional, some tracked as debt, and a few genuinely deferred.
 lens: the Topology Graph with the Cycles section enabled
 steps:
   - heading: Open Cycles and start the navigator.
@@ -14,9 +14,9 @@ steps:
   - heading: Assess each group's structure.
     body: For each cycle group, check how many packages it involves, which architectural layers they span, and which specific edges form the loop. Cross-layer cycles (domain to infrastructure, service to persistence) are the most structurally significant.
   - heading: Classify the group.
-    body: "Assign one of four classifications: design problem (the cycle crosses layers or violates an intended boundary), accepted exception (intentional and already annotated), tracked debt (intentional but not yet annotated; add a ticket reference), or out-of-scope noise (irrelevant to the current investigation)."
+    body: "Assign one of four classifications: design problem (the cycle crosses layers or violates an intended boundary), intentional dependency (a reviewed team decision), managed debt (a tolerated dependency with a reason and optional ticket), or out-of-scope noise (irrelevant to the current investigation)."
   - heading: Act on the classification.
-    body: "For design problems: navigate to the specific edge closing the cycle and plan a refactor. For accepted exceptions: confirm the source annotation is present. For tracked debt: record the ticket in the annotation if one does not exist yet. For noise: add a Safe Haven to suppress it for the current session."
+    body: "For design problems: navigate to the specific edge closing the cycle and plan a refactor. For intentional dependencies or managed debt: record or review the repository governance decision on the concrete dependency and commit the governance file. For noise: add a Safe Haven to suppress it in your local workspace."
   - heading: Move to the next group.
     body: Use the cycle-group navigator to advance. Record the decision for each group before moving. When you have processed all groups, note the count of each classification as your audit output.
 interpretation: |

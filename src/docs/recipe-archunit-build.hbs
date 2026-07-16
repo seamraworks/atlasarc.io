@@ -54,6 +54,10 @@ class ArchitectureTest {
     <pre><code>.withModuleSourceRoot("orders", Path.of("orders/src/main/java"))
 .withModuleSourceRoot("billing", Path.of("billing/src/main/java"))</code></pre>
     <p>The module label is part of JVM governance identity when two modules contain the same package. That means accepting a split-package dependency in <code>orders</code> cannot accidentally accept the matching dependency in <code>billing</code>. Missing module qualification fails closed when the selector would be ambiguous.</p>
+    <p>If governance was authored with <strong>Include tests</strong> selected in the IDE, configure <code>@AnalyzeClasses</code> or your explicit <code>ClassFileImporter</code> to import the same compiled test classes and add their source roots with the same module labels:</p>
+    <pre><code>.withModuleSourceRoot("orders", Path.of("orders/src/main/java"))
+.withModuleSourceRoot("orders", Path.of("orders/src/test/java"))</code></pre>
+    <p>If <strong>Include tests</strong> was not selected, keep the ArchUnit import production-only. The checkbox does not create a different analysis-source ID; it changes the evidence included under that source, so IDE and CI input scope must agree.</p>
     <p>The analysis-source ID must match the records written by AtlasArc. A whole-project scan uses <code>jvm:whole-project</code>; a module-scoped rule uses its stable <code>jvm:module:&lt;name&gt;</code> ID and the corresponding source roots.</p>
 
     <h2>3. Run it as an ordinary test</h2>

@@ -14,9 +14,9 @@ steps:
   - heading: Step through each group using the navigator.
     body: Use the cycle-group navigator to step through groups one at a time. For each group, the graph highlights the packages involved and the specific edges forming the cycle.
   - heading: Classify the group.
-    body: "For each cycle group, decide what it is: a real design problem that crosses an architectural boundary; an accepted exception the team has already annotated; tracked debt that needs a ticket before it can be addressed; or noise that is out of scope for this investigation."
+    body: "For each cycle group, decide what it is: a real design problem that crosses an architectural boundary; an intentional dependency the team has recorded in repository governance; managed debt that needs a reason and optional ticket; or noise that is out of scope for this investigation."
   - heading: Act on the classification.
-    body: For design problems, identify the specific edge that closes the cycle and refactor it. For intentional exceptions, add a source annotation if one is not already present. For tracked debt, record the ticket reference. For out-of-scope noise, add a Safe Haven to suppress it for the current session without committing anything to the codebase.
+    body: For design problems, identify the specific edge that closes the cycle and refactor it. For intentional exceptions or managed debt, record a cycle decision on the concrete dependency, review the governance-file diff, and commit it with the code. For out-of-scope noise, add a Safe Haven to suppress it in your local workspace without committing anything to the codebase.
   - heading: Record the end-of-session count.
     body: When you have processed all groups, note the revised cycle-group count. The delta between start and end is your sprint contribution. Track this across sprints to see the trend.
 interpretation: |
