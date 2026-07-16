@@ -125,7 +125,13 @@
           "minLength": 1,
           "maxLength": 2048
         },
-        "member": { "$ref": "#/$defs/member" }
+        "member": { "$ref": "#/$defs/member" },
+        "module": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "description": "Stable JVM module identity used to disambiguate split packages."
+        }
       }
     },
     "member": {

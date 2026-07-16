@@ -42,6 +42,7 @@
       </tbody>
     </table>
     <p>TypeScript v1 does not pretend that dependency-cruiser artifacts provide stable class or function identities. Kotlin package governance does not require a source declaration site: the package is an AtlasArc architecture unit.</p>
+    <p>For JVM whole-project analysis, AtlasArc also retains the owning module when it is needed to disambiguate split packages. A package decision for <code>acceptance.shared.left</code> in <code>orders</code> does not govern the identically named package in <code>billing</code>. A module-less selector that could match both is ambiguous and suppresses nothing.</p>
 
     <h2 id="problem-graph">Structural truth stays visible</h2>
     <p>Governance changes which dependencies remain cycle <em>problems</em>; it does not rewrite the structural graph. A governed dependency remains available for inspection and reporting even when it no longer keeps a cycle warning red.</p>
@@ -78,6 +79,16 @@
     "sourceRoots": [{"path": "src/main/java", "module": "main"}]
   }]
 }</code></pre>
+    <p>In a multi-module build, list each module's class directory and source root with one stable, matching label:</p>
+    <pre><code>"classDirectories": [
+  {"path": "orders/target/classes", "module": "orders"},
+  {"path": "billing/target/classes", "module": "billing"}
+],
+"sourceRoots": [
+  {"path": "orders/src/main/java", "module": "orders"},
+  {"path": "billing/src/main/java", "module": "billing"}
+]</code></pre>
+    <p>Use the same stable module labels that the IDE import uses. They become part of JVM evidence identity where package names alone are not unique.</p>
 
     <h3>TypeScript configuration</h3>
     <p>Generate dependency-cruiser JSON in your own toolchain, then point the evaluator at it:</p>

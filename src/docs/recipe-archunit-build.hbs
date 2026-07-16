@@ -50,6 +50,10 @@ class ArchitectureTest {
     <p>For Kotlin or mixed JVM code, add each real source root:</p>
     <pre><code>.withSourceRoot(Path.of("src/main/java"))
 .withSourceRoot(Path.of("src/main/kotlin"))</code></pre>
+    <p>For a multi-module whole-project rule, qualify every source root with the same stable module label used by the IDE and evaluator:</p>
+    <pre><code>.withModuleSourceRoot("orders", Path.of("orders/src/main/java"))
+.withModuleSourceRoot("billing", Path.of("billing/src/main/java"))</code></pre>
+    <p>The module label is part of JVM governance identity when two modules contain the same package. That means accepting a split-package dependency in <code>orders</code> cannot accidentally accept the matching dependency in <code>billing</code>. Missing module qualification fails closed when the selector would be ambiguous.</p>
     <p>The analysis-source ID must match the records written by AtlasArc. A whole-project scan uses <code>jvm:whole-project</code>; a module-scoped rule uses its stable <code>jvm:module:&lt;name&gt;</code> ID and the corresponding source roots.</p>
 
     <h2>3. Run it as an ordinary test</h2>
