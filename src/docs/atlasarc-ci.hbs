@@ -26,7 +26,7 @@
     <p>Both paths use the same public core: schema validation, module-qualified evidence, Intentional/Debt matching, red-wins reference coverage, record statuses, and strongly connected component calculation.</p>
 
     <h2>Use the standalone evaluator</h2>
-    <p>AtlasArc CI requires JDK 21. Release builds publish <code>atlasarc-ci-&lt;version&gt;-standalone.jar</code> and <code>atlasarc-ci-&lt;version&gt;-standalone.zip</code> as attached files of <code>io.atlasarc:atlasarc-ci:&lt;version&gt;</code> on Maven Central. Until the first release is published, build it from the public repository. Your build produces evidence first; AtlasArc never invokes Maven, Gradle, npm, or dependency-cruiser for you.</p>
+    <p>AtlasArc CI 1.0.0 requires JDK 21. Download the <a href="https://repo.maven.apache.org/maven2/io/atlasarc/atlasarc-ci/1.0.0/atlasarc-ci-1.0.0-standalone.jar">standalone JAR</a> or <a href="https://repo.maven.apache.org/maven2/io/atlasarc/atlasarc-ci/1.0.0/atlasarc-ci-1.0.0-standalone.zip">standalone ZIP</a> from Maven Central. Your build produces evidence first; AtlasArc never invokes Maven, Gradle, npm, or dependency-cruiser for you.</p>
 
     <h3>JVM bytecode</h3>
     <p>Save the configuration as <code>.atlasarc/evaluator.json</code>. Because <code>repositoryRoot</code> is relative to that file, <code>..</code> points back to the Git root. Evidence paths are repository-relative:</p>
@@ -68,7 +68,7 @@
     <p>If Java/Kotlin source is newer than its classes, or TypeScript source is newer than its dependency graph, the evaluator returns invalid rather than falsely clean.</p>
 
     <h3>Run the gate</h3>
-    <pre><code>java -jar tools/atlasarc-ci-&lt;version&gt;-standalone.jar \
+    <pre><code>java -jar tools/atlasarc-ci-1.0.0-standalone.jar \
   evaluate --config .atlasarc/evaluator.json --format human</code></pre>
     <p>Use <code>--format json</code> for a stable machine result or <code>--format sarif --output build/atlasarc-governance.sarif</code> for code-scanning ingestion. Machine output omits governance reasons, tickets, and absolute workstation paths.</p>
     <table>
@@ -82,7 +82,7 @@
     </table>
 
     <h2>Use ArchUnit in JUnit</h2>
-    <p>JVM teams can consume <code>io.atlasarc:atlasarc-archunit:&lt;version&gt;</code> and make the same governance verdict part of an ordinary architecture test. Accepted cycles pass; new unaccepted cycles fail. Follow the <a href="/docs/recipe-archunit-build">executable ArchUnit recipe</a> for Maven, Gradle, source roots, and multi-module class-root attribution.</p>
+    <p>JVM teams can consume <code>io.atlasarc:atlasarc-archunit:1.0.0</code> from Maven Central and make the same governance verdict part of an ordinary architecture test. Accepted cycles pass; new unaccepted cycles fail. Follow the <a href="/docs/recipe-archunit-build">executable ArchUnit recipe</a> for Maven, Gradle, source roots, and multi-module class-root attribution.</p>
 
     <h2>What AtlasArc CI does not do</h2>
     <ul>
@@ -93,7 +93,7 @@
     </ul>
 
     <h2>Source, releases, and support</h2>
-    <p>The three Maven artifacts are released together from one public repository under Apache License 2.0. Standalone bundles include checksums, and Maven Central publications include the required signed binaries, sources, and API documentation.</p>
+    <p>The three 1.0.0 Maven artifacts are released together from one public repository under Apache License 2.0. Standalone bundles include checksums, and Maven Central includes the signed binaries, sources, and API documentation.</p>
     <p>Read the <a href="https://github.com/seamraworks/atlasarc-ci#readme">technical README</a>, report reproducible defects in the <a href="https://github.com/seamraworks/atlasarc-ci/issues">public issue tracker</a>, or use <a href="/support">support</a> for sensitive context.</p>
 
     <h2>Related</h2>
