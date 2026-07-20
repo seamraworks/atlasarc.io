@@ -11,12 +11,16 @@ lens: the Topology Graph
 steps:
   - heading: Open the Topology Graph.
     body: Switch to the Topology Graph. You will see the full package dependency graph with directed edges showing which packages depend on which.
+  - heading: Choose whole-project or module scope deliberately.
+    body: Start at the whole-project module overview, or right-click one module root and choose Set as Root before launching the workflow. Workflow presets preserve that Root, so a module-level backbone audit does not jump back to the whole project.
   - heading: Enable the fan-in heatmap overlay.
     body: Apply the fan-in heatmap to colour each node by the number of incoming dependencies. The darkest nodes are the packages with the most callers, the candidates for backbone status.
   - heading: Click the highest fan-in packages.
     body: Click any dark node to see its full metric breakdown in the sidebar. Note instability and abstractness alongside fan-in. Genuine backbone packages are stable (low instability) and often have at least moderate abstractness.
   - heading: Look for the load-bearing concrete ones.
     body: A high fan-in package with low instability and low abstractness is in the Zone of Pain. It is the backbone of the system, but it is also entirely concrete. It cannot evolve without breaking everyone who depends on it. Mark these separately from the stable-and-abstract backbone packages.
+  - heading: Cut isolated noise without broadening the filter.
+    body: If a generated or test package distorts the result, choose Exclude this package from its context menu. This removes only that package, leaving its children and nearby packages available. Use Expand completely only on the module whose package detail you need.
 interpretation: |
   The backbone is not a single package, it is usually a small cluster. Three to seven packages that everything else depends on, arranged in a shallow hierarchy. Healthy backbone packages are stable (instability near 0), somewhat abstract (abstractness above 0.3), and have fan-in that is clearly higher than everything around them. If the highest fan-in packages are also highly concrete, that is a Zone of Pain situation: you have found a load-bearing wall you cannot move. Those packages need abstraction added to the callers-facing surface before the team can refactor them. If the backbone packages look healthy, stable, abstract, and well-defined, then the architecture has a clean foundation and the risk sits elsewhere.
 export_note: |

@@ -158,12 +158,12 @@
     <section class="band band-alt" id="govern-exceptions">
       <div class="container">
         <div class="feature-band feature-band-reverse">
-          <div class="placeholder-box">Screenshot — Governance diff review, debt evidence, and a passing evaluator run</div>
+          <div class="placeholder-box">Screenshot — Cycle Governance review, debt evidence, and a passing evaluator run</div>
           <div>
             <h2>Govern intentional exceptions</h2>
             <p>Not every cycle is a design problem. Some dependencies are intentional, some are tracked debt, some are out of scope for the current investigation. AtlasArc gives teams two tools to manage this without hiding structural reality.</p>
             <p><strong>Safe Havens</strong> suppress a package's cycle participation for the current workspace-local investigation. Nothing is committed to the codebase. <strong>Repository governance records</strong> capture a specific dependency as an intentional decision or tracked debt, with a reason and optional ticket in <code>.atlasarc/governance/cycles.json</code>.</p>
-            <p>Your decisions live with the repository rather than in a private tool database: <strong>versioned with the code, reviewed by the team, and enforceable in CI</strong>. AtlasArc previews the exact file diff and never edits application source or build files. The matching evaluator uses the same schema, evidence matcher, debt precedence, and problem-graph classifier as the IDE for Java, Kotlin, and TypeScript.</p>
+            <p>Your decisions live with the repository rather than in a private tool database: <strong>versioned with the code, reviewed by the team, and enforceable in CI</strong>. Explicit acceptance and repair actions write the AtlasArc governance file directly under revision guards; AtlasArc never edits application source or build files. The matching evaluator uses the same schema, evidence matcher, debt precedence, and problem-graph classifier as the IDE for Java, Kotlin, and TypeScript.</p>
             <ul>
               <li>Safe Havens: workspace-local noise suppression for the current investigation</li>
               <li>Governance records: committed, directional, intentional or debt</li>

@@ -10,13 +10,15 @@ why_it_matters: |
 lens: the Package Matrix
 steps:
   - heading: Open the module boundary.
-    body: Right-click the module root package and choose Pin subject · Matrix. This keeps the module as the subject while preserving the outside callers and dependencies you need for a leak check.
+    body: "Right-click the module and choose Pin subject · Matrix. This keeps the module in focus while preserving the outside callers and dependencies you need for a leak check. Do not use Set as Root here: it would hide those outside callers."
   - heading: Read the Package Matrix around the subject.
     body: The subject subtree appears with its boundary neighbours as rows and columns. External callers show up as neighbour rows with cells pointing into internal package columns.
   - heading: Look for internal packages with external callers.
     body: Scan for cells where a row from outside the module boundary has a dependency on an internal implementation package. These are the leaks. The number in the cell is how many references the external caller has made to the internal package.
   - heading: Click into each leak cell.
     body: Click the cell to see which specific classes the external caller is importing. This tells you which internal API is being used and how entrenched the dependency is.
+  - heading: Remove unrelated noise precisely.
+    body: If one unrelated package crowds the boundary read, right-click it and choose Exclude this package. AtlasArc removes only the selected package, leaving its children and neighbouring packages available.
   - heading: Prioritise by caller count.
     body: Internal packages with one external caller are usually a quick fix. Packages with five or more external callers will require coordination. Start with the smallest leaks and track the larger ones as planned refactoring work.
 interpretation: |

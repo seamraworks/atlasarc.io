@@ -85,7 +85,18 @@
           "maxLength": 512
         },
         "display": { "$ref": "#/$defs/display" }
-      }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "scope": { "const": "reference" } },
+            "required": ["scope"]
+          },
+          "then": {
+            "properties": { "ownerSide": { "const": "source" } }
+          }
+        }
+      ]
     },
     "analysisSource": {
       "type": "object",

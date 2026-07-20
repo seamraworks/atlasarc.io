@@ -10,7 +10,9 @@ why_it_matters: |
 lens: Subsystems
 steps:
   - heading: Set the module root as the architectural focus.
-    body: Right-click the module root package in the Topology Graph and set it as Root. This scopes all lenses to the module boundary.
+    body: Right-click the module in the Topology Graph and choose Set as Root. This scopes every lens to that module.
+  - heading: Expand only this module when package detail matters.
+    body: Choose Expand completely on the focused module if the audit needs every package visible. Only that module opens; the other modules stay as they are.
   - heading: Switch to Subsystems.
     body: Open the Subsystems lens. The boundary risk view shows the module's outgoing (fan-out) and incoming (fan-in) coupling at the boundary level. This tells you whether the module provides more than it consumes, or the other way around.
   - heading: Check internal tangles.

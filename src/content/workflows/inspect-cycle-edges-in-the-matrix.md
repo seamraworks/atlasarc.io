@@ -16,7 +16,9 @@ steps:
   - heading: Read direction before volume.
     body: A cell means the row package depends on the column package. Check both halves of each package pair. Cells in both directions mean mutual coupling; a single dense cell means one-way pressure; a tiny cell may be the accidental import that closes the loop.
   - heading: Select the suspicious cells.
-    body: Click a cell to inspect the dependency examples behind it. Use the concrete source references to decide whether the dependency should be inverted, moved behind an interface, accepted as intentional, or recorded as debt.
+    body: Click a cell to inspect the dependency examples behind it. Use the concrete source references to decide whether the dependency should be inverted, moved behind an interface, recorded as Intentional, or tracked as Debt. Record durable decisions on that concrete dependency in repository governance; use a Safe Haven only when the package is local noise for this investigation.
+  - heading: Review durable decisions together.
+    body: Open Cycle Governance from the shared toolbar after the edge-by-edge pass. Filter Intentional, Debt, or stale/invalid records; inspect the compact evidence diagram; and repair or reclassify records before committing the governance file.
   - heading: Return to the graph if shape matters again.
     body: When the matrix tells you which edge matters, switch back to the Topology Graph or Cycle View to explain the loop visually for a review, ticket, or report.
 metrics:

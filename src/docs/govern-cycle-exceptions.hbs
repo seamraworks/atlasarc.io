@@ -23,12 +23,24 @@
     <ol>
       <li>Analyze the current Java, Kotlin, or TypeScript source and select a problem-cycle edge or one of its concrete references.</li>
       <li>Choose <strong>Record cycle decision…</strong>.</li>
-      <li>Select the scope and owner side, classify it as <strong>Intentional</strong> or <strong>Debt</strong>, add the required reason, and optionally add a ticket.</li>
-      <li>Review the exact governance-file diff. AtlasArc writes only after confirmation and refuses to overwrite a concurrent edit.</li>
+      <li>Select the scope and, where applicable, owner side. Check the plain-English summary, classify the decision as <strong>Intentional</strong> or <strong>Debt</strong>, add the required reason, and optionally add a ticket.</li>
+      <li>Choose <strong>Record acceptance</strong>. AtlasArc writes directly and refuses to overwrite a concurrent edit.</li>
       <li>Re-analyze or reload governance, review the resulting status, then commit the file with the related source change.</li>
     </ol>
-    <p><strong>Owner side</strong> records where responsibility sits on the directed dependency: source means the code depending outward owns the decision; target means the depended-on side accepts incoming use. Narrow the counterparty when a broader owner-side record would cover unrelated dependencies.</p>
-    <p><strong>Intentional</strong> is a deliberate design choice and renders in muted green. <strong>Debt</strong> is tolerated structure that should remain visible in debt counts, lists, reports, and review surfaces; it renders in muted amber. If active records overlap, debt wins so a narrower or later intentional record cannot hide it.</p>
+    <p><strong>Owner side</strong> records where responsibility sits for a broader scope: source covers dependencies leaving the selected code; target covers dependencies entering it. An individual dependency already identifies both sides, so AtlasArc hides the owner control for that scope.</p>
+
+    <h2 id="classification">Choose Intentional or Debt</h2>
+    <p>Both classifications accept reviewed dependency evidence, so that evidence no longer keeps a fully governed cycle in the problem graph or fails the matching CI rule. The classification records what the team means by that acceptance; it does not erase the structural dependency.</p>
+    <table>
+      <thead>
+        <tr><th>Classification</th><th>Choose it when</th><th>What AtlasArc preserves</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Intentional</strong></td><td>The dependency is a deliberate architectural relationship and the team does not plan to remove it.</td><td>It renders in muted green and remains inspectable as accepted structure.</td></tr>
+        <tr><td><strong>Debt</strong></td><td>The team tolerates the dependency for now but believes it should change. Record the reason and add a ticket when one exists.</td><td>It renders in muted amber and remains visible in debt counts, lists, reports, and governance review.</td></tr>
+      </tbody>
+    </table>
+    <p>When the answer changes, use the governance review to reclassify the existing record. AtlasArc changes the kind in place and preserves the stable record ID; deleting and recreating the decision is unnecessary. If active records overlap, <strong>Debt wins</strong>, so a broader or later Intentional record cannot hide known debt.</p>
 
     <h2 id="language-scope">Use only evidence the backend can prove</h2>
     <table>
@@ -36,13 +48,13 @@
         <tr><th>Analysis backend</th><th>Supported v1 governance evidence</th></tr>
       </thead>
       <tbody>
-        <tr><td>Java bytecode</td><td>Package, type, member, and directed-reference evidence when stable identities are present.</td></tr>
-        <tr><td>Kotlin bytecode</td><td>Package architecture units plus type, function, property, constructor, member, and directed-reference evidence when present.</td></tr>
-        <tr><td>TypeScript artifact</td><td>Source-folder, source-file, directed import, and dependency-kind evidence such as runtime, type-only, dynamic import, or re-export.</td></tr>
+        <tr><td>Java bytecode</td><td>Package, type, member, and individual-dependency evidence when stable identities are present.</td></tr>
+        <tr><td>Kotlin bytecode</td><td>Package architecture units plus type, function, property, constructor, member, and individual-dependency evidence when present.</td></tr>
+        <tr><td>TypeScript artifact</td><td>Source-folder, source-file, individual import, and dependency-kind evidence such as runtime, type-only, dynamic import, or re-export.</td></tr>
       </tbody>
     </table>
     <p>TypeScript v1 does not pretend that dependency-cruiser artifacts provide stable class or function identities. Kotlin package governance does not require a source declaration site: the package is an AtlasArc architecture unit.</p>
-    <p>For JVM whole-project analysis, AtlasArc also retains the owning module when it is needed to disambiguate split packages. A package decision for <code>acceptance.shared.left</code> in <code>orders</code> does not govern the identically named package in <code>billing</code>. A module-less selector that could match both is ambiguous and suppresses nothing.</p>
+    <p>For JVM whole-project analysis, module labels keep governance decisions scoped to the intended module. A package decision for <code>acceptance.shared.left</code> in <code>orders</code> does not govern the package with the same name in <code>billing</code>. A selector that could refer to both is ambiguous and suppresses nothing.</p>
 
     <h2 id="problem-graph">Structural truth stays visible</h2>
     <p>Governance changes which dependencies remain cycle <em>problems</em>; it does not rewrite the structural graph. A governed dependency remains available for inspection and reporting even when it no longer keeps a cycle warning red.</p>
@@ -55,9 +67,20 @@
       <li><strong>Resolved</strong>: the governed dependency no longer exists; review and remove the record when that is intentional.</li>
       <li><strong>Missing source/target</strong>: an identity moved or disappeared; inspect candidates before retargeting.</li>
       <li><strong>Partial</strong>: only some recorded reference evidence still matches; uncovered evidence remains a problem.</li>
-      <li><strong>Ambiguous, unsupported, or invalid</strong>: the record suppresses nothing until a person resolves the issue.</li>
+      <li><strong>Ambiguous</strong>: a JVM selector could refer to packages in more than one module. The record suppresses nothing until you choose the intended source and target modules.</li>
+      <li><strong>Unsupported or invalid</strong>: the backend cannot prove the requested scope, or the record does not satisfy the schema. It suppresses nothing until corrected.</li>
     </ul>
-    <p>Use the governance review to inspect evidence, preview a retarget or removal diff, reload an externally changed file, or open the document. AtlasArc never turns a suggestion into a write without confirmation.</p>
+
+    <h3 id="management-dialog">Review and maintain the repository document</h3>
+    <p>Open <strong>Cycle Governance</strong> from the shared toolbar in any lens. The dialog starts with every record collapsed. Its count pills filter all records, Intentional, Debt, stale or invalid, and not evaluated; changing a filter closes the expanded item so the result is easy to rescan.</p>
+    <p>Expand one record to see its decision rationale, current evaluation, and a compact read-only topology diagram of the matched dependency evidence. Expanding another closes the first. From that item you can:</p>
+    <ul>
+      <li>mark an active record as <strong>Debt</strong> or <strong>Intentional</strong> without deleting and recreating it;</li>
+      <li>retarget a missing source or target from candidates found in current evidence;</li>
+      <li>resolve an ambiguous JVM selector by choosing the intended source and target modules from the dependency evidence AtlasArc found;</li>
+      <li>remove the record, reload an externally changed document, or open the JSON file.</li>
+    </ul>
+    <p>AtlasArc offers only module pairs supported by current dependency evidence. Reclassification and evidence-backed retargeting apply directly. Removal uses an inline destructive confirmation. If the file changed since the dialog loaded, AtlasArc refuses the stale write.</p>
 
     <h2 id="file-contract">File ownership and merge behavior</h2>
     <p>The schema is versioned at <a href="/schemas/cycle-governance-v1.schema.json"><code>https://atlasarc.io/schemas/cycle-governance-v1.schema.json</code></a>. Records are keyed objects rather than one large array, so independent branch additions stay local in review. AtlasArc writes deterministic UTF-8/LF JSON with sorted record and reference IDs.</p>
@@ -89,6 +112,7 @@
   {"path": "billing/src/main/java", "module": "billing"}
 ]</code></pre>
     <p>Use the same stable module labels that the IDE import uses. They become part of JVM evidence identity where package names alone are not unique.</p>
+    <p>For genuinely module-less JVM code, omit <code>module</code> from every class directory and source root. AtlasArc then treats all of those physical roots as one module-less JVM universe and starts the hierarchy at the root package. Do not mix named and unlabelled roots: incomplete ownership configuration fails closed.</p>
 
     <h3>TypeScript configuration</h3>
     <p>Generate dependency-cruiser JSON in your own toolchain, then point the evaluator at it:</p>

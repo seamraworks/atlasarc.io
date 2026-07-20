@@ -48,7 +48,7 @@
       <li><strong>Adaptive Treemap</strong> shows a meaningful frontier through the package tree. It is more informative than only direct children, and less overwhelming than every leaf package at once.</li>
     </ul>
     <p>The important detail is that subsystem health is computed from the raw graph, not from whatever happens to be visible after your current filters. A filtered view can be narrow; the rollup metrics still describe the subsystem underneath it.</p>
-    <p>A practical pattern: turn on rollup to understand the shape of a large tangle, identify the suspicious namespace, then increase depth or set that package as root before touching code.</p>
+    <p><strong>Progressively reveal the whole project:</strong> enable rollup and choose the lowest depth that still separates meaningful architectural areas, then use <strong>Expand All</strong>. The package hierarchy is now fully expanded underneath the rollup, so raise <strong>Rollup depth</strong> one step at a time to reveal the next namespace level across the scoped project. Stop as soon as the added detail makes the diagram harder rather than easier to read, then set the suspicious package as root before drilling further.</p>
     <div class="placeholder-box">Screenshot: Deep Package Rollup with collapsed-folder cycle indicators</div>
 
     <h2>Filter the noise</h2>
@@ -58,6 +58,7 @@
       <li><strong>Fan-in and fan-out ranges</strong> find structural roles. High fan-in points at packages many others depend on. High fan-out points at packages that know too much. Low values can expose fragments, hermits, and packages in the wrong place.</li>
       <li><strong>Hide isolated</strong> removes packages left with no visible edges after filtering. This keeps a strict filter from leaving visual debris across the canvas.</li>
       <li><strong>Exclude patterns</strong> remove known-noise families by prefix, suffix, or substring. Use them for generated code, framework adapters, test fixtures, or a namespace that is out of scope for the current review.</li>
+      <li><strong>Exclude this package</strong> in a package context menu adds one exact entry to the Exclusions list and applies it immediately. It removes only the selected package, leaving its children and neighbouring packages available.</li>
       <li><strong>Search / Spotlight</strong> is for orientation rather than scoping. It highlights matches and immediate neighbours while dimming the rest.</li>
       <li><strong>Status Cluster</strong> is a fixed strip of indicator lamps that always shows what is currently hiding packages, and how much. Active reference and fan filters, exclusions, Hide isolated, and Only Cycles each light a lamp, so a single forgotten setting that quietly removed most of the graph is visible at a glance instead of being mistaken for the whole architecture.</li>
       <li><strong>No-results feedback</strong> makes aggressive filtering reversible. If everything disappears, reset or relax the threshold instead of guessing what happened.</li>
@@ -84,8 +85,8 @@
       <li><strong>Cycle detail levels</strong> step from full context to architectural violations only. Use the early levels to understand context; use Architectural when you need the hardest violations without nested or accepted noise.</li>
       <li><strong>Cycle-group navigator</strong> walks strongly connected groups one at a time. The point is to make "there are many cycles" become "this is group 3, and these are the packages keeping it alive."</li>
       <li><strong>Cycle groups panel</strong> shows group membership and severity badges, and lets you mute groups you have already triaged.</li>
-      <li><strong>Classification</strong> distinguishes architectural cycles, aggregation cycles, nested-internal cycles, cross-module phantom cycles, and accepted cycles. A large codebase needs this distinction because not every loop deserves the same response.</li>
-      <li><strong>Safe Havens</strong> move known package-level exceptions out of the current investigation. <strong>Repository governance</strong> makes durable intentional/debt decisions reviewable in <code>.atlasarc/governance/cycles.json</code>, with a reason and optional ticket.</li>
+      <li><strong>Classification</strong> distinguishes architectural cycles, aggregation cycles, nested-internal cycles, and governed cycles, so loops that disappear when folders are expanded and decisions the team already recorded are not mistaken for new architectural problems.</li>
+      <li><strong>Safe Havens</strong> move local package noise out of the current investigation. <strong>Repository governance</strong> makes durable Intentional/Debt decisions reviewable in <code>.atlasarc/governance/cycles.json</code>, with a reason and optional ticket.</li>
     </ul>
     <p>A good cycle triage pass usually has three outcomes: refactor now, record a debt item, or sanction an intentional exception. AtlasArc keeps those decisions visible instead of pretending accepted coupling disappeared.</p>
     <p>Useful next steps: run the <a href="/workflows/find-cycles">Find cyclic dependencies</a> workflow for discovery, then use <a href="/workflows/audit-individual-cycle-groups">Audit individual cycle groups</a> when the backlog is large enough to need a group-by-group pass.</p>

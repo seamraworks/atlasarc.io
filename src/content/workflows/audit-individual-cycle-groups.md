@@ -18,7 +18,7 @@ steps:
   - heading: Act on the classification.
     body: "For design problems: navigate to the specific edge closing the cycle and plan a refactor. For intentional dependencies or managed debt: record or review the repository governance decision on the concrete dependency and commit the governance file. For noise: add a Safe Haven to suppress it in your local workspace."
   - heading: Move to the next group.
-    body: Use the cycle-group navigator to advance. Record the decision for each group before moving. When you have processed all groups, note the count of each classification as your audit output.
+    body: "Use the cycle-group navigator to advance. Record the decision for each group before moving. When you have processed all groups, open Cycle Governance for the repository-wide review: filter the classifications, repair stale or ambiguous records from current evidence, and then note the count of each classification as your audit output."
 interpretation: |
   Groups that cross architectural layers are the highest priority to resolve. Groups within the same layer are often a clean interface extraction. Groups involving two packages are cheaper to fix than groups with five or more members. For large groups (five or more packages), look for the linchpin edges: the one or two dependencies that, if removed or inverted, would collapse the group. The largest-cycle-size metric tells you where to expect the most work before you start. Consistent progress on the design-problem groups, even one or two per sprint, is more valuable than occasional large cleanup sessions that do not change the trajectory.
 export_note: |

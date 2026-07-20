@@ -38,8 +38,8 @@
       <div class="container">
         <h2>Cycle detection and triage</h2>
         <ul>
-          <li>Automatic detection of every dependency cycle, each classified as architectural, aggregation, nested, or cross-module so you can tell a real design problem from a harmless one.</li>
-          <li>In multi-module projects, cycles that only exist because modules were merged stay hidden until you ask to see them.</li>
+          <li>Automatic detection of dependency cycles, classified as architectural, aggregation, or nested so you can distinguish design problems from collapsed-view effects.</li>
+          <li>Multi-module projects show each module as its own frame while preserving real dependencies and cycles between modules.</li>
           <li>A cycles-only view with four levels of detail and a navigator that steps you through one cycle group at a time.</li>
           <li>Collapsed folders show a marker when a cycle is hiding inside them, so you can find trouble without expanding everything.</li>
         </ul>
@@ -53,7 +53,7 @@
           <li><strong>Safe Havens</strong>: set aside cycles you&rsquo;ve already reviewed or don&rsquo;t care about right now. It&rsquo;s local to your session and never changes your code.</li>
           <li><strong>Repository governance</strong>: record a directional dependency as intentional or known debt in <code>.atlasarc/governance/cycles.json</code>, with a required reason and optional ticket.</li>
           <li><strong>Intentional vs. debt</strong>: governed dependencies show in muted green when they&rsquo;re intentional and amber when they&rsquo;re tracked debt, and debt stays visible in dedicated evidence surfaces.</li>
-          <li><strong>Review without source mutation</strong>: AtlasArc previews the exact governance-file diff, writes only after confirmation, and never edits application source or build files.</li>
+          <li><strong>Review without source mutation</strong>: explicit governance actions write only <code>.atlasarc/governance/cycles.json</code> under revision guards; destructive removal uses inline confirmation, and AtlasArc never edits application source or build files.</li>
           <li><strong>IDE/CI parity</strong>: the bundled headless evaluator applies the same Java, Kotlin, and TypeScript matching and problem-graph rules in the build.</li>
         </ul>
       </div>

@@ -10,7 +10,9 @@ why_it_matters: |
 lens: Subsystems
 steps:
   - heading: Set the subsystem as the architectural focus.
-    body: Right-click the subsystem root in the Topology Graph and set it as Root. This scopes all lenses to the subsystem boundary.
+    body: Right-click the subsystem in the Topology Graph and choose Set as Root. This scopes every lens to the selected area.
+  - heading: Expand the selected area only when you need package detail.
+    body: Choose Expand completely on the selected module or package folder to reveal that area without opening every peer module. The selected Root stays active when you switch lenses.
   - heading: Check size in the sidebar.
     body: Open the Metrics sidebar and note class count and lines of code. These are your baseline size metrics. Compare against the previous quarter if you have a record.
   - heading: Review boundary metrics in Subsystems.

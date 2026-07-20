@@ -10,7 +10,7 @@ why_it_matters: |
 lens: Subsystems
 steps:
   - heading: Open the Subsystems view.
-    body: Switch to the Subsystems lens. Packages are grouped into subsystem bubbles based on the current focus root. Each bubble represents a direct child area of the current root; size encodes the aggregate metric for that subtree.
+    body: Switch to the Subsystems lens. A whole-project analysis starts with one bubble per module. If a Root is active, each bubble represents a direct child area. Size encodes the aggregate metric for each area.
   - heading: Inspect cross-subsystem flow.
     body: Select the "Boundary Risk" preset to plot subsystems by their boundary fan-in and fan-out. Bubbles in the upper-right have both high incoming and outgoing coupling — these are your most entangled subsystems. Hover to see the exact values.
   - heading: Drill into pressure points.

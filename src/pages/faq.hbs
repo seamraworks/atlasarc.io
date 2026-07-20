@@ -78,7 +78,7 @@
           </div>
           <div class="faq-item">
             <dt>Do I need to change my build files?</dt>
-            <dd>No. AtlasArc does not edit application build files for analysis or governance. It writes only its committed governance document after you review the diff. To enforce decisions in CI, build your project normally and add a pipeline step that runs the <a href="/docs/govern-cycle-exceptions#ci">AtlasArc evaluator</a>.</dd>
+            <dd>No. AtlasArc does not edit application build files for analysis or governance. Choosing <strong>Record acceptance</strong> writes only the committed AtlasArc governance document, under a revision guard that refuses concurrent edits. To enforce decisions in CI, build your project normally and add a pipeline step that runs the <a href="/docs/govern-cycle-exceptions#ci">AtlasArc evaluator</a>.</dd>
           </div>
           <div class="faq-item">
             <dt>Why should I build before analysis?</dt>
@@ -86,7 +86,7 @@
           </div>
           <div class="faq-item">
             <dt>Does it work with multi-module projects?</dt>
-            <dd>Yes. AtlasArc can analyze the whole project or individual IntelliJ modules. Multi-module cycle noise is handled explicitly, including cross-module cycles that are hidden by default unless you ask to inspect them. See <a href="/docs/handling-large-projects">handling large projects</a>.</dd>
+            <dd>Yes. AtlasArc can analyze the whole project or individual IntelliJ modules. Use <strong>Set as Root</strong> to focus on one module; dependencies and cycles between modules remain visible in whole-project analysis. See <a href="/docs/handling-large-projects">handling large projects</a>.</dd>
           </div>
           <div class="faq-item">
             <dt>Can it handle large projects?</dt>

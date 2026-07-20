@@ -14,9 +14,11 @@ steps:
   - heading: Show the isolated packages.
     body: Turn the "Hide isolated" filter OFF. Most sessions keep it on to reduce noise, which is exactly why hermits stay invisible. With it off, every package with no edges floats free of the connected graph.
   - heading: Clear other filters so nothing is artificially hidden.
-    body: Click Reset to drop any active coupling-strength, fan-in, or prefix filters. A package can look isolated only because the current filters hid its edges. Resetting guarantees that a floating node is a true hermit, not a filtering artefact.
+    body: Starting this workflow clears reference, fan, and cycle filters, pauses Exclusions and deep package roll-up, and turns Hide isolated off. It keeps your current Root, and your exclusion list remains intact for later. If you configure the view manually instead, use Reset before scoping the audit. A package can look isolated only because filtering hid its edges.
   - heading: Audit one module at a time.
-    body: For a large project, set a package Prefix to scope the graph to a single module. Hermits are easier to judge in context; an isolated package inside a leaf utility module reads very differently from one stranded in your domain layer.
+    body: For a large project, right-click a module and choose Set as Root. Hermits are easier to judge in context; an isolated package inside a leaf utility module reads very differently from one stranded in your domain layer.
+  - heading: Reveal the chosen subtree, not the whole project.
+    body: Right-click the selected module or package folder and choose Expand completely so collapsed children cannot conceal hermit candidates. This expands only that subtree; avoid project-wide Expand All unless the whole-project audit is deliberate.
   - heading: Classify each hermit, then act.
     body: "For each floating package decide what it is. Dead code: confirm there are no reflective or configuration references, then delete it and reclaim the maintenance. A forgotten refactor: reconnect it to its intended callers, or finish removing what it replaced. A self-contained utility: consider promoting it to a shared library or internal module where its independence is a feature, not an accident. Navigate to any package in the IDE directly from its node to make the call against real code."
 metrics:
