@@ -78,7 +78,7 @@
           </div>
           <div class="faq-item">
             <dt>Do I need to change my build files?</dt>
-            <dd>No. AtlasArc does not edit application build files for analysis or governance. Choosing <strong>Record acceptance</strong> writes only the committed AtlasArc governance document, under a revision guard that refuses concurrent edits. To enforce decisions in CI, build your project normally and add a pipeline step that runs the <a href="/docs/govern-cycle-exceptions#ci">AtlasArc evaluator</a>.</dd>
+            <dd>No. AtlasArc does not edit application build files for analysis or governance. Choosing <strong>Record acceptance</strong> writes only the committed AtlasArc governance document, under a revision guard that refuses concurrent edits. To enforce decisions in CI, build your project normally and add the <a href="/docs/atlasarc-ci">standalone evaluator or ArchUnit adapter</a>.</dd>
           </div>
           <div class="faq-item">
             <dt>Why should I build before analysis?</dt>
@@ -167,15 +167,18 @@
         <dl class="faq">
           <div class="faq-item">
             <dt>Does AtlasArc fail my build?</dt>
-            <dd>The IntelliJ plugin does not fail builds by itself. Add the standalone evaluator as a pipeline step, or use the <a href="/docs/recipe-archunit-build">AtlasArc ArchUnit/JUnit rule</a> in a JVM architecture test. Both read the committed governance file and fail when an ungoverned problem cycle remains.</dd>
+            <dd>The IntelliJ plugin does not fail builds by itself. Add the open-source standalone evaluator as a pipeline step, or use the <a href="/docs/recipe-archunit-build">AtlasArc ArchUnit/JUnit rule</a> in a JVM architecture test. Both read the committed governance file and fail when an ungoverned problem cycle remains. See <a href="/docs/atlasarc-ci#choose">which integration fits</a>.</dd>
           </div>
           <div class="faq-item">
             <dt>How does the governance evaluator work?</dt>
-            <dd>Your build first produces current JVM classes or TypeScript dependency artifacts. The standalone evaluator then reads those inputs plus <code>.atlasarc/governance/cycles.json</code>, using the same matcher and problem-graph classifier as the IDE. Remaining ungoverned cycle problems return a failing exit code. See the <a href="/docs/govern-cycle-exceptions#ci">CI setup</a>.</dd>
+            <dd>Your build first produces current JVM classes or TypeScript dependency artifacts. The standalone evaluator then reads those inputs plus <code>.atlasarc/governance/cycles.json</code>, using the same matcher and problem-graph classifier as the IDE. Remaining ungoverned cycle problems return a failing exit code. See the <a href="/docs/atlasarc-ci">CI setup</a>.</dd>
           </div>
           <div class="faq-item">
-            <dt>Do I need AtlasArc in CI?</dt>
-            <dd>You do not run IntelliJ in CI. Use the framework-free evaluator shipped with the matching AtlasArc release; it requires JDK 21 and explicitly configured compiler output or TypeScript artifacts.</dd>
+            <dt>Do I need the AtlasArc plugin in CI?</dt>
+            <dd>No. <a href="/docs/atlasarc-ci">AtlasArc CI</a> is Apache-2.0 open source and requires no IntelliJ runtime or paid plugin license. The standalone evaluator needs JDK 21 and explicitly configured compiler output or TypeScript artifacts.</dd>
+
+            <dt>Should I use the standalone evaluator or ArchUnit?</dt>
+            <dd>Use the <a href="/docs/recipe-archunit-build">ArchUnit adapter</a> when a Java/Kotlin project should run the check as an ordinary JUnit test. Use the <a href="/docs/atlasarc-ci">standalone evaluator</a> for TypeScript, mixed stacks, SARIF/JSON output, or a tool-neutral process exit code.</dd>
           </div>
           <div class="faq-item">
             <dt>Can my ArchUnit tests honour cycles accepted in AtlasArc?</dt>

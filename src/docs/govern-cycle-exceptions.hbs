@@ -87,54 +87,9 @@
     <p>Keep generated dependency evidence separate from committed governance under <code>.atlasarc/</code>. AtlasArc owns valid writes; manual editing is possible but is not the intended workflow, and malformed, unknown, stale, or unsupported content fails closed.</p>
 
     <h2 id="ci">Enforce the same decisions in CI</h2>
-    <p>The AtlasArc governance evaluator is the framework-free CI companion built from the same source revision as the plugin. A locally built plugin distribution contains its JAR, configuration schema, examples, checksums, SBOM, provenance, license, and notices under <code>AtlasArc/tools/governance-evaluator/</code>. Use the evaluator from the same build as the plugin that authored the file.</p>
-    <p>The evaluator requires JDK 21. It never runs Gradle, Maven, npm, or dependency-cruiser: your build creates current compiler output or TypeScript artifacts first, then the evaluator reads those explicit inputs.</p>
-
-    <h3>JVM configuration</h3>
-    <p>Copy the bundled JVM example to <code>.atlasarc/evaluator.json</code> and point it at the classes and source roots produced by your build:</p>
-    <pre><code>{
-  "configVersion": 1,
-  "repositoryRoot": ".",
-  "sources": [{
-    "id": "jvm:main",
-    "backend": "jvm-bytecode",
-    "classDirectories": [{"path": "build/classes/java/main", "module": "main"}],
-    "sourceRoots": [{"path": "src/main/java", "module": "main"}]
-  }]
-}</code></pre>
-    <p>In a multi-module build, list each module's class directory and source root with one stable, matching label:</p>
-    <pre><code>"classDirectories": [
-  {"path": "orders/target/classes", "module": "orders"},
-  {"path": "billing/target/classes", "module": "billing"}
-],
-"sourceRoots": [
-  {"path": "orders/src/main/java", "module": "orders"},
-  {"path": "billing/src/main/java", "module": "billing"}
-]</code></pre>
-    <p>Use the same stable module labels that the IDE import uses. They become part of JVM evidence identity where package names alone are not unique.</p>
-    <p>For genuinely module-less JVM code, omit <code>module</code> from every class directory and source root. AtlasArc then treats all of those physical roots as one module-less JVM universe and starts the hierarchy at the root package. Do not mix named and unlabelled roots: incomplete ownership configuration fails closed.</p>
-
-    <h3>TypeScript configuration</h3>
-    <p>Generate dependency-cruiser JSON in your own toolchain, then point the evaluator at it:</p>
-    <pre><code>{
-  "configVersion": 1,
-  "repositoryRoot": ".",
-  "sources": [{
-    "id": "typescript:frontend",
-    "backend": "typescript-artifact",
-    "root": ".",
-    "dependencyCruiserJson": ".atlasarc/depgraph.json",
-    "eslintSarif": ".atlasarc/eslint.sarif"
-  }]
-}</code></pre>
-
-    <h3>Run the gate</h3>
-    <p>Copy the matching build's evaluator payload into a CI-managed <code>tools/</code> directory (or adjust the path below), and verify its bundled <code>SHA256SUMS</code> before execution:</p>
-    <pre><code>java -jar tools/atlasarc-governance-evaluator-&lt;version&gt;-standalone.jar \
-  evaluate --config .atlasarc/evaluator.json --format human</code></pre>
-    <p>Use <code>--format json</code> for machine processing or <code>--format sarif --output build/atlasarc-governance.sarif</code> for code-scanning ingestion. Exit code <code>0</code> means valid governance with no remaining problem cycle; <code>1</code> means valid evaluation with ungoverned cycle problems; <code>2</code> means configuration, acquisition, freshness, schema, or governance validation failed; <code>3</code> means an unexpected evaluator error.</p>
-    <p>Multiple configured sources are evaluated independently. AtlasArc does not invent a merged Java/Kotlin/TypeScript graph, and CI does not consume local Safe Havens.</p>
-    <p>Java/Kotlin projects that already run architecture tests can use the <a href="/docs/recipe-archunit-build">AtlasArc ArchUnit/JUnit recipe</a>. Its <code>ArchRule</code> reads the same governance file and delegates to the same evaluation core, so accepted cycles pass while new ungoverned cycles remain test failures.</p>
+    <p><a href="/docs/atlasarc-ci">AtlasArc CI</a> is the Apache-2.0 enforcement side of this workflow. It needs no IntelliJ runtime or paid plugin license. The standalone evaluator reads current Java/Kotlin bytecode or TypeScript dependency-cruiser artifacts and returns a process exit code; the ArchUnit adapter makes the same verdict part of an ordinary JVM test.</p>
+    <p>Both integrations read the committed governance file and use the same public engine as the IDE. Local Safe Havens are never consumed by CI. If evidence is stale, module ownership is ambiguous, or a record is invalid, evaluation fails closed rather than reporting a false clean result.</p>
+    <p>See <a href="/docs/atlasarc-ci">the AtlasArc CI guide</a> for the integration chooser, Maven distribution, public source, evaluator configuration, output formats, and exit codes. Java/Kotlin teams that prefer the normal JUnit lifecycle can go directly to the <a href="/docs/recipe-archunit-build">ArchUnit recipe</a>.</p>
 
     <h2>Where to go next</h2>
     <p>Start cycle triage with <a href="/workflows/find-cycles">Find cyclic dependencies</a>, see the public product summary under <a href="/product/features#govern-exceptions">Govern intentional exceptions</a>, or review <a href="/docs/handling-large-projects">Handling large projects</a> for ways to reduce a crowded model before recording decisions.</p>

@@ -20,13 +20,25 @@
     </ul>
 
     <h2>1. Add the test dependencies</h2>
-    <p>A local AtlasArc build places <code>atlasarc-archunit-&lt;version&gt;-standalone.jar</code> beside the evaluator under <code>AtlasArc/tools/governance-evaluator/</code>. Copy the matching adapter JAR into a CI-managed <code>tools/</code> directory in your project, then add it with ArchUnit's JUnit 5 integration:</p>
+    <p>AtlasArc's Apache-2.0 ArchUnit adapter is released as <code>io.atlasarc:atlasarc-archunit</code>. Add it beside ArchUnit's JUnit 5 integration once the first public release is available:</p>
     <pre><code>// build.gradle.kts
 dependencies {
+    testImplementation("io.atlasarc:atlasarc-archunit:&lt;version&gt;")
     testImplementation("com.tngtech.archunit:archunit-junit5:1.4.2")
-    testImplementation(files("tools/atlasarc-archunit-&lt;version&gt;-standalone.jar"))
 }</code></pre>
-    <p>Keep the adapter from the same AtlasArc build that authored the governance file. The adapter contains AtlasArc's framework-free matching runtime, but ArchUnit itself remains your normal test dependency.</p>
+    <pre><code>&lt;dependency&gt;
+  &lt;groupId&gt;io.atlasarc&lt;/groupId&gt;
+  &lt;artifactId&gt;atlasarc-archunit&lt;/artifactId&gt;
+  &lt;version&gt;&lt;version&gt;&lt;/version&gt;
+  &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;com.tngtech.archunit&lt;/groupId&gt;
+  &lt;artifactId&gt;archunit-junit5&lt;/artifactId&gt;
+  &lt;version&gt;1.4.2&lt;/version&gt;
+  &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;</code></pre>
+    <p>The adapter, standalone evaluator, and portable governance core are released together from the public <a href="https://github.com/seamraworks/atlasarc-ci">AtlasArc CI repository</a>. ArchUnit itself remains your normal test dependency.</p>
 
     <h2>2. Add the governed-cycle rule</h2>
     <pre><code>import com.tngtech.archunit.junit.AnalyzeClasses;
@@ -44,20 +56,26 @@ class ArchitectureTest {
         AtlasArcGovernanceRules.governedCycles()
             .fromRepository(Path.of("."))
             .forAnalysisSource("jvm:whole-project")
-            .withModuleSourceRoot("main", Path.of("src/main/java"))
+            .withSourceRoot(Path.of("src/main/java"))
+            .withClassRoot(Path.of("target/classes"))
             .build();
 }</code></pre>
     <p>For Kotlin or mixed JVM code, add each real source root:</p>
-    <pre><code>.withModuleSourceRoot("main", Path.of("src/main/java"))
-.withModuleSourceRoot("main", Path.of("src/main/kotlin"))</code></pre>
-    <p>For a multi-module whole-project rule, qualify every source root with the same stable module label used by the IDE and evaluator:</p>
+    <pre><code>.withSourceRoot(Path.of("src/main/java"))
+.withSourceRoot(Path.of("src/main/kotlin"))
+.withClassRoot(Path.of("target/classes"))</code></pre>
+    <p>For a multi-module whole-project rule, qualify every source and class root with the same stable module label used by the IDE and evaluator:</p>
     <pre><code>.withModuleSourceRoot("orders", Path.of("orders/src/main/java"))
-.withModuleSourceRoot("billing", Path.of("billing/src/main/java"))</code></pre>
-    <p>Module labels keep governance decisions scoped to the intended module. If a selector could refer to the same package name in more than one module, AtlasArc fails closed until the module is specified.</p>
-    <p>For genuinely module-less JVM code, use <code>withSourceRoot(Path)</code> for every source root instead. This keeps the root package as the hierarchy root. Do not mix <code>withSourceRoot</code> and <code>withModuleSourceRoot</code> in one rule.</p>
+.withModuleSourceRoot("billing", Path.of("billing/src/main/java"))
+.withModuleClassRoot("orders", Path.of("orders/target/classes"))
+.withModuleClassRoot("billing", Path.of("billing/target/classes"))</code></pre>
+    <p>Module labels keep governance decisions scoped to the intended module. Class roots make attribution deterministic even when modules contain the same package and source-file names. If a selector could refer to more than one module, AtlasArc fails closed until the decision is qualified.</p>
+    <p>For genuinely module-less JVM code, use <code>withSourceRoot(Path)</code> and <code>withClassRoot(Path)</code> instead. This keeps the root package as the hierarchy root. Do not mix named and module-less roots in one rule.</p>
     <p>If governance was authored with <strong>Include tests</strong> selected in the IDE, configure <code>@AnalyzeClasses</code> or your explicit <code>ClassFileImporter</code> to import the same compiled test classes and add their source roots with the same module labels:</p>
     <pre><code>.withModuleSourceRoot("orders", Path.of("orders/src/main/java"))
-.withModuleSourceRoot("orders", Path.of("orders/src/test/java"))</code></pre>
+.withModuleSourceRoot("orders", Path.of("orders/src/test/java"))
+.withModuleClassRoot("orders", Path.of("orders/target/classes"))
+.withModuleClassRoot("orders", Path.of("orders/target/test-classes"))</code></pre>
     <p>If <strong>Include tests</strong> was not selected, keep the ArchUnit import production-only. The checkbox does not create a different analysis-source ID; it changes the evidence included under that source, so IDE and CI input scope must agree.</p>
     <p>The analysis-source ID labels this ArchUnit acquisition in diagnostics and record provenance; it is not a governance namespace or an exact-ID applicability gate. Use <code>jvm:whole-project</code> for a repository-wide imported class set, or <code>jvm:module:&lt;name&gt;</code> when the rule imports only that module. Stable module labels on the source roots are what keep identically named packages independent.</p>
 
@@ -82,12 +100,12 @@ class ArchitectureTest {
 
     <h2>Limits</h2>
     <ul>
-      <li>This recipe is for Java and Kotlin bytecode because it runs inside ArchUnit/JUnit. Use the <a href="/docs/govern-cycle-exceptions#ci">standalone evaluator</a> for TypeScript and for a language-neutral pipeline command.</li>
+      <li>This recipe is for Java and Kotlin bytecode because it runs inside ArchUnit/JUnit. Use the <a href="/docs/atlasarc-ci">standalone evaluator</a> for TypeScript and for a language-neutral pipeline command.</li>
       <li>Local Safe Havens never affect CI. Only committed repository governance is honoured.</li>
       <li>The rule consumes the classes selected by <code>@AnalyzeClasses</code>. Keep that imported class set aligned with the module-qualified source roots you configure; the analysis-source ID labels the acquisition but does not have to equal the ID recorded by the IDE.</li>
     </ul>
 
     <h2>Related</h2>
-    <p>See <a href="/docs/govern-cycle-exceptions">Govern cycle exceptions</a> for the IDE workflow, governance scopes, stale-record repair, and standalone evaluator configuration.</p>
+    <p>See <a href="/docs/govern-cycle-exceptions">Govern cycle exceptions</a> for the IDE workflow and stale-record repair, or <a href="/docs/atlasarc-ci">AtlasArc CI</a> for the standalone evaluator.</p>
   {{/inline}}
 {{/docs}}
