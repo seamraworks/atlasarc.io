@@ -26,7 +26,7 @@
     <p>Both paths use the same public core: schema validation, module-qualified evidence, Intentional/Debt matching, red-wins reference coverage, record statuses, and strongly connected component calculation.</p>
 
     <h2>Use the standalone evaluator</h2>
-    <p>AtlasArc CI 1.0.0 requires JDK 21. Download the <a href="https://repo.maven.apache.org/maven2/io/atlasarc/atlasarc-ci/1.0.0/atlasarc-ci-1.0.0-standalone.jar">standalone JAR</a> or <a href="https://repo.maven.apache.org/maven2/io/atlasarc/atlasarc-ci/1.0.0/atlasarc-ci-1.0.0-standalone.zip">standalone ZIP</a> from Maven Central. Your build produces evidence first; AtlasArc never invokes Maven, Gradle, npm, or dependency-cruiser for you.</p>
+    <p>AtlasArc CI 1.2.0 requires JDK 21. Download the <a href="https://repo.maven.apache.org/maven2/io/atlasarc/atlasarc-ci/1.2.0/atlasarc-ci-1.2.0-standalone.jar">standalone JAR</a> or <a href="https://repo.maven.apache.org/maven2/io/atlasarc/atlasarc-ci/1.2.0/atlasarc-ci-1.2.0-standalone.zip">standalone ZIP</a> from Maven Central. Your build produces evidence first; AtlasArc never invokes Maven, Gradle, npm, or dependency-cruiser for you.</p>
 
     <h3>JVM bytecode</h3>
     <p>Save the configuration as <code>.atlasarc/evaluator.json</code>. Because <code>repositoryRoot</code> is relative to that file, <code>..</code> points back to the Git root. Evidence paths are repository-relative:</p>
@@ -74,12 +74,13 @@
     <p>The preview is read-only. It shows the current problem cycles, concrete references that would become Debt, existing records that remain untouched, and the resulting verdict. After reviewing it, add explicit write intent:</p>
     <pre><code>java -jar tools/atlasarc-ci-&lt;version&gt;-standalone.jar \
   baseline --config .atlasarc/evaluator.json --write</code></pre>
-    <p>AtlasArc creates one exact-reference <strong>Debt</strong> record per current ungoverned cycle dependency. It never converts the backlog into broad package acceptance, never marks machine-generated decisions Intentional, and never changes an existing decision. The write is deterministic, atomic, revision-checked, and an unchanged rerun leaves the file byte-for-byte alone.</p>
+    <p>Starting with 1.2.0, AtlasArc does not accept every edge in a strongly connected component. It selects a narrow set of edges whose governance breaks the current cycles, minimizing selected edges first and concrete references second for ordinary-sized groups. It then creates one exact-reference <strong>Debt</strong> record for each current dependency on those selected edges only. Large groups use a bounded deterministic heuristic, and every proposal must produce a clean ordinary evaluation before AtlasArc will write it.</p>
+    <p>The baseline never converts the backlog into broad package acceptance, never marks machine-generated decisions Intentional, and never changes an existing decision. The write is deterministic, atomic, revision-checked, and an unchanged rerun leaves the file byte-for-byte alone.</p>
     <p>Review and commit <code>cycles.json</code>, then run the ordinary evaluator as the gate. A new dependency fails when it forms a new ungoverned problem cycle; the baseline does not hide structural dependencies or suppress unrelated future references. AtlasArc refuses the baseline when evidence is stale, partial, unattributed, ambiguous, invalid, ignored by Git, read-only, concurrently changed, or beyond the record limit.</p>
-    <p>Prefer a visual review? Run a fresh whole-project analysis and open <strong>Cycle Governance</strong> in AtlasArc for IntelliJ. Its baseline panel uses the same public planner and shows the record count before the explicit write.</p>
+    <p>Prefer a visual review? Run a fresh whole-project analysis and open <strong>Cycle Governance</strong> in AtlasArc for IntelliJ. Its baseline panel uses the same public planner and distinguishes current problem cycles, selected cycle-breaking edges, and exact record count before the explicit write.</p>
 
     <h3>Run the gate</h3>
-    <pre><code>java -jar tools/atlasarc-ci-1.0.0-standalone.jar \
+    <pre><code>java -jar tools/atlasarc-ci-1.2.0-standalone.jar \
   evaluate --config .atlasarc/evaluator.json --format human</code></pre>
     <p>Use <code>--format json</code> for a stable machine result or <code>--format sarif --output build/atlasarc-governance.sarif</code> for code-scanning ingestion. Machine output omits governance reasons, tickets, and absolute workstation paths.</p>
     <table>
@@ -93,7 +94,7 @@
     </table>
 
     <h2>Use ArchUnit in JUnit</h2>
-    <p>JVM teams can consume <code>io.atlasarc:atlasarc-archunit:1.0.0</code> from Maven Central and make the same governance verdict part of an ordinary architecture test. Accepted cycles pass; new unaccepted cycles fail. Follow the <a href="/docs/recipe-archunit-build">executable ArchUnit recipe</a> for Maven, Gradle, source roots, and multi-module class-root attribution.</p>
+    <p>JVM teams can consume <code>io.atlasarc:atlasarc-archunit:1.2.0</code> from Maven Central and make the same governance verdict part of an ordinary architecture test. Accepted cycles pass; new unaccepted cycles fail. Follow the <a href="/docs/recipe-archunit-build">executable ArchUnit recipe</a> for Maven, Gradle, source roots, and multi-module class-root attribution.</p>
 
     <h2>What AtlasArc CI does not do</h2>
     <ul>
@@ -104,7 +105,7 @@
     </ul>
 
     <h2>Source, releases, and support</h2>
-    <p>The three 1.0.0 Maven artifacts are released together from one public repository under Apache License 2.0. Standalone bundles include checksums, and Maven Central includes the signed binaries, sources, and API documentation.</p>
+    <p>The three 1.2.0 Maven artifacts are released together from one public repository under Apache License 2.0. Standalone bundles include checksums, and Maven Central includes the signed binaries, sources, and API documentation.</p>
     <p>Read the <a href="https://github.com/seamraworks/atlasarc-ci#readme">technical README</a>, report reproducible defects in the <a href="https://github.com/seamraworks/atlasarc-ci/issues">public issue tracker</a>, or use <a href="/support">support</a> for sensitive context.</p>
 
     <h2>Related</h2>

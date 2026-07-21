@@ -175,7 +175,7 @@
           </div>
           <div class="faq-item">
             <dt>How do I enable CI when the repository already has cycles?</dt>
-            <dd>Use the <a href="/docs/atlasarc-ci#baseline">cycle-debt baseline</a>. Preview first, then explicitly write one exact Debt record for each current ungoverned cycle dependency. Commit that reviewable starting point and run ordinary evaluation as the read-only gate; new ungoverned problem cycles still fail. The same proposal is available in the IntelliJ Cycle Governance hub after a fresh whole-project analysis.</dd>
+            <dd>Use the <a href="/docs/atlasarc-ci#baseline">cycle-debt baseline</a>. Preview first: AtlasArc selects a narrow set of dependency edges that breaks the current cycles, then proposes exact Debt only for the current references on those edges—not every edge in each SCC. Commit that reviewable starting point and run ordinary evaluation as the read-only gate; new ungoverned problem cycles still fail. The same proposal is available in the IntelliJ Cycle Governance hub after a fresh whole-project analysis.</dd>
           </div>
           <div class="faq-item">
             <dt>Do I need the AtlasArc plugin in CI?</dt>
