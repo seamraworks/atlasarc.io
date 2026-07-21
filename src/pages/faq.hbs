@@ -147,6 +147,14 @@
             <dd>Safe Havens are workspace-local suppressions for narrowing an investigation. They keep noise out of the current review without creating a committed team decision. See <a href="/docs/govern-cycle-exceptions#safe-havens">Govern cycle exceptions</a>.</dd>
           </div>
           <div class="faq-item">
+            <dt>What is repository analysis scope?</dt>
+            <dd>It is the committed list of generated, vendored, or deliberately fenced packages and source folders that your repository leaves outside architectural evaluation. AtlasArc applies <code>.atlasarc/governance/scope.json</code> before metrics, cycle detection, whole-model reports, and CI, and shows the policy's measured impact. See <a href="/docs/govern-cycle-exceptions#repository-scope">repository scope</a>.</dd>
+          </div>
+          <div class="faq-item">
+            <dt>Do shared investigation views change CI?</dt>
+            <dd>No. A preset in <code>.atlasarc/views.json</code> helps teammates reopen the same Root or Pin, lens, filters, hierarchy posture, and view-only exclusions. It remains editable after application and is never read by the standalone evaluator or ArchUnit adapter. See <a href="/docs/govern-cycle-exceptions#shared-views">shared investigation views</a>.</dd>
+          </div>
+          <div class="faq-item">
             <dt>What are repository governance records?</dt>
             <dd>They are committed AtlasArc decisions that mark a directed dependency as intentional or tracked debt. A required reason and optional ticket travel in <code>.atlasarc/governance/cycles.json</code>, so the decision is reviewed instead of disappearing into a tool setting. See <a href="/docs/govern-cycle-exceptions">Govern cycle exceptions</a>.</dd>
           </div>
@@ -171,7 +179,7 @@
           </div>
           <div class="faq-item">
             <dt>How does the governance evaluator work?</dt>
-            <dd>Your build first produces current JVM classes or TypeScript dependency artifacts. The standalone evaluator then reads those inputs plus <code>.atlasarc/governance/cycles.json</code>, using the same matcher and problem-graph classifier as the IDE. Remaining ungoverned cycle problems return a failing exit code. See the <a href="/docs/atlasarc-ci">CI setup</a>.</dd>
+            <dd>Your build first produces current JVM classes or TypeScript dependency artifacts. The standalone evaluator applies optional <code>.atlasarc/governance/scope.json</code> to that evidence, then matches <code>.atlasarc/governance/cycles.json</code> and classifies the remaining graph. An invalid scope or ungoverned in-scope cycle returns a failing exit code. See the <a href="/docs/atlasarc-ci">CI setup</a>.</dd>
           </div>
           <div class="faq-item">
             <dt>How do I enable CI when the repository already has cycles?</dt>
@@ -186,11 +194,11 @@
           </div>
           <div class="faq-item">
             <dt>Can my ArchUnit tests honour cycles accepted in AtlasArc?</dt>
-            <dd>Yes. The AtlasArc ArchUnit adapter reads <code>.atlasarc/governance/cycles.json</code> and applies the same matcher and problem-cycle classifier as the IDE. A governed cycle passes; a new ungoverned cycle remains an ArchUnit violation. See the <a href="/docs/recipe-archunit-build">executable recipe</a>.</dd>
+            <dd>Yes. The AtlasArc ArchUnit adapter applies <code>.atlasarc/governance/scope.json</code>, reads <code>.atlasarc/governance/cycles.json</code>, and uses the same scope matcher and problem-cycle classifier as the IDE. A governed cycle passes; a new ungoverned in-scope cycle remains an ArchUnit violation. See the <a href="/docs/recipe-archunit-build">executable recipe</a>.</dd>
           </div>
           <div class="faq-item">
             <dt>Will the IDE and CI make the same governance decision?</dt>
-            <dd>Yes for the same current evidence. They share schema version 1, evidence matching, debt precedence, reference-level red-wins behavior, and cycle classification. Invalid, stale, partial, ambiguous, or unsupported records fail closed in both surfaces.</dd>
+            <dd>Yes for the same current evidence. They share repository-scope projection, cycle-decision matching, debt precedence, reference-level red-wins behavior, and cycle classification. Invalid scope and invalid, stale, partial, ambiguous, or unsupported cycle records fail closed in both surfaces. Shared views and local Safe Havens are intentionally IDE-only.</dd>
           </div>
         </dl>
       </div>

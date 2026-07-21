@@ -18,7 +18,7 @@ steps:
   - heading: Click into each leak cell.
     body: Click the cell to see which specific classes the external caller is importing. This tells you which internal API is being used and how entrenched the dependency is.
   - heading: Remove unrelated noise precisely.
-    body: If one unrelated package crowds the boundary read, right-click it and choose Exclude this package. AtlasArc removes only the selected package, leaving its children and neighbouring packages available.
+    body: If one unrelated package subtree crowds the boundary read, right-click it and choose Hide this package from view. AtlasArc hides that module-aware subtree without changing its metric or cycle contribution.
   - heading: Prioritise by caller count.
     body: Internal packages with one external caller are usually a quick fix. Packages with five or more external callers will require coordination. Start with the smallest leaks and track the larger ones as planned refactoring work.
 interpretation: |

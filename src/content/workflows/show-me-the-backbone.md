@@ -20,7 +20,7 @@ steps:
   - heading: Look for the load-bearing concrete ones.
     body: A high fan-in package with low instability and low abstractness is in the Zone of Pain. It is the backbone of the system, but it is also entirely concrete. It cannot evolve without breaking everyone who depends on it. Mark these separately from the stable-and-abstract backbone packages.
   - heading: Cut isolated noise without broadening the filter.
-    body: If a generated or test package distorts the result, choose Exclude this package from its context menu. This removes only that package, leaving its children and nearby packages available. Use Expand completely only on the module whose package detail you need.
+    body: If a generated or test package subtree distorts the result, choose Hide this package from view from its context menu. This leaves metrics and cycle findings based on the complete in-scope analysis. Use Expand completely only on the module whose package detail you need.
 interpretation: |
   The backbone is not a single package, it is usually a small cluster. Three to seven packages that everything else depends on, arranged in a shallow hierarchy. Healthy backbone packages are stable (instability near 0), somewhat abstract (abstractness above 0.3), and have fan-in that is clearly higher than everything around them. If the highest fan-in packages are also highly concrete, that is a Zone of Pain situation: you have found a load-bearing wall you cannot move. Those packages need abstraction added to the callers-facing surface before the team can refactor them. If the backbone packages look healthy, stable, abstract, and well-defined, then the architecture has a clean foundation and the risk sits elsewhere.
 export_note: |

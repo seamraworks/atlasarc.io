@@ -4,12 +4,12 @@
     <link rel="canonical" href="https://atlasarc.io/docs/atlasarc-ci">
     <meta name="description" content="Enforce AtlasArc cycle governance with the open-source standalone evaluator or the ArchUnit/JUnit adapter for Java, Kotlin, and TypeScript evidence.">
     <meta property="og:title" content="AtlasArc CI">
-    <meta property="og:description" content="One repository governance file, one cycle engine, and two build integrations.">
+    <meta property="og:description" content="One repository scope and cycle-governance contract, one engine, and two build integrations.">
     <meta property="og:url" content="https://atlasarc.io/docs/atlasarc-ci">
   {{/inline}}
   {{#*inline "body-block"}}
     <h1>AtlasArc CI</h1>
-    <p>AtlasArc CI is the open-source enforcement side of repository cycle governance. It reads <code>.atlasarc/governance/cycles.json</code>, evaluates current JVM or TypeScript dependency evidence, and fails when an unaccepted cycle remains. It does not require IntelliJ or a paid plugin license at runtime.</p>
+    <p>AtlasArc CI is the open-source enforcement side of repository cycle governance. It applies <code>.atlasarc/governance/scope.json</code>, evaluates current JVM or TypeScript dependency evidence against <code>.atlasarc/governance/cycles.json</code>, and fails when an unaccepted in-scope cycle remains. It does not require IntelliJ or a paid plugin license at runtime.</p>
     <p>The Apache-2.0 source, release assets, schemas, and complete technical README live at <a href="https://github.com/seamraworks/atlasarc-ci">github.com/seamraworks/atlasarc-ci</a>. AtlasArc for IntelliJ remains the visual workbench for finding cycles, recording decisions, repairing stale records, and explaining the result.</p>
 
     <h2 id="choose">Choose the integration</h2>
@@ -23,10 +23,14 @@
         <tr><th>Local feedback</th><td>Automatic whenever the architecture test runs</td><td>Only when a developer or task invokes the process</td></tr>
       </tbody>
     </table>
-    <p>Both paths use the same public core: schema validation, module-qualified evidence, Intentional/Debt matching, red-wins reference coverage, record statuses, and strongly connected component calculation.</p>
+    <p>Both paths use the same public core: repository-scope projection, schema validation, module-qualified evidence, Intentional/Debt matching, red-wins reference coverage, record statuses, and strongly connected component calculation. Neither path reads the plugin-only <code>.atlasarc/views.json</code> file.</p>
+
+    <h2 id="repository-scope">Apply the same repository scope everywhere</h2>
+    <p>Repository scope is optional. Without <code>.atlasarc/governance/scope.json</code>, every acquired architecture unit is in scope. When it exists, AtlasArc removes matching semantic JVM packages or TypeScript source folders and their incident dependencies before cycle detection and decision matching. Evaluation output includes the scope revision, applied and stale rules, and retained/excluded unit and dependency totals.</p>
+    <p>Invalid, unreadable, or Git-ignored scope returns an invalid result instead of falling back to a different evidence universe. The IDE, whole-model reports, standalone evaluator, and ArchUnit/JUnit adapter use the same matcher. See <a href="/docs/govern-cycle-exceptions#repository-scope">Define repository analysis scope</a> for selectors, module ownership, and the Governance-hub workflow.</p>
 
     <h2>Use the standalone evaluator</h2>
-    <p>AtlasArc CI 1.2.0 requires JDK 21. Download the <a href="https://repo.maven.apache.org/maven2/io/atlasarc/atlasarc-ci/1.2.0/atlasarc-ci-1.2.0-standalone.jar">standalone JAR</a> or <a href="https://repo.maven.apache.org/maven2/io/atlasarc/atlasarc-ci/1.2.0/atlasarc-ci-1.2.0-standalone.zip">standalone ZIP</a> from Maven Central. Your build produces evidence first; AtlasArc never invokes Maven, Gradle, npm, or dependency-cruiser for you.</p>
+    <p>AtlasArc CI 1.3.0 requires JDK 21. Download the <a href="https://repo.maven.apache.org/maven2/io/atlasarc/atlasarc-ci/1.3.0/atlasarc-ci-1.3.0-standalone.jar">standalone JAR</a> or <a href="https://repo.maven.apache.org/maven2/io/atlasarc/atlasarc-ci/1.3.0/atlasarc-ci-1.3.0-standalone.zip">standalone ZIP</a> from Maven Central. Your build produces evidence first; AtlasArc never invokes Maven, Gradle, npm, or dependency-cruiser for you.</p>
 
     <h3>JVM bytecode</h3>
     <p>Save the configuration as <code>.atlasarc/evaluator.json</code>. Because <code>repositoryRoot</code> is relative to that file, <code>..</code> points back to the Git root. Evidence paths are repository-relative:</p>
@@ -80,7 +84,7 @@
     <p>Prefer a visual review? Run a fresh whole-project analysis and open <strong>Cycle Governance</strong> in AtlasArc for IntelliJ. Its baseline panel uses the same public planner and distinguishes current problem cycles, selected cycle-breaking edges, and exact record count before the explicit write.</p>
 
     <h3>Run the gate</h3>
-    <pre><code>java -jar tools/atlasarc-ci-1.2.0-standalone.jar \
+    <pre><code>java -jar tools/atlasarc-ci-1.3.0-standalone.jar \
   evaluate --config .atlasarc/evaluator.json --format human</code></pre>
     <p>Use <code>--format json</code> for a stable machine result or <code>--format sarif --output build/atlasarc-governance.sarif</code> for code-scanning ingestion. Machine output omits governance reasons, tickets, and absolute workstation paths.</p>
     <table>
@@ -94,18 +98,18 @@
     </table>
 
     <h2>Use ArchUnit in JUnit</h2>
-    <p>JVM teams can consume <code>io.atlasarc:atlasarc-archunit:1.2.0</code> from Maven Central and make the same governance verdict part of an ordinary architecture test. Accepted cycles pass; new unaccepted cycles fail. Follow the <a href="/docs/recipe-archunit-build">executable ArchUnit recipe</a> for Maven, Gradle, source roots, and multi-module class-root attribution.</p>
+    <p>JVM teams can consume <code>io.atlasarc:atlasarc-archunit:1.3.0</code> from Maven Central and make the same governance verdict part of an ordinary architecture test. Accepted cycles pass; new unaccepted cycles fail. Follow the <a href="/docs/recipe-archunit-build">executable ArchUnit recipe</a> for Maven, Gradle, source roots, and multi-module class-root attribution.</p>
 
     <h2>What AtlasArc CI does not do</h2>
     <ul>
-      <li>It does not read workspace-local Safe Havens; only committed repository governance affects the build.</li>
+      <li>It does not read workspace-local Safe Havens or repository-shared investigation views; only committed repository scope and cycle decisions affect the build.</li>
       <li>It does not gate complexity, coverage, fan-in/out, or other exploratory metrics.</li>
       <li>It does not provide an arbitrary architecture-rule language or replace ArchUnit, ESLint, Sonar, or dependency-cruiser rules.</li>
       <li>Normal evaluation and the ArchUnit rule are read-only. Only the separate, explicitly invoked baseline workflow writes adoption Debt.</li>
     </ul>
 
     <h2>Source, releases, and support</h2>
-    <p>The three 1.2.0 Maven artifacts are released together from one public repository under Apache License 2.0. Standalone bundles include checksums, and Maven Central includes the signed binaries, sources, and API documentation.</p>
+    <p>The three 1.3.0 Maven artifacts are released together from one public repository under Apache License 2.0. Standalone bundles include checksums, and Maven Central includes the signed binaries, sources, and API documentation.</p>
     <p>Read the <a href="https://github.com/seamraworks/atlasarc-ci#readme">technical README</a>, report reproducible defects in the <a href="https://github.com/seamraworks/atlasarc-ci/issues">public issue tracker</a>, or use <a href="/support">support</a> for sensitive context.</p>
 
     <h2>Related</h2>

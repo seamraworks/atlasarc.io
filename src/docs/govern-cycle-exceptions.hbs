@@ -2,7 +2,7 @@
   {{#*inline "html-head-block"}}
     <title>Govern Cycle Exceptions in the IDE and CI | AtlasArc Documentation</title>
     <link rel="canonical" href="https://atlasarc.io/docs/govern-cycle-exceptions">
-    <meta name="description" content="Record reviewable Java, Kotlin, and TypeScript cycle-governance decisions in .atlasarc/governance/cycles.json and enforce the same evidence in CI.">
+    <meta name="description" content="Define repository analysis scope, share investigation views, and record reviewable Java, Kotlin, and TypeScript cycle decisions with matching CI enforcement.">
     <meta property="og:title" content="Govern Cycle Exceptions with AtlasArc">
     <meta property="og:description" content="One committed governance workflow for intentional cycles and managed debt in the IDE and CI.">
     <meta property="og:url" content="https://atlasarc.io/docs/govern-cycle-exceptions">
@@ -10,14 +10,40 @@
   {{#*inline "body-block"}}
     <h1>Govern cycle exceptions</h1>
     <p>Not every dependency cycle is a defect. Some are deliberate architecture; others are debt the team has chosen to carry for now. AtlasArc records both as reviewable repository governance, without changing application source or build files.</p>
-    <p>The authoritative file is <code>.atlasarc/governance/cycles.json</code> in the nearest owning Git root. Commit it with the code that creates or changes the decision. The IntelliJ workflow and the headless evaluator read the same schema and apply the same matching and cycle-classification rules.</p>
+    <p>The Governance hub keeps three different repository concerns explicit: <code>.atlasarc/governance/scope.json</code> defines which evidence is evaluated, <code>.atlasarc/governance/cycles.json</code> records reviewed cycle decisions inside that evidence, and <code>.atlasarc/views.json</code> shares optional investigation starting postures. They are separate because only the first two affect CI.</p>
 
     <h2 id="safe-havens">Choose the right commitment level</h2>
     <ul>
       <li><strong>Safe Haven</strong>: local, workspace-scoped focus state. Use it to set a package or source folder aside during your current investigation. It is not team policy and the CI evaluator does not read it.</li>
+      <li><strong>Shared investigation view</strong>: committed collaboration state in <code>.atlasarc/views.json</code>. Use it to help a teammate reopen the same Root or Pin, lens, filters, and presentation. It never changes CI scope.</li>
+      <li><strong>Repository scope rule</strong>: a durable evidence-boundary decision in <code>.atlasarc/governance/scope.json</code>. Use it for generated, vendored, or deliberately fenced architecture units that the IDE, reports, and CI must all leave outside analysis.</li>
       <li><strong>Governance record</strong>: a durable team decision committed in <code>.atlasarc/governance/cycles.json</code>. Use it when a dependency is intentionally accepted or tracked as debt and should receive the same treatment in the IDE, review, reports, and CI.</li>
     </ul>
-    <p>A Safe Haven answers “not in this investigation.” A governance record answers “the team has reviewed this dependency.”</p>
+    <p>A Safe Haven answers “not in my investigation.” A shared view answers “reopen this investigation.” Repository scope answers “not in the evidence our repository governs.” A cycle record answers “the team reviewed and accepted this in-scope dependency.”</p>
+
+    <h2 id="repository-scope">Define repository analysis scope first</h2>
+    <p>Repository scope is applied before metrics, cycle detection, cycle-decision matching, whole-model reports, the standalone evaluator, or the ArchUnit/JUnit adapter. When a semantic rule matches a package or TypeScript source folder, AtlasArc removes that unit and every dependency entering or leaving it. Scope is therefore policy, not a visual filter and not an accepted finding. In the Exclusions sidebar, <strong>View only</strong> keeps ordinary hiding visual; <strong>Analysis scope</strong> shows this policy and routes changes through the Governance hub.</p>
+    <pre><code>{
+  "$schema": "https://atlasarc.io/schemas/repository-scope-v1.schema.json",
+  "schemaVersion": 1,
+  "exclusions": {
+    "generated-adapters": {
+      "selector": {
+        "kind": "jvm-package-pattern",
+        "module": "billing",
+        "pattern": "com.acme.billing.generated.**"
+      },
+      "reason": "Generated from the reviewed billing API contract."
+    }
+  }
+}</code></pre>
+    <p>Patterns use literal segments, <code>*</code> for one segment, and <code>**</code> for zero or more. JVM rules distinguish an exact module, every owner (<code>*</code>), and legitimately module-less evidence, so equal package names in sibling modules never merge. TypeScript rules use normalized repository-relative source-folder paths.</p>
+    <p>Open <strong>Cycle Governance</strong> to add or remove rules and inspect their measured impact. AtlasArc shows matched and stale rules, retained and excluded unit/reference totals, and the scope revision. A missing file means the full acquired architecture is in scope. Invalid, unreadable, or Git-ignored policy fails closed: AtlasArc stops before a new acquisition, marks any retained prior view with a red Policy lamp, and blocks governance writes plus whole-model reports until the file is repaired. The exact contract is <a href="/schemas/repository-scope-v1.schema.json">repository-scope-v1.schema.json</a>.</p>
+
+    <h2 id="shared-views">Share an investigation, not a build policy</h2>
+    <p>After arranging a useful Root or Pin, lens, filters, hierarchy compaction, heatmap or lens presentation, and exact local package exclusions, open <strong>Cycle Governance → Shared investigation views</strong> and choose <strong>Save current view</strong>. The committed preset gives teammates a named starting point for the same architectural question.</p>
+    <p>Applying a preset copies it into the normal editable session. Changing an ordinary control marks the View status lamp and preset as locally modified; it does not rewrite <code>views.json</code> or snap the control back. <strong>Update from current</strong> is the explicit revision-guarded repository change. <strong>Leave view</strong> removes its view-only exclusion layer and returns to repository-default posture without touching repository scope.</p>
+    <p>Derived cycle-group numbers, machine-local paths, canvas pan/zoom, ambiguous free-form exclusions, and machine-local or Custom Hotspots presets are not durable preset identity. Choose a built-in Hotspots preset before saving so another teammate can reproduce it. The standalone evaluator and ArchUnit adapter never read <code>views.json</code>. Whole-model reports ignore shared and local hiding; a Current Investigation report may reproduce the posture and says which preset was active and whether it was locally modified. The exact document contract is <a href="/schemas/repository-views-v1.schema.json">repository-views-v1.schema.json</a>.</p>
 
     <h2 id="record">Record and review a decision</h2>
     <ol>
@@ -89,11 +115,11 @@
 
     <h2 id="file-contract">File ownership and merge behavior</h2>
     <p>The schema is versioned at <a href="/schemas/cycle-governance-v1.schema.json"><code>https://atlasarc.io/schemas/cycle-governance-v1.schema.json</code></a>. Records are keyed objects rather than one large array, so independent branch additions stay local in review. AtlasArc writes deterministic UTF-8/LF JSON with sorted record and reference IDs.</p>
-    <p>Keep generated dependency evidence separate from committed governance under <code>.atlasarc/</code>. AtlasArc owns valid writes; manual editing is possible but is not the intended workflow, and malformed, unknown, stale, or unsupported content fails closed.</p>
+    <p>Keep generated dependency evidence separate from committed policy and decisions under <code>.atlasarc/</code>. AtlasArc owns valid writes; manual editing is possible but is not the intended workflow. Invalid scope fails authoritative analysis closed; invalid shared views have no effect and can never weaken CI.</p>
 
     <h2 id="ci">Enforce the same decisions in CI</h2>
     <p><a href="/docs/atlasarc-ci">AtlasArc CI</a> is the Apache-2.0 enforcement side of this workflow. It needs no IntelliJ runtime or paid plugin license. The standalone evaluator reads current Java/Kotlin bytecode or TypeScript dependency-cruiser artifacts and returns a process exit code; the ArchUnit adapter makes the same verdict part of an ordinary JVM test.</p>
-    <p>Both integrations read the committed governance file and use the same public engine as the IDE. Local Safe Havens are never consumed by CI. If evidence is stale, module ownership is ambiguous, or a record is invalid, evaluation fails closed rather than reporting a false clean result.</p>
+    <p>Both integrations read committed repository scope and cycle decisions and use the same public engine as the IDE. Shared views and local Safe Havens are never consumed by CI. If scope or evidence is invalid, module ownership is ambiguous, or a cycle record is invalid, evaluation fails closed rather than reporting a false clean result.</p>
     <p>See <a href="/docs/atlasarc-ci">the AtlasArc CI guide</a> for the integration chooser, Maven distribution, public source, evaluator configuration, output formats, and exit codes. Java/Kotlin teams that prefer the normal JUnit lifecycle can go directly to the <a href="/docs/recipe-archunit-build">ArchUnit recipe</a>.</p>
 
     <h2>Where to go next</h2>

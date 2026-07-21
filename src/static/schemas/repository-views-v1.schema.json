@@ -1,0 +1,151 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atlasarc.io/schemas/repository-views-v1.schema.json",
+  "title": "AtlasArc.io repository shared investigation views",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "schemaVersion", "presets"],
+  "properties": {
+    "$schema": { "const": "https://atlasarc.io/schemas/repository-views-v1.schema.json" },
+    "schemaVersion": { "const": 1 },
+    "presets": { "type": "array", "items": { "$ref": "#/$defs/preset" } }
+  },
+  "$defs": {
+    "preset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "description"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+        "name": { "type": "string", "minLength": 1, "pattern": "\\S" },
+        "description": { "type": "string", "minLength": 1, "pattern": "\\S" },
+        "analysisSourceHint": { "type": ["string", "null"], "minLength": 1 },
+        "view": { "$ref": "#/$defs/view" }
+      }
+    },
+    "view": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "lens": { "enum": ["topology", "matrix", "subsystems", "hotspots", "composition"] },
+        "anchor": { "$ref": "#/$defs/anchor" },
+        "filters": { "$ref": "#/$defs/filters" },
+        "hierarchy": { "$ref": "#/$defs/hierarchy" },
+        "viewExclusions": { "type": "array", "items": { "$ref": "#/$defs/selector" } },
+        "presentation": { "$ref": "#/$defs/presentation" }
+      }
+    },
+    "anchor": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "mode": { "const": "normal" },
+            "subject": { "type": "null" },
+            "neighbourMesh": { "type": "boolean" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["mode", "subject"],
+          "properties": {
+            "mode": { "enum": ["root", "pinned"] },
+            "subject": { "$ref": "#/$defs/subject" },
+            "neighbourMesh": { "type": "boolean" }
+          }
+        }
+      ]
+    },
+    "subject": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "architectureUnit"],
+          "properties": {
+            "kind": { "const": "jvm-package" },
+            "architectureUnit": { "type": "string", "minLength": 1, "pattern": "\\S" },
+            "module": { "type": ["string", "null"], "minLength": 1 }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "architectureUnit"],
+          "properties": {
+            "kind": { "const": "typescript-source-folder" },
+            "architectureUnit": { "type": "string", "minLength": 1, "pattern": "\\S" },
+            "module": { "type": "null" }
+          }
+        }
+      ]
+    },
+    "filters": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "minimumReferences": { "type": "integer", "minimum": 0 },
+        "maximumReferences": { "type": "integer", "minimum": 0 },
+        "minimumFanOut": { "type": "integer", "minimum": 0 },
+        "maximumFanOut": { "type": "integer", "minimum": 0 },
+        "minimumFanIn": { "type": "integer", "minimum": 0 },
+        "maximumFanIn": { "type": "integer", "minimum": 0 },
+        "hideIsolated": { "type": "boolean" },
+        "onlyCycles": { "type": "boolean" },
+        "cycleDetail": { "enum": ["full", "all-cycles", "architecture-and-folders", "architecture-only"] },
+        "mutePinnedCycles": { "type": "boolean" }
+      }
+    },
+    "hierarchy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "compactFolders": { "type": "boolean" },
+        "compactDepth": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "selector": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "pattern"],
+          "properties": {
+            "kind": { "const": "jvm-package-pattern" },
+            "pattern": { "type": "string", "minLength": 1 },
+            "module": { "type": ["string", "null"], "minLength": 1 }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "pattern"],
+          "properties": {
+            "kind": { "const": "typescript-source-folder-pattern" },
+            "pattern": { "type": "string", "minLength": 1 },
+            "module": { "type": "null" }
+          }
+        }
+      ]
+    },
+    "presentation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "heatmapMetric": {
+          "enum": [
+            "instability", "abstractness", "distance", "relativeVisibility", "fanOut", "fanIn",
+            "loc", "classCount", "cyclomaticMax", "cyclomaticAverage", "cognitiveMax",
+            "cognitiveAverage", "lineCoverage", "branchCoverage", null
+          ]
+        },
+        "heatmapUsesSubsystemRollup": { "type": "boolean" },
+        "hotspotPreset": { "enum": ["coupling", "complexity", "god-classes", "visibility", "zone-map", "coverage-risk", null] },
+        "subsystemView": { "enum": ["boundary-risk", "complexity-load", "visibility-surface", "internal-tangles", null] },
+        "compositionDepth": { "enum": ["direct", "adaptive", "full", null] }
+      }
+    }
+  }
+}
