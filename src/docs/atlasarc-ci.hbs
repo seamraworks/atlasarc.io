@@ -67,6 +67,17 @@
 }</code></pre>
     <p>If Java/Kotlin source is newer than its classes, or TypeScript source is newer than its dependency graph, the evaluator returns invalid rather than falsely clean.</p>
 
+    <h2 id="baseline">Adopt an existing codebase without hiding future cycles</h2>
+    <p>Starting with AtlasArc CI 1.1.0, a repository that already has cycles can first preview an exact cycle-debt baseline:</p>
+    <pre><code>java -jar tools/atlasarc-ci-&lt;version&gt;-standalone.jar \
+  baseline --config .atlasarc/evaluator.json</code></pre>
+    <p>The preview is read-only. It shows the current problem cycles, concrete references that would become Debt, existing records that remain untouched, and the resulting verdict. After reviewing it, add explicit write intent:</p>
+    <pre><code>java -jar tools/atlasarc-ci-&lt;version&gt;-standalone.jar \
+  baseline --config .atlasarc/evaluator.json --write</code></pre>
+    <p>AtlasArc creates one exact-reference <strong>Debt</strong> record per current ungoverned cycle dependency. It never converts the backlog into broad package acceptance, never marks machine-generated decisions Intentional, and never changes an existing decision. The write is deterministic, atomic, revision-checked, and an unchanged rerun leaves the file byte-for-byte alone.</p>
+    <p>Review and commit <code>cycles.json</code>, then run the ordinary evaluator as the gate. A new dependency fails when it forms a new ungoverned problem cycle; the baseline does not hide structural dependencies or suppress unrelated future references. AtlasArc refuses the baseline when evidence is stale, partial, unattributed, ambiguous, invalid, ignored by Git, read-only, concurrently changed, or beyond the record limit.</p>
+    <p>Prefer a visual review? Run a fresh whole-project analysis and open <strong>Cycle Governance</strong> in AtlasArc for IntelliJ. Its baseline panel uses the same public planner and shows the record count before the explicit write.</p>
+
     <h3>Run the gate</h3>
     <pre><code>java -jar tools/atlasarc-ci-1.0.0-standalone.jar \
   evaluate --config .atlasarc/evaluator.json --format human</code></pre>
@@ -89,7 +100,7 @@
       <li>It does not read workspace-local Safe Havens; only committed repository governance affects the build.</li>
       <li>It does not gate complexity, coverage, fan-in/out, or other exploratory metrics.</li>
       <li>It does not provide an arbitrary architecture-rule language or replace ArchUnit, ESLint, Sonar, or dependency-cruiser rules.</li>
-      <li>Normal evaluation is read-only and never edits <code>cycles.json</code>.</li>
+      <li>Normal evaluation and the ArchUnit rule are read-only. Only the separate, explicitly invoked baseline workflow writes adoption Debt.</li>
     </ul>
 
     <h2>Source, releases, and support</h2>

@@ -82,6 +82,11 @@
     </ul>
     <p>AtlasArc offers only module pairs supported by current dependency evidence. Reclassification and evidence-backed retargeting apply directly. Removal uses an inline destructive confirmation. If the file changed since the dialog loaded, AtlasArc refuses the stale write.</p>
 
+    <h3 id="baseline">Establish the existing cycle-debt baseline</h3>
+    <p>For a brownfield repository, the governance hub can turn the current backlog into the starting line for CI. After a fresh whole-project analysis, the panel above the register shows how many ungoverned problem cycles exist and how many exact Debt records AtlasArc proposes to add. You can keep the standard reason, replace it, and optionally apply one ticket before choosing <strong>Add N debt records</strong>.</p>
+    <p>The action adds one individual-dependency Debt decision per current ungoverned cycle reference and preserves every existing record. It does not broadly accept a package, mark generated decisions Intentional, hide structural dependencies, or display a file-diff ceremony. AtlasArc refuses to offer the write for module-only, stale, incomplete, unattributed, invalid, ignored, or read-only evidence. Opening the dialog alone never changes the repository.</p>
+    <p>Review and commit the resulting <code>cycles.json</code>, then enable the ordinary read-only CI evaluation. The same workflow is available without IntelliJ through the explicit <a href="/docs/atlasarc-ci#baseline"><code>atlasarc-ci baseline</code> command</a>.</p>
+
     <h2 id="file-contract">File ownership and merge behavior</h2>
     <p>The schema is versioned at <a href="/schemas/cycle-governance-v1.schema.json"><code>https://atlasarc.io/schemas/cycle-governance-v1.schema.json</code></a>. Records are keyed objects rather than one large array, so independent branch additions stay local in review. AtlasArc writes deterministic UTF-8/LF JSON with sorted record and reference IDs.</p>
     <p>Keep generated dependency evidence separate from committed governance under <code>.atlasarc/</code>. AtlasArc owns valid writes; manual editing is possible but is not the intended workflow, and malformed, unknown, stale, or unsupported content fails closed.</p>
