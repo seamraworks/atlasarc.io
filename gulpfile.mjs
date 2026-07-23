@@ -683,7 +683,8 @@ const MIME = {
 };
 
 function serve(cb) {
-  const basePort = Number(process.env.PORT) || 3000;
+  const basePort = Number(process.env.PORT) || 4173;
+  const devHost = process.env.ATLASARC_DEV_HOST || '127.0.0.1';
   const maxAttempts = 10;
 
   const server = http.createServer((req, res) => {
@@ -712,16 +713,16 @@ function serve(cb) {
       const next = server.__port + 1;
       console.warn(`[serve] port ${server.__port} in use, trying ${next}...`);
       server.__port = next;
-      server.listen(next);
+      server.listen(next, devHost);
       return;
     }
     console.error(`[serve] could not start dev server: ${err.message}`);
   });
 
-  server.on('listening', () => console.log(`AtlasArc dev -> http://localhost:${server.__port}`));
+  server.on('listening', () => console.log(`AtlasArc dev -> http://${devHost}:${server.__port}`));
 
   server.__port = basePort;
-  server.listen(basePort);
+  server.listen(basePort, devHost);
   cb();
 }
 

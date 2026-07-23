@@ -13,7 +13,7 @@ content or structure changes.
 ```bash
 npm install      # install dev dependencies
 npm run build    # clean + compile everything into dist/
-npm run dev      # build, then watch + serve at http://localhost:3000
+npm run dev      # build, then watch + serve at http://127.0.0.1:4173
 npm run clean    # remove dist/
 npm run check    # tsc type-check only (no emit)
 ```
