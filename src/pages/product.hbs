@@ -92,6 +92,8 @@
       </div>
     </section>
 
+    {{> lifecycle-accordion}}
+
     <section class="band cta-band">
       <div class="container cta-band-inner">
         <div class="cta-text">
@@ -106,5 +108,8 @@
       </div>
     </section>
 
+  {{/inline}}
+  {{#*inline "scripts-block"}}
+    <script type="module" src="/assets/scripts/lifecycle.js"></script>
   {{/inline}}
 {{/marketing}}

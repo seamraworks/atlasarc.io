@@ -4,6 +4,67 @@
     "domain": "atlasarc.io",
     "scriptId": "t8CPz3UjaKIrKBlIRF0If"
   },
+  "productLifecycle": [
+    {
+      "slug": "acquire",
+      "label": "Acquire evidence",
+      "kicker": "Start with the actual build",
+      "description": "Load Java/Kotlin bytecode or TypeScript analysis artifacts and let AtlasArc build the dependency model. No annotations or application-source changes.",
+      "sourceSurface": true
+    },
+    {
+      "slug": "scope",
+      "label": "Define scope",
+      "kicker": "Decide what counts",
+      "description": "Start with the project as it is. Commit a shared scope when the IDE, reports, and CI need to evaluate the same evidence.",
+      "scopeSurface": true
+    },
+    {
+      "slug": "explore",
+      "label": "Explore",
+      "kicker": "Follow the structure",
+      "description": "Move between topology, matrix, composition, hotspots, and metrics without leaving IntelliJ. Zoom out across the system or pin the package you care about.",
+      "image": "/assets/images/lifecycle/explore.png",
+      "initial": true
+    },
+    {
+      "slug": "cycles",
+      "label": "Identify cycles",
+      "kicker": "Untangle one cycle at a time",
+      "description": "Isolate related loops in the cycle problem graph, then follow the exact dependency edge back to the source that created it.",
+      "image": "/assets/images/lifecycle/cycles.png"
+    },
+    {
+      "slug": "govern",
+      "label": "Govern decisions",
+      "kicker": "Write down the decision",
+      "description": "Mark a dependency as intentional or tracked debt. The reason and ticket live with the code, where the team can review them.",
+      "governSurface": true
+    },
+    {
+      "slug": "ci",
+      "label": "Enforce in CI",
+      "kicker": "Make CI remember",
+      "description": "Run the same evaluator through the standalone CLI or ArchUnit/JUnit. Known cycles pass; new ones fail with evidence you can reproduce locally.",
+      "ciSurface": true
+    },
+    {
+      "slug": "report",
+      "label": "Report",
+      "kicker": "Leave a useful record",
+      "description": "Turn the evidence and decisions from your investigation into a browsable Architecture Audit Report, with a printable version for reviews and planning.",
+      "image": "/assets/images/lifecycle/report.png",
+      "reportSurface": true
+    },
+    {
+      "slug": "share",
+      "label": "Share investigations",
+      "kicker": "Hand off the actual investigation",
+      "description": "Save the lens, scope, filters, and subject. A teammate can reopen the same question without reconstructing your setup.",
+      "image": "/assets/images/lifecycle/share.png",
+      "shareSurface": true
+    }
+  ],
   "marketing": [
     { "title": "Home", "src": "index.hbs", "url": "/", "out": "index.html" },
     { "title": "Product", "src": "product.hbs", "url": "/product", "out": "product/index.html" },

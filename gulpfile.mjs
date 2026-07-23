@@ -31,7 +31,7 @@ const SRC = path.join(__dirname, 'src');
 const DIST = path.join(__dirname, 'dist');
 const MANIFEST = path.join(__dirname, 'manifest');
 const SITE_BASE = 'https://atlasarc.io';
-const PUBLIC_STYLE_CHUNKS = ['main', 'home', 'features', 'catalog', 'compare', 'pricing', 'docs'];
+const PUBLIC_STYLE_CHUNKS = ['main', 'home', 'product', 'features', 'catalog', 'compare', 'pricing', 'docs'];
 const PUBLIC_STYLE_HREFS = [...PUBLIC_STYLE_CHUNKS.map(cssHref), '/pagefind/pagefind-ui.css'];
 
 // ---------------------------------------------------------------------------
@@ -159,6 +159,9 @@ function marketingStyleChunks(entry) {
   switch (entry.src) {
     case 'index.hbs':
       chunks.push('home', 'catalog');
+      break;
+    case 'product.hbs':
+      chunks.push('product');
       break;
     case 'features.hbs':
       chunks.push('features');
@@ -426,6 +429,7 @@ function styles(cb) {
     .src([
       path.join(SRC, 'styles/main.less'),
       path.join(SRC, 'styles/home.less'),
+      path.join(SRC, 'styles/product.less'),
       path.join(SRC, 'styles/features.less'),
       path.join(SRC, 'styles/catalog.less'),
       path.join(SRC, 'styles/compare.less'),

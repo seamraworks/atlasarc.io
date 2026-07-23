@@ -1,0 +1,145 @@
+<section class="band lifecycle-band" aria-labelledby="lifecycle-heading">
+  <div class="lifecycle-heading">
+    <div>
+      <p class="eyebrow">The whole loop</p>
+      <h2 id="lifecycle-heading">Close the architecture feedback loop.</h2>
+    </div>
+    <p class="lifecycle-intro">Start simple and get real insight. Then turn architecture review into a durable team practice.</p>
+  </div>
+
+  <p class="sr-only" id="lifecycle-description">Screenshot slices follow the work from acquiring evidence through sharing an investigation. Select a slice to expand it.</p>
+
+  <div class="lifecycle-stage" data-lifecycle-stage>
+    <div class="lifecycle-accordion" role="tablist" aria-label="AtlasArc architecture practice" aria-describedby="lifecycle-description" data-lifecycle-accordion>
+      {{#each site.productLifecycle}}
+        <article class="lifecycle-panel{{#if initial}} is-active{{/if}}" data-lifecycle-index="{{@index}}" data-lifecycle-stage-name="{{slug}}" role="presentation">
+          <button
+            class="lifecycle-trigger"
+            id="lifecycle-tab-{{slug}}"
+            type="button"
+            role="tab"
+            aria-selected="{{#if initial}}true{{else}}false{{/if}}"
+            aria-controls="lifecycle-copy-{{slug}}"
+            tabindex="{{#if initial}}0{{else}}-1{{/if}}"
+            data-lifecycle-index="{{@index}}"
+          ><span class="sr-only">{{label}}</span></button>
+
+          <div class="lifecycle-media" aria-hidden="true" data-pagefind-ignore>
+            {{#if sourceSurface}}
+              <div class="lifecycle-surface">
+                <div class="lifecycle-window">
+                  <div class="lifecycle-titlebar"><span>Analysis source</span><span class="lifecycle-window-dots">● ● ●</span></div>
+                  <div class="lifecycle-source-body">
+                    <div>
+                      <div class="lifecycle-ui-label">Selected evidence</div>
+                      <div class="lifecycle-select-box">Whole project · IntelliJ modules</div>
+                      <div class="lifecycle-source-row"><span>Java / Kotlin</span><strong>Bytecode ready</strong></div>
+                      <div class="lifecycle-source-row"><span>TypeScript</span><strong>Artifacts ready</strong></div>
+                      <div class="lifecycle-source-row"><span>Coverage</span><span>2 reports</span></div>
+                    </div>
+                    <aside class="lifecycle-source-summary">
+                      <div class="lifecycle-ui-label">Model</div>
+                      <div class="lifecycle-source-stat"><strong>53</strong>packages</div>
+                      <div class="lifecycle-source-stat"><strong>208</strong>edges</div>
+                      <div class="lifecycle-source-stat"><strong>2</strong>languages</div>
+                    </aside>
+                  </div>
+                </div>
+              </div>
+            {{/if}}
+
+            {{#if scopeSurface}}
+              <div class="lifecycle-surface">
+                <div class="lifecycle-window">
+                  <div class="lifecycle-titlebar"><span>Repository analysis scope</span><span class="lifecycle-window-dots">● ● ●</span></div>
+                  <div class="lifecycle-scope-body">
+                    <aside class="lifecycle-scope-presets">
+                      <div class="lifecycle-ui-label">Presets</div>
+                      <div class="lifecycle-scope-option is-selected">Production architecture</div>
+                      <div class="lifecycle-scope-option">All modules</div>
+                      <div class="lifecycle-scope-option">Custom investigation</div>
+                    </aside>
+                    <div class="lifecycle-code-view"><span class="lifecycle-code-comment">// .atlasarc/governance/scope.json</span>
+{
+  <span class="lifecycle-code-key">"name"</span>: <span class="lifecycle-code-string">"Production architecture"</span>,
+  <span class="lifecycle-code-key">"rules"</span>: [<span class="lifecycle-code-string">"generated"</span>, <span class="lifecycle-code-string">"vendor"</span>]
+}</div>
+                  </div>
+                </div>
+              </div>
+            {{/if}}
+
+            {{#if image}}<img class="lifecycle-image" src="{{image}}" alt="" loading="lazy">{{/if}}
+
+            {{#if governSurface}}
+              <div class="lifecycle-surface">
+                <div class="lifecycle-window">
+                  <div class="lifecycle-titlebar"><span>Record cycle decision</span><span class="lifecycle-window-dots">● ● ●</span></div>
+                  <div class="lifecycle-govern-body">
+                    <div class="lifecycle-govern-form">
+                      <div class="lifecycle-form-line"><span>Decision</span><div class="lifecycle-form-value">Tracked debt</div></div>
+                      <div class="lifecycle-form-line"><span>Reason</span><div class="lifecycle-form-value">Remove after mailer split</div></div>
+                      <div class="lifecycle-form-line"><span>Ticket</span><div class="lifecycle-form-value">ARCH-418</div></div>
+                      <span class="lifecycle-form-button">Record decision</span>
+                    </div>
+                    <div class="lifecycle-diff-view"><span class="lifecycle-code-comment">cycles.json</span>
+<span class="lifecycle-diff-add">+ "status": "debt",</span>
+<span class="lifecycle-diff-add">+ "reason": "Mailer split",</span>
+<span class="lifecycle-diff-add">+ "ticket": "ARCH-418",</span>
+<span class="lifecycle-diff-add">+ "from": "mailer",</span>
+<span class="lifecycle-diff-add">+ "to": "api"</span></div>
+                  </div>
+                </div>
+              </div>
+            {{/if}}
+
+            {{#if ciSurface}}
+              <div class="lifecycle-surface">
+                <div class="lifecycle-terminal">
+                  <div class="lifecycle-terminal-head">Build · architecture-policy</div>
+                  <span class="lifecycle-terminal-line"><span class="lifecycle-terminal-prompt">$</span> atlasarc-ci evaluate</span>
+                  <span class="lifecycle-terminal-line lifecycle-terminal-dim">Loading repository scope…</span>
+                  <span class="lifecycle-terminal-line lifecycle-terminal-ok">✓ 53 packages · 208 edges</span>
+                  <span class="lifecycle-terminal-line lifecycle-terminal-ok">✓ 6 governed cycles matched</span>
+                  <span class="lifecycle-terminal-line lifecycle-terminal-warn">! 1 new cycle requires a decision</span>
+                  <span class="lifecycle-terminal-line">&nbsp;&nbsp;billing → shared-api → billing</span>
+                  <span class="lifecycle-terminal-line lifecycle-terminal-warn">Architecture policy failed · exit 2</span>
+                </div>
+              </div>
+            {{/if}}
+
+            {{#if reportSurface}}
+              <div class="lifecycle-report-card">
+                <h4>Project architecture health</h4>
+                <div class="lifecycle-report-meta">simplejavamail · production architecture</div>
+                <div class="lifecycle-report-metrics">
+                  <div class="lifecycle-report-metric"><strong>53</strong>packages</div>
+                  <div class="lifecycle-report-metric"><strong>7</strong>cycle groups</div>
+                  <div class="lifecycle-report-metric"><strong>0.73</strong>cohesion</div>
+                </div>
+                <div class="lifecycle-report-bars"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+              </div>
+            {{/if}}
+
+            {{#if shareSurface}}
+              <div class="lifecycle-shared-overlay">
+                <div class="lifecycle-shared-title">Repository views</div>
+                <div class="lifecycle-shared-view"><span><strong>Mailer boundary review</strong>Topology · subject: mailer</span><span>shared</span></div>
+                <div class="lifecycle-shared-view"><span><strong>Weakly covered hotspots</strong>Hotspots · CC × coverage</span><span>shared</span></div>
+                <div class="lifecycle-shared-view"><span><strong>Release architecture check</strong>Matrix · production scope</span><span>shared</span></div>
+              </div>
+            {{/if}}
+          </div>
+
+          <div class="lifecycle-shade" aria-hidden="true"></div>
+          <div class="lifecycle-stage-title" aria-hidden="true"><span class="lifecycle-stage-title-tab">{{label}}</span><span class="lifecycle-stage-title-body">{{label}}</span></div>
+          <div class="lifecycle-copy" id="lifecycle-copy-{{slug}}" role="tabpanel" aria-labelledby="lifecycle-tab-{{slug}}" aria-hidden="{{#if initial}}false{{else}}true{{/if}}">
+            <p class="lifecycle-kicker">{{kicker}}</p>
+            <h3>{{label}}</h3>
+            <p>{{description}}</p>
+          </div>
+        </article>
+      {{/each}}
+    </div>
+  </div>
+</section>
