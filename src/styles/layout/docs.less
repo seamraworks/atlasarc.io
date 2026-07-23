@@ -29,7 +29,106 @@
   overflow-y: auto;
   padding-bottom: @space-lg;
 }
-.docs-search { margin-bottom: @space-lg; }
+.docs-search {
+  margin-bottom: @space-lg;
+  --pf-font: @font-sans;
+  --pf-text: @ink;
+  --pf-text-secondary: @ink-soft;
+  --pf-text-muted: @ink-faint;
+  --pf-background: @canvas;
+  --pf-border: @line;
+  --pf-border-focus: @arc;
+  --pf-hover: @arc-tint;
+  --pf-outline-focus: @arc;
+  --pf-shadow-md: none;
+  --pf-border-radius: 0;
+  --pf-input-height: 38px;
+}
+.docs-search .pf-searchbox-input-wrapper::before {
+  inset-inline-start: 0 !important;
+  width: 13px !important;
+  height: 13px !important;
+  background-color: @ink-faint !important;
+}
+.docs-search .pf-searchbox-input {
+  padding-inline-start: 24px !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 1px solid @line !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+.docs-search .pf-searchbox-input-wrapper:has(.pf-trigger-shortcut) .pf-searchbox-input {
+  padding-inline-end: 44px !important;
+}
+.docs-search .pf-searchbox-input:focus,
+.docs-search .pf-searchbox-input:focus-visible {
+  padding-inline-end: 12px !important;
+  border-bottom: 2px solid @arc !important;
+  box-shadow: none !important;
+}
+.docs-search .pf-searchbox-input::placeholder {
+  // Keep the actual input at 16px so mobile browsers do not zoom on focus.
+  // Only the long prompt needs to sit more quietly in the narrow sidebar.
+  font-size: 0.76rem !important;
+  color: @ink-faint !important;
+}
+.docs-search .pf-searchbox-input-wrapper .pf-trigger-shortcut {
+  inset-inline-end: 0 !important;
+  gap: 0.42em !important;
+}
+.docs-search .pf-trigger-key {
+  min-width: 0 !important;
+  height: auto !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  color: @ink-faint !important;
+  font-family: @font-mono !important;
+  font-size: 0.56rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.07em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.docs-search .pf-searchbox-dropdown {
+  margin-top: @space-2xs;
+  border: 1px solid @line !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+.docs-search .pf-searchbox-results {
+  padding: 0 !important;
+}
+.docs-search .pf-searchbox-result {
+  padding: @space-sm !important;
+  border-left: 2px solid transparent;
+  border-radius: 0 !important;
+}
+.docs-search .pf-searchbox-result:hover,
+.docs-search .pf-searchbox-result[data-pf-selected] {
+  background: @arc-tint !important;
+  border-left-color: @arc;
+  outline: none !important;
+}
+.docs-search .pf-searchbox-footer {
+  padding: @space-xs @space-sm !important;
+  font-family: @font-mono !important;
+  font-size: 0.56rem !important;
+  letter-spacing: 0.04em;
+}
+.docs-search .pf-searchbox-footer-key {
+  min-width: 0 !important;
+  height: auto !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  color: @ink !important;
+  font-family: @font-mono !important;
+  font-size: inherit !important;
+}
 .docs-nav-title {
   font-family: @font-mono;
   font-size: 0.72rem;

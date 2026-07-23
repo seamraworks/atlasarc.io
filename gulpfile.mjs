@@ -32,7 +32,7 @@ const DIST = path.join(__dirname, 'dist');
 const MANIFEST = path.join(__dirname, 'manifest');
 const SITE_BASE = 'https://atlasarc.io';
 const PUBLIC_STYLE_CHUNKS = ['main', 'home', 'product', 'features', 'catalog', 'compare', 'pricing', 'docs'];
-const PUBLIC_STYLE_HREFS = [...PUBLIC_STYLE_CHUNKS.map(cssHref), '/pagefind/pagefind-ui.css'];
+const PUBLIC_STYLE_HREFS = [...PUBLIC_STYLE_CHUNKS.map(cssHref), '/pagefind/pagefind-component-ui.css'];
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -335,7 +335,7 @@ function renderDoc(hb, entry, base) {
   const tpl = hb.compile(fs.readFileSync(path.join(SRC, 'docs', entry.src), 'utf8'));
   const html = tpl({
     ...base,
-    ...styleContext(['docs'], ['/pagefind/pagefind-ui.css']),
+    ...styleContext(['docs'], ['/pagefind/pagefind-component-ui.css']),
     page: entry,
     currentUrl: entry.url,
     chrome: 'docs',
@@ -377,7 +377,7 @@ function renderStructured(hb, entry, kind, base) {
   const tpl = hb.compile(wrapper);
   const html = tpl({
     ...base,
-    ...styleContext(['docs'], ['/pagefind/pagefind-ui.css']),
+    ...styleContext(['docs'], ['/pagefind/pagefind-component-ui.css']),
     ...data,
     content,
     relatedBeats: entry.beats || null,

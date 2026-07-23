@@ -7,9 +7,6 @@
     "noEmit": false,
     "outDir": "dist/assets/scripts",
     "rootDir": "src/scripts",
-    "paths": {
-      "/pagefind/pagefind-ui.js": ["./src/scripts/pagefind.d.ts"]
-    },
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
