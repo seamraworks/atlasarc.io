@@ -21,8 +21,8 @@ steps:
     body: Switch to Hotspots. Look at the overall complexity distribution across packages inside the subsystem. Identify any packages with high CC max; these are the complexity concentrations worth drilling into.
   - heading: Check visibility in Composition.
     body: Switch to Composition and enable the relative visibility heatmap. Packages with high relative visibility are exposing a large share of their surface. For implementation packages, this usually means accidental API surface that has grown over time.
-  - heading: Check coverage if a JaCoCo report is loaded.
-    body: If a JaCoCo report has been loaded into AtlasArc, enable the coverage heatmap on the Topology Graph. Packages with low line or branch coverage and high fan-in are the highest-risk gap because the test suite is not exercising code that other packages depend on.
+  - heading: Check coverage if a report is loaded.
+    body: If a coverage report has been loaded into AtlasArc, enable the coverage heatmap on the Topology Graph. Packages with low line or branch coverage and high fan-in are the highest-risk gap because the test suite is not exercising code that other packages depend on.
 interpretation: |
   A healthy subsystem shows LOC and class count within the team's expected growth range, relative visibility below 0.5 for implementation packages (meaning less than half the internal surface is exposed), internal cycle count at zero or declining, and test coverage concentrated in the packages with highest fan-in. A subsystem that is growing across all size metrics, gaining boundary fan-out each quarter, adding internal cycles, and has coverage concentrated in low-fan-in packages is accruing structural debt faster than it is being paid down. The specific metrics to watch most closely are the ones that are trending, not the ones that are high. A stable high value is a known constraint. A rising value is an uncontrolled one.
 export_note: |

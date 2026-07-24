@@ -107,10 +107,10 @@
           <div class="placeholder-box">Screenshot — Hotspots CC vs Coverage map</div>
           <div>
             <h2>Expose complex, undertested code</h2>
-            <p>Structure is only half of maintainability. AtlasArc reads cyclomatic and cognitive complexity down to the method, and overlays branch and line coverage loaded from your JaCoCo reports. The CC vs Coverage Hotspots map shows the packages that are both complex and thinly tested. When that map gets crowded, Galaxy can add depth and route context without replacing the simpler read.</p>
+            <p>Structure is only half of maintainability. AtlasArc reads cyclomatic and cognitive complexity down to the method, and overlays branch and line coverage from the reports your tests already produce. The CC vs Coverage Hotspots map shows the packages that are both complex and thinly tested. When that map gets crowded, Galaxy can add depth and route context without replacing the simpler read.</p>
             <ul>
               <li>Cyclomatic and cognitive complexity at package, class, and method level</li>
-              <li>Branch and line coverage loaded from JaCoCo reports</li>
+              <li>Branch and line coverage loaded from JaCoCo or LCOV reports</li>
               <li>CC vs Coverage map, with Galaxy as dense-project support</li>
             </ul>
 {{> beat-badges beat=(lookup site.beatsById "expose") showWorkflows=true}}

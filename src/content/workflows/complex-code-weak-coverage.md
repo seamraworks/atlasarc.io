@@ -2,15 +2,15 @@
 title: Complex code with weak coverage
 slug: complex-code-weak-coverage
 seo_title: Find Complex Code Without Enough Test Coverage | AtlasArc Workflow
-seo_description: Use AtlasArc Hotspots and JaCoCo coverage data to find large, complex packages whose branch paths are not protected by tests.
+seo_description: Use AtlasArc Hotspots and coverage data to find large, complex packages whose branch paths are not protected by tests.
 problem: |
   A complex package can look manageable in isolation, and a coverage report can look acceptable in aggregate. The risk appears when those two facts overlap: code with many decision paths, weak branch coverage, and enough size that changing it is not a local edit. That is where refactoring starts to feel unsafe.
 why_it_matters: |
   Cyclomatic complexity is a proxy for how many independent paths the code can take. Branch coverage shows whether tests exercise those decisions. A package with high CC max and low branch coverage is complex in a specific way: the test suite is not protecting its decision paths. Those packages need characterization tests before cleanup, splitting, or behavior changes. Galaxy is useful when you need to see whether several weak spots form a larger connected cluster.
 lens: Hotspots with the CC vs Coverage preset
 steps:
-  - heading: Load a JaCoCo XML report.
-    body: Generate the JaCoCo XML report from the project build and load it into AtlasArc so line and branch coverage are available on package metrics.
+  - heading: Make coverage and complexity available.
+    body: For Java or Kotlin, build the project and load a JaCoCo XML report. For TypeScript, generate the dependency graph with compatible ESLint/SonarJS SARIF complexity data, analyze that source, then load LCOV with branch records. AtlasArc keeps missing evidence unavailable rather than treating it as zero.
   - heading: Open Hotspots and select CC vs Coverage.
     body: Switch to Hotspots. Choose the CC vs Coverage preset. The X axis is CC max, the Y axis is branch coverage, bubble size is lines of code, and colour is CC max.
   - heading: Find high-complexity, low-coverage packages.
