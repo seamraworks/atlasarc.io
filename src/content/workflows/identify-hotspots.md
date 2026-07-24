@@ -14,7 +14,7 @@ steps:
   - heading: Add the structural second pass.
     body: Use the Zone Map preset to bring instability, abstractness, and distance from the main sequence into the same investigation.
   - heading: Focus on the risky cluster.
-    body: Start with the upper-right or reddest cluster, not isolated small bubbles. Click any bubble to drill into its metrics in the sidebar before choosing a refactoring target.
+    body: Start with the upper-right or reddest cluster, not isolated small bubbles. Select any bubble to inspect its metrics in the sidebar before choosing a refactoring target.
   - heading: Use Galaxy when the map gets crowded.
     body: If the flat map has too many plausible candidates, switch to Galaxy Risk horizon. Depth, size, colour, and dependency routes help separate lone metric outliers from structurally connected risk clusters.
 metrics:

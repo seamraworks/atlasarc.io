@@ -1,19 +1,19 @@
 {{#> docs}}
   {{#*inline "html-head-block"}}
     <title>Structural View Modes | AtlasArc Documentation</title>
-    <meta name="description" content="How AtlasArc structural modes differ: survey, root scope, pinned subject, Boundary Matrix, Cycle View, and Cycles Only.">
+    <meta name="description" content="How AtlasArc structural modes differ: survey, Root, pinned subject, Boundary Matrix, Cycle View, and Cycles Only.">
     <meta property="og:title" content="AtlasArc structural view modes">
-    <meta property="og:description" content="Survey, root scope, pinned subject, Boundary Matrix, Cycle View, and Cycles Only. What each mode narrows, and which one you actually wanted.">
+    <meta property="og:description" content="Survey, Root, pinned subject, Boundary Matrix, Cycle View, and Cycles Only. What each mode changes, and which one you actually wanted.">
   {{/inline}}
   {{#*inline "body-block"}}
     <h1>Structural view modes</h1>
-    <p>AtlasArc keeps one dependency model underneath everything, but not every structural question deserves the whole model on screen. The graph and matrix can sit in a broad survey posture, a scoped root posture, a pinned-subject posture, or a cycle posture. The difference is worth knowing, because each one changes what stays on screen and what the info bar is really telling you.</p>
+    <p>AtlasArc keeps one dependency model underneath everything, but not every structural question deserves the whole model on screen. The graph and matrix can sit in a broad survey posture, a rooted posture, a pinned-subject posture, or a cycle posture. The difference is worth knowing, because each one changes what stays on screen and what the info bar is really telling you.</p>
     <p>This is the page to come back to when the banner says Pinned, Cycle view, Cycles Only, or Boundary Matrix, and you want to know precisely what got narrowed and by which control.</p>
 
-    <h2 id="survey-and-root-scope">Survey and root scope</h2>
+    <h2 id="survey-and-root-scope">Survey and Root</h2>
     <p><strong>Survey</strong> is the ordinary project read. The Topology Graph shows visible packages as nodes; the Package Matrix shows the same packages as rows and columns. Filters, exclusions, rollup, and Hide isolated may all still be narrowing what you see, but nothing has been singled out. There's no selected structural subject.</p>
-    <p><strong>Root scope</strong> starts from a package or source-folder subtree. Use Set as Root when the question is "what on earth is going on inside this area?" Root scope is a broad area reduction: it changes the visible universe, without making any one package the subject that every relation gets measured against. That distinction gets sharper in the next section.</p>
-    <div class="placeholder-box">Screenshot: Set as Root scoping the Topology Graph to a single subtree</div>
+    <p><strong>Root</strong> starts every lens from a package, source-folder, or module subtree. Use Set as Root when you want every lens to start inside one of those subtrees. It changes Current Focus without making any one package the subject that every relation gets measured against. That distinction gets sharper in the next section.</p>
+    <div class="placeholder-box">Screenshot: Set as Root opening the Topology Graph on a single subtree</div>
 
     <h2 id="pinned-subject">Pinned subject reads</h2>
     <p>Pin a subject and one package, source folder, or subsystem holds the centre of the read. The view stops being "everything under this root" and becomes "what matters around this thing."</p>
@@ -24,7 +24,7 @@
 
     <h2 id="boundary-matrix">Boundary Matrix</h2>
     <p>Boundary Matrix is that same pinned-subject posture, over in the Package Matrix. The subject row shows outgoing traffic from the subject to its neighbours. The subject column shows incoming traffic from neighbours into the subject. Neighbour-to-neighbour cells stay on screen as dimmed context.</p>
-    <p>Set as Root is the tempting alternative here, so the two are worth separating. Root scope asks what's happening inside a subtree. Boundary Matrix asks what crosses the subject's perimeter, and whether the neighbourhood around it is tangled as well.</p>
+    <p>Set as Root is the tempting alternative here, so the two are worth separating. Root asks what's happening inside a subtree. Boundary Matrix asks what crosses the subject's perimeter, and whether the neighbourhood around it is tangled as well.</p>
     <p>When a boundary read comes out crowded, spend your attention on the subject row and column first. Dense neighbour-to-neighbour cells may well matter, but they stay context until they explain why the subject's boundary is under pressure.</p>
     <div class="placeholder-box">Screenshot: Boundary Matrix with the subject row and column against dimmed context cells</div>
 
@@ -44,7 +44,7 @@
     <p>When the banner is ambiguous and you just want the short version:</p>
     <ul>
       <li>Use <strong>survey</strong> when you need a first map of the project.</li>
-      <li>Use <strong>root scope</strong> when the question is confined to one package subtree (subsystem).</li>
+      <li>Use <strong>Root</strong> when the question is confined to one module, package, or source-folder subtree.</li>
       <li>Use <strong>pinned subject</strong> in the graph when you need local blast radius or boundary direction around one subject.</li>
       <li>Use <strong>Boundary Matrix</strong> when the subject's incoming and outgoing boundary traffic matters more than the whole subtree.</li>
       <li>Use <strong>Cycles Only</strong> when you are triaging cycle participants across the current visible model.</li>

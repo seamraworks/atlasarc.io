@@ -14,13 +14,13 @@ steps:
   - heading: Inspect cross-subsystem flow.
     body: Select the "Boundary Risk" preset to plot subsystems by their boundary fan-in and fan-out. Bubbles in the upper-right have both high incoming and outgoing coupling — these are your most entangled subsystems. Hover to see the exact values.
   - heading: Drill into pressure points.
-    body: Double-click any bubble to drill into that subsystem and re-scope the view to its direct children. This lets you follow the coupling pressure down into a specific area without losing context about where you are in the hierarchy.
+    body: Double-click any bubble to drill into that subsystem. Subsystems now compares the next architectural level inside it, so you can follow the coupling pressure down without losing your place in the hierarchy.
 metrics:
   - fan-in-fan-out
 interpretation: |
   A subsystem with bidirectional heavy coupling to another means those two areas cannot evolve independently. That's the highest-priority structural problem at this level. A subsystem with only high fan-in is a stable shared dependency; focus on keeping its API clean rather than chasing lower coupling. A subsystem with only high fan-out is fragile; changes elsewhere ripple through it unpredictably, and splitting it or reducing its dependencies is usually the right move.
 export_note: |
-  Export the current view as PNG for architecture review sessions. The Subsystems CSV export gives you the raw aggregate metrics for every subsystem at the current scope level, useful for tracking coupling trends across sprints.
+  Export the current view as PNG for architecture review sessions. The Subsystems CSV export gives you the raw aggregate metrics for every subsystem at the current level, useful for tracking coupling trends across sprints.
 related_metrics:
   - fan-in-fan-out
   - instability-abstractness

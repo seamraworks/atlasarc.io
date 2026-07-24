@@ -30,6 +30,6 @@ Cycle Matrix keeps one detected cycle group in view while preserving enough surr
 
 Cycles Only can also filter the Matrix to cycle-participating packages and dependencies. That is a triage filter across the visible model. Cycle Matrix is the persistent one-group posture.
 
-The structural breadcrumb above the Matrix follows the current anchor. In ordinary scoped views, a breadcrumb hop re-scopes the Matrix. In a pinned boundary read, the same hop moves the subject pin to that ancestor so you can widen the audit without rebuilding the view.
+The structural breadcrumb above the Matrix follows the current anchor. In an ordinary rooted view, a breadcrumb hop updates Current Focus. In a pinned boundary read, the same hop moves the subject pin to that ancestor so you can widen the audit without rebuilding the view.
 
 If you want to take the data somewhere else, the Export menu includes a TSV export of the full matrix. Drop it into a spreadsheet, sort by dependency count, and you have a prioritised list of the tightest couplings in your project.

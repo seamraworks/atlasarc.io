@@ -60,7 +60,7 @@
       "slug": "share",
       "label": "Share investigations",
       "kicker": "Hand off the actual investigation",
-      "description": "Save the lens, scope, filters, and subject. A teammate can reopen the same question without reconstructing your setup.",
+      "description": "Save the lens, Root or pinned subject, filters, and presentation. A teammate can reopen the same question without reconstructing your setup.",
       "image": "/assets/images/lifecycle/share.png",
       "shareSurface": true
     }

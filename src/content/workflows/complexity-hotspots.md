@@ -12,7 +12,7 @@ steps:
   - heading: Open the Hotspots bubble chart at package level.
     body: Switch to Hotspots. Each bubble represents a package. Look for packages with elevated complexity on the Y axis; these are the packages with enough internal complexity to be worth drilling into.
   - heading: Drill into the package, then switch to Classes.
-    body: Double-click any package bubble to make that package the current Hotspots scope, then switch Item to Classes. The bubbles now represent individual classes within the package. Bubble size encodes method count; position encodes complexity.
+    body: Double-click any package bubble to drill into that package, making it the Current Focus, then switch Item to Classes. The bubbles now represent individual classes within the package. Bubble size encodes method count; position encodes complexity.
   - heading: Identify the outlier classes.
     body: Look for class bubbles in the upper area of the chart (high complexity) that are also large (many methods). These are the classes with both broad surface area and high internal difficulty. Click any class to see its CC max, CC avg, cognitive complexity max, and cognitive complexity average in the sidebar.
   - heading: Navigate to the class in the IDE.

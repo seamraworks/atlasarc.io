@@ -24,9 +24,9 @@ The preset controls switch between Complexity, Coupling, Zone Map, CC vs Coverag
 
 <h2 id="package-vs-class-mode">Package vs Class Mode</h2>
 
-Double-click a package bubble or star to drill into that package as the current scope. Switch to Classes when you want points to represent classes inside that scope; double-clicking a class opens its source file in the IDE. That class mode is a ranking and comparison tool, separate from the Topology Graph's contained package-internals layer. Package points also expose **Reveal package in Project View** from the context menu when you want IDE navigation without changing the Hotspots scope.
+Double-click a package bubble or star to drill into that package, making it the Current Focus across lenses. Switch to Classes when you want points to represent classes inside that package; double-clicking a class opens its source file in the IDE. That class mode is a ranking and comparison tool, separate from the Topology Graph's contained package-internals layer. Package points also expose **Reveal package in Project View** from the context menu when you want IDE navigation without changing Current Focus.
 
-Package mode answers "which package deserves attention?" Class mode answers "which class inside this scope deserves attention?" Keep that distinction clear when using the chart for refactoring tickets: a risky package may need decomposition, while a risky class may need local simplification or characterization tests.
+Package mode answers "which package deserves attention?" Class mode answers "which class inside this package deserves attention?" Keep that distinction clear when using the chart for refactoring tickets: a risky package may need decomposition, while a risky class may need local simplification or characterization tests.
 
 <h2 id="direct-vs-recursive-scope">Direct vs Recursive Scope</h2>
 

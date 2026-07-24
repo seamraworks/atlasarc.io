@@ -42,6 +42,6 @@ Cycles Only is broader. It filters the current view to cycle-participating packa
 
 The graph can colour visible packages by a selected metric without changing the dependency structure underneath. Use heatmaps for questions like "which cycle participants are unstable?", "which backbone packages are too concrete?", or "which depended-on packages have weak coverage?"
 
-The overlay belongs to the current visible graph. Scope, filters, exclusions, Cycles Only, and pinned subject posture still decide which packages and edges are present; the heatmap adds the metric read on top.
+The overlay belongs to the current visible graph. Current Focus, filters, view exclusions, Cycles Only, and pinned subject posture still decide which packages and edges are present; the heatmap adds the metric read on top.
 
 The Topology Graph is where you go to understand structure. The other lenses are where you go to measure it.

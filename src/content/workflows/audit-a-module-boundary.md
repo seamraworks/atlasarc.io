@@ -9,8 +9,8 @@ why_it_matters: |
   Module boundaries are the architectural commitments a team makes about what belongs together and how it interacts with the outside. Without periodic audits, those boundaries quietly erode: internal packages grow external callers, internal cycles accumulate, and the boundary instability shifts in ways nobody intended. Auditing on a regular cadence gives the team a feedback loop and a set of numbers to point to when making decisions about what to refactor next.
 lens: Subsystems
 steps:
-  - heading: Set the module root as the architectural focus.
-    body: Right-click the module in the Topology Graph and choose Set as Root. This scopes every lens to that module.
+  - heading: Set the module as Root.
+    body: Right-click the module in the Topology Graph and choose Set as Root. Every lens now opens on that module.
   - heading: Expand only this module when package detail matters.
     body: Choose Expand completely on the focused module if the audit needs every package visible. Only that module opens; the other modules stay as they are.
   - heading: Switch to Subsystems.

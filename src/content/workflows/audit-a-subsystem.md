@@ -9,8 +9,8 @@ why_it_matters: |
   Structural debt in a subsystem accumulates below the level of individual code reviews. No single pull request causes a cohesion problem. No single commit adds a cycle group. The signals are trends across sprints: LOC growing faster than class count, boundary fan-out increasing each quarter, internal cycles not declining. A quarterly audit that takes 30 minutes to run is the feedback loop that tells you whether the decisions made in daily development are adding up to something better or worse.
 lens: Subsystems
 steps:
-  - heading: Set the subsystem as the architectural focus.
-    body: Right-click the subsystem in the Topology Graph and choose Set as Root. This scopes every lens to the selected area.
+  - heading: Set the subsystem as Root.
+    body: Right-click the subsystem in the Topology Graph and choose Set as Root. Every lens now opens on the selected subsystem.
   - heading: Expand the selected area only when you need package detail.
     body: Choose Expand completely on the selected module or package folder to reveal that area without opening every peer module. The selected Root stays active when you switch lenses.
   - heading: Check size in the sidebar.

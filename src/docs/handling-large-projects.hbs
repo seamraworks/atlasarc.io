@@ -1,14 +1,14 @@
 {{#> docs}}
   {{#*inline "html-head-block"}}
     <title>Handling Large Projects | AtlasArc Documentation</title>
-    <meta name="description" content="How AtlasArc makes a large Java or Kotlin codebase small enough to reason about: reduce scope, roll up deep namespaces, filter the noise, switch lenses, isolate cycles, and drill to the exact code.">
+    <meta name="description" content="How AtlasArc makes a large Java, Kotlin, or TypeScript codebase small enough to reason about: choose a Current Focus, pin a subject, roll up deep namespaces, filter noise, switch lenses, isolate cycles, and drill to exact evidence.">
     <meta property="og:title" content="Handling large projects with AtlasArc">
     <meta property="og:description" content="Large projects don't fail because they have too many packages. They fail when every view shows everything at once. Here's how AtlasArc narrows the model until the problem is small enough to act on.">
   {{/inline}}
   {{#*inline "body-block"}}
     <h1>Make large codebases small enough to reason about</h1>
     <p>Large projects do not fail because they have too many packages. They fail when every view shows everything at once. A full dependency graph is useful only after you have made it smaller, or after you have switched to a view that answers a narrower question.</p>
-    <p>AtlasArc handles large projects by reduction. It scopes the model to the area you care about, contracts pass-through package folders, rolls deep namespaces up for triage, filters weak or irrelevant dependencies, and lets you switch from the graph to Matrix, Subsystems, Hotspots, or Composition when another lens is more honest about the problem.</p>
+    <p>AtlasArc handles large projects by reduction. Set the relevant module, package, or source folder as Current Focus, pin a structural subject when outside relationships matter, contract pass-through package folders, roll deep namespaces up for triage, filter weak or irrelevant dependencies, and switch from the graph to Matrix, Subsystems, Hotspots, or Composition when another lens is more honest about the problem.</p>
     <p>Use this page as a field guide. It starts with the moment the graph is too large to read and ends with the exact dependency examples, source files, and exports you need for a review or refactoring ticket.</p>
 
     <h2>Start with a readable map</h2>
@@ -24,22 +24,22 @@
     <p>Start here when the first graph looks either too empty or too dense. Before changing any filters, check whether the default expansion has already found the first useful architectural layer.</p>
     <div class="placeholder-box">Screenshot: smart initial expansion and contracted package folders</div>
 
-    <h2>Reduce the scope before you read the graph</h2>
-    <p>The fastest way to make a large project readable is to stop looking at all of it. Most architecture questions already have a subject: a module you are extracting, a layer boundary you are auditing, a package that keeps showing up in reviews, or one cycle group that blocks a refactor. These questions share a posture AtlasArc makes explicit &mdash; <strong>Subject Mode</strong>: you <strong>pin</strong> the structural view to one subject and read everything relative to it, so the graph and matrix become a focused subject audit instead of showing the model on its own terms.</p>
+    <h2>Choose what should stay in view</h2>
+    <p>The fastest way to make a large project readable is to stop looking at all of it. Sometimes the question lives inside one module or package. Sometimes one subsystem, boundary, or cycle group is the subject and its outside relationships need to remain visible. AtlasArc gives those different questions different controls.</p>
     <ul>
-      <li><strong>Focus / Prefix</strong> restricts the model to one package subtree. Use it when the question is "what is happening inside <code>com.acme.billing</code>?" rather than "what is happening everywhere?"</li>
-      <li><strong>Set as Root</strong> is available from Graph, Matrix, Subsystems, Hotspots, and Composition, so a scope chosen in one lens carries into the next one.</li>
+      <li><strong>Focus</strong> names the module, package, or source folder every lens currently opens on. Use it when the question is "what is happening inside <code>com.acme.billing</code>?" rather than "what is happening everywhere?"</li>
+      <li><strong>Set as Root</strong> is the explicit package or module command that updates Current Focus, so a Root chosen in one lens carries into the next one.</li>
       <li><strong>Show in AtlasArc</strong> from the IntelliJ Project tree starts from the package you already selected in the IDE. You do not have to copy a package name into a filter box.</li>
       <li><strong>Pinned subject in Graph</strong> shows a package or subsystem with its perimeter neighbours. Use Neighbour links for local blast radius: "what touches this, and what does it touch?"</li>
       <li><strong>Boundary reads</strong> emphasize traffic crossing a subsystem perimeter. Use Direction, and Mute cycles when needed, when the question is whether a module boundary is holding.</li>
-      <li><strong>Cycle view</strong> shows only the packages in a selected cycle group, with enough ancestors expanded to keep the shape readable.</li>
+      <li><strong>Cycle View</strong> holds one selected cycle group as the structural question, with enough ancestors expanded to keep the shape readable.</li>
       <li><strong>Breadcrumbs</strong> in focus-based lenses let you drill into a subsystem and climb back out without rebuilding the package path in your head.</li>
     </ul>
-    <p>Use root scope for a broad area, pinned subject for a local dependency perimeter or boundary read, and Cycle view when the subject is already a strongly connected group. Neighbourhood and Boundary are explanatory readings of a pinned subject, not separate product modes. These are different reductions, not synonyms.</p>
-    <div class="placeholder-box">Screenshot: Focus / Prefix scoping the model to one subsystem</div>
+    <p>Use Root when the question stays inside one module, package, or source-folder subtree; use a pinned subject for a local dependency perimeter or boundary read; use Cycle View when the subject is already a strongly connected group. Neighbourhood and Boundary are explanatory readings of a pinned subject, not separate product modes. These are different reductions, not synonyms.</p>
+    <div class="placeholder-box">Screenshot: Focus opening every lens on one subsystem</div>
 
     <h2>Roll up detail without losing signal</h2>
-    <p>Even after scoping, a Java or Kotlin package tree can be deeper than the architectural question. In that case, read the shape first and expand the exact packages later. AtlasArc gives you several ways to reduce depth while preserving the signals that matter.</p>
+    <p>Even after choosing Current Focus, a Java, Kotlin, or TypeScript hierarchy can be deeper than the architectural question. In that case, read the shape first and expand the exact branches later. AtlasArc gives you several ways to reduce depth while preserving the signals that matter.</p>
     <ul>
       <li><strong>Deep Package Rollup</strong> groups packages below a selected namespace depth into their visible parent. Lower the depth to inspect the dependency shape at namespace level; raise it again before planning a code edit.</li>
       <li><strong>Contracted package folders</strong> remove single-child pass-through chains before they waste visual space. They are useful even when depth rollup is off.</li>
@@ -48,7 +48,7 @@
       <li><strong>Adaptive Treemap</strong> shows a meaningful frontier through the package tree. It is more informative than only direct children, and less overwhelming than every leaf package at once.</li>
     </ul>
     <p>The important detail is that subsystem health is computed from the repository-scoped structural graph, not from whatever happens to be visible after your current view filters. A filtered view can be narrow; the rollup metrics still describe the in-scope subsystem underneath it.</p>
-    <p><strong>Progressively reveal the whole project:</strong> enable rollup and choose the lowest depth that still separates meaningful architectural areas, then use <strong>Expand All</strong>. The package hierarchy is now fully expanded underneath the rollup, so raise <strong>Rollup depth</strong> one step at a time to reveal the next namespace level across the scoped project. Stop as soon as the added detail makes the diagram harder rather than easier to read, then set the suspicious package as root before drilling further.</p>
+    <p><strong>Progressively reveal the whole project:</strong> enable rollup and choose the lowest depth that still separates meaningful hierarchy branches, then use <strong>Expand All</strong>. The hierarchy is now fully expanded underneath the rollup, so raise <strong>Rollup depth</strong> one step at a time to reveal the next namespace level beneath Current Focus. Stop as soon as the added detail makes the diagram harder rather than easier to read, then set the suspicious package as Root before drilling further.</p>
     <div class="placeholder-box">Screenshot: Deep Package Rollup with collapsed-folder cycle indicators</div>
 
     <h2>Filter the noise</h2>
@@ -121,7 +121,7 @@
     <div class="placeholder-box">Screenshot: edge examples sidebar and generated Architecture Audit Report</div>
 
     <h2>Built to stay fast</h2>
-    <p>The reductions above are not cosmetic browser tricks. AtlasArc computes the meaningful reductions in the plugin backend and sends the UI a model that already reflects the selected scope, filters, cycle detail, rollup, and lens data.</p>
+    <p>The reductions above are not cosmetic browser tricks. AtlasArc computes the meaningful reductions in the plugin backend and sends the UI a view model that already reflects Current Focus, filters, cycle detail, rollup, and lens data.</p>
     <ul>
       <li><strong>Large Graph Guard</strong> warns before operations that would render too many nodes, such as Expand All or broad layout changes. It suggests cheaper alternatives: Only Cycles, Matrix, Set as Root, Subsystems, Hotspots, or Composition.</li>
       <li><strong>Matrix safety limits</strong> cap package count and minimum zoom so a huge matrix does not become unusable by default.</li>
